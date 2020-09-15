@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Academy : MonoBehaviour
 {
-    Image viewImage;
     Camera camera;
+    public static Vector3 cameraPos;
     float z = -10;
     private Sprite OutsideAcademyView01,
                     OutsideAcademyView02,
@@ -15,55 +15,37 @@ public class Academy : MonoBehaviour
 
     void Start()
     {
-        viewImage = GameObject.Find("View").GetComponent<Image>();
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+        cameraPos = camera.transform.position;
 
         OutsideAcademyView01 = Resources.Load<Sprite>("OutsideAcademyView01");
         OutsideAcademyView02 = Resources.Load<Sprite>("OutsideAcademyView02");
         OutsideAcademyView03 = Resources.Load<Sprite>("OutsideAcademyView03");
         OutsideAcademyView04 = Resources.Load<Sprite>("OutsideAcademyView04");
-
-        viewImage.sprite = OutsideAcademyView01;
     }
 
     public void MoveForward()
     {
-        z += 1.54f;
+        if (cameraPos.z < -6)
+        {
+            z += 2f;
 
-        camera.transform.position = new Vector3(0, 0, z);
-
-        // if (viewImage.sprite == OutsideAcademyView01)
-        // {
-        //     viewImage.sprite = OutsideAcademyView02;
-        // }
-        // else if (viewImage.sprite == OutsideAcademyView02)
-        // {
-        //     viewImage.sprite = OutsideAcademyView03;
-        // }
-        // else if (viewImage.sprite == OutsideAcademyView03)
-        // {
-        //     viewImage.sprite = OutsideAcademyView04;
-        // }
+            camera.transform.position = new Vector3(0, 0, z);
+            cameraPos = camera.transform.position;
+        }
+        else
+        {
+            SoundManager.playDoorClosedSound();
+        }
     }
 
     public void MoveBackward()
     {
-        z -= 1.54f;
+        z -= 2f;
 
         camera.transform.position = new Vector3(0, 0, z);
-
-        // if (viewImage.sprite == OutsideAcademyView02)
-        // {
-        //     viewImage.sprite = OutsideAcademyView01;
-        // }
-        // else if (viewImage.sprite == OutsideAcademyView03)
-        // {
-        //     viewImage.sprite = OutsideAcademyView02;
-        // }
-        // else if (viewImage.sprite == OutsideAcademyView04)
-        // {
-        //     viewImage.sprite = OutsideAcademyView03;
-        // }
+        cameraPos = camera.transform.position;
     }
 
     public void MoveLeft()

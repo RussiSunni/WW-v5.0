@@ -14,9 +14,9 @@ public class MoveTest : MonoBehaviour
     {
         viewImage = GameObject.Find("View").GetComponent<Image>();
 
-        view01 = Resources.Load<Sprite>("View01");
-        view02 = Resources.Load<Sprite>("View02");
-        view03 = Resources.Load<Sprite>("View03");
+        view01 = Resources.Load<Sprite>("Views/View01");
+        view02 = Resources.Load<Sprite>("Views/View02");
+        view03 = Resources.Load<Sprite>("Views/View03");
 
         viewImage.sprite = view01;
     }
