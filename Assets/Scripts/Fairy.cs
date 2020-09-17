@@ -4,30 +4,20 @@ using UnityEngine;
 
 public class Fairy : MonoBehaviour
 {
-    GameObject helloCard;
-    public static GameObject doorCard, fairyText;
+
 
     void Start()
     {
-        helloCard = GameObject.Find("HelloButton");
-        fairyText = GameObject.Find("FairyText");
-        doorCard = GameObject.Find("DoorButton");
-        helloCard.SetActive(false);
-        fairyText.SetActive(false);
-        doorCard.SetActive(false);
+
     }
 
     void OnMouseDown()
     {
-        // if (!helloCard.activeSelf)
-        // {
+        if (!GameControl.helloCard.activeSelf)
+        {
+            GameControl.helloCard.SetActive(true);
+            SoundManager.playCardAppearSound();
+        }
         SoundManager.playHelloSound();
-        helloCard.SetActive(true);
-        SoundManager.playCardAppearSound();
-        // }
-        // else
-        // {
-
-        // }
     }
 }

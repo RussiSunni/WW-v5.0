@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip helloSound, doorClosedSound, cardAppearSound;
+    public static AudioClip helloSound, doorClosedSound, cardAppearSound, doorOpeningSound;
     static AudioSource audioSrc;
 
     void Start()
@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
         helloSound = Resources.Load<AudioClip>("Sound/Hello");
         doorClosedSound = Resources.Load<AudioClip>("Sound/DoorClosed");
         cardAppearSound = Resources.Load<AudioClip>("Sound/CardAppear");
+        doorOpeningSound = Resources.Load<AudioClip>("Sound/DoorOpening");
     }
 
     public static void playHelloSound()
@@ -22,6 +23,10 @@ public class SoundManager : MonoBehaviour
     public static void playDoorClosedSound()
     {
         audioSrc.PlayOneShot(doorClosedSound);
+    }
+    public static void playDoorOpeningSound()
+    {
+        audioSrc.PlayOneShot(doorOpeningSound);
     }
     public static void playCardAppearSound()
     {
