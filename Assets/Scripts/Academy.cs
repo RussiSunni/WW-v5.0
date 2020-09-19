@@ -10,8 +10,12 @@ public class Academy : MonoBehaviour
     float z = -10;
     float y = 0;
     string direction, scene;
-    Text fairyText;
+    Text dialogue;
     int textNumber = 1;
+    bool doorClosed = true;
+
+    SpriteRenderer academyDoorway;
+    Sprite doorOpen;
 
     void Start()
     {
@@ -19,10 +23,14 @@ public class Academy : MonoBehaviour
         cameraPos = camera.transform.position;
         direction = "north";
 
-        fairyText = GameObject.Find("FairyText").GetComponent<Text>();
-        fairyText.text = "";
+        dialogue = GameObject.Find("Text").GetComponent<Text>();
+        dialogue.text = "";
 
         scene = "Academy";
+
+        academyDoorway = GameObject.Find("View03").GetComponent<SpriteRenderer>();
+        doorOpen = Resources.Load<Sprite>("Views/OutsideAcademyView03b");
+
     }
 
     public void MoveForward()
@@ -31,9 +39,9 @@ public class Academy : MonoBehaviour
         {
             if (direction == "north" || direction == "south")
             {
-                if (cameraPos.z < -6)
+                if (cameraPos.z < 0 || doorClosed == false)
                 {
-                    z += 2f;
+                    z += 5.4f;
                     camera.transform.position = new Vector3(0, 0, z);
                     cameraPos = camera.transform.position;
                 }
@@ -51,7 +59,7 @@ public class Academy : MonoBehaviour
         {
             if (direction == "north" || direction == "south")
             {
-                z -= 2f;
+                z -= 5.4f;
                 camera.transform.position = new Vector3(0, 0, z);
                 cameraPos = camera.transform.position;
             }
@@ -117,45 +125,60 @@ public class Academy : MonoBehaviour
 
     public void UpOneLevel()
     {
-        if (z == -8)
+        SoundManager.playHelloSound();
+
+        if (z > -4.7 && z < -4.5)
         {
             scene = "Fairy";
             y = 12f;
             camera.transform.position = new Vector3(0, y, z);
             if (!GameControl.goodbyeCard.activeSelf)
-                fairyText.text = "Hello. Welcome to Wild World.";
+                dialogue.text = "Hello. Welcome to Wild World.";
+        }
+
+        if (z > 6.1 && z < 6.3)
+        {
+            scene = "Secretary";
+            y = 12f;
+            camera.transform.position = new Vector3(0, y, z);
+            dialogue.text = "Hello.";
+
         }
     }
 
     public void DownOneLevel()
     {
+        SoundManager.playGoodbyeSound();
+
         scene = "Academy";
 
         y = 0f;
         camera.transform.position = new Vector3(0, y, z);
 
-        fairyText.text = "";
+        dialogue.text = "";
     }
 
     public void TextScrollForward()
     {
         textNumber++;
         if (textNumber == 2)
-            fairyText.text = "Below is your spellbook.";
+            dialogue.text = "Below is your spellbook.";
 
         else if (textNumber == 3)
         {
-            fairyText.text = "So far, you have a greeting spell. I will give you one to open doors also.";
+            SoundManager.playDoorSound();
+            dialogue.text = "So far, you have a greeting spell. I will give you one to open doors also.";
             GameControl.doorCard.SetActive(true);
             SoundManager.playCardAppearSound();
         }
 
         else if (textNumber == 4)
-            fairyText.text = "You will need to collect and use spells in order to escape the Labyrinth. Be careful, using the wrong spell at the wrong place can result in an early demise.";
+            dialogue.text = "You will need to collect and use spells in order to escape the Labyrinth. Be careful, using the wrong spell at the wrong place can result in an early demise.";
 
         else if (textNumber == 5)
         {
-            fairyText.text = "Goodbye.";
+            SoundManager.playGoodbyeSound();
+            dialogue.text = "Goodbye.";
             GameControl.goodbyeCard.SetActive(true);
             SoundManager.playCardAppearSound();
         }
@@ -163,6 +186,12 @@ public class Academy : MonoBehaviour
 
     public void doorButton()
     {
-        SoundManager.playDoorOpeningSound();
+        SoundManager.playDoorSound();
+        if (z > 0.7 && z < 0.9)
+        {
+            SoundManager.playDoorOpeningSound();
+            academyDoorway.sprite = doorOpen;
+            doorClosed = false;
+        }
     }
 }
