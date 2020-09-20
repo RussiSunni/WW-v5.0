@@ -9,6 +9,7 @@ public class Academy : MonoBehaviour
     public static Vector3 cameraPos;
     float z = -10;
     float y = 0;
+    float x = 0;
     string direction, scene;
     Text dialogue;
     int textNumber = 1;
@@ -29,7 +30,7 @@ public class Academy : MonoBehaviour
         scene = "Academy";
 
         academyDoorway = GameObject.Find("View03").GetComponent<SpriteRenderer>();
-        doorOpen = Resources.Load<Sprite>("Views/OutsideAcademyView03b");
+        doorOpen = Resources.Load<Sprite>("Views/Academy/OutsideAcademyView03b");
 
     }
 
@@ -37,7 +38,7 @@ public class Academy : MonoBehaviour
     {
         if (scene == "Academy")
         {
-            if (direction == "north" || direction == "south")
+            if (direction == "north")
             {
                 if (cameraPos.z < 0 || doorClosed == false)
                 {
@@ -50,6 +51,27 @@ public class Academy : MonoBehaviour
                     SoundManager.playDoorClosedSound();
                 }
             }
+
+            if (direction == "south")
+            {
+                if (cameraPos.z > -9)
+                {
+                    z -= 5.4f;
+                    camera.transform.position = new Vector3(0, 0, z);
+                    cameraPos = camera.transform.position;
+                }
+                else
+                {
+                    SoundManager.playDoorClosedSound();
+                }
+            }
+
+            else if (direction == "west")
+            {
+                x -= 5.4f;
+                camera.transform.position = new Vector3(x, 0, z);
+                cameraPos = camera.transform.position;
+            }
         }
     }
 
@@ -57,10 +79,24 @@ public class Academy : MonoBehaviour
     {
         if (scene == "Academy")
         {
-            if (direction == "north" || direction == "south")
+            if (direction == "north")
             {
                 z -= 5.4f;
                 camera.transform.position = new Vector3(0, 0, z);
+                cameraPos = camera.transform.position;
+            }
+
+            if (direction == "south")
+            {
+                z += 5.4f;
+                camera.transform.position = new Vector3(0, 0, z);
+                cameraPos = camera.transform.position;
+            }
+
+            else if (direction == "west")
+            {
+                x += 5.4f;
+                camera.transform.position = new Vector3(x, 0, z);
                 cameraPos = camera.transform.position;
             }
         }
