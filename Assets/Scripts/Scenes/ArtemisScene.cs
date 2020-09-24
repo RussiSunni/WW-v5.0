@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 public class ArtemisScene : MonoBehaviour
 {
     Image questionImage, fairyImage;
+
+    SpriteRenderer question;
     private Sprite fairyIncorrect,
                    fairyNeutral,
-                   fairyCorrect;
+                   fairyCorrect,
+                   artemis;
     int questionNumber = 0;
     Text answerText1, answerText2, answerText3, answerText4;
     public float timeRemaining = 0;
@@ -19,51 +22,54 @@ public class ArtemisScene : MonoBehaviour
 
     void Start()
     {
-
-
         answerText1 = GameObject.Find("Answer1Text").GetComponent<Text>();
         answerText2 = GameObject.Find("Answer2Text").GetComponent<Text>();
         answerText3 = GameObject.Find("Answer3Text").GetComponent<Text>();
         answerText4 = GameObject.Find("Answer4Text").GetComponent<Text>();
-        questionImage = GetComponent<Image>();
-        fairyImage = GameObject.Find("Fairy").GetComponent<Image>();
+        question = GameObject.Find("Question").GetComponent<SpriteRenderer>();
+        //  fairyImage = GameObject.Find("Fairy").GetComponent<Image>();
+
         fairyTalk = GameObject.Find("FairyTalk").GetComponent<Text>();
 
+        artemis = Resources.Load<Sprite>("Artemis-alone");
         fairyIncorrect = Resources.Load<Sprite>("FairyIncorrect");
         fairyNeutral = Resources.Load<Sprite>("FairyNeutral");
         fairyCorrect = Resources.Load<Sprite>("FairyCorrect");
 
         timerReady = false;
 
-        fairyTalk.text = "Hi, learner. Let’s help the animals find their names.";
-
-        answerText1.text = "Start";
+        //   fairyImage.sprite = artemis;
+        fairyTalk.text = "Before you enter my lands, you will have to show me that you know the names of the animals.";
+        answerText1.text = "I am ready.";
+        answerText2.text = "I'll come back later.";
     }
 
     public void Answer1()
     {
         if (finished)
         {
-
             //  SceneManager.LoadScene("Scene002");
         }
 
         else if (questionNumber == 0)
         {
-
-            questionImage.sprite = AnimalNamesQuestionBank.questions[0].sprite;
+            // questionImage.color = new Color32(255, 255, 255, 255);
+            // questionImage.sprite = AnimalNamesQuestionBank.questions[0].sprite;
+            question.sprite = AnimalNamesQuestionBank.questions[0].sprite;
             answerText1.text = AnimalNamesQuestionBank.questions[0].answerOptions[0];
             answerText2.text = AnimalNamesQuestionBank.questions[0].answerOptions[1];
             answerText3.text = AnimalNamesQuestionBank.questions[0].answerOptions[2];
             answerText4.text = AnimalNamesQuestionBank.questions[0].answerOptions[3];
+            question.transform.position = AnimalNamesQuestionBank.questions[0].position;
+            question.transform.localScale = AnimalNamesQuestionBank.questions[0].scale;
+
 
             fairyTalk.text = null;
             questionNumber++;
-
         }
         else
         {
-            if (AnimalNamesQuestionBank.questions[questionNumber - 1].questionName == answerText1.text)
+            if (AnimalNamesQuestionBank.questions[0].questionName == answerText1.text)
             {
                 correctAnswer = true;
                 MarkAsKnown();
@@ -84,7 +90,7 @@ public class ArtemisScene : MonoBehaviour
         if (questionNumber != 0)
         {
 
-            if (AnimalNamesQuestionBank.questions[questionNumber - 1].questionName == answerText2.text)
+            if (AnimalNamesQuestionBank.questions[0].questionName == answerText2.text)
             {
                 correctAnswer = true;
                 MarkAsKnown();
@@ -105,7 +111,7 @@ public class ArtemisScene : MonoBehaviour
         if (questionNumber != 0)
         {
 
-            if (AnimalNamesQuestionBank.questions[questionNumber - 1].questionName == answerText3.text)
+            if (AnimalNamesQuestionBank.questions[0].questionName == answerText3.text)
             {
                 correctAnswer = true;
                 MarkAsKnown();
@@ -125,7 +131,7 @@ public class ArtemisScene : MonoBehaviour
     {
         if (questionNumber != 0)
         {
-            if (AnimalNamesQuestionBank.questions[questionNumber - 1].questionName == answerText4.text)
+            if (AnimalNamesQuestionBank.questions[0].questionName == answerText4.text)
             {
                 correctAnswer = true;
                 MarkAsKnown();
@@ -150,7 +156,7 @@ public class ArtemisScene : MonoBehaviour
 
             if (correctAnswer == true)
             {
-                AnimalNamesQuestionBank.questions.RemoveAt(questionNumber - 1);
+                AnimalNamesQuestionBank.questions.RemoveAt(0);
             }
 
             else if (questionNumber < AnimalNamesQuestionBank.questions.Count)
@@ -164,11 +170,15 @@ public class ArtemisScene : MonoBehaviour
 
             if (AnimalNamesQuestionBank.questions.Count > 0)
             {
-                questionImage.sprite = AnimalNamesQuestionBank.questions[questionNumber - 1].sprite;
-                answerText1.text = AnimalNamesQuestionBank.questions[questionNumber - 1].answerOptions[0];
-                answerText2.text = AnimalNamesQuestionBank.questions[questionNumber - 1].answerOptions[1];
-                answerText3.text = AnimalNamesQuestionBank.questions[questionNumber - 1].answerOptions[2];
-                answerText4.text = AnimalNamesQuestionBank.questions[questionNumber - 1].answerOptions[3];
+                //questionImage.sprite = AnimalNamesQuestionBank.questions[questionNumber - 1].sprite;
+
+                question.sprite = AnimalNamesQuestionBank.questions[0].sprite;
+                answerText1.text = AnimalNamesQuestionBank.questions[0].answerOptions[0];
+                answerText2.text = AnimalNamesQuestionBank.questions[0].answerOptions[1];
+                answerText3.text = AnimalNamesQuestionBank.questions[0].answerOptions[2];
+                answerText4.text = AnimalNamesQuestionBank.questions[0].answerOptions[3];
+                question.transform.position = AnimalNamesQuestionBank.questions[0].position;
+                question.transform.localScale = AnimalNamesQuestionBank.questions[0].scale;
             }
             else
             {
@@ -295,14 +305,14 @@ public class ArtemisScene : MonoBehaviour
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
-            if (correctAnswer)
-                fairyImage.sprite = fairyCorrect;
-            else
-                fairyImage.sprite = fairyIncorrect;
+            //  if (correctAnswer)
+            //fairyImage.sprite = fairyCorrect;
+            //  else
+            // fairyImage.sprite = fairyIncorrect;
         }
         else
         {
-            fairyImage.sprite = fairyNeutral;
+            //  fairyImage.sprite = artemis;
             ChangeQuestion();
             timerReady = false;
         }

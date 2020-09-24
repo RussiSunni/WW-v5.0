@@ -8,7 +8,7 @@ using System.IO;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, doorCard, goodbyeCard;
+    public static GameObject helloCard, doorCard, goodbyeCard, openCard;
 
     void Awake()
     {
@@ -25,11 +25,21 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
-        helloCard = GameObject.Find("HelloButton");
+        //  helloCard = GameObject.Find("HelloButton");
         doorCard = GameObject.Find("DoorButton");
         goodbyeCard = GameObject.Find("GoodbyeButton");
-        helloCard.SetActive(false);
+        openCard = GameObject.Find("OpenButton");
+        //  helloCard.SetActive(false);
         doorCard.SetActive(false);
         goodbyeCard.SetActive(false);
+        openCard.SetActive(false);
+    }
+
+    public static void Restart()
+    {
+        doorCard.SetActive(false);
+        goodbyeCard.SetActive(false);
+        openCard.SetActive(false);
+        Academy.cameraPos = new Vector3(0, 0, -10);
     }
 }

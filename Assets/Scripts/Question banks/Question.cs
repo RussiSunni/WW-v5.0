@@ -17,4 +17,6 @@ public class Question : MonoBehaviour
     public bool answered;
     public bool known;
     public string answerSound;
+    public Vector3 position;
+    public Vector3 scale;
 }

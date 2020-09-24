@@ -47,9 +47,6 @@ public class AnimalNamesQuestionBank : Question
 
     void Start()
     {
-
-
-
         animalName001 = new Question()
         {
             number = 1,
@@ -67,7 +64,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Cat"
+            answerSound = "Cat",
+            position = new Vector3(-1.7f, 1.6f, 0f),
+            scale = new Vector3(1.0f, 1.0f, 1.0f)
         };
 
         animalName002 = new Question()
@@ -87,7 +86,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Dog"
+            answerSound = "Dog",
+            position = new Vector3(-1.25f, 1.3f, 0f),
+            scale = new Vector3(1.0f, 1.0f, 1.0f)
         };
 
         animalName003 = new Question()
@@ -107,7 +108,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Horse"
+            answerSound = "Horse",
+            position = new Vector3(-1f, 1.7f, 0f),
+            scale = new Vector3(1.0f, 1.0f, 1.0f)
         };
 
         animalName004 = new Question()
@@ -127,7 +130,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Bear"
+            answerSound = "Bear",
+            position = new Vector3(-0.8f, 1.6f, 0f),
+            scale = new Vector3(1.0f, 1.0f, 1.0f)
         };
 
         animalName005 = new Question()
@@ -147,7 +152,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Wolf"
+            answerSound = "Wolf",
+            position = new Vector3(-1.5f, 1.9f, 0f),
+            scale = new Vector3(0.7f, 0.7f, 1.0f)
         };
 
         animalName006 = new Question()
@@ -167,7 +174,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Zebra"
+            answerSound = "Zebra",
+            position = new Vector3(-0.8f, 1.65f, 0f),
+            scale = new Vector3(1.0f, 1.0f, 1.0f)
         };
 
         animalName007 = new Question()
@@ -327,7 +336,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Duck"
+            answerSound = "Duck",
+            position = new Vector3(-1.6f, 1.2f, 0f),
+            scale = new Vector3(0.6f, 0.6f, 1.0f)
         };
 
         animalName015 = new Question()
@@ -347,7 +358,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Pig"
+            answerSound = "Pig",
+            position = new Vector3(-1.25f, 1.35f, 0f),
+            scale = new Vector3(0.8f, 0.8f, 1.0f)
         };
 
         animalName016 = new Question()
@@ -367,7 +380,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Donkey"
+            answerSound = "Donkey",
+            position = new Vector3(-0.9f, 2.4f, 0f),
+            scale = new Vector3(1.0f, 1.0f, 1.0f)
         };
 
         animalName017 = new Question()
@@ -387,7 +402,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Rabbit"
+            answerSound = "Rabbit",
+            position = new Vector3(-1.55f, 1.4f, 0f),
+            scale = new Vector3(0.6f, 0.6f, 1.0f)
         };
 
         animalName018 = new Question()
@@ -407,7 +424,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Frog"
+            answerSound = "Frog",
+            position = new Vector3(-1.8f, 0.7f, 0f),
+            scale = new Vector3(0.5f, 0.5f, 1.0f)
         };
 
         animalName019 = new Question()
@@ -427,7 +446,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Tiger"
+            answerSound = "Tiger",
+            position = new Vector3(-0.6f, 1.4f, 0f),
+            scale = new Vector3(1.16f, 1.16f, 1.0f)
         };
 
         animalName020 = new Question()
@@ -447,7 +468,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Goat"
+            answerSound = "Goat",
+            position = new Vector3(-1.5f, 1.4f, 0f),
+            scale = new Vector3(0.814f, 0.814f, 0.814f)
         };
 
         animalName021 = new Question()
@@ -467,7 +490,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Chicken"
+            answerSound = "Chicken",
+            position = new Vector3(-1.8f, 1.3f, 0f),
+            scale = new Vector3(0.5f, 0.5f, 1.0f)
         };
 
         animalName022 = new Question()
@@ -487,7 +512,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Elephant"
+            answerSound = "Elephant",
+            position = new Vector3(0f, 2.2f, 0f),
+            scale = new Vector3(1.55f, 1.55f, 1.0f)
         };
 
         animalName023 = new Question()
@@ -507,7 +534,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Lizard"
+            answerSound = "Lizard",
+            position = new Vector3(-1.0f, 1f, 0f),
+            scale = new Vector3(1.0f, 1.0f, 1.0f)
         };
 
         animalName024 = new Question()
@@ -527,7 +556,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Bat"
+            answerSound = "Bat",
+            position = new Vector3(-1.4f, 4f, 0f),
+            scale = new Vector3(0.6f, 0.6f, 1.0f)
         };
 
         animalName025 = new Question()
@@ -687,7 +718,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Tortoise"
+            answerSound = "Tortoise",
+            position = new Vector3(-1.5f, 0.9f, 0f),
+            scale = new Vector3(0.7f, 0.7f, 1.0f)
         };
 
         animalName033 = new Question()
@@ -707,7 +740,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Shark"
+            answerSound = "Shark",
+            position = new Vector3(0f, 1.3f, 0f),
+            scale = new Vector3(1.6f, 1.6f, 1.0f)
         };
 
         animalName034 = new Question()
@@ -727,7 +762,9 @@ public class AnimalNamesQuestionBank : Question
             "animals"
         },
             size = 1,
-            answerSound = "Dolphin"
+            answerSound = "Dolphin",
+            position = new Vector3(-0.9f, 1.4f, 0f),
+            scale = new Vector3(1f, 1f, 1.0f)
         };
 
         animalName035 = new Question()
@@ -814,25 +851,25 @@ public class AnimalNamesQuestionBank : Question
         questions.Add(animalName006);
 
         // if (!GameControl.animalName007known)
-        questions.Add(animalName007);
+        //  questions.Add(animalName007);
 
         // if (!GameControl.animalName008known)
-        questions.Add(animalName008);
+        //   questions.Add(animalName008);
 
         // if (!GameControl.animalName009known)
-        questions.Add(animalName009);
+        //   questions.Add(animalName009);
 
         // if (!GameControl.animalName010known)
-        questions.Add(animalName010);
+        //   questions.Add(animalName010);
 
         // if (!GameControl.animalName011known)
-        questions.Add(animalName011);
+        //   questions.Add(animalName011);
 
         // if (!GameControl.animalName012known)
-        questions.Add(animalName012);
+        //  questions.Add(animalName012);
 
         // if (!GameControl.animalName013known)
-        questions.Add(animalName013);
+        //  questions.Add(animalName013);
 
         // if (!GameControl.animalName014known)
         questions.Add(animalName014);
@@ -868,25 +905,25 @@ public class AnimalNamesQuestionBank : Question
         questions.Add(animalName024);
 
         // if (!GameControl.animalName025known)
-        questions.Add(animalName025);
+        //   questions.Add(animalName025);
 
         // if (!GameControl.animalName026known)
-        questions.Add(animalName026);
+        //  questions.Add(animalName026);
 
         // if (!GameControl.animalName027known)
-        questions.Add(animalName027);
+        //  questions.Add(animalName027);
 
         // if (!GameControl.animalName028known)
-        questions.Add(animalName028);
+        //   questions.Add(animalName028);
 
         // if (!GameControl.animalName029known)
-        questions.Add(animalName029);
+        //  questions.Add(animalName029);
 
         // if (!GameControl.animalName030known)
-        questions.Add(animalName030);
+        //  questions.Add(animalName030);
 
         // if (!GameControl.animalName031known)
-        questions.Add(animalName031);
+        //   questions.Add(animalName031);
 
         // if (!GameControl.animalName032known)
         questions.Add(animalName032);
@@ -898,11 +935,11 @@ public class AnimalNamesQuestionBank : Question
         questions.Add(animalName034);
 
         // if (!GameControl.animalName035known)
-        questions.Add(animalName035);
+        // questions.Add(animalName035);
 
-        questions.Add(animalName036);
+        //  questions.Add(animalName036);
 
-        questions.Add(animalName037);
+        //  questions.Add(animalName037);
 
         questions = questions.OrderBy(x => System.Guid.NewGuid()).ToList();
 
