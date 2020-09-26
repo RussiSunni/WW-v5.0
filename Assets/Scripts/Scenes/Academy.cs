@@ -14,7 +14,7 @@ public class Academy : MonoBehaviour
     string direction, scene;
     Text dialogue;
     int textNumber;
-    bool doorClosed = true;
+    //  bool doorClosed = true;
 
     SpriteRenderer academyDoorway;
     Sprite doorOpen;
@@ -36,18 +36,18 @@ public class Academy : MonoBehaviour
 
     public void MoveForward()
     {
-        Debug.Log(cameraPos.x);
-        Debug.Log(cameraPos.y);
+        // Debug.Log(cameraPos.x);
+        // Debug.Log(cameraPos.y);
         Debug.Log(cameraPos.z);
-        Debug.Log(x);
-        Debug.Log(y);
-        Debug.Log(z);
+        // Debug.Log(x);
+        // Debug.Log(y);
+        // Debug.Log(z);
 
         if (scene == "Academy")
         {
             if (direction == "north")
             {
-                if (cameraPos.z < 0 && cameraPos.x == 0 || doorClosed == false)
+                if (cameraPos.z < -4 && cameraPos.x == 0)
                 {
                     z += 5.4f;
                     camera.transform.position = new Vector3(0, 0, z);
@@ -95,6 +95,12 @@ public class Academy : MonoBehaviour
             else if (direction == "east")
             {
                 if (cameraPos.x < 5.3 && cameraPos.z == -10)
+                {
+                    x += 5.4f;
+                    camera.transform.position = new Vector3(x, 0, z);
+                    cameraPos = camera.transform.position;
+                }
+                else if (cameraPos.z > 6.1 && cameraPos.z < 6.3)
                 {
                     x += 5.4f;
                     camera.transform.position = new Vector3(x, 0, z);
@@ -196,10 +202,10 @@ public class Academy : MonoBehaviour
             }
             camera.transform.Rotate(0, 90, 0);
         }
-        else if (scene == "Fairy" || scene == "Artemis" || scene == "Fairy2")
-        {
-            TextScrollForward();
-        }
+        // else if (scene == "Fairy" || scene == "Artemis" || scene == "Fairy2")
+        // {
+        //     TextScrollForward();
+        // }
     }
 
     public void TextScrollForward()
@@ -248,7 +254,7 @@ public class Academy : MonoBehaviour
 
     public void HelloCard()
     {
-        if (z > -4.7 && z < -4.5)
+        if (z > -4.7 && z < -4.5 && y == 0f)
         {
             textNumber = 1;
 
@@ -271,9 +277,13 @@ public class Academy : MonoBehaviour
             scene = "Secretary";
             y = 12f;
             camera.transform.position = new Vector3(0, y, z);
-            dialogue.text = "Hello.";
+            dialogue.text = "Hello.\n Are you lost?";
+            if (!GameControl.noCard.activeSelf)
+            {
+                GameControl.noCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
         }
-
         else if (x < -10.7 && x > -10.9)
         {
             textNumber = 1;
@@ -296,13 +306,13 @@ public class Academy : MonoBehaviour
 
         else
         {
-            GameControl.Restart();
+            Restart();
         }
     }
 
     public void GoodbyeCard()
     {
-        if (z > -4.7 && z < -4.5)
+        if (z > -4.7 && z < -4.5 && y == 12f)
         {
             scene = "Academy";
 
@@ -317,9 +327,22 @@ public class Academy : MonoBehaviour
                 SoundManager.playCardAppearSound();
             }
         }
+        else if (z > 6.1 && z < 6.3 && y == 12f)
+        {
+            scene = "Academy";
+            y = 0f;
+            camera.transform.position = new Vector3(x, y, z);
+            dialogue.text = "";
+
+            if (!GameControl.hiCard.activeSelf)
+            {
+                GameControl.hiCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
         else
         {
-            GameControl.Restart();
+            Restart();
         }
     }
 
@@ -329,11 +352,60 @@ public class Academy : MonoBehaviour
         {
             SoundManager.playDoorOpeningSound();
             academyDoorway.sprite = doorOpen;
-            doorClosed = false;
+            //         doorClosed = false;
+            if (!GameControl.yesCard.activeSelf)
+            {
+                GameControl.enterCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
         }
         else
         {
-            GameControl.Restart();
+            Restart();
         }
+    }
+
+    public void EnterCard()
+    {
+        if (z > 0.7 && z < 0.9)
+        {
+            z = 6.2f;
+            cameraPos.z = 6.2f;
+            camera.transform.position = new Vector3(x, y, z);
+
+            if (!GameControl.yesCard.activeSelf)
+            {
+                GameControl.yesCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void YesCard()
+    {
+        if (z > 6.1 && z < 6.3)
+        {
+            if (!GameControl.readCard.activeSelf)
+            {
+                GameControl.readCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+
+                dialogue.text = "Well, read the sign.";
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void Restart()
+    {
+        GameControl.Restart();
+        SceneManager.LoadScene("Academy");
     }
 }
