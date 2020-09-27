@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip helloSound, doorClosedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound;
+    public static AudioClip helloSound, doorClosedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound;
     static AudioSource audioSrc;
 
     void Start()
@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
         heySound = Resources.Load<AudioClip>("Sound/Hey");
         wolfGrowlSound = Resources.Load<AudioClip>("Sound/WolfGrowl");
         bumpSound = Resources.Load<AudioClip>("Sound/Bump");
+        pageTurnSound = Resources.Load<AudioClip>("Sound/PageTurn");
     }
 
     public static void playHelloSound()
@@ -56,5 +57,9 @@ public class SoundManager : MonoBehaviour
     public static void playBumpSound()
     {
         audioSrc.PlayOneShot(bumpSound);
+    }
+    public static void playPageTurnSound()
+    {
+        audioSrc.PlayOneShot(pageTurnSound);
     }
 }

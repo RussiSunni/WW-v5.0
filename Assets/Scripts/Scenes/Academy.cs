@@ -14,10 +14,11 @@ public class Academy : MonoBehaviour
     string direction, scene;
     Text dialogue;
     int textNumber;
-    //  bool doorClosed = true;
+    bool doorClosed = true;
+    GameObject page1;
 
-    SpriteRenderer academyDoorway;
-    Sprite doorOpen;
+    SpriteRenderer frontDoorway, roomsDoorway;
+    Sprite frontDoorOpen, roomsDoorOpen;
 
     void Start()
     {
@@ -28,18 +29,22 @@ public class Academy : MonoBehaviour
         dialogue = GameObject.Find("Text").GetComponent<Text>();
         dialogue.text = "";
 
+        page1 = GameObject.Find("Page1");
+
         scene = "Academy";
 
-        academyDoorway = GameObject.Find("View03").GetComponent<SpriteRenderer>();
-        doorOpen = Resources.Load<Sprite>("Views/Academy/OutsideAcademyView03b");
+        frontDoorway = GameObject.Find("View03").GetComponent<SpriteRenderer>();
+        frontDoorOpen = Resources.Load<Sprite>("Views/Academy/OutsideAcademyView03b");
+        roomsDoorway = GameObject.Find("View21").GetComponent<SpriteRenderer>();
+        roomsDoorOpen = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05b");
     }
 
     public void MoveForward()
     {
-        // Debug.Log(cameraPos.x);
+        Debug.Log(cameraPos.x);
         // Debug.Log(cameraPos.y);
-        Debug.Log(cameraPos.z);
-        // Debug.Log(x);
+        // Debug.Log(cameraPos.z);
+        Debug.Log(x);
         // Debug.Log(y);
         // Debug.Log(z);
 
@@ -50,7 +55,13 @@ public class Academy : MonoBehaviour
                 if (cameraPos.z < -4 && cameraPos.x == 0)
                 {
                     z += 5.4f;
-                    camera.transform.position = new Vector3(0, 0, z);
+                    camera.transform.position = new Vector3(x, 0, z);
+                    cameraPos = camera.transform.position;
+                }
+                else if (!doorClosed && cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > 5.3 && cameraPos.x < 5.5)
+                {
+                    z += 5.4f;
+                    camera.transform.position = new Vector3(x, 0, z);
                     cameraPos = camera.transform.position;
                 }
                 else
@@ -61,7 +72,7 @@ public class Academy : MonoBehaviour
 
             if (direction == "south")
             {
-                if (cameraPos.z > -9)
+                if (cameraPos.z > -9 && x == 0)
                 {
                     z -= 5.4f;
                     camera.transform.position = new Vector3(0, 0, z);
@@ -75,7 +86,7 @@ public class Academy : MonoBehaviour
 
             else if (direction == "west")
             {
-                if (cameraPos.x > -5.3 && cameraPos.z == -10)
+                if (cameraPos.x > -5.3 && cameraPos.z == -10 || cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > -5.3)
                 {
                     x -= 5.4f;
                     camera.transform.position = new Vector3(x, 0, z);
@@ -117,7 +128,6 @@ public class Academy : MonoBehaviour
             }
         }
     }
-
     public void MoveBackward()
     {
         if (scene == "Academy")
@@ -125,14 +135,14 @@ public class Academy : MonoBehaviour
             if (direction == "north")
             {
                 z -= 5.4f;
-                camera.transform.position = new Vector3(0, 0, z);
+                camera.transform.position = new Vector3(x, 0, z);
                 cameraPos = camera.transform.position;
             }
 
             if (direction == "south")
             {
                 z += 5.4f;
-                camera.transform.position = new Vector3(0, 0, z);
+                camera.transform.position = new Vector3(x, 0, z);
                 cameraPos = camera.transform.position;
             }
 
@@ -151,7 +161,6 @@ public class Academy : MonoBehaviour
             }
         }
     }
-
     public void LeftButton()
     {
         if (scene == "Academy")
@@ -251,6 +260,16 @@ public class Academy : MonoBehaviour
         }
     }
 
+    public void SpellbookButton()
+    {
+        SoundManager.playPageTurnSound();
+
+        if (page1.transform.localPosition.x == 0f)
+            page1.transform.localPosition = new Vector3(-800f, 0f, 0f);
+        else if (page1.transform.localPosition.x == -800f)
+            page1.transform.localPosition = new Vector3(0f, 0f, 0f);
+    }
+
 
     public void HelloCard()
     {
@@ -270,13 +289,13 @@ public class Academy : MonoBehaviour
             }
         }
 
-        else if (z > 6.1 && z < 6.3)
+        else if (z > 6.1 && z < 6.3 && x < -5.3 && x > -5.5)
         {
             textNumber = 1;
 
             scene = "Secretary";
             y = 12f;
-            camera.transform.position = new Vector3(0, y, z);
+            camera.transform.position = new Vector3(x, y, z);
             dialogue.text = "Hello.\n Are you lost?";
             if (!GameControl.noCard.activeSelf)
             {
@@ -284,25 +303,25 @@ public class Academy : MonoBehaviour
                 SoundManager.playCardAppearSound();
             }
         }
-        else if (x < -10.7 && x > -10.9)
-        {
-            textNumber = 1;
+        // else if (x < -10.7 && x > -10.9)
+        // {
+        //     textNumber = 1;
 
-            scene = "Fairy2";
-            y = 21f;
-            camera.transform.position = new Vector3(0, y, z);
-            dialogue.text = "Wait.";
-        }
+        //     scene = "Fairy2";
+        //     y = 21f;
+        //     camera.transform.position = new Vector3(0, y, z);
+        //     dialogue.text = "Wait.";
+        // }
 
-        else if (x < -16.1 && x > -16.3)
-        {
-            textNumber = 1;
+        // else if (x < -16.1 && x > -16.3)
+        // {
+        //     textNumber = 1;
 
-            scene = "Artemis";
-            y = 12f;
-            camera.transform.position = new Vector3(0, y, z);
-            dialogue.text = "Hello, I am Artemis, Queen of the Animals.";
-        }
+        //     scene = "Artemis";
+        //     y = 12f;
+        //     camera.transform.position = new Vector3(0, y, z);
+        //     dialogue.text = "Hello, I am Artemis, Queen of the Animals.";
+        // }
 
         else
         {
@@ -351,11 +370,21 @@ public class Academy : MonoBehaviour
         if (z > 0.7 && z < 0.9)
         {
             SoundManager.playDoorOpeningSound();
-            academyDoorway.sprite = doorOpen;
-            //         doorClosed = false;
+            frontDoorway.sprite = frontDoorOpen;
             if (!GameControl.yesCard.activeSelf)
             {
                 GameControl.enterCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else if (z > 6.1 && z < 6.3)
+        {
+            SoundManager.playDoorOpeningSound();
+            roomsDoorway.sprite = roomsDoorOpen;
+            doorClosed = false;
+            if (!GameControl.closeCard.activeSelf)
+            {
+                GameControl.closeCard.SetActive(true);
                 SoundManager.playCardAppearSound();
             }
         }
@@ -396,6 +425,43 @@ public class Academy : MonoBehaviour
 
                 dialogue.text = "Well, read the sign.";
             }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void ReadCard()
+    {
+        if (z > 6.1 && z < 6.3)
+        {
+            y = 12f;
+            camera.transform.position = new Vector3(x, y, z);
+            if (!GameControl.stopCard.activeSelf)
+            {
+                GameControl.stopCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void StopCard()
+    {
+        if (z > 6.1 && z < 6.3)
+        {
+            y = 0f;
+            camera.transform.position = new Vector3(x, y, z);
+            if (!GameControl.byeCard.activeSelf)
+            {
+                GameControl.byeCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+            SpellbookButton();
         }
         else
         {
