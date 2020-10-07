@@ -8,7 +8,7 @@ using System.IO;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, enterCard, stopCard, closeCard, byeCard;
+    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard;
 
     void Awake()
     {
@@ -32,11 +32,18 @@ public class GameControl : MonoBehaviour
         noCard = GameObject.Find("NoButton");
         readCard = GameObject.Find("ReadButton");
         hiCard = GameObject.Find("HiButton");
-        enterCard = GameObject.Find("EnterButton");
+        // enterCard = GameObject.Find("EnterButton");
         stopCard = GameObject.Find("StopButton");
         closeCard = GameObject.Find("CloseButton");
         byeCard = GameObject.Find("ByeButton");
+        thankYouCard = GameObject.Find("ThankYouButton");
 
+        niceCard = GameObject.Find("NiceButton");
+        toCard = GameObject.Find("ToButton");
+        meetCard = GameObject.Find("MeetButton");
+        youCard = GameObject.Find("YouButton");
+        niceToMeetYouTooCard = GameObject.Find("NiceToMeetYouTooButton");
+        okCard = GameObject.Find("OKButton");
 
         doorCard.SetActive(false);
         goodbyeCard.SetActive(false);
@@ -45,10 +52,18 @@ public class GameControl : MonoBehaviour
         noCard.SetActive(false);
         readCard.SetActive(false);
         hiCard.SetActive(false);
-        enterCard.SetActive(false);
+        //   enterCard.SetActive(false);
         stopCard.SetActive(false);
         closeCard.SetActive(false);
         byeCard.SetActive(false);
+        thankYouCard.SetActive(false);
+        niceCard.SetActive(false);
+        toCard.SetActive(false);
+        meetCard.SetActive(false);
+        youCard.SetActive(false);
+
+        niceToMeetYouTooCard.SetActive(false);
+        okCard.SetActive(false);
     }
 
     public static void Restart()

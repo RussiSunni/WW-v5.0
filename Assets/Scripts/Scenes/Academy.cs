@@ -14,11 +14,12 @@ public class Academy : MonoBehaviour
     string direction, scene;
     Text dialogue;
     int textNumber;
-    bool doorClosed = true;
-    GameObject page1;
+    bool isFrontDoorClosed = true;
+    bool isRoomsDoorClosed = true;
+    GameObject page1, page2;
 
     SpriteRenderer frontDoorway, roomsDoorway;
-    Sprite frontDoorOpen, roomsDoorOpen;
+    Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class Academy : MonoBehaviour
         dialogue.text = "";
 
         page1 = GameObject.Find("Page1");
+        page2 = GameObject.Find("Page2");
 
         scene = "Academy";
 
@@ -37,19 +39,24 @@ public class Academy : MonoBehaviour
         frontDoorOpen = Resources.Load<Sprite>("Views/Academy/OutsideAcademyView03b");
         roomsDoorway = GameObject.Find("View21").GetComponent<SpriteRenderer>();
         roomsDoorOpen = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05b");
+        roomsDoorClosed = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05");
+
     }
 
     public void MoveForward()
     {
-        Debug.Log(cameraPos.x);
+
+        // Debug.Log(cameraPos.x);
         // Debug.Log(cameraPos.y);
         // Debug.Log(cameraPos.z);
-        Debug.Log(x);
+        // Debug.Log(x);
         // Debug.Log(y);
         // Debug.Log(z);
 
         if (scene == "Academy")
         {
+            SoundManager.playFootstepSound();
+
             if (direction == "north")
             {
                 if (cameraPos.z < -4 && cameraPos.x == 0)
@@ -58,12 +65,19 @@ public class Academy : MonoBehaviour
                     camera.transform.position = new Vector3(x, 0, z);
                     cameraPos = camera.transform.position;
                 }
-                else if (!doorClosed && cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > 5.3 && cameraPos.x < 5.5)
+                else if (cameraPos.z < 18 && cameraPos.x == 0 && !isFrontDoorClosed)
                 {
                     z += 5.4f;
                     camera.transform.position = new Vector3(x, 0, z);
                     cameraPos = camera.transform.position;
                 }
+                else if (!isRoomsDoorClosed && cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > 5.3 && cameraPos.x < 5.5)
+                {
+                    z += 5.4f;
+                    camera.transform.position = new Vector3(x, 0, z);
+                    cameraPos = camera.transform.position;
+                }
+
                 else
                 {
                     SoundManager.playDoorClosedSound();
@@ -86,7 +100,7 @@ public class Academy : MonoBehaviour
 
             else if (direction == "west")
             {
-                if (cameraPos.x > -5.3 && cameraPos.z == -10 || cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > -5.3)
+                if (cameraPos.x > -5.3 && cameraPos.z == -10 || cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > -5.3 || cameraPos.z == 17)
                 {
                     x -= 5.4f;
                     camera.transform.position = new Vector3(x, 0, z);
@@ -105,13 +119,13 @@ public class Academy : MonoBehaviour
 
             else if (direction == "east")
             {
-                if (cameraPos.x < 5.3 && cameraPos.z == -10)
+                if (cameraPos.x < 5.3 && cameraPos.z == -10 || cameraPos.z == 17 && x < 5.3)
                 {
                     x += 5.4f;
                     camera.transform.position = new Vector3(x, 0, z);
                     cameraPos = camera.transform.position;
                 }
-                else if (cameraPos.z > 6.1 && cameraPos.z < 6.3)
+                else if (cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x < 5.3)
                 {
                     x += 5.4f;
                     camera.transform.position = new Vector3(x, 0, z);
@@ -132,14 +146,16 @@ public class Academy : MonoBehaviour
     {
         if (scene == "Academy")
         {
-            if (direction == "north")
+            SoundManager.playFootstepSound();
+
+            if (direction == "north" && cameraPos.z > -10f)
             {
                 z -= 5.4f;
                 camera.transform.position = new Vector3(x, 0, z);
                 cameraPos = camera.transform.position;
             }
 
-            if (direction == "south")
+            else if (direction == "south")
             {
                 z += 5.4f;
                 camera.transform.position = new Vector3(x, 0, z);
@@ -158,6 +174,11 @@ public class Academy : MonoBehaviour
                 x -= 5.4f;
                 camera.transform.position = new Vector3(x, 0, z);
                 cameraPos = camera.transform.position;
+            }
+
+            else
+            {
+                SoundManager.playBumpSound();
             }
         }
     }
@@ -265,11 +286,16 @@ public class Academy : MonoBehaviour
         SoundManager.playPageTurnSound();
 
         if (page1.transform.localPosition.x == 0f)
+        {
             page1.transform.localPosition = new Vector3(-800f, 0f, 0f);
+            page2.transform.localPosition = new Vector3(0f, 0f, 0f);
+        }
         else if (page1.transform.localPosition.x == -800f)
+        {
             page1.transform.localPosition = new Vector3(0f, 0f, 0f);
+            page2.transform.localPosition = new Vector3(800f, 0f, 0f);
+        }
     }
-
 
     public void HelloCard()
     {
@@ -278,6 +304,7 @@ public class Academy : MonoBehaviour
             textNumber = 1;
 
             scene = "Fairy";
+            SoundManager.playHeySound();
             y = 12f;
             camera.transform.position = new Vector3(0, y, z);
             if (!GameControl.goodbyeCard.activeSelf)
@@ -303,15 +330,19 @@ public class Academy : MonoBehaviour
                 SoundManager.playCardAppearSound();
             }
         }
-        // else if (x < -10.7 && x > -10.9)
-        // {
-        //     textNumber = 1;
-
-        //     scene = "Fairy2";
-        //     y = 21f;
-        //     camera.transform.position = new Vector3(0, y, z);
-        //     dialogue.text = "Wait.";
-        // }
+        else if (cameraPos.z == 11.6f)
+        {
+            scene = "Fairy";
+            y = 12f;
+            camera.transform.position = new Vector3(0, y, z);
+            dialogue.text = "Turn the page to access new spells.\n OK?";
+            if (!GameControl.okCard.activeSelf)
+            {
+                GameControl.okCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+                SpellbookButton();
+            }
+        }
 
         // else if (x < -16.1 && x > -16.3)
         // {
@@ -353,11 +384,17 @@ public class Academy : MonoBehaviour
             camera.transform.position = new Vector3(x, y, z);
             dialogue.text = "";
 
-            if (!GameControl.hiCard.activeSelf)
-            {
-                GameControl.hiCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            // if (!GameControl.hiCard.activeSelf)
+            // {
+            //     SpellbookButton();
+            //     GameControl.hiCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+
+            //     y = 21.5f;
+            //     camera.transform.position = new Vector3(x, y, z);
+            //     dialogue.text = "Hey! You can turn the pages of your spellbook with the book button.";
+            //     SoundManager.playHeySound();
+            // }
         }
         else
         {
@@ -371,17 +408,18 @@ public class Academy : MonoBehaviour
         {
             SoundManager.playDoorOpeningSound();
             frontDoorway.sprite = frontDoorOpen;
+            isFrontDoorClosed = false;
             if (!GameControl.yesCard.activeSelf)
             {
-                GameControl.enterCard.SetActive(true);
+                GameControl.yesCard.SetActive(true);
                 SoundManager.playCardAppearSound();
             }
         }
-        else if (z > 6.1 && z < 6.3)
+        else if (z > 6.1 && z < 6.3 && isRoomsDoorClosed)
         {
             SoundManager.playDoorOpeningSound();
             roomsDoorway.sprite = roomsDoorOpen;
-            doorClosed = false;
+            isRoomsDoorClosed = false;
             if (!GameControl.closeCard.activeSelf)
             {
                 GameControl.closeCard.SetActive(true);
@@ -394,33 +432,33 @@ public class Academy : MonoBehaviour
         }
     }
 
-    public void EnterCard()
-    {
-        if (z > 0.7 && z < 0.9)
-        {
-            z = 6.2f;
-            cameraPos.z = 6.2f;
-            camera.transform.position = new Vector3(x, y, z);
+    // public void EnterCard()
+    // {
+    //     if (z > 0.7 && z < 0.9)
+    //     {
+    //         z = 6.2f;
+    //         cameraPos.z = 6.2f;
+    //         camera.transform.position = new Vector3(x, y, z);
 
-            if (!GameControl.yesCard.activeSelf)
-            {
-                GameControl.yesCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
-        }
-        else
-        {
-            Restart();
-        }
-    }
+    //         if (!GameControl.yesCard.activeSelf)
+    //         {
+    //             GameControl.yesCard.SetActive(true);
+    //             SoundManager.playCardAppearSound();
+    //         }
+    //     }
+    //     else
+    //     {
+    //         Restart();
+    //     }
+    // }
 
     public void YesCard()
     {
         if (z > 6.1 && z < 6.3)
         {
-            if (!GameControl.readCard.activeSelf)
+            if (!GameControl.thankYouCard.activeSelf)
             {
-                GameControl.readCard.SetActive(true);
+                GameControl.thankYouCard.SetActive(true);
                 SoundManager.playCardAppearSound();
 
                 dialogue.text = "Well, read the sign.";
@@ -436,6 +474,8 @@ public class Academy : MonoBehaviour
     {
         if (z > 6.1 && z < 6.3)
         {
+            scene = "Scroll";
+
             y = 12f;
             camera.transform.position = new Vector3(x, y, z);
             if (!GameControl.stopCard.activeSelf)
@@ -454,6 +494,8 @@ public class Academy : MonoBehaviour
     {
         if (z > 6.1 && z < 6.3)
         {
+            scene = "Academy";
+
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
             if (!GameControl.byeCard.activeSelf)
@@ -461,13 +503,135 @@ public class Academy : MonoBehaviour
                 GameControl.byeCard.SetActive(true);
                 SoundManager.playCardAppearSound();
             }
-            SpellbookButton();
         }
         else
         {
             Restart();
         }
     }
+    public void CloseCard()
+    {
+        if (z > 6.1 && z < 6.3 && !isRoomsDoorClosed)
+        {
+            SoundManager.playDoorOpeningSound();
+            roomsDoorway.sprite = roomsDoorClosed;
+            isRoomsDoorClosed = true;
+            if (!GameControl.hiCard.activeSelf)
+            {
+                GameControl.hiCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void ThankYouCard()
+    {
+        if (z > 6.1 && z < 6.3 && y == 12f)
+        {
+            if (!GameControl.readCard.activeSelf)
+            {
+                GameControl.readCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else if (z > 6.1 && z < 6.3 && y == 21.5f)
+        {
+            y = 0f;
+            camera.transform.position = new Vector3(x, y, z);
+
+            // if (!GameControl.readCard.activeSelf)
+            // {
+            //     GameControl.readCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+    public void HiCard()
+    {
+        if (cameraPos.z == 17f && cameraPos.x == 5.4f)
+        {
+            scene = "Students";
+
+            y = 12f;
+            camera.transform.position = new Vector3(x, y, z);
+            dialogue.text = "Nice to meet you. / My name is Sue.";
+
+            if (!GameControl.niceToMeetYouTooCard.activeSelf)
+            {
+                GameControl.niceToMeetYouTooCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+
+            // if (!GameControl.niceCard.activeSelf)
+            // {
+            //     GameControl.niceCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+            // if (!GameControl.toCard.activeSelf)
+            // {
+            //     GameControl.toCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+            // if (!GameControl.meetCard.activeSelf)
+            // {
+            //     GameControl.meetCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+            // if (!GameControl.youCard.activeSelf)
+            // {
+            //     GameControl.youCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+        }
+
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void OKCard()
+    {
+        if (cameraPos.z == 11.6f && cameraPos.x == 0f && y == 12f)
+        {
+            y = 0f;
+            camera.transform.position = new Vector3(x, y, z);
+            // if (!GameControl.readCard.activeSelf)
+            // {
+            //     GameControl.readCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+    public void NiceToMeetYouCard()
+    {
+        if (cameraPos.z == 17f && cameraPos.x == 5.4f && y == 12f)
+        {
+            Debug.Log("test");
+            // if (!GameControl.readCard.activeSelf)
+            // {
+            //     GameControl.readCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
 
     public void Restart()
     {
