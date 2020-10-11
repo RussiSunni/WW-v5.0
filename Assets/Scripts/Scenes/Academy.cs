@@ -23,6 +23,7 @@ public class Academy : MonoBehaviour
 
     void Start()
     {
+
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraPos = camera.transform.position;
         direction = "north";
@@ -70,6 +71,8 @@ public class Academy : MonoBehaviour
                     z += 5.4f;
                     camera.transform.position = new Vector3(x, 0, z);
                     cameraPos = camera.transform.position;
+
+                    OutdoorsAmbientSound.StopOutdoorAmbientSound();
                 }
                 else if (!isRoomsDoorClosed && cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > 5.3 && cameraPos.x < 5.5)
                 {
@@ -432,25 +435,6 @@ public class Academy : MonoBehaviour
         }
     }
 
-    // public void EnterCard()
-    // {
-    //     if (z > 0.7 && z < 0.9)
-    //     {
-    //         z = 6.2f;
-    //         cameraPos.z = 6.2f;
-    //         camera.transform.position = new Vector3(x, y, z);
-
-    //         if (!GameControl.yesCard.activeSelf)
-    //         {
-    //             GameControl.yesCard.SetActive(true);
-    //             SoundManager.playCardAppearSound();
-    //         }
-    //     }
-    //     else
-    //     {
-    //         Restart();
-    //     }
-    // }
 
     public void YesCard()
     {
@@ -509,6 +493,7 @@ public class Academy : MonoBehaviour
             Restart();
         }
     }
+
     public void CloseCard()
     {
         if (z > 6.1 && z < 6.3 && !isRoomsDoorClosed)
@@ -562,7 +547,7 @@ public class Academy : MonoBehaviour
 
             y = 12f;
             camera.transform.position = new Vector3(x, y, z);
-            dialogue.text = "Nice to meet you. / My name is Sue.";
+            dialogue.text = "Hi. I'm Sue.";
 
             if (!GameControl.niceToMeetYouTooCard.activeSelf)
             {
@@ -602,13 +587,16 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == 11.6f && cameraPos.x == 0f && y == 12f)
         {
+            scene = "Academy";
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
-            // if (!GameControl.readCard.activeSelf)
-            // {
-            //     GameControl.readCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
+            dialogue.text = "";
+
+            if (!GameControl.sueCard.activeSelf)
+            {
+                GameControl.sueCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
         }
         else
         {

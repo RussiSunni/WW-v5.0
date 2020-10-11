@@ -8,7 +8,7 @@ using System.IO;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard;
+    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard, sueCard;
 
     void Awake()
     {
@@ -44,6 +44,7 @@ public class GameControl : MonoBehaviour
         youCard = GameObject.Find("YouButton");
         niceToMeetYouTooCard = GameObject.Find("NiceToMeetYouTooButton");
         okCard = GameObject.Find("OKButton");
+        sueCard = GameObject.Find("SueButton");
 
         doorCard.SetActive(false);
         goodbyeCard.SetActive(false);
@@ -64,6 +65,7 @@ public class GameControl : MonoBehaviour
 
         niceToMeetYouTooCard.SetActive(false);
         okCard.SetActive(false);
+        sueCard.SetActive(false);
     }
 
     public static void Restart()
