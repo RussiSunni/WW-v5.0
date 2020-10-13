@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public class OldCard : MonoBehaviour
 {
     public Vector3 initialPosition, mousePosition;
     public float deltaX, deltaY, deltaZ;
