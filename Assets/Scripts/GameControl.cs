@@ -8,7 +8,7 @@ using System.IO;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard, sueCard;
+    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard, sueCard, mayCard;
 
     void Awake()
     {
@@ -25,6 +25,7 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
+        helloCard = GameObject.Find("HelloButton");
         doorCard = GameObject.Find("DoorButton");
         goodbyeCard = GameObject.Find("GoodbyeButton");
         openCard = GameObject.Find("OpenButton");
@@ -45,8 +46,9 @@ public class GameControl : MonoBehaviour
         niceToMeetYouTooCard = GameObject.Find("NiceToMeetYouTooButton");
         okCard = GameObject.Find("OKButton");
         sueCard = GameObject.Find("SueButton");
+        mayCard = GameObject.Find("MayButton");
 
-        doorCard.SetActive(false);
+        //  doorCard.SetActive(false);
         goodbyeCard.SetActive(false);
         openCard.SetActive(false);
         yesCard.SetActive(false);
@@ -58,14 +60,11 @@ public class GameControl : MonoBehaviour
         closeCard.SetActive(false);
         byeCard.SetActive(false);
         thankYouCard.SetActive(false);
-        niceCard.SetActive(false);
-        toCard.SetActive(false);
-        meetCard.SetActive(false);
-        youCard.SetActive(false);
 
-        niceToMeetYouTooCard.SetActive(false);
+
         okCard.SetActive(false);
         sueCard.SetActive(false);
+        mayCard.SetActive(false);
     }
 
     public static void Restart()

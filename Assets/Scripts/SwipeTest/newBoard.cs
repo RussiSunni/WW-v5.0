@@ -3,37 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 public class newBoard : MonoBehaviour
 {
-    public int width;
-    public int height;
+    int width;
+    int height;
     public GameObject tilePrefab;
-    public GameObject[] dots;
+    public GameObject[] cards;
     private BackgroundTile[,] allTiles;
-    public GameObject[,] allDots;
+    public GameObject[,] allCards;
 
     void Start()
     {
-        allTiles = new BackgroundTile[width, height];
-        allDots = new GameObject[width, height];
+        width = 5;
+        height = 5;
+
+        allTiles = new BackgroundTile[2, 2];
+        allCards = new GameObject[2, 2];
         Setup();
     }
 
     private void Setup()
     {
-        for (int i = 0; i < width; i++)
+        int cardToUse = 0;
+
+        for (int i = 0; i < 2; i++)
         {
-            for (int j = 0; j < height; j++)
+            for (int j = 0; j < 2; j++)
             {
                 Vector2 tempPosition = new Vector2(i, j);
+
                 GameObject backgroundTile = Instantiate(tilePrefab, tempPosition, Quaternion.identity);
+
                 backgroundTile.transform.parent = this.transform;
+
                 backgroundTile.name = "( " + i + ", " + j + " )";
 
-                int dotToUse = Random.Range(0, dots.Length);
-                GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
-                dot.transform.parent = this.transform;
-                dot.name = this.gameObject.name;
+                GameObject card = Instantiate(cards[cardToUse], tempPosition, Quaternion.identity);
 
-                allDots[i, j] = dot;
+                // card.transform.parent = this.transform;
+                // card.name = this.gameObject.name;
+
+                // allCards[i, j] = card;
+
+                cardToUse++;
             }
         }
     }

@@ -20,10 +20,10 @@ public class Academy : MonoBehaviour
 
     SpriteRenderer frontDoorway, roomsDoorway;
     Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed;
+    public static bool helloHold;
 
     void Start()
     {
-
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraPos = camera.transform.position;
         direction = "north";
@@ -302,6 +302,9 @@ public class Academy : MonoBehaviour
 
     public void HelloCard()
     {
+        GameControl.helloCard.GetComponent<Image>().color = Color.white;
+        helloHold = false;
+
         if (z > -4.7 && z < -4.5 && y == 0f)
         {
             textNumber = 1;
@@ -359,9 +362,16 @@ public class Academy : MonoBehaviour
 
         else
         {
-            Restart();
+            //     Restart();
         }
     }
+
+    public void HelloCardHold()
+    {
+        helloHold = true;
+        GameControl.helloCard.GetComponent<Image>().color = Color.gray;
+    }
+
 
     public void GoodbyeCard()
     {
@@ -548,33 +558,6 @@ public class Academy : MonoBehaviour
             y = 12f;
             camera.transform.position = new Vector3(x, y, z);
             dialogue.text = "Hi. I'm Sue.";
-
-            if (!GameControl.niceToMeetYouTooCard.activeSelf)
-            {
-                GameControl.niceToMeetYouTooCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
-
-            // if (!GameControl.niceCard.activeSelf)
-            // {
-            //     GameControl.niceCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
-            // if (!GameControl.toCard.activeSelf)
-            // {
-            //     GameControl.toCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
-            // if (!GameControl.meetCard.activeSelf)
-            // {
-            //     GameControl.meetCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
-            // if (!GameControl.youCard.activeSelf)
-            // {
-            //     GameControl.youCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
         }
 
         else
@@ -603,16 +586,28 @@ public class Academy : MonoBehaviour
             Restart();
         }
     }
-    public void NiceToMeetYouCard()
+    public void HelloSue()
     {
         if (cameraPos.z == 17f && cameraPos.x == 5.4f && y == 12f)
         {
-            Debug.Log("test");
-            // if (!GameControl.readCard.activeSelf)
-            // {
-            //     GameControl.readCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
+            if (helloHold)
+            {
+                if (!GameControl.mayCard.activeSelf)
+                {
+                    GameControl.mayCard.SetActive(true);
+                    SoundManager.playCardAppearSound();
+                }
+                y = 22f;
+                camera.transform.position = new Vector3(x, y, z);
+                dialogue.text = "Hi, I'm May.";
+
+                GameControl.helloCard.GetComponent<Image>().color = Color.white;
+                helloHold = false;
+            }
+            else
+            {
+                Restart();
+            }
         }
         else
         {
@@ -620,10 +615,33 @@ public class Academy : MonoBehaviour
         }
     }
 
+    public void HelloMay()
+    {
+        if (cameraPos.z == 17f && cameraPos.x == 5.4f && y == 22f)
+        {
+            if (helloHold)
+            {
+                if (!GameControl.theCard.activeSelf)
+                {
+                    GameControl.theCard.SetActive(true);
+                    SoundManager.playCardAppearSound();
+                }
+            }
+            else
+            {
+                Restart();
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
 
     public void Restart()
     {
         GameControl.Restart();
         SceneManager.LoadScene("Academy");
     }
+
 }

@@ -150,11 +150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d5e2b8ace352a2e89ffa1e916e7351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 2
-  height: 2
   tilePrefab: {fileID: 2864709598715198309, guid: 0eeec81a22ea519b3b09f13e64af0728,
     type: 3}
-  dots: []
+  cards:
+  - {fileID: 5321775353123040753, guid: 13be2d09abbdf64dfac9f47015444802, type: 3}
+  - {fileID: 1485969632113972380, guid: b20ac8c01e7ee5072879c01eb5838d5d, type: 3}
+  - {fileID: 2322769317268036895, guid: f9995dc3367a10a1db2609c2be293abb, type: 3}
+  - {fileID: 1761105179787743676, guid: d251402636272053d8352f51c5d1b6f6, type: 3}
 --- !u!4 &822153451
 Transform:
   m_ObjectHideFlags: 0
