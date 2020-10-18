@@ -95,6 +95,12 @@ public class Academy : MonoBehaviour
                     camera.transform.position = new Vector3(0, 0, z);
                     cameraPos = camera.transform.position;
                 }
+                else if (cameraPos.z > 6.2 && x == -16.2f)
+                {
+                    z -= 5.4f;
+                    camera.transform.position = new Vector3(x, y, z);
+                    cameraPos = camera.transform.position;
+                }
                 else
                 {
                     SoundManager.playBumpSound();
@@ -341,7 +347,7 @@ public class Academy : MonoBehaviour
             scene = "Fairy";
             y = 12f;
             camera.transform.position = new Vector3(0, y, z);
-            dialogue.text = "Turn the page to access new spells.\n OK?";
+            dialogue.text = "To use 2 spells, hold down one, then press the second.\n OK?";
             if (!GameControl.okCard.activeSelf)
             {
                 GameControl.okCard.SetActive(true);
@@ -350,19 +356,9 @@ public class Academy : MonoBehaviour
             }
         }
 
-        // else if (x < -16.1 && x > -16.3)
-        // {
-        //     textNumber = 1;
-
-        //     scene = "Artemis";
-        //     y = 12f;
-        //     camera.transform.position = new Vector3(0, y, z);
-        //     dialogue.text = "Hello, I am Artemis, Queen of the Animals.";
-        // }
-
         else
         {
-            //     Restart();
+            //   Restart();
         }
     }
 
@@ -396,18 +392,6 @@ public class Academy : MonoBehaviour
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
             dialogue.text = "";
-
-            // if (!GameControl.hiCard.activeSelf)
-            // {
-            //     SpellbookButton();
-            //     GameControl.hiCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-
-            //     y = 21.5f;
-            //     camera.transform.position = new Vector3(x, y, z);
-            //     dialogue.text = "Hey! You can turn the pages of your spellbook with the book button.";
-            //     SoundManager.playHeySound();
-            // }
         }
         else
         {
@@ -626,6 +610,13 @@ public class Academy : MonoBehaviour
                     GameControl.theCard.SetActive(true);
                     SoundManager.playCardAppearSound();
                 }
+                y = 0f;
+                camera.transform.position = new Vector3(x, y, z);
+                dialogue.text = "";
+                scene = "Academy";
+
+                GameControl.helloCard.GetComponent<Image>().color = Color.white;
+                helloHold = false;
             }
             else
             {

@@ -14,4 +14,9 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("SwipeTest");
     }
+
+    public void SpellRules()
+    {
+        SceneManager.LoadScene("SpellRules");
+    }
 }
