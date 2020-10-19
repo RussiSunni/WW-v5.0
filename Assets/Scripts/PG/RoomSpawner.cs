@@ -5,12 +5,6 @@ using UnityEngine;
 public class RoomSpawner : MonoBehaviour
 {
     public int openingDirection;
-
-    // 1 - need bottom door
-    // 2 - need top door
-    // 3 - need left door
-    // 4 - need right door
-
     private RoomTemplates templates;
     private int rand;
     public bool spawned;
@@ -23,11 +17,8 @@ public class RoomSpawner : MonoBehaviour
 
     void Spawn()
     {
-        // Debug.Log("test");
         if (spawned == false)
         {
-            // Debug.Log("test");
-
             if (openingDirection == 1)
             {
                 //spawn room with bottom door
@@ -58,14 +49,8 @@ public class RoomSpawner : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //   Debug.Log(other.gameObject.name + " : " + gameObject.name);
-
         if (other.CompareTag("Spawn Point"))
         {
-            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
-            {
-
-            }
 
             Destroy(gameObject);
         }

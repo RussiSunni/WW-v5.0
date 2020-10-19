@@ -46,7 +46,6 @@ public class Academy : MonoBehaviour
 
     public void MoveForward()
     {
-
         // Debug.Log(cameraPos.x);
         // Debug.Log(cameraPos.y);
         // Debug.Log(cameraPos.z);
@@ -66,6 +65,12 @@ public class Academy : MonoBehaviour
                     camera.transform.position = new Vector3(x, 0, z);
                     cameraPos = camera.transform.position;
                 }
+
+                else if (cameraPos.z > 6.1f && cameraPos.x == 5.4f)
+                {
+                    SceneManager.LoadScene("RandomLevelTest");
+                }
+
                 else if (cameraPos.z < 18 && cameraPos.x == 0 && !isFrontDoorClosed)
                 {
                     z += 5.4f;
@@ -80,7 +85,6 @@ public class Academy : MonoBehaviour
                     camera.transform.position = new Vector3(x, 0, z);
                     cameraPos = camera.transform.position;
                 }
-
                 else
                 {
                     SoundManager.playDoorClosedSound();
@@ -144,6 +148,7 @@ public class Academy : MonoBehaviour
                 {
                     SoundManager.playWolfGrowlSound();
                 }
+
                 else
                 {
                     SoundManager.playBumpSound();
@@ -422,6 +427,7 @@ public class Academy : MonoBehaviour
                 GameControl.closeCard.SetActive(true);
                 SoundManager.playCardAppearSound();
             }
+
         }
         else
         {
@@ -439,7 +445,7 @@ public class Academy : MonoBehaviour
                 GameControl.thankYouCard.SetActive(true);
                 SoundManager.playCardAppearSound();
 
-                dialogue.text = "Well, read the sign.";
+                dialogue.text = "Go and see the teacher, straight and to the left.";
             }
         }
         else

@@ -7,6 +7,7 @@ TagManager:
   - Spawn Point
   - Rooms
   - CanWalkThrough
+  - Teacher
   layers:
   - Default
   - TransparentFX

@@ -26,6 +26,7 @@ public class Movement : MonoBehaviour
     // --
 
     public GameObject[] openings;
+    public GameObject teacher;
     public bool canWalkThroughNextWall;
     public static bool canWalk;
 
@@ -36,12 +37,17 @@ public class Movement : MonoBehaviour
         direction = "north";
 
         // --
-
+        // check which are doorways
         Invoke("CheckWalk", 2f);
     }
 
     void CheckWalk()
     {
+        // -- 
+        // Teacher character
+        teacher = GameObject.FindGameObjectWithTag("Teacher");
+
+        // walls
         openings = GameObject.FindGameObjectsWithTag("CanWalkThrough");
         CheckWalls();
     }
@@ -176,6 +182,16 @@ public class Movement : MonoBehaviour
         CheckWalls();
     }
 
+    public void HelloCard()
+    {
+        Vector3 viewPos = camera.WorldToViewportPoint(teacher.transform.position);
+        //    / print("x: " + viewPos.x + "y: " + viewPos.y + "z: " + viewPos.z);
 
-
+        if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
+        {
+            cameraPos.y = 12f;
+            camera.transform.position = new Vector3(x, y, z);
+            cameraPos = camera.transform.position;
+        }
+    }
 }

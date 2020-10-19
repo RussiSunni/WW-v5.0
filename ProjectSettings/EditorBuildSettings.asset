@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpellRules.unity
     guid: faea4069724a2c717b662bd38aaf6ef7
+  - enabled: 1
+    path: Assets/Scenes/RandomLevelTest.unity
+    guid: f7c88b4af02567f99ae6f14b169d9b1f
   m_configObjects: {}

@@ -15,6 +15,11 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("SwipeTest");
     }
 
+    public void RandomLevelTest()
+    {
+        SceneManager.LoadScene("RandomLevelTest");
+    }
+
     public void SpellRules()
     {
         SceneManager.LoadScene("SpellRules");
