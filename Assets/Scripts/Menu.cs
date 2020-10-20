@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Rules");
+        SceneManager.LoadScene("Intro");
     }
 
     public void SwipeTest()
