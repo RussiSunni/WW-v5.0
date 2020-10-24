@@ -8,8 +8,9 @@ using System.IO;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard, sueCard, mayCard, theCard, sorryCard;
+    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard;
     public static string scene;
+    public GameObject UICanvas, dictionaryCanvas;
 
     void Awake()
     {
@@ -26,6 +27,10 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
+        UICanvas = GameObject.Find("UICanvas");
+        // dictionaryCanvas = GameObject.Find("DictionaryCanvas");
+        // dictionaryCanvas.SetActive(false);
+
         helloCard = GameObject.Find("HelloButton");
         doorCard = GameObject.Find("DoorButton");
         goodbyeCard = GameObject.Find("GoodbyeButton");
@@ -39,6 +44,9 @@ public class GameControl : MonoBehaviour
         closeCard = GameObject.Find("CloseButton");
         byeCard = GameObject.Find("ByeButton");
         thankYouCard = GameObject.Find("ThankYouButton");
+        goodCard = GameObject.Find("GoodButton");
+        badCard = GameObject.Find("BadButton");
+
 
         niceCard = GameObject.Find("NiceButton");
         toCard = GameObject.Find("ToButton");
@@ -58,12 +66,13 @@ public class GameControl : MonoBehaviour
         yesCard.SetActive(false);
         noCard.SetActive(false);
         readCard.SetActive(false);
-        hiCard.SetActive(false);
-        //   enterCard.SetActive(false);
+        hiCard.SetActive(false);    
         stopCard.SetActive(false);
         closeCard.SetActive(false);
         byeCard.SetActive(false);
         thankYouCard.SetActive(false);
+        goodCard.SetActive(false);
+        badCard.SetActive(false);
 
         okCard.SetActive(false);
         sueCard.SetActive(false);
@@ -74,9 +83,18 @@ public class GameControl : MonoBehaviour
         scene = "Academy";
     }
 
-    public void SwapUI()
+    public void Dictionary()
     {
-
+        if (dictionaryCanvas.activeSelf)
+        {
+            dictionaryCanvas.SetActive(false);
+            UICanvas.SetActive(true);
+        }
+        else if (UICanvas.activeSelf)
+        {
+            dictionaryCanvas.SetActive(true);
+            UICanvas.SetActive(false);
+        }
     }
 
     public static void Restart()

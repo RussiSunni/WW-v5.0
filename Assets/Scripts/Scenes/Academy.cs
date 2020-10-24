@@ -127,6 +127,7 @@ public class Academy : MonoBehaviour
 
                     OutdoorsAmbientSound.StopOutdoorAmbientSound();
                 }
+
                 else if (!isRoomsDoorClosed && cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > 5.3 && cameraPos.x < 5.5)
                 {
                     z += 5.4f;
@@ -369,36 +370,36 @@ public class Academy : MonoBehaviour
         helloHold = false;
         if (GameControl.scene == "Academy")
         {
-            if (z > -4.7 && z < -4.5 && y == 0f)
+            if (cameraPos.z == -4.6f && cameraPos.x == 0f)
             {
-                textNumber = 1;
-
                 scene = "Fairy";
                 SoundManager.playHeySound();
-                y = 12f;
-                camera.transform.position = new Vector3(0, y, z);
-                if (!GameControl.goodbyeCard.activeSelf)
-                    dialogue.text = "Hello.";
-                if (!GameControl.goodbyeCard.activeSelf)
+                cameraPos.y = 12f;
+                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                dialogue.text = "Bonjour.\nComment ça va?";
+                if (!GameControl.goodCard.activeSelf)
                 {
-                    GameControl.goodbyeCard.SetActive(true);
+                    GameControl.goodCard.SetActive(true);
+                    SoundManager.playCardAppearSound();
+                }
+                if (!GameControl.badCard.activeSelf)
+                {
+                    GameControl.badCard.SetActive(true);
                     SoundManager.playCardAppearSound();
                 }
             }
 
-            else if (z > 6.1 && z < 6.3 && x < -5.3 && x > -5.5)
+            else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
             {
-                textNumber = 1;
-
                 scene = "Secretary";
-                y = 12f;
-                camera.transform.position = new Vector3(x, y, z);
-                dialogue.text = "Hello.\n Are you lost?";
-                if (!GameControl.noCard.activeSelf)
-                {
-                    GameControl.noCard.SetActive(true);
-                    SoundManager.playCardAppearSound();
-                }
+                cameraPos.y = 12f;
+                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                dialogue.text = "Bonjour.\n\n Quel est votre nom?";
+                // if (!GameControl.noCard.activeSelf)
+                // {
+                //     GameControl.noCard.SetActive(true);
+                //     SoundManager.playCardAppearSound();
+                // }
             }
             else if (cameraPos.z == 11.6f)
             {
@@ -413,10 +414,9 @@ public class Academy : MonoBehaviour
                     SpellbookButton();
                 }
             }
-
             else
             {
-                //   Restart();
+                Restart();
             }
         }
 
@@ -446,22 +446,14 @@ public class Academy : MonoBehaviour
 
     public void GoodbyeCard()
     {
-        if (z > -4.7 && z < -4.5 && y == 12f)
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
         {
             scene = "Academy";
-
-            y = 0f;
-            camera.transform.position = new Vector3(x, y, z);
-
+            cameraPos.y = 0f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "";
-
-            if (!GameControl.openCard.activeSelf)
-            {
-                GameControl.openCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
         }
-        else if (z > 6.1 && z < 6.3 && y == 12f)
+        else if (cameraPos.z == 6.2 && y == 12f)
         {
             scene = "Academy";
             y = 0f;
@@ -486,31 +478,42 @@ public class Academy : MonoBehaviour
         }
     }
 
-    public void OpenCard()
+    public void GoodCard()
     {
-        if (GameControl.scene == "Academy")
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
         {
-            if (z > 0.7 && z < 0.9)
+            dialogue.text = "tu sembles perdu";
+            if (!GameControl.yesCard.activeSelf)
             {
-                SoundManager.playDoorOpeningSound();
-                frontDoorway.sprite = frontDoorOpen;
-                isFrontDoorClosed = false;
-                if (!GameControl.yesCard.activeSelf)
-                {
-                    GameControl.yesCard.SetActive(true);
-                    SoundManager.playCardAppearSound();
-                }
+                GameControl.yesCard.SetActive(true);
+                SoundManager.playCardAppearSound();
             }
-            else if (z > 6.1 && z < 6.3 && isRoomsDoorClosed)
+            if (!GameControl.noCard.activeSelf)
             {
-                SoundManager.playDoorOpeningSound();
-                roomsDoorway.sprite = roomsDoorOpen;
-                isRoomsDoorClosed = false;
-                if (!GameControl.closeCard.activeSelf)
-                {
-                    GameControl.closeCard.SetActive(true);
-                    SoundManager.playCardAppearSound();
-                }
+                GameControl.noCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else
+        {
+            Restart();
+        }
+
+    }
+    public void BadCard()
+    {
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
+        {
+            dialogue.text = "tu sembles perdu";
+            if (!GameControl.noCard.activeSelf)
+            {
+                GameControl.noCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+            if (!GameControl.yesCard.activeSelf)
+            {
+                GameControl.yesCard.SetActive(true);
+                SoundManager.playCardAppearSound();
             }
         }
         else
@@ -519,17 +522,51 @@ public class Academy : MonoBehaviour
         }
     }
 
+    public void OpenCard()
+    {
+        if (Mathf.Approximately(cameraPos.z, 0.8f))
+        {
+            SoundManager.playDoorOpeningSound();
+            frontDoorway.sprite = frontDoorOpen;
+            isFrontDoorClosed = false;
+            if (!GameControl.yesCard.activeSelf)
+            {
+                GameControl.yesCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else if (z > 6.1 && z < 6.3 && isRoomsDoorClosed)
+        {
+            SoundManager.playDoorOpeningSound();
+            roomsDoorway.sprite = roomsDoorOpen;
+            isRoomsDoorClosed = false;
+            if (!GameControl.closeCard.activeSelf)
+            {
+                GameControl.closeCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
 
     public void YesCard()
     {
-        if (z > 6.1 && z < 6.3)
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
         {
             if (!GameControl.thankYouCard.activeSelf)
             {
                 GameControl.thankYouCard.SetActive(true);
                 SoundManager.playCardAppearSound();
 
-                dialogue.text = "Go and see the teacher, straight and to the left.";
+                dialogue.text = "Allez voir le professeur, droit et à gauche.";
+            }
+            if (!GameControl.openCard.activeSelf)
+            {
+                GameControl.openCard.SetActive(true);
+                SoundManager.playCardAppearSound();
             }
         }
         else
@@ -537,6 +574,56 @@ public class Academy : MonoBehaviour
             Restart();
         }
     }
+    public void NoCard()
+    {
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
+        {
+            if (!GameControl.thankYouCard.activeSelf)
+            {
+                GameControl.thankYouCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+
+                dialogue.text = "Allez voir le professeur, droit et à gauche.";
+            }
+            if (!GameControl.openCard.activeSelf)
+            {
+                GameControl.openCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void ThankYouCard()
+    {
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
+        {
+            if (!GameControl.goodbyeCard.activeSelf)
+            {
+                GameControl.goodbyeCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else if (z > 6.1 && z < 6.3 && y == 21.5f)
+        {
+            y = 0f;
+            camera.transform.position = new Vector3(x, y, z);
+
+            // if (!GameControl.readCard.activeSelf)
+            // {
+            //     GameControl.readCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
 
     public void ReadCard()
     {
@@ -597,32 +684,7 @@ public class Academy : MonoBehaviour
         }
     }
 
-    public void ThankYouCard()
-    {
-        if (z > 6.1 && z < 6.3 && y == 12f)
-        {
-            if (!GameControl.readCard.activeSelf)
-            {
-                GameControl.readCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
-        }
-        else if (z > 6.1 && z < 6.3 && y == 21.5f)
-        {
-            y = 0f;
-            camera.transform.position = new Vector3(x, y, z);
 
-            // if (!GameControl.readCard.activeSelf)
-            // {
-            //     GameControl.readCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
-        }
-        else
-        {
-            Restart();
-        }
-    }
     public void HiCard()
     {
         if (cameraPos.z == 17f && cameraPos.x == 5.4f)
@@ -728,6 +790,7 @@ public class Academy : MonoBehaviour
             SoundManager.playCardAppearSound();
         }
     }
+
 
     public void Restart()
     {

@@ -24,4 +24,9 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("SpellRules");
     }
+
+    public void Test3D()
+    {
+        SceneManager.LoadScene("3DTest");
+    }
 }
