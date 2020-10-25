@@ -17,14 +17,14 @@ public class Test3DMovement : MonoBehaviour
     public void MoveForward()
     {
         SoundManager.playFootstepSound();
-        cameraPos.z += 2f;
+        cameraPos.z += 5f;
         camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
     }
 
     public void MoveBackward()
     {
         SoundManager.playFootstepSound();
-        cameraPos.z -= 2f;
+        cameraPos.z -= 5f;
         camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
     }
 

@@ -14,10 +14,8 @@ public class Academy : MonoBehaviour
     string direction, scene;
     Text dialogue;
     int textNumber;
-    bool isFrontDoorClosed = true;
     bool isRoomsDoorClosed = true;
-    GameObject page1, page2;
-
+    GameObject page1, page2, frontDoor;
     SpriteRenderer frontDoorway, roomsDoorway;
     Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed;
     public static bool helloHold;
@@ -26,7 +24,7 @@ public class Academy : MonoBehaviour
 
     public GameObject teacher;
     public GameObject[] openings;
-    public bool canWalkThroughNextWall;
+    public bool canWalkThroughNextWall, canWalkThroughPreviousWall;
 
 
     void Start()
@@ -40,21 +38,24 @@ public class Academy : MonoBehaviour
 
         page1 = GameObject.Find("Page1");
         page2 = GameObject.Find("Page2");
+        frontDoor = GameObject.Find("FrontDoor");
 
         if (GameControl.scene == "Academy")
         {
-            frontDoorway = GameObject.Find("View03").GetComponent<SpriteRenderer>();
+            frontDoorway = GameObject.Find("FrontDoor").GetComponent<SpriteRenderer>();
             frontDoorOpen = Resources.Load<Sprite>("Views/Academy/OutsideAcademyView03b");
             roomsDoorway = GameObject.Find("View21").GetComponent<SpriteRenderer>();
             roomsDoorOpen = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05b");
             roomsDoorClosed = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05");
         }
 
-        if (GameControl.scene == "Academy Wild Area")
+        //   if (GameControl.scene == "Academy Wild Area")
+        if (GameControl.scene == "Academy")
         {
 
             // check which are doorways
-            Invoke("CheckWalk", 1f);
+            //Invoke("CheckWalk", 1f);
+            CheckWalk();
         }
     }
 
@@ -63,32 +64,43 @@ public class Academy : MonoBehaviour
         // -- 
         // Teacher character 
 
-        Debug.Log("CheckWalk");
-        teacher = GameObject.FindGameObjectWithTag("Teacher");
+        //  Debug.Log("CheckWalk");
+        //   teacher = GameObject.FindGameObjectWithTag("Teacher");
 
         // walls
         openings = GameObject.FindGameObjectsWithTag("CanWalkThrough");
         CheckWalls();
 
         //- move camera also
-        camera.transform.position = new Vector3(0, 0, 0);
-        cameraPos = camera.transform.position;
+        //  camera.transform.position = new Vector3(0, 0, 0);
+        //  cameraPos = camera.transform.position;
 
 
     }
     public void CheckWalls()
     {
         canWalkThroughNextWall = false;
+        canWalkThroughPreviousWall = false;
 
         for (int i = 0; i < openings.Length; i++)
         {
             Vector3 viewPos = camera.WorldToViewportPoint(openings[i].transform.position);
+            Vector3 rearViewPos = camera.WorldToViewportPoint(openings[i].transform.position) + new Vector3(0, 0, -5.4f);
+            //  Debug.Log(rearViewPos);
 
             if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
             {
                 canWalkThroughNextWall = true;
             }
+
+            if (rearViewPos.z < -2.6f && rearViewPos.z > -2.8f && rearViewPos.x > 0.4f && rearViewPos.x < 0.6f)
+            {
+                canWalkThroughPreviousWall = true;
+            }
         }
+        //   Debug.Log(canWalkThroughNextWall);
+        // Debug.Log(canWalkThroughPreviousWall);
+
     }
     public void MoveForward()
     {
@@ -100,114 +112,116 @@ public class Academy : MonoBehaviour
         // Debug.Log(z);        
         // Debug.Log(GameControl.scene);
 
+        // if (GameControl.scene == "Academy")
+        // {
+        //     SoundManager.playFootstepSound();
+        //     if (direction == "north")
+        //     {
+        //         if (cameraPos.z < -4 && cameraPos.x == 0)
+        //         {
+        //             z += 5.4f;
+        //             camera.transform.position = new Vector3(x, 0, z);
+        //             cameraPos = camera.transform.position;
+        //         }
+
+        //         else if (cameraPos.z > 6.1f && cameraPos.z < 11.6f && cameraPos.x == 5.4f)
+        //         {
+        //             GameControl.scene = "Academy Wild Area";
+        //             SceneManager.LoadScene("AcademyWildArea");
+        //             Start();
+        //         }
+
+        //         else if (cameraPos.z < 18 && cameraPos.x == 0 && !isFrontDoorClosed)
+        //         {
+        //             z += 5.4f;
+        //             camera.transform.position = new Vector3(x, 0, z);
+        //             cameraPos = camera.transform.position;
+
+        //             OutdoorsAmbientSound.StopOutdoorAmbientSound();
+        //         }
+
+        //         else if (cameraPos.z < 18f && cameraPos.x < 5.5f && cameraPos.x > -16.3f)
+        //         {
+        //             cameraPos.z += 5.4f;
+        //             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+        //             cameraPos = camera.transform.position;
+        //         }
+        //         else
+        //         {
+        //             SoundManager.playDoorClosedSound();
+        //         }
+        //     }
+
+        //     if (direction == "south")
+        //     {
+        //         if (cameraPos.z > -9 && x == 0)
+        //         {
+        //             z -= 5.4f;
+        //             camera.transform.position = new Vector3(0, 0, z);
+        //             cameraPos = camera.transform.position;
+        //         }
+        //         else if (cameraPos.z > 6.2 && x == -16.2f)
+        //         {
+        //             z -= 5.4f;
+        //             camera.transform.position = new Vector3(x, y, z);
+        //             cameraPos = camera.transform.position;
+        //         }
+        //         else
+        //         {
+        //             SoundManager.playBumpSound();
+        //         }
+        //     }
+
+        //     else if (direction == "west")
+        //     {
+        //         if (cameraPos.x > -5.3f && cameraPos.z == -10f || cameraPos.z == 6.2f && cameraPos.x > -5.3f || cameraPos.z == 17f && cameraPos.x > -10.9f || cameraPos.z == 22.4f && cameraPos.x > -10.9f)
+        //         {
+        //             cameraPos.x -= 5.4f;
+        //             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+        //             cameraPos = camera.transform.position;
+        //         }
+        //         else if (cameraPos.z == -10)
+        //         {
+        //             // SoundManager.playHeySound();
+        //             SoundManager.playWolfGrowlSound();
+        //         }
+        //         else
+        //         {
+        //             SoundManager.playBumpSound();
+        //         }
+        //     }
+
+        //     else if (direction == "east")
+        //     {
+        //         if (cameraPos.x < 5.3f && cameraPos.z == -10f || cameraPos.z == 17f && x < 5.3f || cameraPos.z == 22.4f && x < 5.3f)
+        //         {
+        //             cameraPos.x += 5.4f;
+        //             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+        //             cameraPos = camera.transform.position;
+        //         }
+        //         else if (cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x < 5.3)
+        //         {
+        //             x += 5.4f;
+        //             camera.transform.position = new Vector3(x, 0, z);
+        //             cameraPos = camera.transform.position;
+        //         }
+        //         else if (cameraPos.z == -10)
+        //         {
+        //             SoundManager.playWolfGrowlSound();
+        //         }
+
+        //         else
+        //         {
+        //             SoundManager.playBumpSound();
+        //         }
+        //     }
+        // }
+        // else if (GameControl.scene == "Academy Wild Area")
         if (GameControl.scene == "Academy")
-        {
-            SoundManager.playFootstepSound();
-            if (direction == "north")
-            {
-                if (cameraPos.z < -4 && cameraPos.x == 0)
-                {
-                    z += 5.4f;
-                    camera.transform.position = new Vector3(x, 0, z);
-                    cameraPos = camera.transform.position;
-                }
-
-                else if (cameraPos.z > 6.1f && cameraPos.x == 5.4f)
-                {
-                    GameControl.scene = "Academy Wild Area";
-                    SceneManager.LoadScene("AcademyWildArea");
-                    Start();
-                }
-
-                else if (cameraPos.z < 18 && cameraPos.x == 0 && !isFrontDoorClosed)
-                {
-                    z += 5.4f;
-                    camera.transform.position = new Vector3(x, 0, z);
-                    cameraPos = camera.transform.position;
-
-                    OutdoorsAmbientSound.StopOutdoorAmbientSound();
-                }
-
-                else if (!isRoomsDoorClosed && cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > 5.3 && cameraPos.x < 5.5)
-                {
-                    z += 5.4f;
-                    camera.transform.position = new Vector3(x, 0, z);
-                    cameraPos = camera.transform.position;
-                }
-                else
-                {
-                    SoundManager.playDoorClosedSound();
-                }
-            }
-
-            if (direction == "south")
-            {
-                if (cameraPos.z > -9 && x == 0)
-                {
-                    z -= 5.4f;
-                    camera.transform.position = new Vector3(0, 0, z);
-                    cameraPos = camera.transform.position;
-                }
-                else if (cameraPos.z > 6.2 && x == -16.2f)
-                {
-                    z -= 5.4f;
-                    camera.transform.position = new Vector3(x, y, z);
-                    cameraPos = camera.transform.position;
-                }
-                else
-                {
-                    SoundManager.playBumpSound();
-                }
-            }
-
-            else if (direction == "west")
-            {
-                if (cameraPos.x > -5.3 && cameraPos.z == -10 || cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x > -5.3 || cameraPos.z == 17)
-                {
-                    x -= 5.4f;
-                    camera.transform.position = new Vector3(x, 0, z);
-                    cameraPos = camera.transform.position;
-                }
-                else if (cameraPos.z == -10)
-                {
-                    // SoundManager.playHeySound();
-                    SoundManager.playWolfGrowlSound();
-                }
-                else
-                {
-                    SoundManager.playBumpSound();
-                }
-            }
-
-            else if (direction == "east")
-            {
-                if (cameraPos.x < 5.3 && cameraPos.z == -10 || cameraPos.z == 17 && x < 5.3)
-                {
-                    x += 5.4f;
-                    camera.transform.position = new Vector3(x, 0, z);
-                    cameraPos = camera.transform.position;
-                }
-                else if (cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x < 5.3)
-                {
-                    x += 5.4f;
-                    camera.transform.position = new Vector3(x, 0, z);
-                    cameraPos = camera.transform.position;
-                }
-                else if (cameraPos.z == -10)
-                {
-                    SoundManager.playWolfGrowlSound();
-                }
-
-                else
-                {
-                    SoundManager.playBumpSound();
-                }
-            }
-        }
-        else if (GameControl.scene == "Academy Wild Area")
         {
             if (canWalkThroughNextWall)
             {
+                SoundManager.playFootstepSound();
                 if (direction == "north")
                 {
                     cameraPos.z += 5.4f;
@@ -233,6 +247,14 @@ public class Academy : MonoBehaviour
                     cameraPos = camera.transform.position;
                 }
             }
+
+            else if (cameraPos.z == -10)
+            {
+                SoundManager.playWolfGrowlSound();
+            }
+            else
+                SoundManager.playBumpSound();
+
             CheckWalls();
         }
     }
@@ -242,38 +264,66 @@ public class Academy : MonoBehaviour
         {
             SoundManager.playFootstepSound();
 
-            if (direction == "north" && cameraPos.z > -10f)
-            {
-                z -= 5.4f;
-                camera.transform.position = new Vector3(x, 0, z);
-                cameraPos = camera.transform.position;
-            }
+            // if (direction == "north" && cameraPos.z > -10f)
+            // {
+            //     z -= 5.4f;
+            //     camera.transform.position = new Vector3(x, 0, z);
+            //     cameraPos = camera.transform.position;
+            // }
 
-            else if (direction == "south")
-            {
-                z += 5.4f;
-                camera.transform.position = new Vector3(x, 0, z);
-                cameraPos = camera.transform.position;
-            }
+            // else if (direction == "south")
+            // {
+            //     z += 5.4f;
+            //     camera.transform.position = new Vector3(x, 0, z);
+            //     cameraPos = camera.transform.position;
+            // }
 
-            else if (direction == "west")
-            {
-                x += 5.4f;
-                camera.transform.position = new Vector3(x, 0, z);
-                cameraPos = camera.transform.position;
-            }
+            // else if (direction == "west")
+            // {
+            //     x += 5.4f;
+            //     camera.transform.position = new Vector3(x, 0, z);
+            //     cameraPos = camera.transform.position;
+            // }
 
-            else if (direction == "east")
+            // else if (direction == "east")
+            // {
+            //     x -= 5.4f;
+            //     camera.transform.position = new Vector3(x, 0, z);
+            //     cameraPos = camera.transform.position;
+            // }
+            if (canWalkThroughPreviousWall)
             {
-                x -= 5.4f;
-                camera.transform.position = new Vector3(x, 0, z);
-                cameraPos = camera.transform.position;
+                SoundManager.playFootstepSound();
+                if (direction == "north")
+                {
+                    cameraPos.z -= 5.4f;
+                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                    cameraPos = camera.transform.position;
+                }
+                else if (direction == "south")
+                {
+                    cameraPos.z -= -5.4f;
+                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                    cameraPos = camera.transform.position;
+                }
+                else if (direction == "east")
+                {
+                    cameraPos.x -= 5.4f;
+                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                    cameraPos = camera.transform.position;
+                }
+                else if (direction == "west")
+                {
+                    cameraPos.x -= -5.4f;
+                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                    cameraPos = camera.transform.position;
+                }
             }
-
             else
             {
                 SoundManager.playBumpSound();
             }
+            CheckWalls();
         }
     }
     public void LeftButton()
@@ -298,10 +348,10 @@ public class Academy : MonoBehaviour
 
         camera.transform.Rotate(0, -90, 0);
 
-        if (GameControl.scene == "Academy Wild Area")
-        {
-            CheckWalls();
-        }
+        //  if (GameControl.scene == "Academy Wild Area")
+        //  {
+        CheckWalls();
+        //  }
     }
     public void RightButton()
     {
@@ -324,10 +374,10 @@ public class Academy : MonoBehaviour
         }
         camera.transform.Rotate(0, 90, 0);
 
-        if (GameControl.scene == "Academy Wild Area")
-        {
-            CheckWalls();
-        }
+        //    if (GameControl.scene == "Academy Wild Area")
+        //     {
+        CheckWalls();
+        //     }
     }
 
     public void TextScrollForward()
@@ -394,7 +444,7 @@ public class Academy : MonoBehaviour
                 scene = "Secretary";
                 cameraPos.y = 12f;
                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                dialogue.text = "Bonjour.\n\n Quel est votre nom?";
+                dialogue.text = "Bonjour.\n\n Êtes-vous étudiant à l'Académie?";
                 // if (!GameControl.noCard.activeSelf)
                 // {
                 //     GameControl.noCard.SetActive(true);
@@ -528,7 +578,10 @@ public class Academy : MonoBehaviour
         {
             SoundManager.playDoorOpeningSound();
             frontDoorway.sprite = frontDoorOpen;
-            isFrontDoorClosed = false;
+
+            frontDoor.tag = "CanWalkThrough";
+            CheckWalk();
+
             if (!GameControl.yesCard.activeSelf)
             {
                 GameControl.yesCard.SetActive(true);
@@ -566,6 +619,21 @@ public class Academy : MonoBehaviour
             if (!GameControl.openCard.activeSelf)
             {
                 GameControl.openCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
+        {
+            dialogue.text = "Je vois. Vous êtes une fille ou un garçon?";
+            // dialogue.text = "Quel est votre nom?";
+            if (!GameControl.girlCard.activeSelf)
+            {
+                GameControl.girlCard.SetActive(true);
+                SoundManager.playCardAppearSound();
+            }
+            if (!GameControl.boyCard.activeSelf)
+            {
+                GameControl.boyCard.SetActive(true);
                 SoundManager.playCardAppearSound();
             }
         }
@@ -616,8 +684,9 @@ public class Academy : MonoBehaviour
             // {
             //     GameControl.readCard.SetActive(true);
             //     SoundManager.playCardAppearSound();
-            // }
+            // } 
         }
+
         else
         {
             Restart();
@@ -788,6 +857,34 @@ public class Academy : MonoBehaviour
         {
             GameControl.theCard.SetActive(true);
             SoundManager.playCardAppearSound();
+        }
+    }
+
+    public void GirlCard()
+    {
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
+        {
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            dialogue.text = "Et quel âge as-tu?";
+            // if (!GameControl.noCard.activeSelf)
+            // {
+            //     GameControl.noCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
+        }
+    }
+
+    public void BoyCard()
+    {
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
+        {
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            dialogue.text = "Et quel âge as-tu?";
+            // if (!GameControl.noCard.activeSelf)
+            // {
+            //     GameControl.noCard.SetActive(true);
+            //     SoundManager.playCardAppearSound();
+            // }
         }
     }
 

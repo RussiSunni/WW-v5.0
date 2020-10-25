@@ -8,7 +8,7 @@ using System.IO;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard;
+    public static GameObject helloCard, doorCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, niceCard, toCard, meetCard, youCard, niceToMeetYouTooCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
 
@@ -58,6 +58,8 @@ public class GameControl : MonoBehaviour
         mayCard = GameObject.Find("MayButton");
         theCard = GameObject.Find("TheButton");
         sorryCard = GameObject.Find("SorryButton");
+        girlCard = GameObject.Find("GirlButton");
+        boyCard = GameObject.Find("BoyButton");
 
         //  doorCard.SetActive(false);
 
@@ -66,7 +68,7 @@ public class GameControl : MonoBehaviour
         yesCard.SetActive(false);
         noCard.SetActive(false);
         readCard.SetActive(false);
-        hiCard.SetActive(false);    
+        hiCard.SetActive(false);
         stopCard.SetActive(false);
         closeCard.SetActive(false);
         byeCard.SetActive(false);
@@ -79,6 +81,8 @@ public class GameControl : MonoBehaviour
         mayCard.SetActive(false);
         theCard.SetActive(false);
         sorryCard.SetActive(false);
+        girlCard.SetActive(false);
+        boyCard.SetActive(false);
 
         scene = "Academy";
     }
