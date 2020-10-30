@@ -4,6 +4,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static AudioClip helloSound, doorClosedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound;
+    public static AudioClip fairy001;
     static AudioSource audioSrc;
 
     void Start()
@@ -21,6 +22,8 @@ public class SoundManager : MonoBehaviour
         bumpSound = Resources.Load<AudioClip>("Sound/Bump");
         pageTurnSound = Resources.Load<AudioClip>("Sound/PageTurn");
         footstepSound = Resources.Load<AudioClip>("Sound/Footstep");
+
+        fairy001 = Resources.Load<AudioClip>("Sound/Fairy001");
     }
 
     public static void playHelloSound()
@@ -66,5 +69,9 @@ public class SoundManager : MonoBehaviour
     public static void playFootstepSound()
     {
         audioSrc.PlayOneShot(footstepSound);
+    }
+    public static void playFairy001Sound()
+    {
+        audioSrc.PlayOneShot(fairy001);
     }
 }

@@ -28,12 +28,12 @@ public class Board : MonoBehaviour
                 backgroundTile.transform.parent = this.transform;
                 backgroundTile.name = "( " + i + ", " + j + " )";
 
-                int dotToUse = Random.Range(0, dots.Length);
-                GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
-                dot.transform.parent = this.transform;
-                dot.name = this.gameObject.name;
+                // int dotToUse = Random.Range(0, dots.Length);
+                // GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
+                // dot.transform.parent = this.transform;
+                // dot.name = this.gameObject.name;
 
-                allDots[i, j] = dot;
+                // allDots[i, j] = dot;
             }
         }
     }

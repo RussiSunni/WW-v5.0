@@ -36,6 +36,8 @@ public class Academy : MonoBehaviour
         dialogue = GameObject.Find("Text").GetComponent<Text>();
         dialogue.text = "";
 
+        //GameControl.helloCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+
         page1 = GameObject.Find("Page1");
         page2 = GameObject.Find("Page2");
         frontDoor = GameObject.Find("FrontDoor");
@@ -427,16 +429,14 @@ public class Academy : MonoBehaviour
                 cameraPos.y = 12f;
                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
                 dialogue.text = "Bonjour.\nComment ça va?";
-                if (!GameControl.goodCard.activeSelf)
-                {
-                    GameControl.goodCard.SetActive(true);
-                    SoundManager.playCardAppearSound();
-                }
-                if (!GameControl.badCard.activeSelf)
-                {
-                    GameControl.badCard.SetActive(true);
-                    SoundManager.playCardAppearSound();
-                }
+                //  SoundManager.playFairy001Sound();
+
+                GameControl.goodCard.GetComponent<Button>().interactable = true;
+                GameControl.goodCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+
+                GameControl.badCard.GetComponent<Button>().interactable = true;
+                GameControl.badCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                SoundManager.playCardAppearSound();
             }
 
             else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
@@ -532,17 +532,12 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f)
         {
-            dialogue.text = "tu sembles perdu";
-            if (!GameControl.yesCard.activeSelf)
-            {
-                GameControl.yesCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
-            if (!GameControl.noCard.activeSelf)
-            {
-                GameControl.noCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            dialogue.text = "Es-tu perdu?";
+            GameControl.yesCard.GetComponent<Button>().interactable = true;
+            GameControl.yesCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.noCard.GetComponent<Button>().interactable = true;
+            GameControl.noCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            SoundManager.playCardAppearSound();
         }
         else
         {
@@ -554,17 +549,12 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f)
         {
-            dialogue.text = "tu sembles perdu";
-            if (!GameControl.noCard.activeSelf)
-            {
-                GameControl.noCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
-            if (!GameControl.yesCard.activeSelf)
-            {
-                GameControl.yesCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            dialogue.text = "Es-tu perdu?";
+            GameControl.yesCard.GetComponent<Button>().interactable = true;
+            GameControl.yesCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.noCard.GetComponent<Button>().interactable = true;
+            GameControl.noCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            SoundManager.playCardAppearSound();
         }
         else
         {
@@ -609,33 +599,21 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f)
         {
-            if (!GameControl.thankYouCard.activeSelf)
-            {
-                GameControl.thankYouCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-
-                dialogue.text = "Allez voir le professeur, droit et à gauche.";
-            }
-            if (!GameControl.openCard.activeSelf)
-            {
-                GameControl.openCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            GameControl.thankYouCard.GetComponent<Button>().interactable = true;
+            GameControl.thankYouCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.openCard.GetComponent<Button>().interactable = true;
+            GameControl.openCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            dialogue.text = "Allez voir le professeur, droit et à gauche.";
+            SoundManager.playCardAppearSound();
         }
         else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
         {
             dialogue.text = "Je vois. Vous êtes une fille ou un garçon?";
-            // dialogue.text = "Quel est votre nom?";
-            if (!GameControl.girlCard.activeSelf)
-            {
-                GameControl.girlCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
-            if (!GameControl.boyCard.activeSelf)
-            {
-                GameControl.boyCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            GameControl.girlCard.GetComponent<Button>().interactable = true;
+            GameControl.girlCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.boyCard.GetComponent<Button>().interactable = true;
+            GameControl.boyCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            SoundManager.playCardAppearSound();
         }
         else
         {
@@ -646,18 +624,10 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f)
         {
-            if (!GameControl.thankYouCard.activeSelf)
-            {
-                GameControl.thankYouCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-
-                dialogue.text = "Allez voir le professeur, droit et à gauche.";
-            }
-            if (!GameControl.openCard.activeSelf)
-            {
-                GameControl.openCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            GameControl.thankYouCard.GetComponent<Button>().interactable = true;
+            GameControl.thankYouCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.openCard.GetComponent<Button>().interactable = true;
+            GameControl.openCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
         }
         else
         {
@@ -669,11 +639,8 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f)
         {
-            if (!GameControl.goodbyeCard.activeSelf)
-            {
-                GameControl.goodbyeCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            GameControl.goodbyeCard.GetComponent<Button>().interactable = true;
+            GameControl.goodbyeCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
         }
         else if (z > 6.1 && z < 6.3 && y == 21.5f)
         {
@@ -864,13 +831,48 @@ public class Academy : MonoBehaviour
     {
         if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
         {
-            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "Et quel âge as-tu?";
-            // if (!GameControl.noCard.activeSelf)
-            // {
-            //     GameControl.noCard.SetActive(true);
-            //     SoundManager.playCardAppearSound();
-            // }
+            SpellbookButton();
+            GameControl.oneCard.GetComponent<Button>().interactable = true;
+            GameControl.oneCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.twoCard.GetComponent<Button>().interactable = true;
+            GameControl.twoCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.threeCard.GetComponent<Button>().interactable = true;
+            GameControl.threeCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.fourCard.GetComponent<Button>().interactable = true;
+            GameControl.fourCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.fiveCard.GetComponent<Button>().interactable = true;
+            GameControl.fiveCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.sixCard.GetComponent<Button>().interactable = true;
+            GameControl.sixCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.sevenCard.GetComponent<Button>().interactable = true;
+            GameControl.sevenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.eightCard.GetComponent<Button>().interactable = true;
+            GameControl.eightCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.nineCard.GetComponent<Button>().interactable = true;
+            GameControl.nineCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.tenCard.GetComponent<Button>().interactable = true;
+            GameControl.tenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.elevenCard.GetComponent<Button>().interactable = true;
+            GameControl.elevenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.twelveCard.GetComponent<Button>().interactable = true;
+            GameControl.twelveCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.thirteenCard.GetComponent<Button>().interactable = true;
+            GameControl.thirteenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.fourteenCard.GetComponent<Button>().interactable = true;
+            GameControl.fourteenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.fifteenCard.GetComponent<Button>().interactable = true;
+            GameControl.fifteenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.sixteenCard.GetComponent<Button>().interactable = true;
+            GameControl.sixteenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.seventeenCard.GetComponent<Button>().interactable = true;
+            GameControl.seventeenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.eighteenCard.GetComponent<Button>().interactable = true;
+            GameControl.eighteenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.nineteenCard.GetComponent<Button>().interactable = true;
+            GameControl.nineteenCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.twentyCard.GetComponent<Button>().interactable = true;
+            GameControl.twentyCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
         }
     }
 
@@ -878,8 +880,8 @@ public class Academy : MonoBehaviour
     {
         if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
         {
-            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "Et quel âge as-tu?";
+            SpellbookButton();
             // if (!GameControl.noCard.activeSelf)
             // {
             //     GameControl.noCard.SetActive(true);
