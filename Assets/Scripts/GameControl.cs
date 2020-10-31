@@ -9,11 +9,15 @@ using UnityEngine.UI;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard;
+    public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
+
+    public static GameObject upArrow, rightArrow, leftArrow, spellbookButton;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
-    public string playerName;
+    string playerName;
+    public static int sceneOne = 1;
+    public static int sceneTwo = 1;
 
     void Awake()
     {
@@ -31,6 +35,10 @@ public class GameControl : MonoBehaviour
     void Start()
     {
         UICanvas = GameObject.Find("UICanvas");
+        upArrow = GameObject.Find("Up Arrow");
+        rightArrow = GameObject.Find("Right Arrow");
+        leftArrow = GameObject.Find("Left Arrow");
+        spellbookButton = GameObject.Find("SpellbookButton");
         // dictionaryCanvas = GameObject.Find("DictionaryCanvas");
         // dictionaryCanvas.SetActive(false);
 
@@ -50,6 +58,10 @@ public class GameControl : MonoBehaviour
         okCard = GameObject.Find("OKButton");
         girlCard = GameObject.Find("GirlButton");
         boyCard = GameObject.Find("BoyButton");
+        sitCard = GameObject.Find("SitButton");
+        morningCard = GameObject.Find("MorningButton");
+        afternoonCard = GameObject.Find("AfternoonButton");
+        eveningCard = GameObject.Find("EveningButton");
 
 
         oneCard = GameObject.Find("1Button");
@@ -85,11 +97,11 @@ public class GameControl : MonoBehaviour
         //   openCard.SetActive(false);
         // yesCard.SetActive(false);
         // noCard.SetActive(false);
-        readCard.SetActive(false);
-        hiCard.SetActive(false);
-        stopCard.SetActive(false);
-        closeCard.SetActive(false);
-        byeCard.SetActive(false);
+        // readCard.SetActive(false);
+        // hiCard.SetActive(false);
+        // stopCard.SetActive(false);
+        // closeCard.SetActive(false);
+        // byeCard.SetActive(false);
         //  thankYouCard.SetActive(false);
         //goodCard.SetActive(false);   
         //   badCard.SetActive(false);
@@ -125,22 +137,22 @@ public class GameControl : MonoBehaviour
         Destroy(control);
     }
 
-    public void Save()
+    public static void Save()
     {
         Debug.Log("saving");
-        //  playerName = "testplayer";
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
         PlayerData data = new PlayerData();
-        //  data.playerName = playerName;
+        data.sceneOne = sceneOne;
+        data.sceneTwo = sceneTwo;
 
         bf.Serialize(file, data);
         file.Close();
     }
 
-    public void Load()
+    public static void Load()
     {
         if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
@@ -149,8 +161,9 @@ public class GameControl : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            //  playerName = data.playerName;
-            //    print(playerName);
+            sceneOne = data.sceneOne;
+            sceneTwo = data.sceneTwo;
+            print(sceneOne);
         }
     }
 }
@@ -159,5 +172,7 @@ public class GameControl : MonoBehaviour
 class PlayerData
 {
     public string playerName;
+    public int sceneOne;
+    public int sceneTwo;
 }
 

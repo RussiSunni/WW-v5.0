@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Academy : MonoBehaviour
 {
@@ -11,14 +12,16 @@ public class Academy : MonoBehaviour
     float z = -10;
     float y = 0;
     float x = 0;
-    string direction, scene;
+    string direction;
     Text dialogue;
     int textNumber;
     bool isRoomsDoorClosed = true;
-    GameObject page1, page2, frontDoor;
-    SpriteRenderer frontDoorway, roomsDoorway;
-    Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed;
-    public static bool helloHold;
+    GameObject page1, page2, page3, page4, frontDoor;
+    SpriteRenderer frontDoorway, roomsDoorway, secretary;
+    Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03;
+    public static bool helloHold, goodHold;
+
+    string timeOfDay;
 
     //--
 
@@ -29,6 +32,18 @@ public class Academy : MonoBehaviour
 
     void Start()
     {
+        DateTime time = System.DateTime.Now;
+        string dateAndTimeVar = time.ToString("yyyy/MM/dd HH:mm:ss");
+        print(dateAndTimeVar);
+        if (time.Hour >= 04 && time.Hour < 12)
+            timeOfDay = "morning";
+        else if (time.Hour >= 12 && time.Hour < 18)
+            timeOfDay = "afternoon";
+        else if (time.Hour >= 18 || time.Hour < 4)
+            timeOfDay = "evening";
+
+        GameControl.Load();
+
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraPos = camera.transform.position;
         direction = "north";
@@ -40,6 +55,8 @@ public class Academy : MonoBehaviour
 
         page1 = GameObject.Find("Page1");
         page2 = GameObject.Find("Page2");
+        page3 = GameObject.Find("Page3");
+        page4 = GameObject.Find("Page4");
         frontDoor = GameObject.Find("FrontDoor");
 
         if (GameControl.scene == "Academy")
@@ -51,10 +68,13 @@ public class Academy : MonoBehaviour
             roomsDoorClosed = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05");
         }
 
+        secretary = GameObject.Find("Secretary02").GetComponent<SpriteRenderer>();
+        secretarySprite02 = Resources.Load<Sprite>("Secretary02");
+        secretarySprite03 = Resources.Load<Sprite>("Secretary03");
+
         //   if (GameControl.scene == "Academy Wild Area")
         if (GameControl.scene == "Academy")
         {
-
             // check which are doorways
             //Invoke("CheckWalk", 1f);
             CheckWalk();
@@ -87,7 +107,7 @@ public class Academy : MonoBehaviour
         for (int i = 0; i < openings.Length; i++)
         {
             Vector3 viewPos = camera.WorldToViewportPoint(openings[i].transform.position);
-            Vector3 rearViewPos = camera.WorldToViewportPoint(openings[i].transform.position) + new Vector3(0, 0, -5.4f);
+            // Vector3 rearViewPos = camera.WorldToViewportPoint(openings[i].transform.position) + new Vector3(0, 0, -5.4f);
             //  Debug.Log(rearViewPos);
 
             if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
@@ -95,10 +115,10 @@ public class Academy : MonoBehaviour
                 canWalkThroughNextWall = true;
             }
 
-            if (rearViewPos.z < -2.6f && rearViewPos.z > -2.8f && rearViewPos.x > 0.4f && rearViewPos.x < 0.6f)
-            {
-                canWalkThroughPreviousWall = true;
-            }
+            // if (rearViewPos.z < -2.6f && rearViewPos.z > -2.8f && rearViewPos.x > 0.4f && rearViewPos.x < 0.6f)
+            // {
+            //     canWalkThroughPreviousWall = true;
+            // }
         }
         //   Debug.Log(canWalkThroughNextWall);
         // Debug.Log(canWalkThroughPreviousWall);
@@ -250,7 +270,7 @@ public class Academy : MonoBehaviour
                 }
             }
 
-            else if (cameraPos.z == -10)
+            else if (cameraPos.z == -10f && direction == "east" || cameraPos.z == -10f && direction == "west")
             {
                 SoundManager.playWolfGrowlSound();
             }
@@ -260,74 +280,75 @@ public class Academy : MonoBehaviour
             CheckWalls();
         }
     }
-    public void MoveBackward()
-    {
-        if (GameControl.scene == "Academy")
-        {
-            SoundManager.playFootstepSound();
 
-            // if (direction == "north" && cameraPos.z > -10f)
-            // {
-            //     z -= 5.4f;
-            //     camera.transform.position = new Vector3(x, 0, z);
-            //     cameraPos = camera.transform.position;
-            // }
+    // public void MoveBackward()
+    // {
+    //     if (GameControl.scene == "Academy")
+    //     {
+    //         SoundManager.playFootstepSound();
 
-            // else if (direction == "south")
-            // {
-            //     z += 5.4f;
-            //     camera.transform.position = new Vector3(x, 0, z);
-            //     cameraPos = camera.transform.position;
-            // }
+    // if (direction == "north" && cameraPos.z > -10f)
+    // {
+    //     z -= 5.4f;
+    //     camera.transform.position = new Vector3(x, 0, z);
+    //     cameraPos = camera.transform.position;
+    // }
 
-            // else if (direction == "west")
-            // {
-            //     x += 5.4f;
-            //     camera.transform.position = new Vector3(x, 0, z);
-            //     cameraPos = camera.transform.position;
-            // }
+    // else if (direction == "south")
+    // {
+    //     z += 5.4f;
+    //     camera.transform.position = new Vector3(x, 0, z);
+    //     cameraPos = camera.transform.position;
+    // }
 
-            // else if (direction == "east")
-            // {
-            //     x -= 5.4f;
-            //     camera.transform.position = new Vector3(x, 0, z);
-            //     cameraPos = camera.transform.position;
-            // }
-            if (canWalkThroughPreviousWall)
-            {
-                SoundManager.playFootstepSound();
-                if (direction == "north")
-                {
-                    cameraPos.z -= 5.4f;
-                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                    cameraPos = camera.transform.position;
-                }
-                else if (direction == "south")
-                {
-                    cameraPos.z -= -5.4f;
-                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                    cameraPos = camera.transform.position;
-                }
-                else if (direction == "east")
-                {
-                    cameraPos.x -= 5.4f;
-                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                    cameraPos = camera.transform.position;
-                }
-                else if (direction == "west")
-                {
-                    cameraPos.x -= -5.4f;
-                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                    cameraPos = camera.transform.position;
-                }
-            }
-            else
-            {
-                SoundManager.playBumpSound();
-            }
-            CheckWalls();
-        }
-    }
+    // else if (direction == "west")
+    // {
+    //     x += 5.4f;
+    //     camera.transform.position = new Vector3(x, 0, z);
+    //     cameraPos = camera.transform.position;
+    // }
+
+    // else if (direction == "east")
+    // {
+    //     x -= 5.4f;
+    //     camera.transform.position = new Vector3(x, 0, z);
+    //     cameraPos = camera.transform.position;
+    // }
+    //         if (canWalkThroughPreviousWall)
+    //         {
+    //             SoundManager.playFootstepSound();
+    //             if (direction == "north")
+    //             {
+    //                 cameraPos.z -= 5.4f;
+    //                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+    //                 cameraPos = camera.transform.position;
+    //             }
+    //             else if (direction == "south")
+    //             {
+    //                 cameraPos.z -= -5.4f;
+    //                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+    //                 cameraPos = camera.transform.position;
+    //             }
+    //             else if (direction == "east")
+    //             {
+    //                 cameraPos.x -= 5.4f;
+    //                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+    //                 cameraPos = camera.transform.position;
+    //             }
+    //             else if (direction == "west")
+    //             {
+    //                 cameraPos.x -= -5.4f;
+    //                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+    //                 cameraPos = camera.transform.position;
+    //             }
+    //         }
+    //         else
+    //         {
+    //             SoundManager.playBumpSound();
+    //         }
+    //         CheckWalls();
+    //     }
+    // }
     public void LeftButton()
     {
 
@@ -382,23 +403,6 @@ public class Academy : MonoBehaviour
         //     }
     }
 
-    public void TextScrollForward()
-    {
-        textNumber++;
-
-        if (scene == "Fairy2")
-        {
-
-            if (textNumber == 2)
-                dialogue.text = "You are about to enter the lands of Artemis.";
-
-            else if (textNumber == 3)
-                dialogue.text = "Wait, here she comes...";
-
-            else if (textNumber == 4)
-                SceneManager.LoadScene("Artemis");
-        }
-    }
 
     public void SpellbookButton()
     {
@@ -408,11 +412,19 @@ public class Academy : MonoBehaviour
         {
             page1.transform.localPosition = new Vector3(-800f, 0f, 0f);
             page2.transform.localPosition = new Vector3(0f, 0f, 0f);
+            page3.transform.localPosition = new Vector3(800f, 0f, 0f);
         }
         else if (page1.transform.localPosition.x == -800f)
         {
+            page1.transform.localPosition = new Vector3(-1600f, 0f, 0f);
+            page2.transform.localPosition = new Vector3(-800f, 0f, 0f);
+            page3.transform.localPosition = new Vector3(0f, 0f, 0f);
+        }
+        else if (page1.transform.localPosition.x == -1600f)
+        {
             page1.transform.localPosition = new Vector3(0f, 0f, 0f);
-            page2.transform.localPosition = new Vector3(800f, 0f, 0f);
+            page2.transform.localPosition = new Vector3(-800f, 0f, 0f);
+            page3.transform.localPosition = new Vector3(-1600f, 0f, 0f);
         }
     }
 
@@ -424,16 +436,23 @@ public class Academy : MonoBehaviour
         {
             if (cameraPos.z == -4.6f && cameraPos.x == 0f)
             {
-                scene = "Fairy";
+                GameControl.upArrow.GetComponent<Button>().interactable = false;
+                GameControl.rightArrow.GetComponent<Button>().interactable = false;
+                GameControl.leftArrow.GetComponent<Button>().interactable = false;
+                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
+                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100);
+
+                // first Fairy interaction - sceneOne
                 SoundManager.playHeySound();
                 cameraPos.y = 12f;
                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                dialogue.text = "Bonjour.\nComment ça va?";
-                //  SoundManager.playFairy001Sound();
+                if (GameControl.sceneOne == 1)
+                    dialogue.text = "Bonjour.\nComment ça va?";
+                else
+                    dialogue.text = "Ah,\nvous encore.";
 
                 GameControl.goodCard.GetComponent<Button>().interactable = true;
                 GameControl.goodCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-
                 GameControl.badCard.GetComponent<Button>().interactable = true;
                 GameControl.badCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
                 SoundManager.playCardAppearSound();
@@ -441,19 +460,28 @@ public class Academy : MonoBehaviour
 
             else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
             {
-                scene = "Secretary";
+                GameControl.upArrow.GetComponent<Button>().interactable = false;
+                GameControl.rightArrow.GetComponent<Button>().interactable = false;
+                GameControl.leftArrow.GetComponent<Button>().interactable = false;
+
+                // first Secretary interaction - sceneTwo              
                 cameraPos.y = 12f;
                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                dialogue.text = "Bonjour.\n\n Êtes-vous étudiant à l'Académie?";
-                // if (!GameControl.noCard.activeSelf)
-                // {
-                //     GameControl.noCard.SetActive(true);
-                //     SoundManager.playCardAppearSound();
-                // }
+                if (GameControl.sceneTwo == 1)
+                    dialogue.text = "Good " + timeOfDay;
+                else
+                    dialogue.text = "Es-tu perdu?";
+
+                GameControl.morningCard.GetComponent<Button>().interactable = true;
+                GameControl.morningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                GameControl.afternoonCard.GetComponent<Button>().interactable = true;
+                GameControl.afternoonCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                GameControl.eveningCard.GetComponent<Button>().interactable = true;
+                GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                SoundManager.playCardAppearSound();
             }
             else if (cameraPos.z == 11.6f)
             {
-                scene = "Fairy";
                 y = 12f;
                 camera.transform.position = new Vector3(0, y, z);
                 dialogue.text = "To use 2 spells, hold down one, then press the second.\n OK?";
@@ -498,14 +526,20 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
         {
-            scene = "Academy";
+            // first Fairy interaction - sceneOne
+            GameControl.sceneOne = GameControl.sceneOne + 1;
+            GameControl.Save();
+
             cameraPos.y = 0f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "";
+
+            GameControl.upArrow.GetComponent<Button>().interactable = true;
+            GameControl.rightArrow.GetComponent<Button>().interactable = true;
+            GameControl.leftArrow.GetComponent<Button>().interactable = true;
         }
         else if (cameraPos.z == 6.2 && y == 12f)
         {
-            scene = "Academy";
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
             dialogue.text = "";
@@ -539,12 +573,23 @@ public class Academy : MonoBehaviour
             GameControl.noCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
             SoundManager.playCardAppearSound();
         }
+        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        {
+
+        }
         else
         {
             Restart();
         }
 
     }
+
+    public void GoodCardHold()
+    {
+        goodHold = true;
+        GameControl.goodCard.GetComponent<Image>().color = Color.gray;
+    }
+
     public void BadCard()
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f)
@@ -660,13 +705,10 @@ public class Academy : MonoBehaviour
         }
     }
 
-
     public void ReadCard()
     {
         if (z > 6.1 && z < 6.3)
         {
-            scene = "Scroll";
-
             y = 12f;
             camera.transform.position = new Vector3(x, y, z);
             if (!GameControl.stopCard.activeSelf)
@@ -685,8 +727,6 @@ public class Academy : MonoBehaviour
     {
         if (z > 6.1 && z < 6.3)
         {
-            scene = "Academy";
-
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
             if (!GameControl.byeCard.activeSelf)
@@ -720,13 +760,10 @@ public class Academy : MonoBehaviour
         }
     }
 
-
     public void HiCard()
     {
         if (cameraPos.z == 17f && cameraPos.x == 5.4f)
         {
-            scene = "Students";
-
             y = 12f;
             camera.transform.position = new Vector3(x, y, z);
             dialogue.text = "Hi. I'm Sue.";
@@ -742,7 +779,6 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == 11.6f && cameraPos.x == 0f && y == 12f)
         {
-            scene = "Academy";
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
             dialogue.text = "";
@@ -786,7 +822,6 @@ public class Academy : MonoBehaviour
             Restart();
         }
     }
-
     public void HelloMay()
     {
         if (cameraPos.z == 17f && cameraPos.x == 5.4f && y == 22f)
@@ -801,7 +836,6 @@ public class Academy : MonoBehaviour
                 y = 0f;
                 camera.transform.position = new Vector3(x, y, z);
                 dialogue.text = "";
-                scene = "Academy";
 
                 GameControl.helloCard.GetComponent<Image>().color = Color.white;
                 helloHold = false;
@@ -890,6 +924,102 @@ public class Academy : MonoBehaviour
         }
     }
 
+    public void SitCard()
+    {
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
+        {
+            dialogue.text = "Thank you.\nWhat is your name?";
+        }
+        GameControl.sceneTwo = GameControl.sceneTwo + 1;
+        GameControl.Save();
+        secretary.sprite = secretarySprite03;
+
+        SpellbookButton();
+    }
+
+    public void MorningCard()
+    {
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        {
+            if (goodHold)
+            {
+                if (timeOfDay == "morning")
+                {
+                    dialogue.text = "Sit down please.";
+                    GameControl.sitCard.GetComponent<Button>().interactable = true;
+                    GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                    GameControl.goodCard.GetComponent<Image>().color = Color.white;
+                    SoundManager.playCardAppearSound();
+
+                    secretary.sprite = secretarySprite02;
+                }
+                else
+                {
+                    Restart();
+                }
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
+    public void AfternoonCard()
+    {
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        {
+            if (goodHold)
+            {
+                if (timeOfDay == "afternoon")
+                {
+                    dialogue.text = "Sit down please.";
+                    GameControl.sitCard.GetComponent<Button>().interactable = true;
+                    GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                    GameControl.goodCard.GetComponent<Image>().color = Color.white;
+                    SoundManager.playCardAppearSound();
+
+                    secretary.sprite = secretarySprite02;
+                }
+                else
+                {
+                    Restart();
+                }
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+    public void EveningCard()
+    {
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        {
+            if (goodHold)
+            {
+                if (timeOfDay == "evening")
+                {
+                    dialogue.text = "Sit down please.";
+                    GameControl.sitCard.GetComponent<Button>().interactable = true;
+                    GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                    GameControl.goodCard.GetComponent<Image>().color = Color.white;
+                    SoundManager.playCardAppearSound();
+
+                    secretary.sprite = secretarySprite02;
+                }
+                else
+                {
+                    Restart();
+                }
+            }
+        }
+        else
+        {
+            Restart();
+        }
+    }
+
 
     public void Restart()
     {
@@ -897,4 +1027,11 @@ public class Academy : MonoBehaviour
         SceneManager.LoadScene("Academy");
     }
 
+    public void Reset()
+    {
+        GameControl.sceneOne = 1;
+        GameControl.sceneTwo = 1;
+
+        print(GameControl.sceneOne + ", " + GameControl.sceneTwo);
+    }
 }
