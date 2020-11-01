@@ -19,15 +19,17 @@ public class Academy : MonoBehaviour
     public static GameObject page1, page2, page3, page4, frontDoor;
     SpriteRenderer frontDoorway, roomsDoorway, secretary;
     Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03;
-    public static bool helloHold, goodHold;
+    public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold;
 
-    string timeOfDay;
+    string timeOfDay, playerName;
+    int playerAge, playerAge0, playerAge10 = 0;
 
     //--
 
     public GameObject teacher;
     public GameObject[] openings;
     public bool canWalkThroughNextWall, canWalkThroughPreviousWall;
+
 
 
     void Start()
@@ -413,18 +415,28 @@ public class Academy : MonoBehaviour
             page1.transform.localPosition = new Vector3(-800f, 0f, 0f);
             page2.transform.localPosition = new Vector3(0f, 0f, 0f);
             page3.transform.localPosition = new Vector3(800f, 0f, 0f);
+            page4.transform.localPosition = new Vector3(1600f, 0f, 0f);
         }
         else if (page1.transform.localPosition.x == -800f)
         {
             page1.transform.localPosition = new Vector3(-1600f, 0f, 0f);
             page2.transform.localPosition = new Vector3(-800f, 0f, 0f);
             page3.transform.localPosition = new Vector3(0f, 0f, 0f);
+            page4.transform.localPosition = new Vector3(800f, 0f, 0f);
+        }
+        else if (page1.transform.localPosition.x == -1600f)
+        {
+            page1.transform.localPosition = new Vector3(-2400f, 0f, 0f);
+            page2.transform.localPosition = new Vector3(-1600f, 0f, 0f);
+            page3.transform.localPosition = new Vector3(-800f, 0f, 0f);
+            page4.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
         else if (page1.transform.localPosition.x == -1600f)
         {
             page1.transform.localPosition = new Vector3(0f, 0f, 0f);
             page2.transform.localPosition = new Vector3(-800f, 0f, 0f);
             page3.transform.localPosition = new Vector3(-1600f, 0f, 0f);
+            page4.transform.localPosition = new Vector3(-2400f, 0f, 0f);
         }
     }
 
@@ -1024,7 +1036,273 @@ public class Academy : MonoBehaviour
         }
     }
 
+    public void EndCard()
+    {
 
+        var aArray = GameObject.FindGameObjectsWithTag("a");
+        foreach (GameObject item in aArray)
+        {
+            Destroy(item);
+        }
+
+        var bArray = GameObject.FindGameObjectsWithTag("b");
+        foreach (GameObject item in bArray)
+        {
+            Destroy(item);
+        }
+
+        var cArray = GameObject.FindGameObjectsWithTag("c");
+        foreach (GameObject item in cArray)
+        {
+            Destroy(item);
+        }
+
+        var dArray = GameObject.FindGameObjectsWithTag("d");
+        foreach (GameObject item in dArray)
+        {
+            Destroy(item);
+        }
+
+        var eArray = GameObject.FindGameObjectsWithTag("e");
+        foreach (GameObject item in eArray)
+        {
+            Destroy(item);
+        }
+
+        var fArray = GameObject.FindGameObjectsWithTag("f");
+        foreach (GameObject item in fArray)
+        {
+            Destroy(item);
+        }
+
+        var gArray = GameObject.FindGameObjectsWithTag("g");
+        foreach (GameObject item in gArray)
+        {
+            Destroy(item);
+        }
+
+        var hArray = GameObject.FindGameObjectsWithTag("h");
+        foreach (GameObject item in hArray)
+        {
+            Destroy(item);
+        }
+
+        var iArray = GameObject.FindGameObjectsWithTag("i");
+        foreach (GameObject item in iArray)
+        {
+            Destroy(item);
+        }
+
+        var jArray = GameObject.FindGameObjectsWithTag("j");
+        foreach (GameObject item in jArray)
+        {
+            Destroy(item);
+        }
+
+        var kArray = GameObject.FindGameObjectsWithTag("k");
+        foreach (GameObject item in kArray)
+        {
+            Destroy(item);
+        }
+
+        var lArray = GameObject.FindGameObjectsWithTag("l");
+        foreach (GameObject item in lArray)
+        {
+            Destroy(item);
+        }
+
+        var mArray = GameObject.FindGameObjectsWithTag("m");
+        foreach (GameObject item in mArray)
+        {
+            Destroy(item);
+        }
+
+        var nArray = GameObject.FindGameObjectsWithTag("n");
+        foreach (GameObject item in nArray)
+        {
+            Destroy(item);
+        }
+
+        var oArray = GameObject.FindGameObjectsWithTag("o");
+        foreach (GameObject item in oArray)
+        {
+            Destroy(item);
+        }
+
+        var pArray = GameObject.FindGameObjectsWithTag("p");
+        foreach (GameObject item in pArray)
+        {
+            Destroy(item);
+        }
+
+        var qArray = GameObject.FindGameObjectsWithTag("q");
+        foreach (GameObject item in qArray)
+        {
+            Destroy(item);
+        }
+
+        var rArray = GameObject.FindGameObjectsWithTag("r");
+        foreach (GameObject item in rArray)
+        {
+            Destroy(item);
+        }
+
+        var sArray = GameObject.FindGameObjectsWithTag("s");
+        foreach (GameObject item in sArray)
+        {
+            Destroy(item);
+        }
+
+        var tArray = GameObject.FindGameObjectsWithTag("t");
+        foreach (GameObject item in tArray)
+        {
+            Destroy(item);
+        }
+
+        var uArray = GameObject.FindGameObjectsWithTag("u");
+        foreach (GameObject item in uArray)
+        {
+            Destroy(item);
+        }
+
+        var vArray = GameObject.FindGameObjectsWithTag("v");
+        foreach (GameObject item in vArray)
+        {
+            Destroy(item);
+        }
+
+        var wArray = GameObject.FindGameObjectsWithTag("w");
+        foreach (GameObject item in wArray)
+        {
+            Destroy(item);
+        }
+
+        var xArray = GameObject.FindGameObjectsWithTag("x");
+        foreach (GameObject item in xArray)
+        {
+            Destroy(item);
+        }
+
+        var yArray = GameObject.FindGameObjectsWithTag("y");
+        foreach (GameObject item in yArray)
+        {
+            Destroy(item);
+        }
+
+        var zArray = GameObject.FindGameObjectsWithTag("z");
+        foreach (GameObject item in zArray)
+        {
+            Destroy(item);
+        }
+
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
+        {
+            string text = "And how old are you, " + WriteLetters.playerNameString + "?";
+            dialogue.text = text;
+            GameControl.playerName = WriteLetters.playerNameString;
+
+            SpellbookButton();
+        }
+    }
+
+    public void OneCard()
+    {
+        playerAge0 = 1;
+    }
+    public void OneCardHold()
+    {
+        oneHold = true;
+        playerAge10 = 10;
+        GameControl.oneCard.GetComponent<Image>().color = Color.gray;
+    }
+
+    public void TwoCard()
+    {
+        playerAge0 = 2;
+    }
+    public void TwoCardHold()
+    {
+        twoHold = true;
+        playerAge10 = 20;
+        GameControl.twoCard.GetComponent<Image>().color = Color.gray;
+    }
+    public void ThreeCard()
+    {
+        playerAge0 = 3;
+    }
+    public void ThreeCardHold()
+    {
+        threeHold = true;
+        playerAge10 = 30;
+        GameControl.threeCard.GetComponent<Image>().color = Color.gray;
+    }
+    public void FourCard()
+    {
+        playerAge0 = 4;
+    }
+    public void FourCardHold()
+    {
+        fourHold = true;
+        playerAge10 = 40;
+        GameControl.fourCard.GetComponent<Image>().color = Color.gray;
+    }
+
+    public void FiveCard()
+    {
+        playerAge0 = 5;
+    }
+    public void FiveCardHold()
+    {
+        fiveHold = true;
+        playerAge10 = 50;
+        GameControl.fiveCard.GetComponent<Image>().color = Color.gray;
+    }
+
+
+    public void SixCard()
+    {
+        playerAge0 = 6;
+    }
+
+    public void SixCardHold()
+    {
+        sixHold = true;
+        playerAge10 = 60;
+        GameControl.sixCard.GetComponent<Image>().color = Color.gray;
+    }
+    public void SevenCard()
+    {
+        playerAge0 = 7;
+    }
+
+    public void SevenCardHold()
+    {
+        sevenHold = true;
+        playerAge10 = 70;
+        GameControl.sevenCard.GetComponent<Image>().color = Color.gray;
+    }
+    public void EightCard()
+    {
+        playerAge0 = 8;
+    }
+
+    public void EightCardHold()
+    {
+        eightHold = true;
+        playerAge10 = 80;
+        GameControl.eightCard.GetComponent<Image>().color = Color.gray;
+    }
+    public void NineCard()
+    {
+        playerAge0 = 9;
+    }
+
+    public void NineCardHold()
+    {
+        nineHold = true;
+        playerAge10 = 90;
+        GameControl.nineCard.GetComponent<Image>().color = Color.gray;
+    }
 
     public void Restart()
     {

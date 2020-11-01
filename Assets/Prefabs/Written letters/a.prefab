@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2952563877596252028}
   - component: {fileID: 2952563877596252031}
   m_Layer: 5
-  m_Name: Textspace01
-  m_TagString: Untagged
+  m_Name: a
+  m_TagString: a
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

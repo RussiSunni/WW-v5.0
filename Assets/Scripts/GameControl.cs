@@ -15,7 +15,8 @@ public class GameControl : MonoBehaviour
     public static GameObject upArrow, rightArrow, leftArrow, spellbookButton;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
-    string playerName;
+    public static string playerName;
+    int playerAge;
     public static int sceneOne = 1;
     public static int sceneTwo = 1;
 
