@@ -16,7 +16,7 @@ public class Academy : MonoBehaviour
     Text dialogue;
     int textNumber;
     bool isRoomsDoorClosed = true;
-    GameObject page1, page2, page3, page4, frontDoor;
+    public static GameObject page1, page2, page3, page4, frontDoor;
     SpriteRenderer frontDoorway, roomsDoorway, secretary;
     Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03;
     public static bool helloHold, goodHold;
@@ -478,6 +478,8 @@ public class Academy : MonoBehaviour
                 GameControl.afternoonCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
                 GameControl.eveningCard.GetComponent<Button>().interactable = true;
                 GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
+                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100);
                 SoundManager.playCardAppearSound();
             }
             else if (cameraPos.z == 11.6f)
@@ -537,6 +539,8 @@ public class Academy : MonoBehaviour
             GameControl.upArrow.GetComponent<Button>().interactable = true;
             GameControl.rightArrow.GetComponent<Button>().interactable = true;
             GameControl.leftArrow.GetComponent<Button>().interactable = true;
+            GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
+            GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 140);
         }
         else if (cameraPos.z == 6.2 && y == 12f)
         {
@@ -1019,6 +1023,7 @@ public class Academy : MonoBehaviour
             Restart();
         }
     }
+
 
 
     public void Restart()
