@@ -11,14 +11,14 @@ public class GameControl : MonoBehaviour
     public static GameControl control;
     public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
-
     public static GameObject upArrow, rightArrow, leftArrow, spellbookButton;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
     public static string playerName;
-    int playerAge;
+    public static int playerAge;
     public static int sceneOne = 1;
     public static int sceneTwo = 1;
+    public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard;
 
     void Awake()
     {
@@ -35,6 +35,8 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
+        Load();
+
         UICanvas = GameObject.Find("UICanvas");
         upArrow = GameObject.Find("Up Arrow");
         rightArrow = GameObject.Find("Right Arrow");
@@ -44,9 +46,20 @@ public class GameControl : MonoBehaviour
         // dictionaryCanvas.SetActive(false);
 
         helloCard = GameObject.Find("HelloButton");
+        goodCard = GameObject.Find("GoodButton");
+
+        if (hasGoodCard)
+            GameControl.goodCard.GetComponent<Button>().interactable = true;
+
+        badCard = GameObject.Find("BadButton");
+
         goodbyeCard = GameObject.Find("GoodbyeButton");
         openCard = GameObject.Find("OpenButton");
         yesCard = GameObject.Find("YesButton");
+
+        if (hasYesCard)
+            GameControl.yesCard.GetComponent<Button>().interactable = true;
+
         noCard = GameObject.Find("NoButton");
         readCard = GameObject.Find("ReadButton");
         hiCard = GameObject.Find("HiButton");
@@ -54,8 +67,7 @@ public class GameControl : MonoBehaviour
         closeCard = GameObject.Find("CloseButton");
         byeCard = GameObject.Find("ByeButton");
         thankYouCard = GameObject.Find("ThankYouButton");
-        goodCard = GameObject.Find("GoodButton");
-        badCard = GameObject.Find("BadButton");
+
         okCard = GameObject.Find("OKButton");
         girlCard = GameObject.Find("GirlButton");
         boyCard = GameObject.Find("BoyButton");
@@ -87,27 +99,11 @@ public class GameControl : MonoBehaviour
         twentyCard = GameObject.Find("20Button");
 
 
-
         sueCard = GameObject.Find("SueButton");
         mayCard = GameObject.Find("MayButton");
         theCard = GameObject.Find("TheButton");
         sorryCard = GameObject.Find("SorryButton");
 
-
-        //   goodbyeCard.SetActive(false);
-        //   openCard.SetActive(false);
-        // yesCard.SetActive(false);
-        // noCard.SetActive(false);
-        // readCard.SetActive(false);
-        // hiCard.SetActive(false);
-        // stopCard.SetActive(false);
-        // closeCard.SetActive(false);
-        // byeCard.SetActive(false);
-        //  thankYouCard.SetActive(false);
-        //goodCard.SetActive(false);   
-        //   badCard.SetActive(false);
-        // girlCard.SetActive(false);
-        //  boyCard.SetActive(false);
 
         okCard.SetActive(false);
         sueCard.SetActive(false);
@@ -141,13 +137,19 @@ public class GameControl : MonoBehaviour
     public static void Save()
     {
         Debug.Log("saving");
+        Debug.Log(hasGoodCard);
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
         PlayerData data = new PlayerData();
-        data.sceneOne = sceneOne;
-        data.sceneTwo = sceneTwo;
+        data.playerName = playerName;
+        data.playerAge = playerAge;
+        //   data.sceneOne = sceneOne;
+        //data.sceneTwo = sceneTwo;
+
+        data.hasGoodCard = hasGoodCard;
+        data.hasYesCard = hasYesCard;
 
         bf.Serialize(file, data);
         file.Close();
@@ -161,9 +163,12 @@ public class GameControl : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
-
-            sceneOne = data.sceneOne;
-            sceneTwo = data.sceneTwo;
+            playerName = data.playerName;
+            playerAge = data.playerAge;
+            //    sceneOne = data.sceneOne;
+            //     sceneTwo = data.sceneTwo;
+            hasGoodCard = data.hasGoodCard;
+            hasYesCard = data.hasYesCard;
             print(sceneOne);
         }
     }
@@ -173,7 +178,9 @@ public class GameControl : MonoBehaviour
 class PlayerData
 {
     public string playerName;
+    public int playerAge;
     public int sceneOne;
     public int sceneTwo;
+    public bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard;
 }
 

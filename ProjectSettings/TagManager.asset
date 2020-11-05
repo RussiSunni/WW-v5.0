@@ -34,6 +34,7 @@ TagManager:
   - x
   - y
   - z
+  - Fairy
   layers:
   - Default
   - TransparentFX
