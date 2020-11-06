@@ -20,14 +20,12 @@ public class WriteLetters : MonoBehaviour
             writtenLetter.transform.position = firstPosition.position;
             firstPositionTaken = true;
             playerName[0] = letterName;
-
         }
         else if (!secondPositionTaken)
         {
             writtenLetter.transform.position = secondPosition.position;
             secondPositionTaken = true;
             playerName[1] = letterName;
-
         }
         else if (!thirdPositionTaken)
         {
@@ -100,7 +98,7 @@ public class WriteLetters : MonoBehaviour
         aWritten = Instantiate(a, Academy.page3.transform);
 
         CalculatePosition(aWritten, aName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
 
     }
@@ -109,7 +107,7 @@ public class WriteLetters : MonoBehaviour
         char bName = char.Parse(b.name);
         bWritten = Instantiate(b, Academy.page3.transform);
         CalculatePosition(bWritten, bName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void CCard()
@@ -117,7 +115,7 @@ public class WriteLetters : MonoBehaviour
         char cName = char.Parse(c.name);
         cWritten = Instantiate(c, Academy.page3.transform);
         CalculatePosition(cWritten, cName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void DCard()
@@ -125,7 +123,7 @@ public class WriteLetters : MonoBehaviour
         char dName = char.Parse(d.name);
         dWritten = Instantiate(d, Academy.page3.transform);
         CalculatePosition(dWritten, dName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void ECard()
@@ -133,7 +131,7 @@ public class WriteLetters : MonoBehaviour
         char eName = char.Parse(e.name);
         eWritten = Instantiate(e, Academy.page3.transform);
         CalculatePosition(eWritten, eName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void FCard()
@@ -141,7 +139,7 @@ public class WriteLetters : MonoBehaviour
         char fName = char.Parse(f.name);
         fWritten = Instantiate(f, Academy.page3.transform);
         CalculatePosition(fWritten, fName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
 
@@ -150,7 +148,7 @@ public class WriteLetters : MonoBehaviour
         char gName = char.Parse(g.name);
         gWritten = Instantiate(g, Academy.page3.transform);
         CalculatePosition(gWritten, gName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void HCard()
@@ -158,7 +156,7 @@ public class WriteLetters : MonoBehaviour
         char hName = char.Parse(h.name);
         hWritten = Instantiate(h, Academy.page3.transform);
         CalculatePosition(hWritten, hName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void ICard()
@@ -166,7 +164,7 @@ public class WriteLetters : MonoBehaviour
         char iName = char.Parse(i.name);
         iWritten = Instantiate(i, Academy.page3.transform);
         CalculatePosition(iWritten, iName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void JCard()
@@ -174,7 +172,7 @@ public class WriteLetters : MonoBehaviour
         char jName = char.Parse(j.name);
         jWritten = Instantiate(j, Academy.page3.transform);
         CalculatePosition(jWritten, jName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void KCard()
@@ -182,7 +180,7 @@ public class WriteLetters : MonoBehaviour
         char kName = char.Parse(k.name);
         kWritten = Instantiate(k, Academy.page3.transform);
         CalculatePosition(kWritten, kName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void LCard()
@@ -190,7 +188,7 @@ public class WriteLetters : MonoBehaviour
         char lName = char.Parse(l.name);
         lWritten = Instantiate(l, Academy.page3.transform);
         CalculatePosition(lWritten, lName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void MCard()
@@ -198,7 +196,7 @@ public class WriteLetters : MonoBehaviour
         char mName = char.Parse(m.name);
         mWritten = Instantiate(m, Academy.page3.transform);
         CalculatePosition(mWritten, mName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void NCard()
@@ -206,7 +204,7 @@ public class WriteLetters : MonoBehaviour
         char nName = char.Parse(n.name);
         nWritten = Instantiate(n, Academy.page3.transform);
         CalculatePosition(nWritten, nName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void OCard()
@@ -214,7 +212,7 @@ public class WriteLetters : MonoBehaviour
         char oName = char.Parse(o.name);
         oWritten = Instantiate(o, Academy.page3.transform);
         CalculatePosition(oWritten, oName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void PCard()
@@ -222,7 +220,7 @@ public class WriteLetters : MonoBehaviour
         char pName = char.Parse(p.name);
         pWritten = Instantiate(p, Academy.page3.transform);
         CalculatePosition(pWritten, pName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void QCard()
@@ -230,7 +228,7 @@ public class WriteLetters : MonoBehaviour
         char qName = char.Parse(q.name);
         qWritten = Instantiate(q, Academy.page3.transform);
         CalculatePosition(qWritten, qName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void RCard()
@@ -238,7 +236,7 @@ public class WriteLetters : MonoBehaviour
         char rName = char.Parse(r.name);
         rWritten = Instantiate(r, Academy.page3.transform);
         CalculatePosition(rWritten, rName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void SCard()
@@ -246,7 +244,7 @@ public class WriteLetters : MonoBehaviour
         char sName = char.Parse(s.name);
         sWritten = Instantiate(s, Academy.page3.transform);
         CalculatePosition(sWritten, sName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void TCard()
@@ -254,7 +252,7 @@ public class WriteLetters : MonoBehaviour
         char tName = char.Parse(t.name);
         tWritten = Instantiate(t, Academy.page3.transform);
         CalculatePosition(tWritten, tName);
-        CanvasCode.GetComponent<Academy>().SpellbookButton();
+        CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
     }
     public void UCard()

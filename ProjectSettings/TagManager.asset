@@ -35,6 +35,7 @@ TagManager:
   - y
   - z
   - Fairy
+  - Fairy in tree
   layers:
   - Default
   - TransparentFX

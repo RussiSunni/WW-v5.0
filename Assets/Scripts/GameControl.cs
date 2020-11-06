@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
     public static GameControl control;
     public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
-    public static GameObject upArrow, rightArrow, leftArrow, spellbookButton;
+    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
     public static string playerName;
@@ -41,15 +41,17 @@ public class GameControl : MonoBehaviour
         upArrow = GameObject.Find("Up Arrow");
         rightArrow = GameObject.Find("Right Arrow");
         leftArrow = GameObject.Find("Left Arrow");
-        spellbookButton = GameObject.Find("SpellbookButton");
+        spellbookButtonLeft = GameObject.Find("SpellbookButton Left");
+        spellbookButtonRight = GameObject.Find("SpellbookButton Right");
+
         // dictionaryCanvas = GameObject.Find("DictionaryCanvas");
         // dictionaryCanvas.SetActive(false);
 
         helloCard = GameObject.Find("HelloButton");
         goodCard = GameObject.Find("GoodButton");
 
-        if (hasGoodCard)
-            GameControl.goodCard.GetComponent<Button>().interactable = true;
+        //  if (hasGoodCard)
+        //      GameControl.goodCard.GetComponent<Button>().interactable = true;
 
         badCard = GameObject.Find("BadButton");
 
@@ -57,8 +59,8 @@ public class GameControl : MonoBehaviour
         openCard = GameObject.Find("OpenButton");
         yesCard = GameObject.Find("YesButton");
 
-        if (hasYesCard)
-            GameControl.yesCard.GetComponent<Button>().interactable = true;
+        //   if (hasYesCard)
+        //       GameControl.yesCard.GetComponent<Button>().interactable = true;
 
         noCard = GameObject.Find("NoButton");
         readCard = GameObject.Find("ReadButton");
@@ -114,6 +116,34 @@ public class GameControl : MonoBehaviour
 
         scene = "Academy";
     }
+
+
+    public static void CharacterSpeakUIChange()
+    {
+        GameControl.upArrow.GetComponent<Button>().interactable = false;
+        GameControl.rightArrow.GetComponent<Button>().interactable = false;
+        GameControl.leftArrow.GetComponent<Button>().interactable = false;
+        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
+        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
+        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-17.5f, 0f, 0f);
+        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
+        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
+        GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(17.5f, 0f, 0f);
+    }
+
+    public static void WorldNavigationUIChange()
+    {
+        GameControl.upArrow.GetComponent<Button>().interactable = true;
+        GameControl.rightArrow.GetComponent<Button>().interactable = true;
+        GameControl.leftArrow.GetComponent<Button>().interactable = true;
+        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
+        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
+        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-35f, 0f, 0f);
+        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
+        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
+        GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(35f, 0f, 0f);
+    }
+
 
     public void Dictionary()
     {

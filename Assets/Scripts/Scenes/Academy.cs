@@ -16,9 +16,9 @@ public class Academy : MonoBehaviour
     Text dialogue;
     int textNumber;
     bool isRoomsDoorClosed = true;
-    public static GameObject page1, page2, page3, page4, frontDoor;
+    public static GameObject page1, page2, page3, page4, frontDoor, LaboratoryDoor;
     SpriteRenderer frontDoorway, roomsDoorway, secretary;
-    Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03;
+    Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03, fairyInTreeNoFairy;
     public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold;
 
     string timeOfDay, playerName;
@@ -31,12 +31,10 @@ public class Academy : MonoBehaviour
     public bool canWalkThroughNextWall, canWalkThroughPreviousWall;
 
 
-    GameObject fairy;
+    GameObject fairy, fairyInTree;
     Animation fairyAnimation;
     void Start()
     {
-
-
         DateTime time = System.DateTime.Now;
         string dateAndTimeVar = time.ToString("yyyy/MM/dd HH:mm:ss");
         print(dateAndTimeVar);
@@ -62,14 +60,19 @@ public class Academy : MonoBehaviour
         page3 = GameObject.Find("Page3");
         page4 = GameObject.Find("Page4");
         frontDoor = GameObject.Find("FrontDoor");
+        LaboratoryDoor = GameObject.Find("LaboratoryDoor");
 
         if (GameControl.scene == "Academy")
         {
             frontDoorway = GameObject.Find("FrontDoor").GetComponent<SpriteRenderer>();
             frontDoorOpen = Resources.Load<Sprite>("Views/Academy/OutsideAcademyView03b");
-            roomsDoorway = GameObject.Find("View21").GetComponent<SpriteRenderer>();
+            roomsDoorway = GameObject.Find("LaboratoryDoor").GetComponent<SpriteRenderer>();
             roomsDoorOpen = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05b");
             roomsDoorClosed = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05");
+            fairyInTreeNoFairy = Resources.Load<Sprite>("Fairy_on_tree-no_Fairy");
+            fairyInTree = GameObject.FindWithTag("Fairy in tree");
+            fairy = GameObject.FindWithTag("Fairy");
+            fairy.SetActive(false);
         }
 
         secretary = GameObject.Find("Secretary02").GetComponent<SpriteRenderer>();
@@ -83,8 +86,6 @@ public class Academy : MonoBehaviour
             //Invoke("CheckWalk", 1f);
             CheckWalk();
         }
-
-        Debug.Log(GameControl.hasGoodCard);
     }
 
     void CheckWalk()
@@ -342,38 +343,52 @@ public class Academy : MonoBehaviour
     }
 
 
-    public void SpellbookButton()
+    public void SpellbookButtonRight()
     {
         SoundManager.playPageTurnSound();
 
-        if (page1.transform.localPosition.x == 0f)
-        {
-            page1.transform.localPosition = new Vector3(-800f, 0f, 0f);
-            page2.transform.localPosition = new Vector3(0f, 0f, 0f);
-            page3.transform.localPosition = new Vector3(800f, 0f, 0f);
-            page4.transform.localPosition = new Vector3(1600f, 0f, 0f);
-        }
-        else if (page1.transform.localPosition.x == -800f)
-        {
-            page1.transform.localPosition = new Vector3(-1600f, 0f, 0f);
-            page2.transform.localPosition = new Vector3(-800f, 0f, 0f);
-            page3.transform.localPosition = new Vector3(0f, 0f, 0f);
-            page4.transform.localPosition = new Vector3(800f, 0f, 0f);
-        }
-        else if (page1.transform.localPosition.x == -1600f)
-        {
-            page1.transform.localPosition = new Vector3(-2400f, 0f, 0f);
-            page2.transform.localPosition = new Vector3(-1600f, 0f, 0f);
-            page3.transform.localPosition = new Vector3(-800f, 0f, 0f);
-            page4.transform.localPosition = new Vector3(0f, 0f, 0f);
-        }
-        else if (page1.transform.localPosition.x == -2400f)
-        {
-            page1.transform.localPosition = new Vector3(0f, 0f, 0f);
-            page2.transform.localPosition = new Vector3(-800f, 0f, 0f);
-            page3.transform.localPosition = new Vector3(-1600f, 0f, 0f);
-            page4.transform.localPosition = new Vector3(-2400f, 0f, 0f);
-        }
+        // if (page1.transform.localPosition.x == 0f)
+        // {
+        //     page1.transform.localPosition = new Vector3(-800f, 0f, 0f);
+        //     page2.transform.localPosition = new Vector3(0f, 0f, 0f);
+        //     page3.transform.localPosition = new Vector3(800f, 0f, 0f);
+        //     page4.transform.localPosition = new Vector3(1600f, 0f, 0f);
+        // }
+        // else if (page1.transform.localPosition.x == -800f)
+        // {
+        //     page1.transform.localPosition = new Vector3(-1600f, 0f, 0f);
+        //     page2.transform.localPosition = new Vector3(-800f, 0f, 0f);
+        //     page3.transform.localPosition = new Vector3(0f, 0f, 0f);
+        //     page4.transform.localPosition = new Vector3(800f, 0f, 0f);
+        // }
+        // else if (page1.transform.localPosition.x == -1600f)
+        // {
+        //     page1.transform.localPosition = new Vector3(-2400f, 0f, 0f);
+        //     page2.transform.localPosition = new Vector3(-1600f, 0f, 0f);
+        //     page3.transform.localPosition = new Vector3(-800f, 0f, 0f);
+        //     page4.transform.localPosition = new Vector3(0f, 0f, 0f);
+        // }
+        // else if (page1.transform.localPosition.x == -2400f)
+        // {
+        //     page1.transform.localPosition = new Vector3(-3200f, 0f, 0f);
+        //     page2.transform.localPosition = new Vector3(-2400f, 0f, 0f);
+        //     page3.transform.localPosition = new Vector3(-1600f, 0f, 0f);
+        //     page4.transform.localPosition = new Vector3(-800f, 0f, 0f);
+        // }
+        page1.transform.localPosition = new Vector3(-540, 0f, 0f) + page1.transform.localPosition;
+        page2.transform.localPosition = new Vector3(-540f, 0f, 0f) + page2.transform.localPosition;
+        page3.transform.localPosition = new Vector3(-540f, 0f, 0f) + page3.transform.localPosition;
+        page4.transform.localPosition = new Vector3(-540f, 0f, 0f) + page4.transform.localPosition;
+    }
+
+    public void SpellbookButtonLeft()
+    {
+        SoundManager.playPageTurnSound();
+
+        page1.transform.localPosition = new Vector3(540f, 0f, 0f) + page1.transform.localPosition;
+        page2.transform.localPosition = new Vector3(540f, 0f, 0f) + page2.transform.localPosition;
+        page3.transform.localPosition = new Vector3(540f, 0f, 0f) + page3.transform.localPosition;
+        page4.transform.localPosition = new Vector3(540f, 0f, 0f) + page4.transform.localPosition;
     }
 
     public void HelloCard()
@@ -384,13 +399,9 @@ public class Academy : MonoBehaviour
         helloHold = false;
         if (GameControl.scene == "Academy")
         {
-            if (cameraPos.z == -4.6f && cameraPos.x == 0f)
+            if (cameraPos.z == -4.6f && cameraPos.x == 0f && !fairy.activeSelf)
             {
-                GameControl.upArrow.GetComponent<Button>().interactable = false;
-                GameControl.rightArrow.GetComponent<Button>().interactable = false;
-                GameControl.leftArrow.GetComponent<Button>().interactable = false;
-                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
-                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100);
+                GameControl.CharacterSpeakUIChange();
 
                 // first Fairy interaction - sceneOne
                 SoundManager.playHeySound();
@@ -408,7 +419,7 @@ public class Academy : MonoBehaviour
                 SoundManager.playCardAppearSound();
             }
 
-            else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+            else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 0f)
             {
                 GameControl.upArrow.GetComponent<Button>().interactable = false;
                 GameControl.rightArrow.GetComponent<Button>().interactable = false;
@@ -428,9 +439,9 @@ public class Academy : MonoBehaviour
                 GameControl.afternoonCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
                 GameControl.eveningCard.GetComponent<Button>().interactable = true;
                 GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
-                GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100);
+                GameControl.CharacterSpeakUIChange();
                 SoundManager.playCardAppearSound();
+                FairyAnimation.CorrectAnswer();
             }
             else if (cameraPos.z == 11.6f)
             {
@@ -441,16 +452,13 @@ public class Academy : MonoBehaviour
                 {
                     GameControl.okCard.SetActive(true);
                     SoundManager.playCardAppearSound();
-                    SpellbookButton();
+                    SpellbookButtonRight();
                 }
             }
             else
             {
-                Restart();
-                fairy = GameObject.FindGameObjectWithTag("Fairy");
-                fairyAnimation = fairy.GetComponent<Animation>();
-                fairyAnimation.Play("fairy_disappointed_1_colour");
-
+                FairyAnimation.IncorrectAnswer();
+                //  Restart();
             }
         }
 
@@ -467,7 +475,7 @@ public class Academy : MonoBehaviour
 
                 GameControl.sorryCard.SetActive(true);
                 SoundManager.playCardAppearSound();
-                SpellbookButton();
+                SpellbookButtonRight();
             }
         }
     }
@@ -492,11 +500,10 @@ public class Academy : MonoBehaviour
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "";
 
-            GameControl.upArrow.GetComponent<Button>().interactable = true;
-            GameControl.rightArrow.GetComponent<Button>().interactable = true;
-            GameControl.leftArrow.GetComponent<Button>().interactable = true;
-            GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
-            GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 140);
+            GameControl.WorldNavigationUIChange();
+
+            fairyInTree.GetComponent<SpriteRenderer>().sprite = fairyInTreeNoFairy;
+            fairy.SetActive(true);
         }
         else if (cameraPos.z == 6.2 && y == 12f)
         {
@@ -506,7 +513,8 @@ public class Academy : MonoBehaviour
         }
         else
         {
-            Restart();
+            FairyAnimation.IncorrectAnswer();
+            //   Restart();
         }
 
         if (GameControl.scene == "Academy Wild Area")
@@ -534,13 +542,14 @@ public class Academy : MonoBehaviour
             SoundManager.playCardAppearSound();
             GameControl.hasGoodCard = true;
         }
-        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 12f)
         {
 
         }
         else
         {
-            Restart();
+            //    Restart();
+            FairyAnimation.IncorrectAnswer();
         }
 
     }
@@ -553,7 +562,7 @@ public class Academy : MonoBehaviour
 
     public void BadCard()
     {
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
         {
             dialogue.text = "Es-tu perdu?";
             GameControl.yesCard.GetComponent<Button>().interactable = true;
@@ -564,7 +573,8 @@ public class Academy : MonoBehaviour
         }
         else
         {
-            Restart();
+            FairyAnimation.IncorrectAnswer();
+            //   Restart();
         }
     }
 
@@ -577,27 +587,21 @@ public class Academy : MonoBehaviour
 
             frontDoor.tag = "CanWalkThrough";
             CheckWalk();
-
-            if (!GameControl.yesCard.activeSelf)
-            {
-                GameControl.yesCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            FairyAnimation.CorrectAnswer();
         }
-        else if (z > 6.1 && z < 6.3 && isRoomsDoorClosed)
+        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, 5.4f) && isRoomsDoorClosed)
         {
             SoundManager.playDoorOpeningSound();
             roomsDoorway.sprite = roomsDoorOpen;
             isRoomsDoorClosed = false;
-            if (!GameControl.closeCard.activeSelf)
-            {
-                GameControl.closeCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+            LaboratoryDoor.tag = "CanWalkThrough";
+            CheckWalk();
+            FairyAnimation.CorrectAnswer();
         }
         else
         {
-            Restart();
+            FairyAnimation.IncorrectAnswer();
+            //    Restart();
         }
     }
 
@@ -613,23 +617,15 @@ public class Academy : MonoBehaviour
             SoundManager.playCardAppearSound();
             GameControl.hasYesCard = true;
         }
-        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
-        {
-            dialogue.text = "Je vois. Vous êtes une fille ou un garçon?";
-            GameControl.girlCard.GetComponent<Button>().interactable = true;
-            GameControl.girlCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-            GameControl.boyCard.GetComponent<Button>().interactable = true;
-            GameControl.boyCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-            SoundManager.playCardAppearSound();
-        }
         else
         {
-            Restart();
+            FairyAnimation.IncorrectAnswer();
+            //  Restart();
         }
     }
     public void NoCard()
     {
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
+        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
         {
             GameControl.thankYouCard.GetComponent<Button>().interactable = true;
             GameControl.thankYouCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
@@ -638,7 +634,8 @@ public class Academy : MonoBehaviour
         }
         else
         {
-            Restart();
+            FairyAnimation.IncorrectAnswer();
+            //    Restart();
         }
     }
 
@@ -649,22 +646,19 @@ public class Academy : MonoBehaviour
             GameControl.goodbyeCard.GetComponent<Button>().interactable = true;
             GameControl.goodbyeCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
         }
-        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 12f)
         {
             dialogue.text = "";
             cameraPos.y = 0f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
 
-            GameControl.upArrow.GetComponent<Button>().interactable = true;
-            GameControl.rightArrow.GetComponent<Button>().interactable = true;
-            GameControl.leftArrow.GetComponent<Button>().interactable = true;
-            GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
-            GameControl.spellbookButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 140);
+            GameControl.WorldNavigationUIChange();
+            FairyAnimation.CorrectAnswer();
         }
-
         else
         {
-            Restart();
+            FairyAnimation.IncorrectAnswer();
+            //   Restart();
         }
     }
 
@@ -692,11 +686,6 @@ public class Academy : MonoBehaviour
         {
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
-            if (!GameControl.byeCard.activeSelf)
-            {
-                GameControl.byeCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
         }
         else
         {
@@ -711,11 +700,6 @@ public class Academy : MonoBehaviour
             SoundManager.playDoorOpeningSound();
             roomsDoorway.sprite = roomsDoorClosed;
             isRoomsDoorClosed = true;
-            if (!GameControl.hiCard.activeSelf)
-            {
-                GameControl.hiCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
         }
         else
         {
@@ -829,7 +813,7 @@ public class Academy : MonoBehaviour
         if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
         {
             dialogue.text = "Et quel âge as-tu?";
-            SpellbookButton();
+            SpellbookButtonRight();
             GameControl.oneCard.GetComponent<Button>().interactable = true;
             GameControl.oneCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
             GameControl.twoCard.GetComponent<Button>().interactable = true;
@@ -878,7 +862,7 @@ public class Academy : MonoBehaviour
         if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
         {
             dialogue.text = "Et quel âge as-tu?";
-            SpellbookButton();
+            SpellbookButtonRight();
             // if (!GameControl.noCard.activeSelf)
             // {
             //     GameControl.noCard.SetActive(true);
@@ -897,7 +881,8 @@ public class Academy : MonoBehaviour
         GameControl.Save();
         secretary.sprite = secretarySprite03;
 
-        SpellbookButton();
+        SpellbookButtonRight();
+        FairyAnimation.CorrectAnswer();
     }
 
     public void MorningCard()
@@ -915,6 +900,7 @@ public class Academy : MonoBehaviour
                     SoundManager.playCardAppearSound();
 
                     secretary.sprite = secretarySprite02;
+                    FairyAnimation.CorrectAnswer();
                 }
                 else
                 {
@@ -943,6 +929,7 @@ public class Academy : MonoBehaviour
                     SoundManager.playCardAppearSound();
 
                     secretary.sprite = secretarySprite02;
+                    FairyAnimation.CorrectAnswer();
                 }
                 else
                 {
@@ -970,6 +957,7 @@ public class Academy : MonoBehaviour
                     SoundManager.playCardAppearSound();
 
                     secretary.sprite = secretarySprite02;
+                    FairyAnimation.CorrectAnswer();
                 }
                 else
                 {
@@ -983,6 +971,10 @@ public class Academy : MonoBehaviour
         }
     }
 
+    public void DeleteCard()
+    {
+
+    }
     public void EndCard()
     {
 
@@ -1148,7 +1140,7 @@ public class Academy : MonoBehaviour
             dialogue.text = text;
             GameControl.playerName = WriteLetters.playerNameString;
 
-            SpellbookButton();
+            SpellbookButtonRight();
         }
     }
 
@@ -1269,7 +1261,7 @@ public class Academy : MonoBehaviour
     {
         playerAge = playerAge0 + playerAge10;
         dialogue.text = "You are " + playerAge + ". Great.\n\n You can go ahead and speak to the teacher now.";
-        SpellbookButton();
+        SpellbookButtonRight();
         GameControl.playerAge = playerAge;
     }
 
