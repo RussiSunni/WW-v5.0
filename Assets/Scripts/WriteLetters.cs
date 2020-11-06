@@ -11,84 +11,111 @@ public class WriteLetters : MonoBehaviour
 
     public static GameObject aWritten, bWritten, cWritten, dWritten, eWritten, fWritten, gWritten, hWritten, iWritten, jWritten, kWritten, lWritten, mWritten, nWritten, oWritten, pWritten, qWritten, rWritten, sWritten, tWritten, uWritten, vWritten, wWritten, xWritten, yWritten, zWritten;
     char[] playerName = new char[12];
+    List<char> playerNameList = new List<char>();
     public static string playerNameString;
+
+    GameObject objectInFirstPosition, objectInSecondPosition, objectInThirdPosition, objectInFourthPosition, objectInFifthPosition, objectInSixthPosition, objectInSeventhPosition, objectInEighthPosition, objectInNinthPosition, objectInTenthPosition, objectInEleventhPosition, objectInTwelthPosition;
 
     public void CalculatePosition(GameObject writtenLetter, char letterName)
     {
         if (!firstPositionTaken)
         {
             writtenLetter.transform.position = firstPosition.position;
+            objectInFirstPosition = writtenLetter;
             firstPositionTaken = true;
-            playerName[0] = letterName;
+            // playerName[0] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!secondPositionTaken)
         {
             writtenLetter.transform.position = secondPosition.position;
+            objectInSecondPosition = writtenLetter;
             secondPositionTaken = true;
-            playerName[1] = letterName;
+            //playerNameList[1] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!thirdPositionTaken)
         {
             writtenLetter.transform.position = thirdPosition.position;
+            objectInThirdPosition = writtenLetter;
             thirdPositionTaken = true;
-            playerName[2] = letterName;
+            //  playerNameList[2] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!fourthPositionTaken)
         {
             writtenLetter.transform.position = fourthPosition.position;
+            objectInFourthPosition = writtenLetter;
             fourthPositionTaken = true;
-            playerName[3] = letterName;
+            //  playerNameList[3] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!fifthPositionTaken)
         {
             writtenLetter.transform.position = fifthPosition.position;
+            objectInFifthPosition = writtenLetter;
             fifthPositionTaken = true;
-            playerName[4] = letterName;
+            //  playerNameList[4] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!sixthPositionTaken)
         {
             writtenLetter.transform.position = sixthPosition.position;
+            objectInSixthPosition = writtenLetter;
             sixthPositionTaken = true;
-            playerName[5] = letterName;
+            ///  playerNameList[5] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!seventhPositionTaken)
         {
             writtenLetter.transform.position = seventhPosition.position;
+            objectInSeventhPosition = writtenLetter;
             seventhPositionTaken = true;
-            playerName[6] = letterName;
+            // playerNameList[6] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!eighthPositionTaken)
         {
             writtenLetter.transform.position = eighthPosition.position;
+            objectInEighthPosition = writtenLetter;
             eighthPositionTaken = true;
-            playerName[7] = letterName;
+            //   playerNameList[7] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!ninthPositionTaken)
         {
             writtenLetter.transform.position = ninthPosition.position;
+            objectInNinthPosition = writtenLetter;
             ninthPositionTaken = true;
-            playerName[8] = letterName;
+            //   playerNameList[8] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!tenthPositionTaken)
         {
             writtenLetter.transform.position = tenthPosition.position;
+            objectInTenthPosition = writtenLetter;
             tenthPositionTaken = true;
-            playerName[9] = letterName;
+            // playerNameList[9] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!eleventhPositionTaken)
         {
             writtenLetter.transform.position = eleventhPosition.position;
+            objectInEleventhPosition = writtenLetter;
             eleventhPositionTaken = true;
-            playerName[10] = letterName;
+            //  playerNameList[10] = letterName;
+            playerNameList.Add(letterName);
         }
         else if (!twelthPositionTaken)
         {
             writtenLetter.transform.position = twelthPosition.position;
+            objectInTwelthPosition = writtenLetter;
             twelthPositionTaken = true;
-            playerName[11] = letterName;
+            // playerNameList[11] = letterName;
+            playerNameList.Add(letterName);
         }
 
-        playerNameString = string.Join("", playerName);
+        playerNameString = string.Join("", playerNameList);
     }
 
 
@@ -100,7 +127,6 @@ public class WriteLetters : MonoBehaviour
         CalculatePosition(aWritten, aName);
         CanvasCode.GetComponent<Academy>().SpellbookButtonRight();
         SoundManager.playConnectSound();
-
     }
     public void BCard()
     {
@@ -297,4 +323,86 @@ public class WriteLetters : MonoBehaviour
         CalculatePosition(zWritten, zName);
         SoundManager.playConnectSound();
     }
+
+
+
+
+    public void Backspace()
+    {
+        if (twelthPositionTaken)
+        {
+            Destroy(objectInTwelthPosition);
+            twelthPositionTaken = false;
+            playerNameList.RemoveAt(11);
+        }
+        else if (eleventhPositionTaken)
+        {
+            Destroy(objectInEleventhPosition);
+            eleventhPositionTaken = false;
+            playerNameList.RemoveAt(10);
+        }
+        else if (tenthPositionTaken)
+        {
+            Destroy(objectInTenthPosition);
+            tenthPositionTaken = false;
+            playerNameList.RemoveAt(9);
+        }
+        else if (ninthPositionTaken)
+        {
+            Destroy(objectInNinthPosition);
+            ninthPositionTaken = false;
+            playerNameList.RemoveAt(8);
+        }
+        else if (eighthPositionTaken)
+        {
+            Destroy(objectInEighthPosition);
+            eighthPositionTaken = false;
+            playerNameList.RemoveAt(7);
+        }
+        else if (seventhPositionTaken)
+        {
+            Destroy(objectInSeventhPosition);
+            seventhPositionTaken = false;
+            playerNameList.RemoveAt(6);
+        }
+        else if (sixthPositionTaken)
+        {
+            Destroy(objectInSixthPosition);
+            sixthPositionTaken = false;
+            playerNameList.RemoveAt(5);
+        }
+        else if (fifthPositionTaken)
+        {
+            Destroy(objectInFifthPosition);
+            fifthPositionTaken = false;
+            playerNameList.RemoveAt(4);
+        }
+        else if (fourthPositionTaken)
+        {
+            Destroy(objectInFourthPosition);
+            fourthPositionTaken = false;
+            playerNameList.RemoveAt(3);
+        }
+        else if (thirdPositionTaken)
+        {
+            Destroy(objectInThirdPosition);
+            thirdPositionTaken = false;
+            playerNameList.RemoveAt(2);
+        }
+        else if (secondPositionTaken)
+        {
+            Destroy(objectInSecondPosition);
+            secondPositionTaken = false;
+            playerNameList.RemoveAt(1);
+        }
+        else if (firstPositionTaken)
+        {
+            Destroy(objectInFirstPosition);
+            firstPositionTaken = false;
+            playerNameList.RemoveAt(0);
+        }
+
+        playerNameString = string.Join("", playerNameList);
+    }
+
 }

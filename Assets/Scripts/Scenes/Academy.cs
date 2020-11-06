@@ -115,7 +115,7 @@ public class Academy : MonoBehaviour
         {
             Vector3 viewPos = camera.WorldToViewportPoint(openings[i].transform.position);
             // Vector3 rearViewPos = camera.WorldToViewportPoint(openings[i].transform.position) + new Vector3(0, 0, -5.4f);
-            //  Debug.Log(rearViewPos);
+            Debug.Log(viewPos);
 
             if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
             {
@@ -127,7 +127,7 @@ public class Academy : MonoBehaviour
             //     canWalkThroughPreviousWall = true;
             // }
         }
-        //   Debug.Log(canWalkThroughNextWall);
+        Debug.Log(canWalkThroughNextWall);
         // Debug.Log(canWalkThroughPreviousWall);
 
     }
@@ -664,10 +664,10 @@ public class Academy : MonoBehaviour
 
     public void ReadCard()
     {
-        if (z > 6.1 && z < 6.3)
+        if (cameraPos.z == 6.2f && cameraPos.x == 5.4)
         {
-            y = 12f;
-            camera.transform.position = new Vector3(x, y, z);
+            cameraPos.y = 12f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             if (!GameControl.stopCard.activeSelf)
             {
                 GameControl.stopCard.SetActive(true);
@@ -676,7 +676,7 @@ public class Academy : MonoBehaviour
         }
         else
         {
-            Restart();
+            // Restart();
         }
     }
 
@@ -971,13 +971,9 @@ public class Academy : MonoBehaviour
         }
     }
 
-    public void DeleteCard()
-    {
 
-    }
     public void EndCard()
     {
-
         var aArray = GameObject.FindGameObjectsWithTag("a");
         foreach (GameObject item in aArray)
         {
@@ -1136,18 +1132,23 @@ public class Academy : MonoBehaviour
 
         if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
         {
-            string text = "And how old are you, " + WriteLetters.playerNameString + "?";
-            dialogue.text = text;
-            GameControl.playerName = WriteLetters.playerNameString;
-
-            SpellbookButtonRight();
+            if (WriteLetters.playerNameString.Length > 0)
+            {
+                string text = "And how old are you, " + WriteLetters.playerNameString + "?";
+                dialogue.text = text;
+                GameControl.playerName = WriteLetters.playerNameString;
+                SpellbookButtonRight();
+            }
+            else
+            {
+                dialogue.text = "Sorry, I didn't get that.";
+            }
         }
     }
 
     public void OneCard()
     {
         playerAge0 = 1;
-        GiveAge();
     }
     public void OneCardHold()
     {
@@ -1159,7 +1160,6 @@ public class Academy : MonoBehaviour
     public void TwoCard()
     {
         playerAge0 = 2;
-        GiveAge();
     }
     public void TwoCardHold()
     {
@@ -1170,7 +1170,6 @@ public class Academy : MonoBehaviour
     public void ThreeCard()
     {
         playerAge0 = 3;
-        GiveAge();
     }
     public void ThreeCardHold()
     {
@@ -1181,7 +1180,6 @@ public class Academy : MonoBehaviour
     public void FourCard()
     {
         playerAge0 = 4;
-        GiveAge();
     }
     public void FourCardHold()
     {
@@ -1193,7 +1191,6 @@ public class Academy : MonoBehaviour
     public void FiveCard()
     {
         playerAge0 = 5;
-        GiveAge();
     }
     public void FiveCardHold()
     {
@@ -1205,7 +1202,6 @@ public class Academy : MonoBehaviour
     public void SixCard()
     {
         playerAge0 = 6;
-        GiveAge();
     }
 
     public void SixCardHold()
@@ -1217,7 +1213,6 @@ public class Academy : MonoBehaviour
     public void SevenCard()
     {
         playerAge0 = 7;
-        GiveAge();
     }
 
     public void SevenCardHold()
@@ -1229,7 +1224,6 @@ public class Academy : MonoBehaviour
     public void EightCard()
     {
         playerAge0 = 8;
-        GiveAge();
     }
 
     public void EightCardHold()
@@ -1241,7 +1235,6 @@ public class Academy : MonoBehaviour
     public void NineCard()
     {
         playerAge0 = 9;
-        GiveAge();
     }
 
     public void NineCardHold()
@@ -1254,15 +1247,17 @@ public class Academy : MonoBehaviour
     public void ZeroCard()
     {
         playerAge0 = 0;
-        GiveAge();
     }
 
     public void GiveAge()
     {
         playerAge = playerAge0 + playerAge10;
-        dialogue.text = "You are " + playerAge + ". Great.\n\n You can go ahead and speak to the teacher now.";
-        SpellbookButtonRight();
+        dialogue.text = "OK, welcome to the Academy.";
+        SpellbookButtonLeft();
+        SpellbookButtonLeft();
+        SpellbookButtonLeft();
         GameControl.playerAge = playerAge;
+        print(playerAge);
     }
 
     public void Restart()
