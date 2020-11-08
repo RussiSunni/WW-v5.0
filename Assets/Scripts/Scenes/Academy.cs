@@ -76,8 +76,8 @@ public class Academy : MonoBehaviour
         }
 
         secretary = GameObject.Find("Secretary02").GetComponent<SpriteRenderer>();
-        secretarySprite02 = Resources.Load<Sprite>("Secretary02");
-        secretarySprite03 = Resources.Load<Sprite>("Secretary03");
+        secretarySprite02 = Resources.Load<Sprite>("Foyer/Secretary02");
+        secretarySprite03 = Resources.Load<Sprite>("Foyer/Secretary03");
 
         //   if (GameControl.scene == "Academy Wild Area")
         if (GameControl.scene == "Academy")
@@ -115,7 +115,7 @@ public class Academy : MonoBehaviour
         {
             Vector3 viewPos = camera.WorldToViewportPoint(openings[i].transform.position);
             // Vector3 rearViewPos = camera.WorldToViewportPoint(openings[i].transform.position) + new Vector3(0, 0, -5.4f);
-            Debug.Log(viewPos);
+            // Debug.Log(viewPos);
 
             if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
             {
@@ -127,9 +127,8 @@ public class Academy : MonoBehaviour
             //     canWalkThroughPreviousWall = true;
             // }
         }
-        Debug.Log(canWalkThroughNextWall);
+        //  Debug.Log(canWalkThroughNextWall);
         // Debug.Log(canWalkThroughPreviousWall);
-
     }
     public void MoveForward()
     {
@@ -256,6 +255,11 @@ public class Academy : MonoBehaviour
                     cameraPos.z += 5.4f;
                     camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
                     cameraPos = camera.transform.position;
+
+                    if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, 0f))
+                    {
+                        OutdoorsAmbientSound.StopOutdoorAmbientSound();
+                    }
                 }
                 else if (direction == "south")
                 {
@@ -664,15 +668,14 @@ public class Academy : MonoBehaviour
 
     public void ReadCard()
     {
-        if (cameraPos.z == 6.2f && cameraPos.x == 5.4)
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, 5.4f))
         {
             cameraPos.y = 12f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-            if (!GameControl.stopCard.activeSelf)
-            {
-                GameControl.stopCard.SetActive(true);
-                SoundManager.playCardAppearSound();
-            }
+
+            GameControl.stopCard.GetComponent<Button>().interactable = true;
+            GameControl.stopCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            SoundManager.playCardAppearSound();
         }
         else
         {
@@ -682,14 +685,14 @@ public class Academy : MonoBehaviour
 
     public void StopCard()
     {
-        if (z > 6.1 && z < 6.3)
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, 5.4f) && cameraPos.y == 12f)
         {
-            y = 0f;
-            camera.transform.position = new Vector3(x, y, z);
+            cameraPos.y = 0f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
         }
         else
         {
-            Restart();
+            //  Restart();
         }
     }
 
@@ -1257,7 +1260,10 @@ public class Academy : MonoBehaviour
         SpellbookButtonLeft();
         SpellbookButtonLeft();
         GameControl.playerAge = playerAge;
-        print(playerAge);
+
+        GameControl.readCard.GetComponent<Button>().interactable = true;
+        GameControl.readCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+        SoundManager.playCardAppearSound();
     }
 
     public void Restart()

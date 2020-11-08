@@ -104,14 +104,7 @@ public class GameControl : MonoBehaviour
         sueCard = GameObject.Find("SueButton");
         mayCard = GameObject.Find("MayButton");
         theCard = GameObject.Find("TheButton");
-        sorryCard = GameObject.Find("SorryButton");
-
-
-        okCard.SetActive(false);
-        sueCard.SetActive(false);
-        mayCard.SetActive(false);
-        theCard.SetActive(false);
-        sorryCard.SetActive(false);
+        sorryCard = GameObject.Find("SorryButton"); 
 
 
         scene = "Academy";
