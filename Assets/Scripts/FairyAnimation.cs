@@ -19,4 +19,9 @@ public class FairyAnimation : MonoBehaviour
     {
         animator.SetTrigger("fairyDisappointed");
     }
+
+    public static void Tutorial()
+    {
+        animator.SetTrigger("fairyWave");
+    }
 }

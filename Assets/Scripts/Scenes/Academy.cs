@@ -18,11 +18,11 @@ public class Academy : MonoBehaviour
     bool isRoomsDoorClosed = true;
     public static GameObject page1, page2, page3, page4, frontDoor, LaboratoryDoor;
     SpriteRenderer frontDoorway, roomsDoorway, secretary;
-    Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03, fairyInTreeNoFairy;
-    public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold;
+    Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04;
+    public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold, controlHold;
 
     string timeOfDay, playerName;
-    int playerAge, playerAge0, playerAge10 = 0;
+    int playerAge, playerAge0, playerAge10 = 0, controlNumber = 0;
 
     //--
 
@@ -75,9 +75,14 @@ public class Academy : MonoBehaviour
             fairy.SetActive(false);
         }
 
-        secretary = GameObject.Find("Secretary02").GetComponent<SpriteRenderer>();
+        secretary = GameObject.Find("Secretary Close Up").GetComponent<SpriteRenderer>();
         secretarySprite02 = Resources.Load<Sprite>("Foyer/Secretary02");
         secretarySprite03 = Resources.Load<Sprite>("Foyer/Secretary03");
+
+        controlSprite01 = Resources.Load<Sprite>("UI/boots-icon");
+        controlSprite02 = Resources.Load<Sprite>("UI/speak-icon");
+        controlSprite03 = Resources.Load<Sprite>("UI/action-icon");
+        controlSprite04 = Resources.Load<Sprite>("UI/map-icon");
 
         //   if (GameControl.scene == "Academy Wild Area")
         if (GameControl.scene == "Academy")
@@ -132,120 +137,11 @@ public class Academy : MonoBehaviour
     }
     public void MoveForward()
     {
-        // Debug.Log(cameraPos.x);
-        // Debug.Log(cameraPos.y);
-        // Debug.Log(cameraPos.z);
-        // Debug.Log(x);
-        // Debug.Log(y);
-        // Debug.Log(z);        
-        // Debug.Log(GameControl.scene);
-
-        // if (GameControl.scene == "Academy")
-        // {
-        //     SoundManager.playFootstepSound();
-        //     if (direction == "north")
-        //     {
-        //         if (cameraPos.z < -4 && cameraPos.x == 0)
-        //         {
-        //             z += 5.4f;
-        //             camera.transform.position = new Vector3(x, 0, z);
-        //             cameraPos = camera.transform.position;
-        //         }
-
-        //         else if (cameraPos.z > 6.1f && cameraPos.z < 11.6f && cameraPos.x == 5.4f)
-        //         {
-        //             GameControl.scene = "Academy Wild Area";
-        //             SceneManager.LoadScene("AcademyWildArea");
-        //             Start();
-        //         }
-
-        //         else if (cameraPos.z < 18 && cameraPos.x == 0 && !isFrontDoorClosed)
-        //         {
-        //             z += 5.4f;
-        //             camera.transform.position = new Vector3(x, 0, z);
-        //             cameraPos = camera.transform.position;
-
-        //             OutdoorsAmbientSound.StopOutdoorAmbientSound();
-        //         }
-
-        //         else if (cameraPos.z < 18f && cameraPos.x < 5.5f && cameraPos.x > -16.3f)
-        //         {
-        //             cameraPos.z += 5.4f;
-        //             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-        //             cameraPos = camera.transform.position;
-        //         }
-        //         else
-        //         {
-        //             SoundManager.playDoorClosedSound();
-        //         }
-        //     }
-
-        //     if (direction == "south")
-        //     {
-        //         if (cameraPos.z > -9 && x == 0)
-        //         {
-        //             z -= 5.4f;
-        //             camera.transform.position = new Vector3(0, 0, z);
-        //             cameraPos = camera.transform.position;
-        //         }
-        //         else if (cameraPos.z > 6.2 && x == -16.2f)
-        //         {
-        //             z -= 5.4f;
-        //             camera.transform.position = new Vector3(x, y, z);
-        //             cameraPos = camera.transform.position;
-        //         }
-        //         else
-        //         {
-        //             SoundManager.playBumpSound();
-        //         }
-        //     }
-
-        //     else if (direction == "west")
-        //     {
-        //         if (cameraPos.x > -5.3f && cameraPos.z == -10f || cameraPos.z == 6.2f && cameraPos.x > -5.3f || cameraPos.z == 17f && cameraPos.x > -10.9f || cameraPos.z == 22.4f && cameraPos.x > -10.9f)
-        //         {
-        //             cameraPos.x -= 5.4f;
-        //             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-        //             cameraPos = camera.transform.position;
-        //         }
-        //         else if (cameraPos.z == -10)
-        //         {
-        //             // SoundManager.playHeySound();
-        //             SoundManager.playWolfGrowlSound();
-        //         }
-        //         else
-        //         {
-        //             SoundManager.playBumpSound();
-        //         }
-        //     }
-
-        //     else if (direction == "east")
-        //     {
-        //         if (cameraPos.x < 5.3f && cameraPos.z == -10f || cameraPos.z == 17f && x < 5.3f || cameraPos.z == 22.4f && x < 5.3f)
-        //         {
-        //             cameraPos.x += 5.4f;
-        //             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-        //             cameraPos = camera.transform.position;
-        //         }
-        //         else if (cameraPos.z > 6.1 && cameraPos.z < 6.3 && cameraPos.x < 5.3)
-        //         {
-        //             x += 5.4f;
-        //             camera.transform.position = new Vector3(x, 0, z);
-        //             cameraPos = camera.transform.position;
-        //         }
-        //         else if (cameraPos.z == -10)
-        //         {
-        //             SoundManager.playWolfGrowlSound();
-        //         }
-
-        //         else
-        //         {
-        //             SoundManager.playBumpSound();
-        //         }
-        //     }
-        // }
-        // else if (GameControl.scene == "Academy Wild Area")
-        if (GameControl.scene == "Academy")
+        if (controlHold == true)
+        {
+            ControlButtonForward();
+        }
+        else if (GameControl.scene == "Academy")
         {
             if (canWalkThroughNextWall)
             {
@@ -294,58 +190,108 @@ public class Academy : MonoBehaviour
 
     public void LeftButton()
     {
+        if (controlHold != true)
+        {
+            if (controlNumber == 1 || controlNumber == 2)
+            {
+                SpellbookButtonLeft();
+            }
+            else if (controlNumber == 0)
+            {
+                if (direction == "north")
+                {
+                    direction = "west";
+                }
+                else if (direction == "west")
+                {
+                    direction = "south";
+                }
+                else if (direction == "south")
+                {
+                    direction = "east";
+                }
+                else if (direction == "east")
+                {
+                    direction = "north";
+                }
 
-        if (direction == "north")
-        {
-            direction = "west";
-        }
-        else if (direction == "west")
-        {
-            direction = "south";
-        }
-        else if (direction == "south")
-        {
-            direction = "east";
-        }
-        else if (direction == "east")
-        {
-            direction = "north";
-        }
+                camera.transform.Rotate(0, -90, 0);
 
-        camera.transform.Rotate(0, -90, 0);
-
-        //  if (GameControl.scene == "Academy Wild Area")
-        //  {
-        CheckWalls();
-        //  }
+                CheckWalls();
+            }
+        }
     }
     public void RightButton()
     {
+        if (controlHold != true)
+        {
+            if (controlNumber == 1 || controlNumber == 2)
+            {
+                SpellbookButtonRight();
+            }
+            else if (controlNumber == 0)
+            {
+                if (direction == "north")
+                {
+                    direction = "east";
+                }
+                else if (direction == "east")
+                {
+                    direction = "south";
+                }
+                else if (direction == "south")
+                {
+                    direction = "west";
+                }
+                else if (direction == "west")
+                {
+                    direction = "north";
+                }
+                camera.transform.Rotate(0, 90, 0);
 
-        if (direction == "north")
-        {
-            direction = "east";
+                CheckWalls();
+            }
         }
-        else if (direction == "east")
-        {
-            direction = "south";
-        }
-        else if (direction == "south")
-        {
-            direction = "west";
-        }
-        else if (direction == "west")
-        {
-            direction = "north";
-        }
-        camera.transform.Rotate(0, 90, 0);
-
-        //    if (GameControl.scene == "Academy Wild Area")
-        //     {
-        CheckWalls();
-        //     }
     }
 
+    public void ControlButtonHold()
+    {
+        controlHold = true;
+        GameControl.controlButton.GetComponent<Image>().color = Color.gray;
+    }
+    public void ControlButton()
+    {
+        controlHold = false;
+        GameControl.controlButton.GetComponent<Image>().color = Color.white;
+        if (controlNumber == 1 || controlNumber == 2)
+            GameControl.HideSideArrows();
+
+        if (controlNumber == 0 || controlNumber == 4)
+            GameControl.ShowSideArrows();
+    }
+
+    public void ControlButtonForward()
+    {
+        controlNumber++;
+        if (controlNumber > 3)
+            controlNumber = 0;
+
+        switch (controlNumber)
+        {
+            case 0:
+                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
+                break;
+            case 1:
+                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                break;
+            case 2:
+                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite03;
+                break;
+            case 3:
+                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite04;
+                break;
+        }
+    }
 
     public void SpellbookButtonRight()
     {
@@ -395,6 +341,9 @@ public class Academy : MonoBehaviour
         page4.transform.localPosition = new Vector3(540f, 0f, 0f) + page4.transform.localPosition;
     }
 
+
+
+
     public void HelloCard()
     {
         GameControl.hasHelloCard = true;
@@ -412,9 +361,14 @@ public class Academy : MonoBehaviour
                 cameraPos.y = 12f;
                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
                 if (GameControl.sceneOne == 1)
-                    dialogue.text = "Bonjour.\nComment ça va?";
+                //dialogue.text = "Bonjour.\nComment ça va?";
+                {
+                    dialogue.text = "Hello.\nHow are you?";
+                    //  SoundManager.playFairyTalk01Sound();
+                }
                 else
-                    dialogue.text = "Ah,\nvous encore.";
+                    //dialogue.text = "Ah,\nvous encore.";
+                    dialogue.text = "Ah,\nyou again.";
 
                 GameControl.goodCard.GetComponent<Button>().interactable = true;
                 GameControl.goodCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
@@ -435,7 +389,8 @@ public class Academy : MonoBehaviour
                 if (GameControl.sceneTwo == 1)
                     dialogue.text = "Good " + timeOfDay;
                 else
-                    dialogue.text = "Es-tu perdu?";
+                    //dialogue.text = "Es-tu perdu?";
+                    dialogue.text = "Are you lost?";
 
                 GameControl.morningCard.GetComponent<Button>().interactable = true;
                 GameControl.morningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
@@ -445,13 +400,14 @@ public class Academy : MonoBehaviour
                 GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
                 GameControl.CharacterSpeakUIChange();
                 SoundManager.playCardAppearSound();
-                FairyAnimation.CorrectAnswer();
+                //FairyAnimation.CorrectAnswer();
+                FairyAnimation.Tutorial();
             }
-            else if (cameraPos.z == 11.6f)
+            else if (cameraPos.z == 17f && cameraPos.x == 5.4f)
             {
-                y = 12f;
-                camera.transform.position = new Vector3(0, y, z);
-                dialogue.text = "To use 2 spells, hold down one, then press the second.\n OK?";
+                cameraPos.y = 12f;
+                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                dialogue.text = "";
                 if (!GameControl.okCard.activeSelf)
                 {
                     GameControl.okCard.SetActive(true);
@@ -538,7 +494,9 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
         {
-            dialogue.text = "Es-tu perdu?";
+            //dialogue.text = "Es-tu perdu?";
+            dialogue.text = "Are you lost?";
+            //  SoundManager.playFairyTalk02Sound();
             GameControl.yesCard.GetComponent<Button>().interactable = true;
             GameControl.yesCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
             GameControl.noCard.GetComponent<Button>().interactable = true;
@@ -568,7 +526,8 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
         {
-            dialogue.text = "Es-tu perdu?";
+            //dialogue.text = "Es-tu perdu?";
+            dialogue.text = "Are you lost?";
             GameControl.yesCard.GetComponent<Button>().interactable = true;
             GameControl.yesCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
             GameControl.noCard.GetComponent<Button>().interactable = true;
@@ -617,9 +576,19 @@ public class Academy : MonoBehaviour
             GameControl.thankYouCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
             GameControl.openCard.GetComponent<Button>().interactable = true;
             GameControl.openCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-            dialogue.text = "Allez voir le professeur, droit et à gauche.";
+            dialogue.text = "Go to the Academy.\n I will go with you.";
             SoundManager.playCardAppearSound();
             GameControl.hasYesCard = true;
+        }
+        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 12f)
+        {
+            cameraPos.y = 22f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            dialogue.text = "To use 2 words, hold down the one until it is grey, then press the other.";
+            fairy.SetActive(false);
+            GameControl.okCard.GetComponent<Button>().interactable = true;
+            GameControl.okCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            SoundManager.playCardAppearSound();
         }
         else
         {
@@ -727,7 +696,15 @@ public class Academy : MonoBehaviour
 
     public void OKCard()
     {
-        if (cameraPos.z == 11.6f && cameraPos.x == 0f && y == 12f)
+        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 22f)
+        {
+            fairy.SetActive(true);
+            cameraPos.y = 12f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            dialogue.text = "Good " + timeOfDay;
+        }
+
+        else if (cameraPos.z == 11.6f && cameraPos.x == 0f && y == 12f)
         {
             y = 0f;
             camera.transform.position = new Vector3(x, y, z);
