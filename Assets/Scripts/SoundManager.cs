@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip helloSound, doorClosedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound;
-    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, connectSound;
+    public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound;
+    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C;
     static AudioSource audioSrc;
 
     void Start()
@@ -23,10 +23,17 @@ public class SoundManager : MonoBehaviour
         bumpSound = Resources.Load<AudioClip>("Sound/Bump");
         pageTurnSound = Resources.Load<AudioClip>("Sound/PageTurn");
         footstepSound = Resources.Load<AudioClip>("Sound/Footstep");
+        doorLockedSound = Resources.Load<AudioClip>("Sound/DoorLocked");
 
-        fairyTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/Hello_how_are_you?_AWS");
-        fairyTalk02 = Resources.Load<AudioClip>("Sound/AWS Polly/Are_you_lost?_AWS");
-        fairyTalk03 = Resources.Load<AudioClip>("Sound/AWS Polly/Are_you_lost?_AWS");
+        fairyTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk01");
+        fairyTalk02 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk02");
+        fairyTalk03 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk03");
+        fairyTalk04 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk04");
+        fairyTalk05 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk05");
+
+        SecretaryTalk01A = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01A");
+        SecretaryTalk01B = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01B");
+        SecretaryTalk01C = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01C");
     }
 
     public static void playHelloSound()
@@ -57,6 +64,10 @@ public class SoundManager : MonoBehaviour
     {
         audioSrc.PlayOneShot(doorSound);
     }
+    public static void playDoorLockedSound()
+    {
+        audioSrc.PlayOneShot(doorLockedSound);
+    }
     public static void playHeySound()
     {
         audioSrc.PlayOneShot(heySound);
@@ -84,5 +95,29 @@ public class SoundManager : MonoBehaviour
     public static void playFairyTalk02Sound()
     {
         audioSrc.PlayOneShot(fairyTalk02);
+    }
+    public static void playFairyTalk03Sound()
+    {
+        audioSrc.PlayOneShot(fairyTalk03);
+    }
+    public static void playFairyTalk04Sound()
+    {
+        audioSrc.PlayOneShot(fairyTalk04);
+    }
+    public static void playFairyTalk05Sound()
+    {
+        audioSrc.PlayOneShot(fairyTalk05);
+    }
+    public static void playSecretaryTalk01ASound()
+    {
+        audioSrc.PlayOneShot(SecretaryTalk01A);
+    }
+    public static void playSecretaryTalk01BSound()
+    {
+        audioSrc.PlayOneShot(SecretaryTalk01B);
+    }
+    public static void playSecretaryTalk01CSound()
+    {
+        audioSrc.PlayOneShot(SecretaryTalk01C);
     }
 }

@@ -112,43 +112,52 @@ public class GameControl : MonoBehaviour
     }
 
 
-    public static void CharacterSpeakUIChange()
+    // public static void CharacterSpeakUIChange()
+    // {
+    //     GameControl.upArrow.GetComponent<Button>().interactable = false;
+    //     GameControl.rightArrow.GetComponent<Button>().interactable = false;
+    //     GameControl.leftArrow.GetComponent<Button>().interactable = false;
+    //     //     GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
+    //     //     GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
+    //     //     GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-17.5f, 0f, 0f);
+    //     //     GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
+    //     //     GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
+    //     //     GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(17.5f, 0f, 0f);
+    // }
+
+    // public static void WorldNavigationUIChange()
+    // {
+    //     GameControl.upArrow.GetComponent<Button>().interactable = true;
+    //     GameControl.rightArrow.GetComponent<Button>().interactable = true;
+    //     GameControl.leftArrow.GetComponent<Button>().interactable = true;
+    //     // GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
+    //     // GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
+    //     // GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-35f, 0f, 0f);
+    //     // GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
+    //     // GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
+    //     // GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(35f, 0f, 0f);
+    // }
+
+    public static void HideArrows()
     {
         GameControl.upArrow.GetComponent<Button>().interactable = false;
         GameControl.rightArrow.GetComponent<Button>().interactable = false;
         GameControl.leftArrow.GetComponent<Button>().interactable = false;
-        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
-        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
-        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-17.5f, 0f, 0f);
-        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
-        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
-        GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(17.5f, 0f, 0f);
     }
-
-    public static void WorldNavigationUIChange()
+    public static void ShowArrows()
     {
         GameControl.upArrow.GetComponent<Button>().interactable = true;
         GameControl.rightArrow.GetComponent<Button>().interactable = true;
         GameControl.leftArrow.GetComponent<Button>().interactable = true;
-        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
-        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
-        GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-35f, 0f, 0f);
-        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
-        GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
-        GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(35f, 0f, 0f);
     }
-
     public static void HideSideArrows()
     {
-        GameControl.upArrow.GetComponent<Button>().interactable = false;
         GameControl.rightArrow.GetComponent<Button>().interactable = false;
         GameControl.leftArrow.GetComponent<Button>().interactable = false;
     }
-    public static void ShowSideArrows()
+    public static void ShowUpArrow()
     {
         GameControl.upArrow.GetComponent<Button>().interactable = true;
-        GameControl.rightArrow.GetComponent<Button>().interactable = true;
-        GameControl.leftArrow.GetComponent<Button>().interactable = true;
     }
 
 
