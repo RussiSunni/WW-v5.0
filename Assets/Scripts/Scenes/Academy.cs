@@ -15,8 +15,8 @@ public class Academy : MonoBehaviour
     string direction;
     Text dialogue;
     int textNumber;
-    bool isRoomsDoorClosed = true, tutorial;
-    public static GameObject page1, page2, page3, page4, mapPage1, frontDoor, LaboratoryDoor;
+    bool isRoomsDoorClosed = true, tutorial, tutorial1Complete = false;
+    public static GameObject speechPages, actionPages, mapPage1, frontDoor, LaboratoryDoor, page1, page2, page3, page4, page5;
     SpriteRenderer frontDoorway, roomsDoorway, secretary;
     Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04;
     public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold, controlHold;
@@ -37,14 +37,13 @@ public class Academy : MonoBehaviour
     {
         DateTime time = System.DateTime.Now;
         string dateAndTimeVar = time.ToString("yyyy/MM/dd HH:mm:ss");
-        print(dateAndTimeVar);
+
         if (time.Hour >= 04 && time.Hour < 12)
             timeOfDay = "morning";
         else if (time.Hour >= 12 && time.Hour < 18)
             timeOfDay = "afternoon";
         else if (time.Hour >= 18 || time.Hour < 4)
             timeOfDay = "evening";
-
 
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraPos = camera.transform.position;
@@ -55,10 +54,13 @@ public class Academy : MonoBehaviour
 
         //GameControl.helloCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
 
+        speechPages = GameObject.Find("SpeechPages");
+        actionPages = GameObject.Find("ActionPages");
         page1 = GameObject.Find("Page1");
         page2 = GameObject.Find("Page2");
         page3 = GameObject.Find("Page3");
         page4 = GameObject.Find("Page4");
+        page5 = GameObject.Find("Page5");
         mapPage1 = GameObject.Find("MapPage1");
         frontDoor = GameObject.Find("FrontDoor");
         LaboratoryDoor = GameObject.Find("LaboratoryDoor");
@@ -156,11 +158,19 @@ public class Academy : MonoBehaviour
                     if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, 0f))
                     {
                         OutdoorsAmbientSound.StopOutdoorAmbientSound();
-                        FairyAnimation.Tutorial();
-                        fairy.transform.localPosition = new Vector3(0f, 2.2f, 1f);
-                        fairy.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
-                        SoundManager.playHeySound();
-                        tutorial = true;
+
+                        if (!tutorial1Complete)
+                        {
+                            controlNumber = 0;
+                            ControlButton();
+                            FairyAnimation.Tutorial();
+                            cameraPos.y += 12f;
+                            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                            fairy.transform.localPosition = new Vector3(1.5f, 2.4f, 1f);
+                            fairy.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+                            SoundManager.playHeySound();
+                            tutorial = true;
+                        }
                     }
                     if (Mathf.Approximately(cameraPos.z, 17f) && Mathf.Approximately(cameraPos.x, 0f))
                     {
@@ -170,7 +180,6 @@ public class Academy : MonoBehaviour
                         camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
                         fairy.transform.localPosition = new Vector3(1.4f, 2.2f, 1f);
                         fairy.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
-                        SoundManager.playHeySound();
                         tutorial = true;
                         dialogue.text = "Introduce yourself to the other students. Try not to sound like a dork.";
                         SoundManager.playFairyTalk05Sound();
@@ -298,23 +307,56 @@ public class Academy : MonoBehaviour
                     break;
             }
 
-            if (controlNumber == 1 || controlNumber == 2)
+            if (controlNumber == 1)
             {
                 GameControl.HideArrows();
                 mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
-                page1.transform.localPosition = new Vector3(page1.transform.localPosition.x, 0f, 0f);
-                page2.transform.localPosition = new Vector3(page2.transform.localPosition.x, 0f, 0f);
-                page3.transform.localPosition = new Vector3(page3.transform.localPosition.x, 0f, 0f);
-                page4.transform.localPosition = new Vector3(page4.transform.localPosition.x, 0f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
+                actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -500f, 0f);
+            }
+            if (controlNumber == 2)
+            {
+                GameControl.HideArrows();
+                mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
+                actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
             }
             if (controlNumber == 0)
             {
                 GameControl.ShowArrows();
                 mapPage1.transform.localPosition = new Vector3(0f, 0f, 0f);
-                page1.transform.localPosition = new Vector3(page1.transform.localPosition.x, -500f, 0f);
-                page2.transform.localPosition = new Vector3(page2.transform.localPosition.x, -500f, 0f);
-                page3.transform.localPosition = new Vector3(page3.transform.localPosition.x, -500f, 0f);
-                page4.transform.localPosition = new Vector3(page4.transform.localPosition.x, -500f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
+            }
+        }
+        else
+        {
+            controlNumber++;
+            if (controlNumber > 2)
+                controlNumber = 1;
+
+            switch (controlNumber)
+            {
+                case 1:
+                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                    break;
+                case 2:
+                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite03;
+                    break;
+            }
+
+            if (controlNumber == 1)
+            {
+                GameControl.HideArrows();
+                mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
+                actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -500f, 0f);
+            }
+            if (controlNumber == 2)
+            {
+                GameControl.HideArrows();
+                mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
+                actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
             }
         }
     }
@@ -374,7 +416,8 @@ public class Academy : MonoBehaviour
         {
             cameraPos.y = 12f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-            dialogue.text = "You cannot pass";
+            dialogue.text = "You cannot pass.";
+            SoundManager.playWolfTalk01Sound();
             if (!GameControl.okCard.GetComponent<Button>().interactable)
             {
                 GameControl.okCard.GetComponent<Button>().interactable = true;
@@ -386,7 +429,8 @@ public class Academy : MonoBehaviour
         {
             cameraPos.y = 12f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-            dialogue.text = "You cannot pass";
+            dialogue.text = "You cannot pass.";
+            SoundManager.playWolfTalk01Sound();
             if (!GameControl.okCard.GetComponent<Button>().interactable)
             {
                 GameControl.okCard.GetComponent<Button>().interactable = true;
@@ -608,13 +652,11 @@ public class Academy : MonoBehaviour
                 GameControl.hasYesCard = true;
             }
         }
-        else if (tutorial)
+        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, 0f) && cameraPos.y == 12f && tutorial)
         {
-            cameraPos.y = 24f;
-            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "To use 2 words, hold down the one until it is grey, then press the other.";
             SoundManager.playFairyTalk04Sound();
-            fairy.SetActive(false);
+            tutorial1Complete = true;
         }
         else
         {
@@ -661,16 +703,15 @@ public class Academy : MonoBehaviour
             else
                 FairyAnimation.IncorrectAnswer();
         }
-        else if (tutorial && cameraPos.y == 24)
+        else if (tutorial && cameraPos.y == 12 && tutorial1Complete)
         {
             cameraPos.y = 0f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "";
             tutorial = false;
             FairyAnimation.CorrectAnswer();
-            fairy.SetActive(true);
-            fairy.transform.localPosition = new Vector3(-1.8f, 1.7f, 1f);
-            fairy.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+            fairy.transform.localPosition = new Vector3(-2f, 1.4f, 1f);
+            fairy.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
         else
         {
@@ -685,7 +726,7 @@ public class Academy : MonoBehaviour
         {
             cameraPos.y = 12f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-
+            FairyAnimation.CorrectAnswer();
             GameControl.stopCard.GetComponent<Button>().interactable = true;
             GameControl.stopCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
             SoundManager.playCardAppearSound();
@@ -702,6 +743,7 @@ public class Academy : MonoBehaviour
         {
             cameraPos.y = 0f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            FairyAnimation.CorrectAnswer();
         }
         else
         {
@@ -756,8 +798,8 @@ public class Academy : MonoBehaviour
         {
             cameraPos.y = 0f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-            fairy.transform.localPosition = new Vector3(-1.8f, 1.7f, 1f);
-            fairy.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+            fairy.transform.localPosition = new Vector3(-2f, 1.4f, 1f);
+            fairy.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
             tutorial = false;
             dialogue.text = "";
         }
@@ -769,8 +811,8 @@ public class Academy : MonoBehaviour
             tutorial = false;
             FairyAnimation.CorrectAnswer();
             fairy.SetActive(true);
-            fairy.transform.localPosition = new Vector3(-1.8f, 1.7f, 1f);
-            fairy.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+            fairy.transform.localPosition = new Vector3(-2f, 1.4f, 1f);
+            fairy.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
         else
         {
@@ -912,6 +954,7 @@ public class Academy : MonoBehaviour
         if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
         {
             dialogue.text = "Thank you.\nWhat is your name?";
+            SoundManager.playSecretaryTalk03Sound();
         }
         GameControl.sceneTwo = GameControl.sceneTwo + 1;
         GameControl.Save();
@@ -930,6 +973,7 @@ public class Academy : MonoBehaviour
                 if (timeOfDay == "morning")
                 {
                     dialogue.text = "Sit down please.";
+                    SoundManager.playSecretaryTalk02Sound();
                     GameControl.sitCard.GetComponent<Button>().interactable = true;
                     GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
                     GameControl.goodCard.GetComponent<Image>().color = Color.white;
@@ -963,6 +1007,7 @@ public class Academy : MonoBehaviour
                 if (timeOfDay == "afternoon")
                 {
                     dialogue.text = "Sit down please.";
+                    SoundManager.playSecretaryTalk02Sound();
                     GameControl.sitCard.GetComponent<Button>().interactable = true;
                     GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
                     GameControl.goodCard.GetComponent<Image>().color = Color.white;
@@ -995,6 +1040,7 @@ public class Academy : MonoBehaviour
                 if (timeOfDay == "evening")
                 {
                     dialogue.text = "Sit down please.";
+                    SoundManager.playSecretaryTalk02Sound();
                     GameControl.sitCard.GetComponent<Button>().interactable = true;
                     GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
                     GameControl.goodCard.GetComponent<Image>().color = Color.white;
@@ -1183,6 +1229,7 @@ public class Academy : MonoBehaviour
             if (WriteLetters.playerNameString.Length > 0)
             {
                 string text = "And how old are you, " + WriteLetters.playerNameString + "?";
+                SoundManager.playSecretaryTalk04Sound();
                 dialogue.text = text;
                 GameControl.playerName = WriteLetters.playerNameString;
                 SpellbookButtonRight();
@@ -1301,6 +1348,7 @@ public class Academy : MonoBehaviour
     {
         playerAge = playerAge0 + playerAge10;
         dialogue.text = "OK, welcome to the Academy.";
+        SoundManager.playSecretaryTalk05Sound();
         SpellbookButtonLeft();
         SpellbookButtonLeft();
         SpellbookButtonLeft();

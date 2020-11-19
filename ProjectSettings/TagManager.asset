@@ -36,6 +36,7 @@ TagManager:
   - z
   - Fairy
   - Fairy in tree
+  - CantWalkThrough
   layers:
   - Default
   - TransparentFX

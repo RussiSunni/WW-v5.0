@@ -4,7 +4,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound;
-    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C;
+    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01;
     static AudioSource audioSrc;
 
     void Start()
@@ -34,6 +34,12 @@ public class SoundManager : MonoBehaviour
         SecretaryTalk01A = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01A");
         SecretaryTalk01B = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01B");
         SecretaryTalk01C = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01C");
+        SecretaryTalk02 = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk02");
+        SecretaryTalk03 = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk03");
+        SecretaryTalk04 = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk04");
+        SecretaryTalk05 = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk05");
+
+        WolfTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/WolfTalk01");
     }
 
     public static void playHelloSound()
@@ -119,5 +125,25 @@ public class SoundManager : MonoBehaviour
     public static void playSecretaryTalk01CSound()
     {
         audioSrc.PlayOneShot(SecretaryTalk01C);
+    }
+    public static void playSecretaryTalk02Sound()
+    {
+        audioSrc.PlayOneShot(SecretaryTalk02);
+    }
+    public static void playSecretaryTalk03Sound()
+    {
+        audioSrc.PlayOneShot(SecretaryTalk03);
+    }
+    public static void playSecretaryTalk04Sound()
+    {
+        audioSrc.PlayOneShot(SecretaryTalk04);
+    }
+    public static void playSecretaryTalk05Sound()
+    {
+        audioSrc.PlayOneShot(SecretaryTalk05);
+    }
+    public static void playWolfTalk01Sound()
+    {
+        audioSrc.PlayOneShot(WolfTalk01);
     }
 }
