@@ -27,12 +27,17 @@ public class Academy : MonoBehaviour
     //--
 
     public GameObject teacher;
-    public GameObject[] openings;
+    public GameObject[] openings, solidObjects;
+
     public bool canWalkThroughNextWall, canWalkThroughPreviousWall;
 
 
     GameObject fairy, fairyInTree;
     Animation fairyAnimation;
+
+    public Color black = Color.black;
+    public Color night;
+
     void Start()
     {
         DateTime time = System.DateTime.Now;
@@ -47,6 +52,7 @@ public class Academy : MonoBehaviour
 
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraPos = camera.transform.position;
+
         direction = "north";
 
         dialogue = GameObject.Find("Text").GetComponent<Text>();
@@ -67,9 +73,9 @@ public class Academy : MonoBehaviour
 
         if (GameControl.scene == "Academy")
         {
-            frontDoorway = GameObject.Find("FrontDoor").GetComponent<SpriteRenderer>();
+            // frontDoorway = GameObject.Find("FrontDoor").GetComponent<SpriteRenderer>();
             frontDoorOpen = Resources.Load<Sprite>("Views/Academy/OutsideAcademyView03b");
-            roomsDoorway = GameObject.Find("LaboratoryDoor").GetComponent<SpriteRenderer>();
+            //roomsDoorway = GameObject.Find("LaboratoryDoor").GetComponent<SpriteRenderer>();
             roomsDoorOpen = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05b");
             roomsDoorClosed = Resources.Load<Sprite>("Views/Academy/InsideAcademyView05");
             fairyInTreeNoFairy = Resources.Load<Sprite>("Fairy_on_tree-no_Fairy");
@@ -77,8 +83,7 @@ public class Academy : MonoBehaviour
             fairy = GameObject.FindWithTag("Fairy");
             fairy.SetActive(false);
         }
-
-        secretary = GameObject.Find("Secretary Close Up").GetComponent<SpriteRenderer>();
+        //   secretary = GameObject.Find("Secretary Close Up").GetComponent<SpriteRenderer>();
         secretarySprite02 = Resources.Load<Sprite>("Foyer/Secretary02");
         secretarySprite03 = Resources.Load<Sprite>("Foyer/Secretary03");
 
@@ -94,6 +99,9 @@ public class Academy : MonoBehaviour
             //Invoke("CheckWalk", 1f);
             CheckWalk();
         }
+
+        speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
+        actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -1000f, 0f);
     }
 
     void CheckWalk()
@@ -105,7 +113,8 @@ public class Academy : MonoBehaviour
         //   teacher = GameObject.FindGameObjectWithTag("Teacher");
 
         // walls
-        openings = GameObject.FindGameObjectsWithTag("CanWalkThrough");
+        //  openings = GameObject.FindGameObjectsWithTag("CanWalkThrough");
+        solidObjects = GameObject.FindGameObjectsWithTag("CantWalkThrough");
         CheckWalls();
 
         //- move camera also
@@ -116,26 +125,41 @@ public class Academy : MonoBehaviour
     }
     public void CheckWalls()
     {
-        canWalkThroughNextWall = false;
-        canWalkThroughPreviousWall = false;
+        // 2.5D
+        //  canWalkThroughNextWall = false;
+        //  canWalkThroughPreviousWall = false;
 
-        for (int i = 0; i < openings.Length; i++)
+        // 3D
+        canWalkThroughNextWall = true;
+
+        for (int i = 0; i < solidObjects.Length; i++)
         {
-            Vector3 viewPos = camera.WorldToViewportPoint(openings[i].transform.position);
+            Vector3 viewPos = camera.WorldToViewportPoint(solidObjects[i].transform.position);
             // Vector3 rearViewPos = camera.WorldToViewportPoint(openings[i].transform.position) + new Vector3(0, 0, -5.4f);
             // Debug.Log(viewPos);
 
-            if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
-            {
-                canWalkThroughNextWall = true;
-            }
+            //2.5D
+            // if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
+            // {
+            //     canWalkThroughNextWall = true;
+            // }
 
             // if (rearViewPos.z < -2.6f && rearViewPos.z > -2.8f && rearViewPos.x > 0.4f && rearViewPos.x < 0.6f)
             // {
             //     canWalkThroughPreviousWall = true;
             // }
+
+            //3D
+            if (viewPos.z > 5.3f && viewPos.z < 5.5f && viewPos.x > 0.4f && viewPos.x < 0.6f)
+            {
+                canWalkThroughNextWall = false;
+            }
+            else if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
+            {
+                canWalkThroughNextWall = false;
+            }
         }
-        //  Debug.Log(canWalkThroughNextWall);
+        //Debug.Log(canWalkThroughNextWall);
         // Debug.Log(canWalkThroughPreviousWall);
     }
     public void MoveForward()
@@ -209,7 +233,7 @@ public class Academy : MonoBehaviour
                 }
             }
 
-            else if (cameraPos.z == -10f && direction == "east" || cameraPos.z == -10f && direction == "west")
+            else if (cameraPos.z == -10.8f && direction == "east" || cameraPos.z == -10.8f && direction == "west")
             {
                 SoundManager.playWolfGrowlSound();
             }
@@ -288,7 +312,7 @@ public class Academy : MonoBehaviour
 
     public void ControlButton()
     {
-        if (cameraPos.y == 0)
+        if (cameraPos.y == 2)
         {
             controlNumber++;
             if (controlNumber > 2)
@@ -310,22 +334,23 @@ public class Academy : MonoBehaviour
             if (controlNumber == 1)
             {
                 GameControl.HideArrows();
-                mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
+                //   mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -500f, 0f);
             }
             if (controlNumber == 2)
             {
                 GameControl.HideArrows();
-                mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
+                //  mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
             }
             if (controlNumber == 0)
             {
                 GameControl.ShowArrows();
-                mapPage1.transform.localPosition = new Vector3(0f, 0f, 0f);
+                //    mapPage1.transform.localPosition = new Vector3(0f, 0f, 0f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
+                actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -1000f, 0f);
             }
         }
         else
@@ -347,14 +372,14 @@ public class Academy : MonoBehaviour
             if (controlNumber == 1)
             {
                 GameControl.HideArrows();
-                mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
+                //   mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -500f, 0f);
             }
             if (controlNumber == 2)
             {
                 GameControl.HideArrows();
-                mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
+                //   mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
             }
@@ -387,11 +412,13 @@ public class Academy : MonoBehaviour
         GameControl.helloCard.GetComponent<Image>().color = Color.white;
         helloHold = false;
 
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f && !fairy.activeSelf)
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && !fairy.activeSelf)
         {
             // first Fairy interaction - sceneOne
-            cameraPos.y = 12f;
+
+            cameraPos.y = 50f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            camera.backgroundColor = black;
             if (!GameControl.goodCard.GetComponent<Button>().interactable)
             {
                 if (GameControl.sceneOne == 1)
@@ -412,10 +439,11 @@ public class Academy : MonoBehaviour
             }
         }
 
-        else if (Mathf.Approximately(cameraPos.z, -10f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 0f)
+        else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 2f)
         {
-            cameraPos.y = 12f;
+            cameraPos.y = 50f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            camera.backgroundColor = black;
             dialogue.text = "You cannot pass.";
             SoundManager.playWolfTalk01Sound();
             if (!GameControl.okCard.GetComponent<Button>().interactable)
@@ -425,10 +453,11 @@ public class Academy : MonoBehaviour
                 SoundManager.playCardAppearSound();
             }
         }
-        else if (Mathf.Approximately(cameraPos.z, -10f) && Mathf.Approximately(cameraPos.x, 5.4f) && cameraPos.y == 0f)
+        else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, 5.4f) && cameraPos.y == 2f)
         {
-            cameraPos.y = 12f;
+            cameraPos.y = 50f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            camera.backgroundColor = black;
             dialogue.text = "You cannot pass.";
             SoundManager.playWolfTalk01Sound();
             if (!GameControl.okCard.GetComponent<Button>().interactable)
@@ -508,15 +537,16 @@ public class Academy : MonoBehaviour
     {
         GameControl.hasGoodbyeCard = true;
 
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && cameraPos.y == 50f)
         {
             // first Fairy interaction - sceneOne
             GameControl.sceneOne = GameControl.sceneOne + 1;
             GameControl.Save();
 
-            cameraPos.y = 0f;
+            cameraPos.y = 2f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "";
+            camera.backgroundColor = night;
 
             //    GameControl.WorldNavigationUIChange();
 
@@ -550,7 +580,8 @@ public class Academy : MonoBehaviour
 
     public void GoodCard()
     {
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
+
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && cameraPos.y == 50f)
         {
             //dialogue.text = "Es-tu perdu?";
 
@@ -586,7 +617,7 @@ public class Academy : MonoBehaviour
 
     public void BadCard()
     {
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && cameraPos.y == 50f)
         {
             if (!GameControl.yesCard.GetComponent<Button>().interactable)
             {
@@ -609,7 +640,7 @@ public class Academy : MonoBehaviour
 
     public void OpenCard()
     {
-        if (Mathf.Approximately(cameraPos.z, 0.8f))
+        if (Mathf.Approximately(cameraPos.z, 0f))
         {
             SoundManager.playDoorOpeningSound();
             frontDoorway.sprite = frontDoorOpen;
@@ -638,7 +669,7 @@ public class Academy : MonoBehaviour
 
     public void YesCard()
     {
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && cameraPos.y == 50f)
         {
             if (!GameControl.thankYouCard.GetComponent<Button>().interactable)
             {
@@ -666,7 +697,7 @@ public class Academy : MonoBehaviour
     }
     public void NoCard()
     {
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f && cameraPos.y == 12f)
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && cameraPos.y == 50f)
         {
             GameControl.thankYouCard.GetComponent<Button>().interactable = true;
             GameControl.thankYouCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
@@ -686,7 +717,7 @@ public class Academy : MonoBehaviour
 
     public void ThankYouCard()
     {
-        if (cameraPos.z == -4.6f && cameraPos.x == 0f)
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f)
         {
             GameControl.goodbyeCard.GetComponent<Button>().interactable = true;
             GameControl.goodbyeCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
@@ -782,17 +813,19 @@ public class Academy : MonoBehaviour
 
     public void OKCard()
     {
-        if (Mathf.Approximately(cameraPos.z, -10f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 12f)
+        if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 50f)
         {
-            cameraPos.y = 0f;
+            cameraPos.y = 2f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "";
+            camera.backgroundColor = night;
         }
-        else if (Mathf.Approximately(cameraPos.z, -10f) && Mathf.Approximately(cameraPos.x, 5.4f) && cameraPos.y == 12f)
+        else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, 5.4f) && cameraPos.y == 50f)
         {
-            cameraPos.y = 0f;
+            cameraPos.y = 2f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
             dialogue.text = "";
+            camera.backgroundColor = night;
         }
         if (Mathf.Approximately(cameraPos.z, 17f) && Mathf.Approximately(cameraPos.x, 0f) && tutorial)
         {
