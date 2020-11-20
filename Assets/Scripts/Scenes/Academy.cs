@@ -70,6 +70,7 @@ public class Academy : MonoBehaviour
         mapPage1 = GameObject.Find("MapPage1");
         frontDoor = GameObject.Find("FrontDoor");
         LaboratoryDoor = GameObject.Find("LaboratoryDoor");
+        secretary = GameObject.Find("Secretary").GetComponent<SpriteRenderer>(); ;
 
         if (GameControl.scene == "Academy")
         {
@@ -467,35 +468,46 @@ public class Academy : MonoBehaviour
                 SoundManager.playCardAppearSound();
             }
         }
-        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 0f)
+        else if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 2f)
         {
             // first Secretary interaction - sceneTwo              
-            cameraPos.y = 12f;
+            cameraPos.y = 80f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-            if (GameControl.sceneTwo == 1)
-            {
-                dialogue.text = "Good " + timeOfDay;
-                if (timeOfDay == "morning")
-                    SoundManager.playSecretaryTalk01ASound();
-                else if (timeOfDay == "afternoon")
-                    SoundManager.playSecretaryTalk01BSound();
-                else
-                    SoundManager.playSecretaryTalk01CSound();
-            }
-            else
-                //dialogue.text = "Es-tu perdu?";
-                dialogue.text = "Are you lost?";
+            camera.backgroundColor = black;
 
-            GameControl.morningCard.GetComponent<Button>().interactable = true;
-            GameControl.morningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-            GameControl.afternoonCard.GetComponent<Button>().interactable = true;
-            GameControl.afternoonCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-            GameControl.eveningCard.GetComponent<Button>().interactable = true;
-            GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            dialogue.text = "Hello. Sit down please.";
+
+
+            // if (GameControl.sceneTwo == 1)
+            // {
+            //     dialogue.text = "Good " + timeOfDay;
+            //     if (timeOfDay == "morning")
+            //         SoundManager.playSecretaryTalk01ASound();
+            //     else if (timeOfDay == "afternoon")
+            //         SoundManager.playSecretaryTalk01BSound();
+            //     else
+            //         SoundManager.playSecretaryTalk01CSound();
+            // }
+            // else
+            //     //dialogue.text = "Es-tu perdu?";
+            //     dialogue.text = "Are you lost?";
+
+            // GameControl.morningCard.GetComponent<Button>().interactable = true;
+            // GameControl.morningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            // GameControl.afternoonCard.GetComponent<Button>().interactable = true;
+            // GameControl.afternoonCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            // GameControl.eveningCard.GetComponent<Button>().interactable = true;
+            // GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            // SoundManager.playCardAppearSound();
+
+            SoundManager.playSecretaryTalk02Sound();
+            GameControl.sitCard.GetComponent<Button>().interactable = true;
+            GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
             SoundManager.playCardAppearSound();
+            secretary.sprite = secretarySprite02;
             FairyAnimation.CorrectAnswer();
         }
-        else if (cameraPos.z == 17f && cameraPos.x == 5.4f)
+        else if (cameraPos.z == 16.2f && cameraPos.x == 5.4f)
         {
             cameraPos.y = 12f;
             camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
@@ -722,12 +734,12 @@ public class Academy : MonoBehaviour
             GameControl.goodbyeCard.GetComponent<Button>().interactable = true;
             GameControl.goodbyeCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
         }
-        else if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 12f)
+        else if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 80f)
         {
             if (GameControl.readCard.GetComponent<Button>().interactable)
             {
                 dialogue.text = "";
-                cameraPos.y = 0f;
+                cameraPos.y = 2f;
                 camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
                 FairyAnimation.CorrectAnswer();
             }
@@ -984,7 +996,7 @@ public class Academy : MonoBehaviour
 
     public void SitCard()
     {
-        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
+        if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 80f))
         {
             dialogue.text = "Thank you.\nWhat is your name?";
             SoundManager.playSecretaryTalk03Sound();
@@ -999,7 +1011,7 @@ public class Academy : MonoBehaviour
 
     public void MorningCard()
     {
-        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f))
         {
             if (goodHold)
             {
@@ -1033,7 +1045,7 @@ public class Academy : MonoBehaviour
 
     public void AfternoonCard()
     {
-        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f))
         {
             if (goodHold)
             {
@@ -1066,7 +1078,7 @@ public class Academy : MonoBehaviour
     }
     public void EveningCard()
     {
-        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f))
+        if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f))
         {
             if (goodHold)
             {
@@ -1257,7 +1269,7 @@ public class Academy : MonoBehaviour
             Destroy(item);
         }
 
-        if (Mathf.Approximately(cameraPos.z, 6.2f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 12f))
+        if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f) && Mathf.Approximately(cameraPos.y, 80f))
         {
             if (WriteLetters.playerNameString.Length > 0)
             {
