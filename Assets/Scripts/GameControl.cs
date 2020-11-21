@@ -159,6 +159,15 @@ public class GameControl : MonoBehaviour
     {
         GameControl.upArrow.GetComponent<Button>().interactable = true;
     }
+    public static void HideUpArrow()
+    {
+        GameControl.upArrow.GetComponent<Button>().interactable = false;
+    }
+    public static void ShowSideArrows()
+    {
+        GameControl.rightArrow.GetComponent<Button>().interactable = true;
+        GameControl.leftArrow.GetComponent<Button>().interactable = true;
+    }
 
 
     public void Dictionary()
