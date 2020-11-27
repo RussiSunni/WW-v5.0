@@ -11,14 +11,14 @@ public class GameControl : MonoBehaviour
     public static GameControl control;
     public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
-    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton;
+    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, boardPanel;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
     public static string playerName;
     public static int playerAge;
     public static int sceneOne = 1;
     public static int sceneTwo = 1;
-    public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard;
+    public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard, canMoveCards;
 
     void Awake()
     {
@@ -44,6 +44,14 @@ public class GameControl : MonoBehaviour
         spellbookButtonLeft = GameObject.Find("SpellbookButton Left");
         spellbookButtonRight = GameObject.Find("SpellbookButton Right");
         controlButton = GameObject.Find("ControlButton");
+        cardMoveToggle = GameObject.Find("CardMoveToggle");
+        cardPhraseToggle = GameObject.Find("CardPhraseToggle");
+
+        boardPanel = GameObject.Find("BoardPanel");
+        boardPanel.SetActive(false);
+
+        HideCardToggles();
+
 
         // dictionaryCanvas = GameObject.Find("DictionaryCanvas");
         // dictionaryCanvas.SetActive(false);
@@ -112,31 +120,6 @@ public class GameControl : MonoBehaviour
     }
 
 
-    // public static void CharacterSpeakUIChange()
-    // {
-    //     GameControl.upArrow.GetComponent<Button>().interactable = false;
-    //     GameControl.rightArrow.GetComponent<Button>().interactable = false;
-    //     GameControl.leftArrow.GetComponent<Button>().interactable = false;
-    //     //     GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
-    //     //     GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
-    //     //     GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-17.5f, 0f, 0f);
-    //     //     GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 70);
-    //     //     GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 35);
-    //     //     GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(17.5f, 0f, 0f);
-    // }
-
-    // public static void WorldNavigationUIChange()
-    // {
-    //     GameControl.upArrow.GetComponent<Button>().interactable = true;
-    //     GameControl.rightArrow.GetComponent<Button>().interactable = true;
-    //     GameControl.leftArrow.GetComponent<Button>().interactable = true;
-    //     // GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
-    //     // GameControl.spellbookButtonLeft.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
-    //     // GameControl.spellbookButtonLeft.GetComponent<RectTransform>().anchoredPosition = new Vector3(-35f, 0f, 0f);
-    //     // GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 140);
-    //     // GameControl.spellbookButtonRight.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 70);
-    //     // GameControl.spellbookButtonRight.GetComponent<RectTransform>().anchoredPosition = new Vector3(35f, 0f, 0f);
-    // }
 
     public static void HideArrows()
     {
@@ -168,7 +151,16 @@ public class GameControl : MonoBehaviour
         GameControl.rightArrow.GetComponent<Button>().interactable = true;
         GameControl.leftArrow.GetComponent<Button>().interactable = true;
     }
-
+    public static void HideCardToggles()
+    {
+        cardMoveToggle.SetActive(false);
+        cardPhraseToggle.SetActive(false);
+    }
+    public static void ShowCardToggles()
+    {
+        cardMoveToggle.SetActive(true);
+        cardPhraseToggle.SetActive(true);
+    }
 
     public void Dictionary()
     {
@@ -183,7 +175,10 @@ public class GameControl : MonoBehaviour
             UICanvas.SetActive(false);
         }
     }
-
+    public static void CanMoveCards()
+    {
+        canMoveCards = true;
+    }
     public static void Restart()
     {
         Destroy(control);
@@ -227,6 +222,9 @@ public class GameControl : MonoBehaviour
             print(sceneOne);
         }
     }
+
+
+
 }
 
 [Serializable]

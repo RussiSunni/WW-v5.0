@@ -717,15 +717,12 @@ MonoBehaviour:
   m_Text: 'Welcome to the Labyrinth.
 
 
-    You will learn spells - use them wisely.
+    You will need to try to blend in. If the
+    locals detect you are not from here, they will attack you.
 
 
-    Using
-    a spell at the right time will result in learning another spell.
-
-
-    Using
-    a spell at the wrong time, well, that could be a bad idea.'
+    Make sure you
+    speak to them in their language, perfectly.'
 --- !u!222 &1488161853
 CanvasRenderer:
   m_ObjectHideFlags: 0
