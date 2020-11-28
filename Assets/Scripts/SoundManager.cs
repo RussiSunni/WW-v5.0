@@ -4,7 +4,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound;
-    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01;
+    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, ArenaMusic01;
     static AudioSource audioSrc;
 
     void Start()
@@ -40,6 +40,8 @@ public class SoundManager : MonoBehaviour
         SecretaryTalk05 = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk05");
 
         WolfTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/WolfTalk01");
+
+        ArenaMusic01 = Resources.Load<AudioClip>("Sound/Harp");
     }
 
     public static void playHelloSound()
@@ -97,6 +99,7 @@ public class SoundManager : MonoBehaviour
     public static void playFairyTalk01Sound()
     {
         audioSrc.PlayOneShot(fairyTalk01);
+
     }
     public static void playFairyTalk02Sound()
     {
@@ -146,4 +149,10 @@ public class SoundManager : MonoBehaviour
     {
         audioSrc.PlayOneShot(WolfTalk01);
     }
+
+    public static void playArenaMusic01Sound()
+    {
+        audioSrc.PlayOneShot(ArenaMusic01);
+    }
+
 }

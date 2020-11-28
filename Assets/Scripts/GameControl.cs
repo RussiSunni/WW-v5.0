@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
     public static GameControl control;
     public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
-    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, boardPanel;
+    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, runAwayButton;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
     public static string playerName;
@@ -19,6 +19,7 @@ public class GameControl : MonoBehaviour
     public static int sceneOne = 1;
     public static int sceneTwo = 1;
     public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard, canMoveCards;
+    public static Image characterTabletopPanel, blackBGPanel, characterImage;
 
     void Awake()
     {
@@ -44,13 +45,14 @@ public class GameControl : MonoBehaviour
         spellbookButtonLeft = GameObject.Find("SpellbookButton Left");
         spellbookButtonRight = GameObject.Find("SpellbookButton Right");
         controlButton = GameObject.Find("ControlButton");
-        cardMoveToggle = GameObject.Find("CardMoveToggle");
-        cardPhraseToggle = GameObject.Find("CardPhraseToggle");
-
-        boardPanel = GameObject.Find("BoardPanel");
-        boardPanel.SetActive(false);
-
-        HideCardToggles();
+        //  cardMoveToggle = GameObject.Find("CardMoveToggle");
+        //  cardPhraseToggle = GameObject.Find("CardPhraseToggle");
+        characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
+        blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();
+        characterImage = GameObject.Find("CharacterImage").GetComponent<Image>();
+        runAwayButton = GameObject.Find("RunAwayButton");
+        runAwayButton.SetActive(false);
+        //  HideCardToggles();
 
 
         // dictionaryCanvas = GameObject.Find("DictionaryCanvas");
@@ -119,7 +121,43 @@ public class GameControl : MonoBehaviour
         scene = "Academy";
     }
 
+    public static void ArenaToggle()
+    {
+        var tempColor1 = blackBGPanel.color;
+        var tempColor2 = characterImage.color;
+        var tempColor3 = characterTabletopPanel.color;
 
+        if (tempColor1.a == 0f)
+        {
+            tempColor1.a = 1f;
+            tempColor2.a = 1f;
+            tempColor3.a = 0.4f;
+        }
+        else
+        {
+            tempColor1.a = 0f;
+            tempColor2.a = 0f;
+            tempColor3.a = 0f;
+        }
+
+        blackBGPanel.color = tempColor1;
+        characterImage.color = tempColor2;
+        characterTabletopPanel.color = tempColor3;
+
+        if (runAwayButton.activeSelf)
+            runAwayButton.SetActive(false);
+        else
+            runAwayButton.SetActive(true);
+
+        int count = characterTabletopPanel.transform.childCount;
+        if (count > 0)
+        {
+            foreach (Transform child in characterTabletopPanel.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+    }
 
     public static void HideArrows()
     {

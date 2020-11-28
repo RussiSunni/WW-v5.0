@@ -16,11 +16,11 @@ public class Academy : MonoBehaviour
     static Text dialogue;
     int textNumber;
     bool isRoomsDoorClosed = true, tutorial, tutorial1Complete = false;
-    public static GameObject speechPages, actionPages, letterPages, numberPages, mapPage1, frontDoor, LaboratoryDoor, page1, page2, page3, page4, page5, letterPage1, letterPage2;
+    public static GameObject speechPages, actionPages, letterPages, numberPages, mapPage1, frontDoor, LaboratoryDoor, page1, page2, page3, page4, page5, letterPage1, letterPage2, playerTabletop;
     static SpriteRenderer frontDoorway, roomsDoorway, secretary, secretaryCloseUp;
-    static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04;
+    static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite;
     public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold;
-
+    public Transform helloCard, howCard, areCard, youCard, questionMarkCard;
     static string timeOfDay, playerName;
     int playerAge, playerAge0, playerAge10 = 0, controlNumber = 0;
 
@@ -65,6 +65,8 @@ public class Academy : MonoBehaviour
         letterPages = GameObject.Find("LetterPages");
         numberPages = GameObject.Find("NumberPages");
 
+        playerTabletop = GameObject.Find("PlayerTabletop");
+
         letterPage1 = GameObject.Find("LetterPage1");
         letterPage2 = GameObject.Find("LetterPage2");
 
@@ -96,6 +98,7 @@ public class Academy : MonoBehaviour
         secretarySprite01 = Resources.Load<Sprite>("Foyer/Secretary01");
         secretarySprite02 = Resources.Load<Sprite>("Foyer/Secretary02");
         secretarySprite03 = Resources.Load<Sprite>("Foyer/Secretary03");
+        fairyNeutralSprite = Resources.Load<Sprite>("Characters/FairyNeutral");
 
         controlSprite01 = Resources.Load<Sprite>("UI/boots-icon");
         controlSprite02 = Resources.Load<Sprite>("UI/speak-icon");
@@ -339,7 +342,7 @@ public class Academy : MonoBehaviour
                 else
                     GameControl.HideUpArrow();
 
-                GameControl.ShowCardToggles();
+                //   GameControl.ShowCardToggles();
                 fairy.transform.localPosition = new Vector3(-0.47f, 0.4f, 1f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -500f, 0f);
@@ -347,16 +350,16 @@ public class Academy : MonoBehaviour
             if (controlNumber == 2)
             {
                 GameControl.HideArrows();
-                GameControl.HideCardToggles();
+                //  GameControl.HideCardToggles();
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
-                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -550f, 0f);
             }
             if (controlNumber == 0)
             {
                 GameControl.ShowArrows();
 
                 fairy.transform.localPosition = new Vector3(-1f, 0.4f, 1f);
-                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -550f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -1000f, 0f);
             }
         }
@@ -388,7 +391,7 @@ public class Academy : MonoBehaviour
                 GameControl.HideArrows();
                 //   mapPage1.transform.localPosition = new Vector3(0f, -500f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
-                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -500f, 0f);
+                speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -550f, 0f);
             }
         }
     }
@@ -437,137 +440,166 @@ public class Academy : MonoBehaviour
         numberPages.transform.localPosition = new Vector3(0f, -1500f, 0f);
     }
 
-    public void HelloCard()
+    public void Go()
     {
-        if (!CardMoveToggle.toggle.isOn)
+        int count = playerTabletop.transform.childCount;
+        // print(count);
+        // for (int i = 0; i < count; i++)
+        // {
+        //     Transform child = playerTabletop.transform.GetChild(i);
+        //     print(child.gameObject.name);
+        // }
+
+        //Fairy interaction -------------------------------
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && direction == "north")
         {
-            GameControl.hasHelloCard = true;
-            GameControl.helloCard.GetComponent<Image>().color = Color.white;
-            helloHold = false;
-
-            if (cameraPos.z == -5.4f && cameraPos.x == 0f && !fairy.activeSelf)
+            if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "HelloCard")
             {
-                // first Fairy interaction - sceneOne
+                GameControl.ArenaToggle();
+                GameControl.characterImage.sprite = fairyNeutralSprite;
+                SoundManager.playFairyTalk01Sound();
 
-                cameraPos.y = 50f;
-                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                camera.backgroundColor = black;
-                if (!GameControl.goodCard.GetComponent<Button>().interactable)
-                {
-                    if (GameControl.sceneOne == 1)
-                    //dialogue.text = "Bonjour.\nComment ça va?";
-                    {
-                        dialogue.text = "Hello.\nHow are you?";
-                        SoundManager.playFairyTalk01Sound();
-                    }
-                    else
-                        //dialogue.text = "Ah,\nvous encore.";
-                        dialogue.text = "Ah,\nyou again.";
+                ArenaSound.StartArenaSound();
 
-                    GameControl.goodCard.GetComponent<Button>().interactable = true;
-                    GameControl.goodCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                    GameControl.badCard.GetComponent<Button>().interactable = true;
-                    GameControl.badCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                    SoundManager.playCardAppearSound();
-                }
-            }
+                // cameraPos.y = 50f;
+                // camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+                // camera.backgroundColor = black;
+                // dialogue.text = "Hello.\nHow are you?";
 
-            else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 2f)
-            {
-                cameraPos.y = 50f;
-                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                camera.backgroundColor = black;
-                dialogue.text = "You cannot pass.";
-                SoundManager.playWolfTalk01Sound();
-                if (!GameControl.okCard.GetComponent<Button>().interactable)
-                {
-                    GameControl.okCard.GetComponent<Button>().interactable = true;
-                    GameControl.okCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                    SoundManager.playCardAppearSound();
-                }
-            }
-            else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, 5.4f) && cameraPos.y == 2f)
-            {
-                cameraPos.y = 50f;
-                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                camera.backgroundColor = black;
-                dialogue.text = "You cannot pass.";
-                SoundManager.playWolfTalk01Sound();
-                if (!GameControl.okCard.GetComponent<Button>().interactable)
-                {
-                    GameControl.okCard.GetComponent<Button>().interactable = true;
-                    GameControl.okCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                    SoundManager.playCardAppearSound();
-                }
-            }
-            else if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 2f)
-            {
-                // first Secretary interaction - sceneTwo              
-                cameraPos.y = 80f;
-                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                camera.backgroundColor = black;
-
-                // dialogue.text = "Hello. Sit down please.";
-
-
-                if (GameControl.sceneTwo == 1)
-                {
-                    dialogue.text = "Good " + timeOfDay;
-                    if (timeOfDay == "morning")
-                        SoundManager.playSecretaryTalk01ASound();
-                    else if (timeOfDay == "afternoon")
-                        SoundManager.playSecretaryTalk01BSound();
-                    else
-                        SoundManager.playSecretaryTalk01CSound();
-                }
-                else
-                    //dialogue.text = "Es-tu perdu?";
-                    dialogue.text = "Are you lost?";
-
-                GameControl.morningCard.GetComponent<Button>().interactable = true;
-                GameControl.morningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                GameControl.afternoonCard.GetComponent<Button>().interactable = true;
-                GameControl.afternoonCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                GameControl.eveningCard.GetComponent<Button>().interactable = true;
-                GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                SoundManager.playCardAppearSound();
-
-                GameControl.sitCard.GetComponent<Button>().interactable = true;
-                GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
-                SoundManager.playCardAppearSound();
-                FairyAnimation.CorrectAnswer();
-            }
-            else if (cameraPos.z == 16.2f && cameraPos.x == 5.4f)
-            {
-                cameraPos.y = 32f;
-                camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                FairyAnimation.CorrectAnswer();
-                GameControl.boardPanel.SetActive(true);
-            }
-            else
-            {
-                FairyAnimation.IncorrectAnswer();
-                //  Restart();
-            }
-
-
-            if (GameControl.scene == "Academy Wild Area")
-            {
-                Vector3 viewPos = camera.WorldToViewportPoint(teacher.transform.position);
-                //    / print("x: " + viewPos.x + "y: " + viewPos.y + "z: " + viewPos.z);
-
-                if (viewPos.z > 2.6f && viewPos.z < 2.8f && viewPos.x > 0.4f && viewPos.x < 0.6f)
-                {
-                    cameraPos.y = 12f;
-                    camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
-                    dialogue.text = "What are you doing here?";
-
-                    GameControl.sorryCard.SetActive(true);
-                    SoundManager.playCardAppearSound();
-                    SpellbookButtonRight();
-                }
+                var characterHelloCard = Instantiate(helloCard, new Vector3(0, 0, 0), Quaternion.identity);
+                var characterHowCard = Instantiate(howCard, new Vector3(0, 0, 0), Quaternion.identity);
+                var characterAreCard = Instantiate(areCard, new Vector3(0, 0, 0), Quaternion.identity);
+                var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
+                var characterQuestionMarkCard = Instantiate(questionMarkCard, new Vector3(0, 0, 0), Quaternion.identity);
+                characterHelloCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+                characterHowCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+                characterAreCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+                characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+                characterQuestionMarkCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
             }
         }
+    }
+
+    public void RunAway()
+    {
+        GameControl.ArenaToggle();
+        ArenaSound.StopArenaSound();
+    }
+
+    public void HelloCard()
+    {
+
+        //  if (!CardMoveToggle.toggle.isOn)
+        //  {
+        // GameControl.hasHelloCard = true;
+        //  GameControl.helloCard.GetComponent<Image>().color = Color.white;
+        //  helloHold = false;
+
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f)
+        {
+
+            //&& !fairy.activeSelf
+            // first Fairy interaction - sceneOne
+
+            cameraPos.y = 50f;
+
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            camera.backgroundColor = black;
+            if (!GameControl.goodCard.GetComponent<Button>().interactable)
+            {
+                if (GameControl.sceneOne == 1)
+                {
+                    dialogue.text = "Hello.\nHow are you?";
+                    SoundManager.playFairyTalk01Sound();
+                }
+                else
+                    dialogue.text = "Ah,\nyou again.";
+
+                GameControl.goodCard.GetComponent<Button>().interactable = true;
+                GameControl.goodCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                GameControl.badCard.GetComponent<Button>().interactable = true;
+                GameControl.badCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                SoundManager.playCardAppearSound();
+            }
+        }
+
+        else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 2f)
+        {
+            cameraPos.y = 50f;
+            //     camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            //      camera.backgroundColor = black;
+            dialogue.text = "You cannot pass.";
+            SoundManager.playWolfTalk01Sound();
+            if (!GameControl.okCard.GetComponent<Button>().interactable)
+            {
+                GameControl.okCard.GetComponent<Button>().interactable = true;
+                GameControl.okCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, 5.4f) && cameraPos.y == 2f)
+        {
+            cameraPos.y = 50f;
+            //     camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            //      camera.backgroundColor = black;
+            dialogue.text = "You cannot pass.";
+            SoundManager.playWolfTalk01Sound();
+            if (!GameControl.okCard.GetComponent<Button>().interactable)
+            {
+                GameControl.okCard.GetComponent<Button>().interactable = true;
+                GameControl.okCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+                SoundManager.playCardAppearSound();
+            }
+        }
+        else if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f) && cameraPos.y == 2f)
+        {
+            // first Secretary interaction - sceneTwo              
+            cameraPos.y = 80f;
+            //      camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            //      camera.backgroundColor = black;
+
+            // dialogue.text = "Hello. Sit down please.";
+
+
+            if (GameControl.sceneTwo == 1)
+            {
+                dialogue.text = "Good " + timeOfDay;
+                if (timeOfDay == "morning")
+                    SoundManager.playSecretaryTalk01ASound();
+                else if (timeOfDay == "afternoon")
+                    SoundManager.playSecretaryTalk01BSound();
+                else
+                    SoundManager.playSecretaryTalk01CSound();
+            }
+            else
+                //dialogue.text = "Es-tu perdu?";
+                dialogue.text = "Are you lost?";
+
+            GameControl.morningCard.GetComponent<Button>().interactable = true;
+            GameControl.morningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.afternoonCard.GetComponent<Button>().interactable = true;
+            GameControl.afternoonCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            GameControl.eveningCard.GetComponent<Button>().interactable = true;
+            GameControl.eveningCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            SoundManager.playCardAppearSound();
+
+            GameControl.sitCard.GetComponent<Button>().interactable = true;
+            GameControl.sitCard.GetComponent<Image>().CrossFadeAlpha(1, 2.0f, false);
+            SoundManager.playCardAppearSound();
+            FairyAnimation.CorrectAnswer();
+        }
+        else if (cameraPos.z == 16.2f && cameraPos.x == 5.4f)
+        {
+            cameraPos.y = 32f;
+            //     camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            FairyAnimation.CorrectAnswer();
+        }
+        else
+        {
+            FairyAnimation.IncorrectAnswer();
+            //  Restart();
+        }
+        // }
     }
 
     public void HelloCardHold()
