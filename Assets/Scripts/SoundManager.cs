@@ -4,7 +4,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound;
-    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, ArenaMusic01;
+    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, fairyTalk06, fairyTalk07, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, ArenaMusic01;
     static AudioSource audioSrc;
 
     void Start()
@@ -30,6 +30,8 @@ public class SoundManager : MonoBehaviour
         fairyTalk03 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk03");
         fairyTalk04 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk04");
         fairyTalk05 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk05");
+        fairyTalk06 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk06");
+        fairyTalk07 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk07");
 
         SecretaryTalk01A = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01A");
         SecretaryTalk01B = Resources.Load<AudioClip>("Sound/AWS Polly/SecretaryTalk01B");
@@ -117,6 +119,15 @@ public class SoundManager : MonoBehaviour
     {
         audioSrc.PlayOneShot(fairyTalk05);
     }
+    public static void playFairyTalk06Sound()
+    {
+        audioSrc.PlayOneShot(fairyTalk06);
+    }
+
+    public static void playFairyTalk07Sound()
+    {
+        audioSrc.PlayOneShot(fairyTalk07);
+    }
     public static void playSecretaryTalk01ASound()
     {
         audioSrc.PlayOneShot(SecretaryTalk01A);
@@ -154,5 +165,7 @@ public class SoundManager : MonoBehaviour
     {
         audioSrc.PlayOneShot(ArenaMusic01);
     }
+
+
 
 }

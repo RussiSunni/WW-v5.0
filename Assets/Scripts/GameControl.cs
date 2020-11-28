@@ -157,6 +157,20 @@ public class GameControl : MonoBehaviour
                 GameObject.Destroy(child.gameObject);
             }
         }
+
+        Academy.roundNumber = 0;
+    }
+
+    public static void DestroyCharacterCards()
+    {
+        int count = characterTabletopPanel.transform.childCount;
+        if (count > 0)
+        {
+            foreach (Transform child in characterTabletopPanel.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
     }
 
     public static void HideArrows()
