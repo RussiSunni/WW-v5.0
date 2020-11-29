@@ -16,7 +16,7 @@ public class Academy : MonoBehaviour
     static Text dialogue;
     public static int textNumber, roundNumber;
     bool isRoomsDoorClosed = true, tutorial, tutorial1Complete = false;
-    public static GameObject speechPages, actionPages, letterPages, numberPages, mapPage1, frontDoor, LaboratoryDoor, page1, page2, page3, page4, page5, letterPage1, letterPage2, playerTabletop;
+    public static GameObject speechPages, actionPages, letterPages, numberPages, mapPage1, frontDoor, LaboratoryDoor, page1, page2, page3, page4, page5, letterPage1, letterPage2, speechTabletop, actionTabletop;
     static SpriteRenderer frontDoorway, roomsDoorway, secretary, secretaryCloseUp;
     static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite, wolfSprite;
     public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold;
@@ -67,7 +67,8 @@ public class Academy : MonoBehaviour
         letterPages = GameObject.Find("LetterPages");
         numberPages = GameObject.Find("NumberPages");
 
-        playerTabletop = GameObject.Find("PlayerTabletop");
+        speechTabletop = GameObject.Find("SpeechTabletop");
+        actionTabletop = GameObject.Find("ActionTabletop");
 
         letterPage1 = GameObject.Find("LetterPage1");
         letterPage2 = GameObject.Find("LetterPage2");
@@ -78,7 +79,7 @@ public class Academy : MonoBehaviour
         //page4 = GameObject.Find("Page4");
         //page5 = GameObject.Find("Page5");
         mapPage1 = GameObject.Find("MapPage1");
-        frontDoor = GameObject.Find("FrontDoor");
+        frontDoor = GameObject.Find("Front Door");
         LaboratoryDoor = GameObject.Find("LaboratoryDoor");
         secretary = GameObject.Find("Secretary").GetComponent<SpriteRenderer>();
         secretaryCloseUp = GameObject.Find("Secretary Close Up").GetComponent<SpriteRenderer>();
@@ -319,7 +320,8 @@ public class Academy : MonoBehaviour
 
     public void ControlButton()
     {
-        if (cameraPos.y == 2)
+        // if (cameraPos.y == 2)
+        if (GameControl.arenaToggle == false)
         {
             controlNumber++;
             if (controlNumber > 2)
@@ -340,11 +342,7 @@ public class Academy : MonoBehaviour
 
             if (controlNumber == 1)
             {
-                if (!GameControl.readCard.GetComponent<Button>().interactable)
-                    GameControl.HideArrows();
-                else
-                    GameControl.HideUpArrow();
-
+                GameControl.HideArrows();
                 //   GameControl.ShowCardToggles();
                 fairy.transform.localPosition = new Vector3(-0.47f, 0.4f, 1f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
@@ -445,18 +443,20 @@ public class Academy : MonoBehaviour
 
     public void Go()
     {
-        int count = playerTabletop.transform.childCount;
-        // print(count);
-        // for (int i = 0; i < count; i++)
+        int speechTableTopCount = speechTabletop.transform.childCount;
+        int actionTableTopCount = actionTabletop.transform.childCount;
+        // print(actionTableTopCount);
+        // print(roundNumber);
+        // for (int i = 0; i < actionTableTopCount; i++)
         // {
-        //     Transform child = playerTabletop.transform.GetChild(i);
+        //     Transform child = actionTabletop.transform.GetChild(i);
         //     print(child.gameObject.name);
         // }
 
         //Fairy interaction -------------------------------
         if (cameraPos.z == -5.4f && cameraPos.x == 0f && direction == "north")
         {
-            if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
             {
                 GameControl.ArenaToggle();
                 roundNumber++;
@@ -480,7 +480,7 @@ public class Academy : MonoBehaviour
                 characterLostCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
                 characterQuestionMarkCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
             }
-            if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "YesCard" && roundNumber == 1)
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "YesCard" && roundNumber == 1)
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
@@ -496,7 +496,7 @@ public class Academy : MonoBehaviour
                 characterTheCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
                 characterDoorCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
             }
-            if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "ThankyouCard" && roundNumber == 2)
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "ThankyouCard" && roundNumber == 2)
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
@@ -507,8 +507,8 @@ public class Academy : MonoBehaviour
         // wolf interactions -------------------------------
         else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -5.4f) && direction == "west")
         {
-            Debug.Log(roundNumber);
-            if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
+            //     Debug.Log(roundNumber);
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
             {
                 GameControl.ArenaToggle();
                 roundNumber++;
@@ -523,7 +523,7 @@ public class Academy : MonoBehaviour
                 characterNotCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
                 characterPassCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
             }
-            else if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "OKCard" && roundNumber == 1)
+            else if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "OKCard" && roundNumber == 1)
             {
                 GameControl.ArenaToggle();
             }
@@ -531,7 +531,7 @@ public class Academy : MonoBehaviour
 
         else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, 5.4f) && direction == "east")
         {
-            if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
             {
                 GameControl.ArenaToggle();
                 roundNumber++;
@@ -546,9 +546,19 @@ public class Academy : MonoBehaviour
                 characterNotCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
                 characterPassCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
             }
-            else if (count == 1 && playerTabletop.transform.GetChild(0).gameObject.name == "OKCard" && roundNumber == 1)
+            else if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "OKCard" && roundNumber == 1)
             {
                 GameControl.ArenaToggle();
+            }
+        }
+
+        //door interaction ----------------------------------
+        else if (cameraPos.z == 0f && cameraPos.x == 0f && direction == "north")
+        {
+            if (actionTableTopCount == 2 && actionTabletop.transform.GetChild(0).gameObject.name == "OpenCard" && actionTabletop.transform.GetChild(1).gameObject.name == "DoorCard" && roundNumber == 0)
+            {
+                // Debug.Log("test");
+                OpenFrontDoor();
             }
         }
     }
@@ -563,6 +573,15 @@ public class Academy : MonoBehaviour
     {
         GameControl.ArenaToggle();
         ArenaSound.StopArenaSound();
+    }
+
+    public void OpenFrontDoor()
+    {
+        frontDoor.transform.Rotate(0, 90f, 0, Space.World);
+        frontDoor.transform.localPosition = new Vector3(-0.95f, 0.2079014f, 0.3f);
+        frontDoor.tag = "Untagged";
+        CheckWalls();
+        SoundManager.playDoorOpeningSound();
     }
 
     public void HelloCard()

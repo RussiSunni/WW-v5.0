@@ -18,7 +18,7 @@ public class GameControl : MonoBehaviour
     public static int playerAge;
     public static int sceneOne = 1;
     public static int sceneTwo = 1;
-    public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard, canMoveCards;
+    public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard, canMoveCards, arenaToggle;
     public static Image characterTabletopPanel, blackBGPanel, characterImage;
 
     void Awake()
@@ -123,6 +123,11 @@ public class GameControl : MonoBehaviour
 
     public static void ArenaToggle()
     {
+        if (arenaToggle == false)
+            arenaToggle = true;
+        else
+            arenaToggle = false;
+
         var tempColor1 = blackBGPanel.color;
         var tempColor2 = characterImage.color;
         var tempColor3 = characterTabletopPanel.color;
