@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound;
+    public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound, correctSound;
     public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, fairyTalk06, fairyTalk07, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, ArenaMusic01;
     static AudioSource audioSrc;
 
@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
         pageTurnSound = Resources.Load<AudioClip>("Sound/PageTurn");
         footstepSound = Resources.Load<AudioClip>("Sound/Footstep");
         doorLockedSound = Resources.Load<AudioClip>("Sound/DoorLocked");
+        correctSound = Resources.Load<AudioClip>("Sound/Correct");
 
         fairyTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk01");
         fairyTalk02 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk02");
@@ -97,6 +98,11 @@ public class SoundManager : MonoBehaviour
     public static void playFootstepSound()
     {
         audioSrc.PlayOneShot(footstepSound);
+    }
+
+    public static void playCorrectSound()
+    {
+        audioSrc.PlayOneShot(correctSound);
     }
     public static void playFairyTalk01Sound()
     {

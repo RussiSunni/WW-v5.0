@@ -10,8 +10,8 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl control;
     public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
-    public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
-    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, runAwayButton;
+    public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard, doorCard, youCard;
+    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, actionHandPanel;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
     public static string playerName;
@@ -19,7 +19,11 @@ public class GameControl : MonoBehaviour
     public static int sceneOne = 1;
     public static int sceneTwo = 1;
     public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard, canMoveCards, arenaToggle;
-    public static Image characterTabletopPanel, blackBGPanel, characterImage;
+    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, actionHand;
+    public static Text newCardText;
+    public static Button runAwayButton;
+
+
 
     void Awake()
     {
@@ -33,6 +37,7 @@ public class GameControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     void Start()
     {
@@ -48,10 +53,17 @@ public class GameControl : MonoBehaviour
         //  cardMoveToggle = GameObject.Find("CardMoveToggle");
         //  cardPhraseToggle = GameObject.Find("CardPhraseToggle");
         characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
+        actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
         blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();
         characterImage = GameObject.Find("CharacterImage").GetComponent<Image>();
-        runAwayButton = GameObject.Find("RunAwayButton");
-        runAwayButton.SetActive(false);
+        newCardImage = GameObject.Find("NewCardImage").GetComponent<Image>();
+        newCardText = GameObject.Find("NewCardText").GetComponent<Text>();
+        actionHandPanel = GameObject.Find("ActionHand");
+        doorCard = GameObject.Find("DoorCard");
+        doorCard.SetActive(false);
+        youCard = GameObject.Find("YouCard");
+        youCard.SetActive(false);
+
         //  HideCardToggles();
 
 
@@ -116,6 +128,8 @@ public class GameControl : MonoBehaviour
         mayCard = GameObject.Find("MayButton");
         theCard = GameObject.Find("TheButton");
         sorryCard = GameObject.Find("SorryButton");
+        runAwayButton = GameObject.Find("RunAwayButton").GetComponent<Button>();
+
 
 
         scene = "Academy";
@@ -124,9 +138,15 @@ public class GameControl : MonoBehaviour
     public static void ArenaToggle()
     {
         if (arenaToggle == false)
+        {
             arenaToggle = true;
+            runAwayButton.interactable = true;
+        }
         else
+        {
             arenaToggle = false;
+            runAwayButton.interactable = false;
+        }
 
         var tempColor1 = blackBGPanel.color;
         var tempColor2 = characterImage.color;
@@ -149,11 +169,6 @@ public class GameControl : MonoBehaviour
         characterImage.color = tempColor2;
         characterTabletopPanel.color = tempColor3;
 
-        if (runAwayButton.activeSelf)
-            runAwayButton.SetActive(false);
-        else
-            runAwayButton.SetActive(true);
-
         int count = characterTabletopPanel.transform.childCount;
         if (count > 0)
         {
@@ -164,6 +179,16 @@ public class GameControl : MonoBehaviour
         }
 
         Academy.roundNumber = 0;
+    }
+
+    public static void RedBG()
+    {
+        var tempColor1 = blackBGPanel.color;
+        if (tempColor1 == Color.red)
+            tempColor1 = Color.black;
+        else
+            tempColor1 = Color.red;
+        blackBGPanel.color = tempColor1;
     }
 
     public static void DestroyCharacterCards()
@@ -178,12 +203,49 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    public static void NewCardOn(Sprite newCard)
+    {
+        var tempColor1 = blackBGPanel.color;
+        var tempColor2 = newCardText.color;
+        var tempColor3 = newCardImage.color;
+        var tempColor4 = characterImage.color;
+        var tempColor5 = characterTabletopPanel.color;
+        tempColor1.a = 1f;
+        tempColor2.a = 1f;
+        tempColor3.a = 1f;
+        tempColor4.a = 0f;
+        tempColor5.a = 0f;
+        blackBGPanel.color = tempColor1;
+        newCardText.color = tempColor2;
+        newCardImage.color = tempColor3;
+        characterImage.color = tempColor4;
+        characterTabletopPanel.color = tempColor5;
+
+        newCardImage.sprite = newCard;
+        SoundManager.playCorrectSound();
+    }
+
+    public static void NewCardOff()
+    {
+        var tempColor1 = blackBGPanel.color;
+        var tempColor2 = newCardText.color;
+        var tempColor3 = newCardImage.color;
+        tempColor1.a = 0f;
+        tempColor2.a = 0f;
+        tempColor3.a = 0f;
+        blackBGPanel.color = tempColor1;
+        newCardText.color = tempColor2;
+        newCardImage.color = tempColor3;
+        arenaToggle = false;
+        Academy.roundNumber = 0;
+    }
     public static void HideArrows()
     {
         GameControl.upArrow.GetComponent<Button>().interactable = false;
         GameControl.rightArrow.GetComponent<Button>().interactable = false;
         GameControl.leftArrow.GetComponent<Button>().interactable = false;
     }
+
     public static void ShowArrows()
     {
         GameControl.upArrow.GetComponent<Button>().interactable = true;
