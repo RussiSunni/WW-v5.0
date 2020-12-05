@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
     public static GameControl control;
     public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard, doorCard, youCard;
-    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, actionHandPanel;
+    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, actionHandPanel, canvasCode;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
     public static string playerName;
@@ -42,6 +42,8 @@ public class GameControl : MonoBehaviour
     void Start()
     {
         Load();
+        canvasCode = GameObject.Find("CanvasCode");
+
 
         UICanvas = GameObject.Find("UICanvas");
         upArrow = GameObject.Find("Up Arrow");
@@ -139,6 +141,7 @@ public class GameControl : MonoBehaviour
 
     public static void ArenaToggle()
     {
+        canvasCode.GetComponent<Academy>().ControlButton();
         if (arenaToggle == false)
         {
             arenaToggle = true;

@@ -600,38 +600,13 @@ public class Academy : MonoBehaviour
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
-                GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 220);
-                var characterICard = Instantiate(iCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterAskedCard = Instantiate(askedCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterWhatCard = Instantiate(whatCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterYourCard = Instantiate(yourCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterNameCard = Instantiate(nameCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterIsCard = Instantiate(isCard, new Vector3(0, 0, 0), Quaternion.identity);
-
-                characterICard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterAskedCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterWhatCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterYourCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterNameCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterIsCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+                StartCoroutine((DinoCoroutine02()));
             }
             else if (roundNumber == 1)
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
-                GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(540, 110);
-                GameControl.RedBG();
-                var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterAreCard = Instantiate(areCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterNotCard = Instantiate(notCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterFromCard = Instantiate(fromCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterHereCard = Instantiate(hereCard, new Vector3(0, 0, 0), Quaternion.identity);
-
-                characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterAreCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterNotCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterFromCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterHereCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+                StartCoroutine((DinoCoroutine03()));
             }
             else if (roundNumber == 2)
             {
@@ -649,9 +624,9 @@ public class Academy : MonoBehaviour
             {
                 GameControl.ArenaToggle();
                 roundNumber++;
-                GameControl.characterImage.sprite = student01Sprite;
-                GameControl.characterImage.rectTransform.sizeDelta = new Vector2(310, 360);
-                StartCoroutine((Student01Coroutine()));
+                // GameControl.characterImage.sprite = student01Sprite;
+                // GameControl.characterImage.rectTransform.sizeDelta = new Vector2(310, 360);
+                StartCoroutine((Student01Coroutine01()));
             }
             else if (roundNumber == 2)
             {
@@ -659,7 +634,8 @@ public class Academy : MonoBehaviour
             }
             else
             {
-                SoundManager.playStudent01HuhSound();
+                GameControl.DestroyCharacterCards();
+                StartCoroutine((Student01Coroutine02()));
             }
 
         }
@@ -676,7 +652,6 @@ public class Academy : MonoBehaviour
                 var characterYourCard = Instantiate(yourCard, new Vector3(0, 0, 0), Quaternion.identity);
                 var characterNameCard = Instantiate(nameCard, new Vector3(0, 0, 0), Quaternion.identity);
                 var characterQuestionMarkCard = Instantiate(questionMarkCard, new Vector3(0, 0, 0), Quaternion.identity);
-
                 characterWhatCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
                 characterIsCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
                 characterYourCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
@@ -686,11 +661,6 @@ public class Academy : MonoBehaviour
         }
     }
 
-    IEnumerator playFairyAudio()
-    {
-        yield return new WaitForSeconds(2.5f);
-        ArenaSound.StartArenaSound();
-    }
 
     public void RunAway()
     {
@@ -723,7 +693,7 @@ public class Academy : MonoBehaviour
 
     IEnumerator FairyCoroutine01()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         SoundManager.playFairyTalk06Sound();
 
         var characterHelloCard = Instantiate(helloCard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -737,10 +707,9 @@ public class Academy : MonoBehaviour
         characterLostCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterQuestionMarkCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
     }
-
     IEnumerator FairyCoroutine02()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         SoundManager.playFairyTalk07Sound();
         var characterGoCard = Instantiate(goCard, new Vector3(0, 0, 0), Quaternion.identity);
         var characterThroughCard = Instantiate(throughCard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -765,17 +734,88 @@ public class Academy : MonoBehaviour
         // characterCanCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         // characterNotCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         // characterPassCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        yield return new WaitForSeconds(1.5f);
     }
-
-    IEnumerator Student01Coroutine()
+    IEnumerator Student01Coroutine01()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         SoundManager.playStudent01HiSound();
         var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
         characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
     }
+    IEnumerator Student01Coroutine02()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playStudent01HuhSound();
+    }
+    IEnumerator Student06Coroutine01()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playStudent06Talk01Sound();
+        var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterICard = Instantiate(iCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterAmCard = Instantiate(amCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterEvaCard = Instantiate(evaCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterICard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterAmCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterEvaCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+    }
 
+
+
+    IEnumerator DinoCoroutine01()
+    {
+        yield return new WaitForSeconds(2);
+        SoundManager.playDinoTalk01Sound();
+        GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 220);
+        var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterWhatCard = Instantiate(whatCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterIsCard = Instantiate(isCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterYourCard = Instantiate(yourCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterName = Instantiate(nameCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterQuestionMark = Instantiate(questionMarkCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterWhatCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterIsCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterYourCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterName.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterQuestionMark.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+    }
+    IEnumerator DinoCoroutine02()
+    {
+        yield return new WaitForSeconds(2);
+        SoundManager.playDinoTalk02Sound();
+        GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 220);
+        var characterICard = Instantiate(iCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterAskedCard = Instantiate(askedCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterWhatCard = Instantiate(whatCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterYourCard = Instantiate(yourCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterNameCard = Instantiate(nameCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterIsCard = Instantiate(isCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterICard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterAskedCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterWhatCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterYourCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterNameCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterIsCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+    }
+    IEnumerator DinoCoroutine03()
+    {
+        yield return new WaitForSeconds(2);
+        SoundManager.playDinoTalk03Sound();
+        GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(540, 110);
+        GameControl.RedBG();
+        var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterAreCard = Instantiate(areCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterNotCard = Instantiate(notCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterFromCard = Instantiate(fromCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterHereCard = Instantiate(hereCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterAreCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterNotCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterFromCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterHereCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+    }
     public void OpenFrontDoor()
     {
         frontDoor.transform.Rotate(0, 90f, 0, Space.World);
@@ -787,38 +827,16 @@ public class Academy : MonoBehaviour
 
     public void Dino()
     {
-        GameControl.characterImage.sprite = dinoSprite;
-        GameControl.characterImage.rectTransform.sizeDelta = new Vector2(300, 700);
         GameControl.ArenaToggle();
         MainMusicSound.StopMainMusicSound();
         ArenaSound.StartArenaSound();
-
-        var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
-        var characterWhatCard = Instantiate(whatCard, new Vector3(0, 0, 0), Quaternion.identity);
-        var characterIsCard = Instantiate(isCard, new Vector3(0, 0, 0), Quaternion.identity);
-        var characterYourCard = Instantiate(yourCard, new Vector3(0, 0, 0), Quaternion.identity);
-        var characterName = Instantiate(nameCard, new Vector3(0, 0, 0), Quaternion.identity);
-        characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterWhatCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterIsCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterYourCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterName.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        StartCoroutine((DinoCoroutine01()));
     }
 
     public void Student06()
     {
-        GameControl.characterImage.sprite = student06Sprite;
-        GameControl.characterImage.rectTransform.sizeDelta = new Vector2(300, 700);
         GameControl.ArenaToggle();
-
-        var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
-        var characterICard = Instantiate(iCard, new Vector3(0, 0, 0), Quaternion.identity);
-        var characterAmCard = Instantiate(amCard, new Vector3(0, 0, 0), Quaternion.identity);
-        var characterEvaCard = Instantiate(evaCard, new Vector3(0, 0, 0), Quaternion.identity);
-        characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterICard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterAmCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterEvaCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        StartCoroutine((Student06Coroutine01()));
     }
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class OutdoorsAmbientSound : MonoBehaviour
 {
     private static AudioSource audioData;
-    private AudioClip outdoorsSound;
+    // private AudioClip outdoorsSound;
 
     void Start()
     {

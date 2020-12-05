@@ -4,7 +4,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound, correctSound;
-    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, fairyTalk06, fairyTalk07, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, ArenaMusic01, WolfHello, Student01Hi, Student01Huh;
+    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, fairyTalk06, fairyTalk07, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, ArenaMusic01, WolfHello, Student01Hi, Student01Huh, dinoTalk01, dinoTalk02, dinoTalk03, student06Talk01;
     static AudioSource audioSrc;
 
     void Start()
@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
         correctSound = Resources.Load<AudioClip>("Sound/Correct");
         Student01Hi = Resources.Load<AudioClip>("Sound/AWS Polly/Hi");
         Student01Huh = Resources.Load<AudioClip>("Sound/AWS Polly/Huh");
-
+        student06Talk01 = Resources.Load<AudioClip>("Sound/AWS Polly/Student06Talk01");
         fairyTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk01");
         fairyTalk02 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk02");
         fairyTalk03 = Resources.Load<AudioClip>("Sound/AWS Polly/FairyTalk03");
@@ -46,6 +46,10 @@ public class SoundManager : MonoBehaviour
 
         WolfTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/WolfTalk01");
         WolfHello = Resources.Load<AudioClip>("Sound/AWS Polly/Hello-male-UK");
+
+        dinoTalk01 = Resources.Load<AudioClip>("Sound/AWS Polly/DinoTalk01");
+        dinoTalk02 = Resources.Load<AudioClip>("Sound/AWS Polly/DinoTalk02");
+        dinoTalk03 = Resources.Load<AudioClip>("Sound/AWS Polly/DinoTalk03");
 
         ArenaMusic01 = Resources.Load<AudioClip>("Sound/Harp");
     }
@@ -193,5 +197,24 @@ public class SoundManager : MonoBehaviour
     public static void playWordSound(AudioClip audioClip)
     {
         audioSrc.PlayOneShot(audioClip);
+    }
+
+    public static void playDinoTalk01Sound()
+    {
+        audioSrc.PlayOneShot(dinoTalk01);
+
+    }
+    public static void playDinoTalk02Sound()
+    {
+        audioSrc.PlayOneShot(dinoTalk02);
+    }
+    public static void playDinoTalk03Sound()
+    {
+        audioSrc.PlayOneShot(dinoTalk03);
+    }
+
+    public static void playStudent06Talk01Sound()
+    {
+        audioSrc.PlayOneShot(student06Talk01);
     }
 }
