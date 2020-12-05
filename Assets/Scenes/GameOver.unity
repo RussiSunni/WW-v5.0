@@ -189,10 +189,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Game over
+  m_Text: 'One of the locals detected that you were not from here.
 
 
-    One of the locals detected that you were not from here.'
+    maybe add
+    v3, some sort of loop. not a bad thing or game over state. a normal part of the
+    loop. mayb show new words they got.'
 --- !u!222 &209740414
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class GameControl : MonoBehaviour
     public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, actionHand;
     public static Text newCardText;
     public static Button runAwayButton;
-
+    public static Image playerBGPanel, characterBGPanel;
 
 
     void Awake()
@@ -63,6 +63,8 @@ public class GameControl : MonoBehaviour
         doorCard.SetActive(false);
         youCard = GameObject.Find("YouCard");
         youCard.SetActive(false);
+        hiCard = GameObject.Find("HiCard");
+        hiCard.SetActive(false);
 
         //  HideCardToggles();
 
@@ -87,7 +89,7 @@ public class GameControl : MonoBehaviour
 
         noCard = GameObject.Find("NoButton");
         readCard = GameObject.Find("ReadButton");
-        hiCard = GameObject.Find("HiButton");
+        // hiCard = GameObject.Find("HiButton");
         stopCard = GameObject.Find("StopButton");
         closeCard = GameObject.Find("CloseButton");
         byeCard = GameObject.Find("ByeButton");
@@ -129,8 +131,8 @@ public class GameControl : MonoBehaviour
         theCard = GameObject.Find("TheButton");
         sorryCard = GameObject.Find("SorryButton");
         runAwayButton = GameObject.Find("RunAwayButton").GetComponent<Button>();
-
-
+        playerBGPanel = GameObject.Find("PlayerBGPanel").GetComponent<Image>();
+        characterBGPanel = GameObject.Find("CharacterBGPanel").GetComponent<Image>();
 
         scene = "Academy";
     }
@@ -148,26 +150,26 @@ public class GameControl : MonoBehaviour
             runAwayButton.interactable = false;
         }
 
-        var tempColor1 = blackBGPanel.color;
-        var tempColor2 = characterImage.color;
-        var tempColor3 = characterTabletopPanel.color;
+        //  var tempColor1 = blackBGPanel.color;
+        //  var tempColor2 = characterImage.color;
+        //  var tempColor3 = characterTabletopPanel.color;
 
-        if (tempColor1.a == 0f)
-        {
-            tempColor1.a = 1f;
-            tempColor2.a = 1f;
-            tempColor3.a = 0.4f;
-        }
-        else
-        {
-            tempColor1.a = 0f;
-            tempColor2.a = 0f;
-            tempColor3.a = 0f;
-        }
+        //   if (tempColor3.a == 0f)
+        //    {
+        //   tempColor1.a = 1f;
+        //   tempColor2.a = 1f;
+        //      tempColor3.a = 0.4f;
+        //   }
+        //   else
+        //   {
+        //  tempColor1.a = 0f;
+        //  tempColor2.a = 0f;
+        //   tempColor3.a = 0f;
+        //  }
 
-        blackBGPanel.color = tempColor1;
-        characterImage.color = tempColor2;
-        characterTabletopPanel.color = tempColor3;
+        //   blackBGPanel.color = tempColor1;
+        //  characterImage.color = tempColor2;
+        //   characterTabletopPanel.color = tempColor3;
 
         int count = characterTabletopPanel.transform.childCount;
         if (count > 0)
@@ -183,12 +185,18 @@ public class GameControl : MonoBehaviour
 
     public static void RedBG()
     {
-        var tempColor1 = blackBGPanel.color;
-        if (tempColor1 == Color.red)
-            tempColor1 = Color.black;
-        else
-            tempColor1 = Color.red;
-        blackBGPanel.color = tempColor1;
+        var tempColor = blackBGPanel.color;
+        tempColor = Color.red;
+        tempColor.a = 0.4f;
+        blackBGPanel.color = tempColor;
+    }
+
+    public static void BlackBG()
+    {
+        var tempColor = blackBGPanel.color;
+        tempColor = Color.black;
+        tempColor.a = 0;
+        blackBGPanel.color = tempColor;
     }
 
     public static void DestroyCharacterCards()
@@ -205,20 +213,20 @@ public class GameControl : MonoBehaviour
 
     public static void NewCardOn(Sprite newCard)
     {
-        var tempColor1 = blackBGPanel.color;
+        // var tempColor1 = blackBGPanel.color;
         var tempColor2 = newCardText.color;
         var tempColor3 = newCardImage.color;
-        var tempColor4 = characterImage.color;
+        //    var tempColor4 = characterImage.color;
         var tempColor5 = characterTabletopPanel.color;
-        tempColor1.a = 1f;
+        // tempColor1.a = 1f;
         tempColor2.a = 1f;
         tempColor3.a = 1f;
-        tempColor4.a = 0f;
+        //   tempColor4.a = 0f;
         tempColor5.a = 0f;
-        blackBGPanel.color = tempColor1;
+        //    blackBGPanel.color = tempColor1;
         newCardText.color = tempColor2;
         newCardImage.color = tempColor3;
-        characterImage.color = tempColor4;
+        //    characterImage.color = tempColor4;
         characterTabletopPanel.color = tempColor5;
 
         newCardImage.sprite = newCard;
@@ -239,6 +247,28 @@ public class GameControl : MonoBehaviour
         arenaToggle = false;
         Academy.roundNumber = 0;
     }
+
+    public static void PlayerBGFlash()
+    {
+        var tempColor = playerBGPanel.color;
+        if (tempColor.a == 0f)
+            tempColor.a = 0.3f;
+        else
+            tempColor.a = 0.0f;
+        playerBGPanel.color = tempColor;
+    }
+
+    public static void CharacterBGFlash()
+    {
+        var tempColor = characterBGPanel.color;
+        if (tempColor.a == 0f)
+            tempColor.a = 0.3f;
+        else
+            tempColor.a = 0.0f;
+        characterBGPanel.color = tempColor;
+    }
+
+
     public static void HideArrows()
     {
         GameControl.upArrow.GetComponent<Button>().interactable = false;
