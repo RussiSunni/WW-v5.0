@@ -76,7 +76,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             SoundManager.playWordSound(audioClip);
         }
-        print(this.transform.parent.name);
+        //   print(this.transform.parent.name);
 
         if (Academy.inInteraction == false)
             this.transform.SetParent(hand);

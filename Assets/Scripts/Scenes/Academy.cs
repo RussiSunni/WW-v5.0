@@ -18,15 +18,15 @@ public class Academy : MonoBehaviour
     bool isRoomsDoorClosed = true, tutorial, tutorial1Complete = false;
     public static GameObject speechPages, actionPages, letterPages, numberPages, mapPage1, frontDoor, LaboratoryDoor, page1, page2, page3, page4, page5, letterPage1, letterPage2, speechTabletop, actionTabletop;
     static SpriteRenderer frontDoorway, roomsDoorway, secretary, secretaryCloseUp;
-    static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite, wolfSprite, dinoSprite, doorCardSprite, youCardSprite, student06Sprite, student01Sprite, hiCardSprite;
+    static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite, wolfSprite, dinoSprite, doorCardSprite, youCardSprite, student06Sprite, student01Sprite, hiCardSprite, evaCardSprite;
     public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold;
-    public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard;
+    public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard;
     static string timeOfDay, playerName;
     int playerAge, playerAge0, playerAge10 = 0, controlNumber = 0;
 
     //--
 
-    public GameObject teacher, student3;
+    public GameObject teacher, student3, dino;
     public GameObject[] openings, solidObjects;
 
     public bool canWalkThroughNextWall, canWalkThroughPreviousWall;
@@ -91,7 +91,8 @@ public class Academy : MonoBehaviour
         LaboratoryDoor = GameObject.Find("LaboratoryDoor");
         secretary = GameObject.Find("Secretary").GetComponent<SpriteRenderer>();
         secretaryCloseUp = GameObject.Find("Secretary Close Up").GetComponent<SpriteRenderer>();
-        student3 = GameObject.Find("Student03");
+        student3 = GameObject.Find("Student 03");
+        dino = GameObject.Find("Dino");
 
         if (GameControl.scene == "Academy")
         {
@@ -124,6 +125,10 @@ public class Academy : MonoBehaviour
         doorCardSprite = Resources.Load<Sprite>("Cards/DoorCard");
         youCardSprite = Resources.Load<Sprite>("Cards/YouCard");
         hiCardSprite = Resources.Load<Sprite>("Cards/HiCard");
+        evaCardSprite = Resources.Load<Sprite>("Cards/EvaCard");
+        youCardSprite = Resources.Load<Sprite>("Cards/YouCard");
+        hiCardSprite = Resources.Load<Sprite>("Cards/HiCard");
+        evaCardSprite = Resources.Load<Sprite>("Cards/EvaCard");
 
         //   if (GameControl.scene == "Academy Wild Area")
         if (GameControl.scene == "Academy")
@@ -495,40 +500,21 @@ public class Academy : MonoBehaviour
                 GameControl.ArenaToggle();
                 roundNumber++;
                 StartCoroutine((FairyCoroutine01()));
-                // GameControl.characterImage.sprite = fairyNeutralSprite;
-                // SoundManager.playFairyTalk06Sound();
-                // var characterHelloCard = Instantiate(helloCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // var characterAreCard = Instantiate(areCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // var characterLostCard = Instantiate(lostCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // var characterQuestionMarkCard = Instantiate(questionMarkCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // characterHelloCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                // characterAreCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                // characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                // characterLostCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                // characterQuestionMarkCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
             }
-            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "YesCard" && roundNumber == 1)
+            else if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "YesCard" && roundNumber == 1)
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
                 StartCoroutine((FairyCoroutine02()));
-                // SoundManager.playFairyTalk07Sound();
-                // var characterGoCard = Instantiate(goCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // var characterThroughCard = Instantiate(throughCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // var characterTheCard = Instantiate(theCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // var characterDoorCard = Instantiate(doorCard, new Vector3(0, 0, 0), Quaternion.identity);
-                // characterGoCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                // characterThroughCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                // characterTheCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                // characterDoorCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
             }
-            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "ThankyouCard" && roundNumber == 2)
+            else if (roundNumber == 2 && speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "ThankyouCard" || roundNumber == 2 && speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "OKCard" || roundNumber == 2 && speechTableTopCount == 2 && speechTabletop.transform.GetChild(0).gameObject.name == "OKCard" && speechTabletop.transform.GetChild(1).gameObject.name == "ThankyouCard")
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
                 GameControl.NewCardOn(doorCardSprite);
                 GameControl.doorCard.SetActive(true);
+                inInteraction = false;
+                GameControl.runAwayButton.interactable = false;
             }
             else if (roundNumber == 3)
             {
@@ -536,20 +522,16 @@ public class Academy : MonoBehaviour
             }
         }
 
-        // wolf interactions -------------------------------
-
+        // Wolf interactions -------------------------------
         else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, 5.4f) && direction == "east")
         {
             inInteraction = true;
             if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
             {
-                StartCoroutine((WolfCoroutine()));
-                //   GameControl.PlayerBGFlash();
+                StartCoroutine((WolfCoroutine01()));
                 GameControl.ArenaToggle();
                 roundNumber++;
-                GameControl.characterImage.sprite = wolfSprite;
                 SoundManager.playHelloSound();
-
             }
             // else if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "OKCard" && roundNumber == 1)
             // {
@@ -565,7 +547,8 @@ public class Academy : MonoBehaviour
             // }
             else
             {
-                SoundManager.playWolfGrowlSound();
+                roundNumber++;
+                StartCoroutine((WolfCoroutine02()));
             }
         }
 
@@ -593,10 +576,18 @@ public class Academy : MonoBehaviour
         }
 
         //Dino interaction .........................
-        else if (cameraPos.z == -10.8f && cameraPos.x == -10.8f && direction == "west")
+        else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -10.8f) && direction == "west")
         {
+            print(roundNumber);
+            print("roundNumber");
             inInteraction = true;
-            if (roundNumber == 0)
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "EvaCard" && roundNumber == 0)
+            {
+                GameControl.ArenaToggle();
+                roundNumber++;
+                StartCoroutine((DinoCoroutine04()));
+            }
+            else if (roundNumber == 0)
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
@@ -624,8 +615,6 @@ public class Academy : MonoBehaviour
             {
                 GameControl.ArenaToggle();
                 roundNumber++;
-                // GameControl.characterImage.sprite = student01Sprite;
-                // GameControl.characterImage.rectTransform.sizeDelta = new Vector2(310, 360);
                 StartCoroutine((Student01Coroutine01()));
             }
             else if (roundNumber == 2)
@@ -637,26 +626,37 @@ public class Academy : MonoBehaviour
                 GameControl.DestroyCharacterCards();
                 StartCoroutine((Student01Coroutine02()));
             }
+        }
 
+        //Student 2 interaction .........................
+        else if (cameraPos.z == 21.6f && cameraPos.x == -5.4f && direction == "north")
+        {
+            inInteraction = true;
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0 || speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HiCard" && roundNumber == 0)
+            {
+                GameControl.ArenaToggle();
+                roundNumber++;
+                StartCoroutine((Student02Coroutine01()));
+            }
         }
 
         //Student 6 interaction .........................
         else if (cameraPos.z == 21.6f && cameraPos.x == 5.4f && direction == "north")
         {
-            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0 || speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HiCard" && roundNumber == 0)
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
-                var characterWhatCard = Instantiate(whatCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterIsCard = Instantiate(isCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterYourCard = Instantiate(yourCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterNameCard = Instantiate(nameCard, new Vector3(0, 0, 0), Quaternion.identity);
-                var characterQuestionMarkCard = Instantiate(questionMarkCard, new Vector3(0, 0, 0), Quaternion.identity);
-                characterWhatCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterIsCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterYourCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterNameCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-                characterQuestionMarkCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+                StartCoroutine((Student06Coroutine02()));
+            }
+            else if (roundNumber == 2)
+            {
+                GameControl.NewCardOff();
+            }
+            else
+            {
+                GameControl.DestroyCharacterCards();
+                StartCoroutine((Student06Coroutine03()));
             }
         }
     }
@@ -672,13 +672,28 @@ public class Academy : MonoBehaviour
                 GameControl.DestroyCharacterCards();
                 GameControl.NewCardOn(hiCardSprite);
                 GameControl.hiCard.SetActive(true);
+                GameControl.runAwayButton.interactable = false;
             }
             else if (roundNumber == 2)
             {
                 GameControl.NewCardOff();
             }
         }
-
+        else if (cameraPos.z == 21.6f && cameraPos.x == 5.4f && direction == "north")
+        {
+            if (roundNumber == 1)
+            {
+                roundNumber++;
+                GameControl.DestroyCharacterCards();
+                GameControl.NewCardOn(evaCardSprite);
+                GameControl.evaCard.SetActive(true);
+                GameControl.runAwayButton.interactable = false;
+            }
+            else if (roundNumber == 2)
+            {
+                GameControl.NewCardOff();
+            }
+        }
         else
         {
             GameControl.ArenaToggle();
@@ -686,7 +701,6 @@ public class Academy : MonoBehaviour
             MainMusicSound.PlayMainMusicSound();
             roundNumber = 0;
         }
-
         GameControl.BlackBG();
     }
 
@@ -720,9 +734,9 @@ public class Academy : MonoBehaviour
         characterTheCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterDoorCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
     }
-    IEnumerator WolfCoroutine()
+    IEnumerator WolfCoroutine01()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         SoundManager.playWolfHelloSound();
         var characterHelloCard = Instantiate(helloCard, new Vector3(0, 0, 0), Quaternion.identity);
         characterHelloCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
@@ -734,6 +748,11 @@ public class Academy : MonoBehaviour
         // characterCanCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         // characterNotCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         // characterPassCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+    }
+    IEnumerator WolfCoroutine02()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playWolfGrowlSound();
     }
     IEnumerator Student01Coroutine01()
     {
@@ -749,7 +768,7 @@ public class Academy : MonoBehaviour
     }
     IEnumerator Student06Coroutine01()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.7f);
         SoundManager.playStudent06Talk01Sound();
         var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
         var characterICard = Instantiate(iCard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -760,13 +779,39 @@ public class Academy : MonoBehaviour
         characterAmCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterEvaCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
     }
+    IEnumerator Student06Coroutine02()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playStudent06Talk02Sound();
+        var characterWhatCard = Instantiate(whatCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterIsCard = Instantiate(isCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterYourCard = Instantiate(yourCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterNameCard = Instantiate(nameCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterQuestionMarkCard = Instantiate(questionMarkCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterWhatCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterIsCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterYourCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterNameCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterQuestionMarkCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+    }
+    IEnumerator Student06Coroutine03()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playStudent06HuhSound();
+    }
 
-
+    IEnumerator Student02Coroutine01()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playStudent02HiSound();
+        var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+    }
 
     IEnumerator DinoCoroutine01()
     {
-        yield return new WaitForSeconds(2);
-        SoundManager.playDinoTalk01Sound();
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playSound(SoundManager.dinoTalk01);
         GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 220);
         var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
         var characterWhatCard = Instantiate(whatCard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -783,8 +828,8 @@ public class Academy : MonoBehaviour
     }
     IEnumerator DinoCoroutine02()
     {
-        yield return new WaitForSeconds(2);
-        SoundManager.playDinoTalk02Sound();
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playSound(SoundManager.dinoTalk02);
         GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 220);
         var characterICard = Instantiate(iCard, new Vector3(0, 0, 0), Quaternion.identity);
         var characterAskedCard = Instantiate(askedCard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -801,8 +846,8 @@ public class Academy : MonoBehaviour
     }
     IEnumerator DinoCoroutine03()
     {
-        yield return new WaitForSeconds(2);
-        SoundManager.playDinoTalk03Sound();
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playSound(SoundManager.dinoTalk03);
         GameControl.characterTabletopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(540, 110);
         GameControl.RedBG();
         var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -816,6 +861,34 @@ public class Academy : MonoBehaviour
         characterFromCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterHereCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
     }
+    IEnumerator DinoCoroutine04()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playSound(SoundManager.dinoTalk04);
+        var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterEvaCard = Instantiate(evaCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterEvaCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        StartCoroutine((DinoCoroutine05()));
+    }
+    IEnumerator DinoCoroutine05()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GameControl.DestroyCharacterCards();
+        SoundManager.playSound(SoundManager.dinoTalk05);
+        var characterNiceCard = Instantiate(niceCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterToCard = Instantiate(toCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterMeetCard = Instantiate(meetCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterNiceCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterToCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterMeetCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        yield return new WaitForSeconds(0.5f);
+        dino.GetComponent<Dino>().Move();
+        yield return new WaitForSeconds(0.5f);
+        dino.GetComponent<Dino>().Move();
+    }
     public void OpenFrontDoor()
     {
         frontDoor.transform.Rotate(0, 90f, 0, Space.World);
@@ -827,6 +900,7 @@ public class Academy : MonoBehaviour
 
     public void Dino()
     {
+        ControlButton();
         GameControl.ArenaToggle();
         MainMusicSound.StopMainMusicSound();
         ArenaSound.StartArenaSound();
@@ -835,6 +909,7 @@ public class Academy : MonoBehaviour
 
     public void Student06()
     {
+        ControlButton();
         GameControl.ArenaToggle();
         StartCoroutine((Student06Coroutine01()));
     }

@@ -10,7 +10,7 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl control;
     public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
-    public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard, doorCard, youCard;
+    public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard, doorCard, youCard, evaCard;
     public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, actionHandPanel, canvasCode;
     public static string scene;
     public GameObject UICanvas, dictionaryCanvas;
@@ -67,6 +67,8 @@ public class GameControl : MonoBehaviour
         youCard.SetActive(false);
         hiCard = GameObject.Find("HiCard");
         hiCard.SetActive(false);
+        evaCard = GameObject.Find("EvaCard");
+        evaCard.SetActive(false);
 
         //  HideCardToggles();
 
@@ -74,64 +76,64 @@ public class GameControl : MonoBehaviour
         // dictionaryCanvas = GameObject.Find("DictionaryCanvas");
         // dictionaryCanvas.SetActive(false);
 
-        helloCard = GameObject.Find("HelloButton");
-        goodCard = GameObject.Find("GoodButton");
+        // helloCard = GameObject.Find("HelloButton");
+        // goodCard = GameObject.Find("GoodButton");
 
         //  if (hasGoodCard)
         //      GameControl.goodCard.GetComponent<Button>().interactable = true;
 
-        badCard = GameObject.Find("BadButton");
+        // badCard = GameObject.Find("BadButton");
 
-        goodbyeCard = GameObject.Find("GoodbyeButton");
-        openCard = GameObject.Find("OpenButton");
-        yesCard = GameObject.Find("YesButton");
+        // goodbyeCard = GameObject.Find("GoodbyeButton");
+        // openCard = GameObject.Find("OpenButton");
+        // yesCard = GameObject.Find("YesButton");
 
         //   if (hasYesCard)
         //       GameControl.yesCard.GetComponent<Button>().interactable = true;
 
-        noCard = GameObject.Find("NoButton");
-        readCard = GameObject.Find("ReadButton");
-        // hiCard = GameObject.Find("HiButton");
-        stopCard = GameObject.Find("StopButton");
-        closeCard = GameObject.Find("CloseButton");
-        byeCard = GameObject.Find("ByeButton");
-        thankYouCard = GameObject.Find("ThankYouButton");
+        // noCard = GameObject.Find("NoButton");
+        // readCard = GameObject.Find("ReadButton");
+        // // hiCard = GameObject.Find("HiButton");
+        // stopCard = GameObject.Find("StopButton");
+        // closeCard = GameObject.Find("CloseButton");
+        // byeCard = GameObject.Find("ByeButton");
+        // thankYouCard = GameObject.Find("ThankYouButton");
 
-        okCard = GameObject.Find("OKButton");
-        girlCard = GameObject.Find("GirlButton");
-        boyCard = GameObject.Find("BoyButton");
-        sitCard = GameObject.Find("SitButton");
-        morningCard = GameObject.Find("MorningButton");
-        afternoonCard = GameObject.Find("AfternoonButton");
-        eveningCard = GameObject.Find("EveningButton");
-
-
-        oneCard = GameObject.Find("1Button");
-        twoCard = GameObject.Find("2Button");
-        threeCard = GameObject.Find("3Button");
-        fourCard = GameObject.Find("4Button");
-        fiveCard = GameObject.Find("5Button");
-        sixCard = GameObject.Find("6Button");
-        sevenCard = GameObject.Find("7Button");
-        eightCard = GameObject.Find("8Button");
-        nineCard = GameObject.Find("9Button");
-        tenCard = GameObject.Find("10Button");
-        elevenCard = GameObject.Find("11Button");
-        twelveCard = GameObject.Find("12Button");
-        thirteenCard = GameObject.Find("13Button");
-        fourteenCard = GameObject.Find("14Button");
-        fifteenCard = GameObject.Find("15Button");
-        sixteenCard = GameObject.Find("16Button");
-        seventeenCard = GameObject.Find("17Button");
-        eighteenCard = GameObject.Find("18Button");
-        nineteenCard = GameObject.Find("19Button");
-        twentyCard = GameObject.Find("20Button");
+        // okCard = GameObject.Find("OKButton");
+        // girlCard = GameObject.Find("GirlButton");
+        // boyCard = GameObject.Find("BoyButton");
+        // sitCard = GameObject.Find("SitButton");
+        // morningCard = GameObject.Find("MorningButton");
+        // afternoonCard = GameObject.Find("AfternoonButton");
+        // eveningCard = GameObject.Find("EveningButton");
 
 
-        sueCard = GameObject.Find("SueButton");
-        mayCard = GameObject.Find("MayButton");
-        theCard = GameObject.Find("TheButton");
-        sorryCard = GameObject.Find("SorryButton");
+        // oneCard = GameObject.Find("1Button");
+        // twoCard = GameObject.Find("2Button");
+        // threeCard = GameObject.Find("3Button");
+        // fourCard = GameObject.Find("4Button");
+        // fiveCard = GameObject.Find("5Button");
+        // sixCard = GameObject.Find("6Button");
+        // sevenCard = GameObject.Find("7Button");
+        // eightCard = GameObject.Find("8Button");
+        // nineCard = GameObject.Find("9Button");
+        // tenCard = GameObject.Find("10Button");
+        // elevenCard = GameObject.Find("11Button");
+        // twelveCard = GameObject.Find("12Button");
+        // thirteenCard = GameObject.Find("13Button");
+        // fourteenCard = GameObject.Find("14Button");
+        // fifteenCard = GameObject.Find("15Button");
+        // sixteenCard = GameObject.Find("16Button");
+        // seventeenCard = GameObject.Find("17Button");
+        // eighteenCard = GameObject.Find("18Button");
+        // nineteenCard = GameObject.Find("19Button");
+        // twentyCard = GameObject.Find("20Button");
+
+
+        // sueCard = GameObject.Find("SueButton");
+        // mayCard = GameObject.Find("MayButton");
+        // theCard = GameObject.Find("TheButton");
+        // sorryCard = GameObject.Find("SorryButton");
         runAwayButton = GameObject.Find("RunAwayButton").GetComponent<Button>();
         playerBGPanel = GameObject.Find("PlayerBGPanel").GetComponent<Image>();
         characterBGPanel = GameObject.Find("CharacterBGPanel").GetComponent<Image>();
@@ -141,7 +143,7 @@ public class GameControl : MonoBehaviour
 
     public static void ArenaToggle()
     {
-        canvasCode.GetComponent<Academy>().ControlButton();
+
         if (arenaToggle == false)
         {
             arenaToggle = true;
