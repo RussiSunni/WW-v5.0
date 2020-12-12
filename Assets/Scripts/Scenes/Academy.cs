@@ -581,7 +581,7 @@ public class Academy : MonoBehaviour
             print(roundNumber);
             print("roundNumber");
             inInteraction = true;
-            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "EvaCard" && roundNumber == 0)
+            if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "EvaCard")
             {
                 GameControl.ArenaToggle();
                 roundNumber++;
@@ -806,6 +806,20 @@ public class Academy : MonoBehaviour
         SoundManager.playStudent02HiSound();
         var characterHiCard = Instantiate(hiCard, new Vector3(0, 0, 0), Quaternion.identity);
         characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        StartCoroutine((Student02Coroutine02()));
+    }
+    IEnumerator Student02Coroutine02()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        var characterHowCard = Instantiate(howCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterAreCard = Instantiate(areCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterQuestionMarkCard = Instantiate(questionMarkCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterHowCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterAreCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterQuestionMarkCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
     }
 
     IEnumerator DinoCoroutine01()
@@ -869,6 +883,8 @@ public class Academy : MonoBehaviour
         var characterEvaCard = Instantiate(evaCard, new Vector3(0, 0, 0), Quaternion.identity);
         characterHiCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterEvaCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        ArenaSound.StopArenaSound();
+        MainMusicSound.PlayMainMusicSound();
         StartCoroutine((DinoCoroutine05()));
     }
     IEnumerator DinoCoroutine05()
@@ -884,9 +900,20 @@ public class Academy : MonoBehaviour
         characterToCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterMeetCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
+        GameControl.DestroyCharacterCards();
         dino.GetComponent<Dino>().Move();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
+        dino.GetComponent<Dino>().Move();
+        yield return new WaitForSeconds(1.5f);
+        dino.GetComponent<Dino>().Move();
+        yield return new WaitForSeconds(1.5f);
+        dino.GetComponent<Dino>().Move();
+        yield return new WaitForSeconds(1.5f);
+        dino.GetComponent<Dino>().Move();
+        yield return new WaitForSeconds(1.5f);
+        dino.GetComponent<Dino>().Move();
+        yield return new WaitForSeconds(1.5f);
         dino.GetComponent<Dino>().Move();
     }
     public void OpenFrontDoor()

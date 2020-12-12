@@ -10,6 +10,11 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Intro");
     }
 
+     public void LoadWilds()
+    {
+        SceneManager.LoadScene("The Wilds");
+    }
+
     public void SwipeTest()
     {
         SceneManager.LoadScene("SwipeTest");

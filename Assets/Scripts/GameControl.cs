@@ -13,7 +13,7 @@ public class GameControl : MonoBehaviour
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard, doorCard, youCard, evaCard;
     public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, actionHandPanel, canvasCode;
     public static string scene;
-    public GameObject UICanvas, dictionaryCanvas;
+    public GameObject UICanvas;
     public static string playerName;
     public static int playerAge;
     public static int sceneOne = 1;
