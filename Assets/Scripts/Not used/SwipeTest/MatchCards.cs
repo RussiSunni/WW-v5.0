@@ -127,15 +127,15 @@ public class MatchCards : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
                     if (card == GameControl.goodCard && otherCard == GameControl.morningCard)
                     {
-                        Academy.MorningCard();
+                        // Academy.MorningCard();
                     }
                     else if (card == GameControl.goodCard && otherCard == GameControl.afternoonCard)
                     {
-                        Academy.AfternoonCard();
+                        //  Academy.AfternoonCard();
                     }
                     else if (card == GameControl.goodCard && otherCard == GameControl.eveningCard)
                     {
-                        Academy.EveningCard();
+                        //   Academy.EveningCard();
                     }
                 }
                 //  Debug.Log(card);

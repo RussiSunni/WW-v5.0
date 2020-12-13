@@ -316,19 +316,19 @@ public class GameControl : MonoBehaviour
         cardPhraseToggle.SetActive(true);
     }
 
-    public void Dictionary()
-    {
-        if (dictionaryCanvas.activeSelf)
-        {
-            dictionaryCanvas.SetActive(false);
-            UICanvas.SetActive(true);
-        }
-        else if (UICanvas.activeSelf)
-        {
-            dictionaryCanvas.SetActive(true);
-            UICanvas.SetActive(false);
-        }
-    }
+    // public void Dictionary()
+    // {
+    //     if (dictionaryCanvas.activeSelf)
+    //     {
+    //         dictionaryCanvas.SetActive(false);
+    //         UICanvas.SetActive(true);
+    //     }
+    //     else if (UICanvas.activeSelf)
+    //     {
+    //         dictionaryCanvas.SetActive(true);
+    //         UICanvas.SetActive(false);
+    //     }
+    // }
     public static void CanMoveCards()
     {
         canMoveCards = true;
@@ -373,7 +373,7 @@ public class GameControl : MonoBehaviour
             //     sceneTwo = data.sceneTwo;
             hasGoodCard = data.hasGoodCard;
             hasYesCard = data.hasYesCard;
-            print(sceneOne);
+            // print(sceneOne);
         }
     }
 

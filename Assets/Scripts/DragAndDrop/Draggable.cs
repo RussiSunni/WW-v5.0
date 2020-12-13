@@ -78,8 +78,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         //   print(this.transform.parent.name);
 
-        if (Academy.inInteraction == false)
+        if (Academy.inInteraction == false && TheWilds.inInteraction == false)
             this.transform.SetParent(hand);
-
     }
 }

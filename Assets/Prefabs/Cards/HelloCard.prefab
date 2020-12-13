@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 4965398096993522726}
   - component: {fileID: 4965398096993522724}
   - component: {fileID: 4965398096993522725}
-  - component: {fileID: 4965398096993522723}
   - component: {fileID: 3698867563569608751}
   - component: {fileID: 1358086564274084669}
   m_Layer: 5
-  m_Name: Card
+  m_Name: HelloCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,19 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4965398096993522723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4965398096993522727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3c7aa9313ed70d7970adadb67d106c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentToReturnTo: {fileID: 0}
 --- !u!225 &3698867563569608751
 CanvasGroup:
   m_ObjectHideFlags: 0
