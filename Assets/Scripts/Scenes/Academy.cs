@@ -13,14 +13,14 @@ public class Academy : MonoBehaviour
     float y = 0;
     float x = 0;
     public static string direction;
-    static Text dialogue;
+    public static Text dialogue;
     public static int textNumber, roundNumber;
     bool isRoomsDoorClosed = true, tutorial, tutorial1Complete = false;
     public static GameObject speechPages, actionPages, letterPages, numberPages, mapPage1, frontDoor, LaboratoryDoor, page1, page2, page3, page4, page5, letterPage1, letterPage2, speechTabletop, actionTabletop;
     static SpriteRenderer frontDoorway, roomsDoorway, secretary, secretaryCloseUp;
     static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite, wolfSprite, dinoSprite, doorCardSprite, youCardSprite, student06Sprite, student01Sprite, hiCardSprite, evaCardSprite;
     public static bool helloHold, goodHold, oneHold, twoHold, threeHold, fourHold, fiveHold, sixHold, sevenHold, eightHold, nineHold;
-    public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard;
+    public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard;
     static string timeOfDay, playerName;
     int playerAge, playerAge0, playerAge10 = 0, controlNumber = 0;
 
@@ -30,11 +30,9 @@ public class Academy : MonoBehaviour
     public GameObject[] openings, solidObjects;
 
     public bool canWalkThroughNextWall, canWalkThroughPreviousWall;
-
     public static bool inInteraction;
 
-
-    GameObject fairy, fairyInTree;
+    public static GameObject fairy, fairyInTree;
     Animation fairyAnimation;
 
     public Color black = Color.black;
@@ -498,10 +496,12 @@ public class Academy : MonoBehaviour
             {
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
-                GameControl.NewCardOn(doorCardSprite);
-                GameControl.doorCard.SetActive(true);
+                StartCoroutine((FairyCoroutine03()));
+                // GameControl.NewCardOn(doorCardSprite);
+                //  GameControl.doorCard.SetActive(true);
                 inInteraction = false;
                 GameControl.runAwayButton.interactable = false;
+                GameControl.ArenaToggle();
             }
             else if (roundNumber == 3)
             {
@@ -620,6 +620,7 @@ public class Academy : MonoBehaviour
         {
             if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0 || speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HiCard" && roundNumber == 0)
             {
+
                 roundNumber++;
                 GameControl.DestroyCharacterCards();
                 StartCoroutine((Student06Coroutine02()));
@@ -641,15 +642,15 @@ public class Academy : MonoBehaviour
     {
         if (cameraPos.z == 16.2f && cameraPos.x == 5.4f && direction == "east")
         {
+            // if (roundNumber == 1)
+            // {
+            //     roundNumber++;
+            //     GameControl.DestroyCharacterCards();
+            //     GameControl.NewCardOn(hiCardSprite);
+            //     GameControl.hiCard.SetActive(true);
+            //     GameControl.runAwayButton.interactable = false;
+            // }
             if (roundNumber == 1)
-            {
-                roundNumber++;
-                GameControl.DestroyCharacterCards();
-                GameControl.NewCardOn(hiCardSprite);
-                GameControl.hiCard.SetActive(true);
-                GameControl.runAwayButton.interactable = false;
-            }
-            else if (roundNumber == 2)
             {
                 GameControl.NewCardOff();
             }
@@ -709,6 +710,25 @@ public class Academy : MonoBehaviour
         characterTheCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         characterDoorCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
     }
+    IEnumerator FairyCoroutine03()
+    {
+        yield return new WaitForSeconds(1.5f);
+        var characterYouCard = Instantiate(youCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterWillCard = Instantiate(willCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterNeedCard = Instantiate(needCard, new Vector3(0, 0, 0), Quaternion.identity);
+        var characterThisCard = Instantiate(thisCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterYouCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterWillCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterNeedCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterThisCard.transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+
+        ControlButton();
+
+        var characterDoorCard = Instantiate(doorCard, new Vector3(0, 0, 0), Quaternion.identity);
+        characterDoorCard.transform.SetParent(GameControl.actionTabletopPanel.transform, false);
+        characterDoorCard.gameObject.AddComponent<Draggable>();
+        SoundManager.playSound(SoundManager.fairyTalk08);
+    }
     IEnumerator WolfCoroutine01()
     {
         yield return new WaitForSeconds(1.5f);
@@ -727,10 +747,11 @@ public class Academy : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         SoundManager.playWolfGrowlSound();
 
-        yield return new WaitForSeconds(1.5f);
+        //yield return new WaitForSeconds(1.5f);
         fairy.SetActive(true);
         dialogue.text = "You lose a card.";
         FairyAnimation.IncorrectAnswer();
+        GameControl.noCard.SetActive(false);
     }
     IEnumerator Student01Coroutine01()
     {
@@ -744,6 +765,9 @@ public class Academy : MonoBehaviour
         dialogue.text = "You can choose a card.";
         FairyAnimation.CorrectAnswer();
         characterHiCard.gameObject.AddComponent<Draggable>();
+        //    GameObject hiCardClone = GameObject.Find("hiCard(Clone)");
+        // hiCardClone.transform.SetParent(GameControl.speechTabletopPanel.transform, false);
+
     }
     IEnumerator Student01Coroutine02()
     {

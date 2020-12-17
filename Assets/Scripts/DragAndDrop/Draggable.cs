@@ -72,13 +72,18 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void ReturnToHand()
     {
-        if (this.transform.parent.name == "SpeechTabletop")
+        //print(this.transform.parent.name);
+        if (this.transform.parent.name != "SpeechHand")
         {
             SoundManager.playWordSound(audioClip);
+
         }
-        //   print(this.transform.parent.name);
 
         if (Academy.inInteraction == false && TheWilds.inInteraction == false)
+        {
             this.transform.SetParent(hand);
+        }
+
+
     }
 }

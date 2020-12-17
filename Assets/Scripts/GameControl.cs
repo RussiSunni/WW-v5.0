@@ -13,13 +13,13 @@ public class GameControl : MonoBehaviour
     public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard, doorCard, youCard, evaCard;
     public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, actionHandPanel, canvasCode;
     public static string scene;
-    public GameObject UICanvas;
+    public static GameObject UICanvas;
     public static string playerName;
     public static int playerAge;
     public static int sceneOne = 1;
     public static int sceneTwo = 1;
     public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard, canMoveCards, arenaToggle;
-    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, actionHand;
+    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, actionHand, actionTabletopPanel, speechTabletopPanel;
     public static Text newCardText;
     public static Button runAwayButton;
     public static Image playerBGPanel, characterBGPanel;
@@ -55,6 +55,8 @@ public class GameControl : MonoBehaviour
         //  cardMoveToggle = GameObject.Find("CardMoveToggle");
         //  cardPhraseToggle = GameObject.Find("CardPhraseToggle");
         characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
+        actionTabletopPanel = GameObject.Find("ActionTabletop").GetComponent<Image>();
+        speechTabletopPanel = GameObject.Find("SpeechTabletop").GetComponent<Image>();
         actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
         blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();
         characterImage = GameObject.Find("CharacterImage").GetComponent<Image>();
@@ -69,6 +71,7 @@ public class GameControl : MonoBehaviour
         hiCard.SetActive(false);
         evaCard = GameObject.Find("EvaCard");
         evaCard.SetActive(false);
+        noCard = GameObject.Find("NoCard");
 
         //  HideCardToggles();
 
