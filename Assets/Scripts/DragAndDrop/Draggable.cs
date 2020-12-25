@@ -12,6 +12,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     GameObject placeholder = null;
     public AudioClip audioClip;
 
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         // Debug.Log("begin drag");
@@ -61,7 +62,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //   Debug.Log("end drag");
+
 
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
@@ -73,17 +74,18 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void ReturnToHand()
     {
         //print(this.transform.parent.name);
-        if (this.transform.parent.name != "SpeechHand")
-        {
-            SoundManager.playWordSound(audioClip);
+        // if (this.transform.parent.name != "SpeechHand")
+        // {
+        //     print("test");
+        //     SoundManager.playWordSound(audioClip);
 
-        }
+        // }
 
         if (Academy.inInteraction == false && TheWilds.inInteraction == false)
         {
             this.transform.SetParent(hand);
         }
-
-
     }
+
+
 }

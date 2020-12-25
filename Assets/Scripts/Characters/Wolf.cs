@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class Wolf : MonoBehaviour
 {
-    List<GameObject> cards = new List<GameObject>();
-    GameObject helloCard;
+    public static List<Transform> cards = new List<Transform>();
+    public Sprite cardBackSprite;
+    Image cardImage;
     void Start()
     {
-        helloCard = GameObject.Find("HelloCard");
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
 
-        cards.Add(helloCard);
-        print(cards[0].name);
+        cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
+
+        cards.Add(gameControlScript.hiCard);
+
+        cardImage = cards[0].GetComponent<Image>();
+        cardImage.sprite = cardBackSprite;
     }
-
-    // add any cards from player, plus logic on when to use
 }
 

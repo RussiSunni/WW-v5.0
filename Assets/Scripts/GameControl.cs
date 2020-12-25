@@ -9,22 +9,21 @@ using UnityEngine.UI;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject helloCard, goodbyeCard, openCard, yesCard, noCard, readCard, hiCard, stopCard, closeCard, byeCard, thankYouCard, okCard, sueCard, mayCard, theCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
-    public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard, doorCard, youCard, evaCard;
-    public static GameObject upArrow, rightArrow, leftArrow, spellbookButtonLeft, spellbookButtonRight, controlButton, cardMoveToggle, cardPhraseToggle, actionHandPanel, canvasCode;
-    public static string scene;
-    public static GameObject UICanvas;
+    public static GameObject goodbyeCard, readCard, stopCard, closeCard, byeCard, sueCard, mayCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
+    //public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
+    public static GameObject upArrow, rightArrow, leftArrow, controlButton, actionHandPanel, canvasCode;
+    public static GameObject UICanvas, speechTabletop, actionTabletop;
     public static string playerName;
     public static int playerAge;
-    public static int sceneOne = 1;
-    public static int sceneTwo = 1;
-    public static bool hasHelloCard, hasGoodbyeCard, hasOpenCard, hasYesCard, hasNoCard, hasGoodCard, hasBadCard, canMoveCards, arenaToggle;
-    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, actionHand, actionTabletopPanel, speechTabletopPanel;
+    public static bool arenaToggle;
+    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, speechHand, actionHand, actionTabletopPanel, speechTabletopPanel, characterHand;
     public static Text newCardText;
     public static Button runAwayButton;
     public static Image playerBGPanel, characterBGPanel;
+    public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard;
+    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, cardBackSprite;
 
-
+    public static DropZone speechTabletopScript, actionTabletopScript;
     void Awake()
     {
         if (control == null)
@@ -44,104 +43,60 @@ public class GameControl : MonoBehaviour
         Load();
         canvasCode = GameObject.Find("CanvasCode");
 
-
         UICanvas = GameObject.Find("UICanvas");
         upArrow = GameObject.Find("Up Arrow");
         rightArrow = GameObject.Find("Right Arrow");
         leftArrow = GameObject.Find("Left Arrow");
-        spellbookButtonLeft = GameObject.Find("SpellbookButton Left");
-        spellbookButtonRight = GameObject.Find("SpellbookButton Right");
         controlButton = GameObject.Find("ControlButton");
-        //  cardMoveToggle = GameObject.Find("CardMoveToggle");
-        //  cardPhraseToggle = GameObject.Find("CardPhraseToggle");
+
         characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
+        characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
         actionTabletopPanel = GameObject.Find("ActionTabletop").GetComponent<Image>();
         speechTabletopPanel = GameObject.Find("SpeechTabletop").GetComponent<Image>();
         actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
+        speechHand = GameObject.Find("SpeechHand").GetComponent<Image>();
+
+        speechTabletop = GameObject.Find("SpeechTabletop");
+        actionTabletop = GameObject.Find("ActionTabletop");
+
+        speechTabletopScript = speechTabletop.GetComponent<DropZone>();
+        actionTabletopScript = actionTabletop.GetComponent<DropZone>();
+
         blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();
-        characterImage = GameObject.Find("CharacterImage").GetComponent<Image>();
-        newCardImage = GameObject.Find("NewCardImage").GetComponent<Image>();
-        newCardText = GameObject.Find("NewCardText").GetComponent<Text>();
-        actionHandPanel = GameObject.Find("ActionHand");
-        doorCard = GameObject.Find("DoorCard");
-        doorCard.SetActive(false);
-        youCard = GameObject.Find("YouCard");
-        youCard.SetActive(false);
-        hiCard = GameObject.Find("HiCard");
-        hiCard.SetActive(false);
-        evaCard = GameObject.Find("EvaCard");
-        evaCard.SetActive(false);
-        noCard = GameObject.Find("NoCard");
-
-        //  HideCardToggles();
 
 
-        // dictionaryCanvas = GameObject.Find("DictionaryCanvas");
-        // dictionaryCanvas.SetActive(false);
+        // doorCard = GameObject.Find("DoorCard");
+        // doorCard.SetActive(false);
+        // youCard = GameObject.Find("YouCard");
+        // youCard.SetActive(false);
+        // hiCard = GameObject.Find("HiCard");
+        // hiCard.SetActive(false);
+        // evaCard = GameObject.Find("EvaCard");
+        // evaCard.SetActive(false);
+        // noCard = GameObject.Find("NoCard");
 
-        // helloCard = GameObject.Find("HelloButton");
-        // goodCard = GameObject.Find("GoodButton");
-
-        //  if (hasGoodCard)
-        //      GameControl.goodCard.GetComponent<Button>().interactable = true;
-
-        // badCard = GameObject.Find("BadButton");
-
-        // goodbyeCard = GameObject.Find("GoodbyeButton");
-        // openCard = GameObject.Find("OpenButton");
-        // yesCard = GameObject.Find("YesButton");
-
-        //   if (hasYesCard)
-        //       GameControl.yesCard.GetComponent<Button>().interactable = true;
-
-        // noCard = GameObject.Find("NoButton");
-        // readCard = GameObject.Find("ReadButton");
-        // // hiCard = GameObject.Find("HiButton");
-        // stopCard = GameObject.Find("StopButton");
-        // closeCard = GameObject.Find("CloseButton");
-        // byeCard = GameObject.Find("ByeButton");
-        // thankYouCard = GameObject.Find("ThankYouButton");
-
-        // okCard = GameObject.Find("OKButton");
-        // girlCard = GameObject.Find("GirlButton");
-        // boyCard = GameObject.Find("BoyButton");
-        // sitCard = GameObject.Find("SitButton");
-        // morningCard = GameObject.Find("MorningButton");
-        // afternoonCard = GameObject.Find("AfternoonButton");
-        // eveningCard = GameObject.Find("EveningButton");
-
-
-        // oneCard = GameObject.Find("1Button");
-        // twoCard = GameObject.Find("2Button");
-        // threeCard = GameObject.Find("3Button");
-        // fourCard = GameObject.Find("4Button");
-        // fiveCard = GameObject.Find("5Button");
-        // sixCard = GameObject.Find("6Button");
-        // sevenCard = GameObject.Find("7Button");
-        // eightCard = GameObject.Find("8Button");
-        // nineCard = GameObject.Find("9Button");
-        // tenCard = GameObject.Find("10Button");
-        // elevenCard = GameObject.Find("11Button");
-        // twelveCard = GameObject.Find("12Button");
-        // thirteenCard = GameObject.Find("13Button");
-        // fourteenCard = GameObject.Find("14Button");
-        // fifteenCard = GameObject.Find("15Button");
-        // sixteenCard = GameObject.Find("16Button");
-        // seventeenCard = GameObject.Find("17Button");
-        // eighteenCard = GameObject.Find("18Button");
-        // nineteenCard = GameObject.Find("19Button");
-        // twentyCard = GameObject.Find("20Button");
-
-
-        // sueCard = GameObject.Find("SueButton");
-        // mayCard = GameObject.Find("MayButton");
-        // theCard = GameObject.Find("TheButton");
-        // sorryCard = GameObject.Find("SorryButton");
-        runAwayButton = GameObject.Find("RunAwayButton").GetComponent<Button>();
+        // runAwayButton = GameObject.Find("RunAwayButton").GetComponent<Button>();
         playerBGPanel = GameObject.Find("PlayerBGPanel").GetComponent<Image>();
         characterBGPanel = GameObject.Find("CharacterBGPanel").GetComponent<Image>();
 
-        scene = "Academy";
+        cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
+        hiCardSprite = Resources.Load<Sprite>("Cards/HiCard");
+        helloCardSprite = Resources.Load<Sprite>("Cards/HelloCard");
+        areCardSprite = Resources.Load<Sprite>("Cards/AreCard");
+        youCardSprite = Resources.Load<Sprite>("Cards/YouCard");
+        lostCardSprite = Resources.Load<Sprite>("Cards/LostCard");
+        goCardSprite = Resources.Load<Sprite>("Cards/GoCard");
+        throughCardSprite = Resources.Load<Sprite>("Cards/ThroughCard");
+        theCardSprite = Resources.Load<Sprite>("Cards/TheCard");
+        doorCardSprite = Resources.Load<Sprite>("Cards/DoorCard");
+        needCardSprite = Resources.Load<Sprite>("Cards/NeedCard");
+        willCardSprite = Resources.Load<Sprite>("Cards/WillCard");
+        thisCardSprite = Resources.Load<Sprite>("Cards/ThisCard");
+        okCardSprite = Resources.Load<Sprite>("Cards/OKCard");
+        questionMarkCardSprite = Resources.Load<Sprite>("Cards/QuestionMarkCard");
+        iCardSprite = Resources.Load<Sprite>("Cards/ICard");
+        amCardSprite = Resources.Load<Sprite>("Cards/AmCard");
+        evaCardSprite = Resources.Load<Sprite>("Cards/EvaCard");
     }
 
     public static void ArenaToggle()
@@ -256,26 +211,6 @@ public class GameControl : MonoBehaviour
         Academy.roundNumber = 0;
     }
 
-    public static void PlayerBGFlash()
-    {
-        var tempColor = playerBGPanel.color;
-        if (tempColor.a == 0f)
-            tempColor.a = 0.3f;
-        else
-            tempColor.a = 0.0f;
-        playerBGPanel.color = tempColor;
-    }
-
-    public static void CharacterBGFlash()
-    {
-        var tempColor = characterBGPanel.color;
-        if (tempColor.a == 0f)
-            tempColor.a = 0.3f;
-        else
-            tempColor.a = 0.0f;
-        characterBGPanel.color = tempColor;
-    }
-
 
     public static void HideArrows()
     {
@@ -308,16 +243,16 @@ public class GameControl : MonoBehaviour
         GameControl.rightArrow.GetComponent<Button>().interactable = true;
         GameControl.leftArrow.GetComponent<Button>().interactable = true;
     }
-    public static void HideCardToggles()
-    {
-        cardMoveToggle.SetActive(false);
-        cardPhraseToggle.SetActive(false);
-    }
-    public static void ShowCardToggles()
-    {
-        cardMoveToggle.SetActive(true);
-        cardPhraseToggle.SetActive(true);
-    }
+    // public static void HideCardToggles()
+    // {
+    //     cardMoveToggle.SetActive(false);
+    //     cardPhraseToggle.SetActive(false);
+    // }
+    // public static void ShowCardToggles()
+    // {
+    //     cardMoveToggle.SetActive(true);
+    //     cardPhraseToggle.SetActive(true);
+    // }
 
     // public void Dictionary()
     // {
@@ -332,10 +267,10 @@ public class GameControl : MonoBehaviour
     //         UICanvas.SetActive(false);
     //     }
     // }
-    public static void CanMoveCards()
-    {
-        canMoveCards = true;
-    }
+    // public static void CanMoveCards()
+    // {
+    //     canMoveCards = true;
+    // }
     public static void Restart()
     {
         Destroy(control);
@@ -344,7 +279,6 @@ public class GameControl : MonoBehaviour
     public static void Save()
     {
         Debug.Log("saving");
-        Debug.Log(hasGoodCard);
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
@@ -355,8 +289,8 @@ public class GameControl : MonoBehaviour
         //   data.sceneOne = sceneOne;
         //data.sceneTwo = sceneTwo;
 
-        data.hasGoodCard = hasGoodCard;
-        data.hasYesCard = hasYesCard;
+        //  data.hasGoodCard = hasGoodCard;
+        //  data.hasYesCard = hasYesCard;
 
         bf.Serialize(file, data);
         file.Close();
@@ -374,8 +308,8 @@ public class GameControl : MonoBehaviour
             playerAge = data.playerAge;
             //    sceneOne = data.sceneOne;
             //     sceneTwo = data.sceneTwo;
-            hasGoodCard = data.hasGoodCard;
-            hasYesCard = data.hasYesCard;
+            //   hasGoodCard = data.hasGoodCard;
+            //    hasYesCard = data.hasYesCard;
             // print(sceneOne);
         }
     }

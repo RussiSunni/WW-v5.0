@@ -91,6 +91,7 @@ MonoBehaviour:
   parentToReturnTo: {fileID: 0}
   placeholderParent: {fileID: 0}
   hand: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: e7248c27f76902a01a3417cb28ab77f7, type: 3}
 --- !u!225 &8174451849570051947
 CanvasGroup:
   m_ObjectHideFlags: 0

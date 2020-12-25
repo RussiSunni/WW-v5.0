@@ -32,7 +32,6 @@ public class AcademyWildArea : MonoBehaviour
 
     void Start()
     {
-        GameControl.scene = "Academy Wild Area";
 
         // camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         // cameraPos = camera.transform.position;

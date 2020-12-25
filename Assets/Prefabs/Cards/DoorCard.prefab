@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2085112004153811074}
   - component: {fileID: 7733359385984453768}
   - component: {fileID: 5395182164709420954}
+  - component: {fileID: -4403003953240946571}
   m_Layer: 5
   m_Name: DoorCard
   m_TagString: Untagged
@@ -107,3 +108,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &-4403003953240946571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085112004153811072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3c7aa9313ed70d7970adadb67d106c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentToReturnTo: {fileID: 0}
+  placeholderParent: {fileID: 0}
+  hand: {fileID: 0}
+  audioClip: {fileID: 0}
