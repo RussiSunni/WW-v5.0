@@ -21,7 +21,7 @@ public class GameControl : MonoBehaviour
     public static Button runAwayButton;
     public static Image playerBGPanel, characterBGPanel;
     public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard;
-    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, cardBackSprite;
+    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite;
 
     public static DropZone speechTabletopScript, actionTabletopScript;
     void Awake()
@@ -97,6 +97,14 @@ public class GameControl : MonoBehaviour
         iCardSprite = Resources.Load<Sprite>("Cards/ICard");
         amCardSprite = Resources.Load<Sprite>("Cards/AmCard");
         evaCardSprite = Resources.Load<Sprite>("Cards/EvaCard");
+        whatCardSprite = Resources.Load<Sprite>("Cards/WhatCard");
+        isCardSprite = Resources.Load<Sprite>("Cards/IsCard");
+        yourCardSprite = Resources.Load<Sprite>("Cards/YourCard");
+        nameCardSprite = Resources.Load<Sprite>("Cards/NameCard");
+        newCardSprite = Resources.Load<Sprite>("Cards/NewCard");
+        hereCardSprite = Resources.Load<Sprite>("Cards/HereCard");
+        haveCardSprite = Resources.Load<Sprite>("Cards/HaveCard");
+        funCardSprite = Resources.Load<Sprite>("Cards/FunCard");
     }
 
     public static void ArenaToggle()

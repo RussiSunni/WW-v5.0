@@ -3,7 +3,30 @@ guid: 5635ab137b3bdd0d990abfe8f436eee4
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cover2.001
+    second: {fileID: 5593535880367819999, guid: 5635ab137b3bdd0d990abfe8f436eee4,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cover3.001
+    second: {fileID: 939857591372398399, guid: f3e8cf64ab4fd5ad5948b03471b70246, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cover4.001
+    second: {fileID: -472507840968877095, guid: f3e8cf64ab4fd5ad5948b03471b70246,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkWood.005
+    second: {fileID: -8293896158859511639, guid: 5635ab137b3bdd0d990abfe8f436eee4,
+      type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

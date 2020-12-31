@@ -4,7 +4,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound, correctSound, hiSound, evaSound;
-    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, fairyTalk06, fairyTalk07, fairyTalk08, fairyHuh, fairyOK, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, wolfHi, ArenaMusic01, WolfHello, Student01Hi, Student01Huh, dinoTalk01, dinoTalk02, dinoTalk03, dinoTalk04, dinoTalk05, student06Talk01, student06Talk02, student06Huh, student02Hi;
+    public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, fairyTalk06, fairyTalk07, fairyTalk08, fairyHuh, fairyOK, connectSound, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, wolfHi, ArenaMusic01, WolfHello, Student01Hi, Student01Huh, dinoTalk01, dinoTalk02, dinoTalk03, dinoTalk04, dinoTalk05, student06Talk01, student06Talk02, student06Talk03, student06Huh, student02Hi, interactionMusic;
     static AudioSource audioSrc;
 
     void Start()
@@ -28,13 +28,15 @@ public class SoundManager : MonoBehaviour
         footstepSound = Resources.Load<AudioClip>("Sound/Footstep");
         doorLockedSound = Resources.Load<AudioClip>("Sound/DoorLocked");
         correctSound = Resources.Load<AudioClip>("Sound/Correct");
-
+        interactionMusic = Resources.Load<AudioClip>("Sound/InteractionMusic");
 
         Student01Hi = Resources.Load<AudioClip>("Sound/AWS Polly/Student01Hi");
         Student01Huh = Resources.Load<AudioClip>("Sound/AWS Polly/Student01Huh");
 
         student06Talk01 = Resources.Load<AudioClip>("Sound/AWS Polly/Student06Talk01");
         student06Talk02 = Resources.Load<AudioClip>("Sound/AWS Polly/Student06Talk02");
+        student06Talk03 = Resources.Load<AudioClip>("Sound/AWS Polly/Student06Talk03");
+
         student06Huh = Resources.Load<AudioClip>("Sound/AWS Polly/Student06Huh");
 
         student02Hi = Resources.Load<AudioClip>("Sound/AWS Polly/Student02Hi");

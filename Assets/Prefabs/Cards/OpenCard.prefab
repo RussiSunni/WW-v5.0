@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 991926993781221838}
   - component: {fileID: 8825277810802656706}
   - component: {fileID: 6626008441947809488}
+  - component: {fileID: 3542038762887789807}
   m_Layer: 5
   m_Name: OpenCard
   m_TagString: Untagged
@@ -91,6 +92,7 @@ MonoBehaviour:
   parentToReturnTo: {fileID: 0}
   placeholderParent: {fileID: 0}
   hand: {fileID: 0}
+  audioClip: {fileID: 0}
 --- !u!225 &8825277810802656706
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -123,3 +125,17 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3542038762887789807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991926993781221834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fe2fb8e47e8b850aa774db64d73658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
+  tabletop: {fileID: 0}

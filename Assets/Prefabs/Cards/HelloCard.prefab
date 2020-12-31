@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4965398096993522725}
   - component: {fileID: 3698867563569608751}
   - component: {fileID: 1358086564274084669}
-  - component: {fileID: -5165712765887980131}
+  - component: {fileID: 6246889470517588113}
+  - component: {fileID: -940603981736878513}
   m_Layer: 5
   m_Name: HelloCard
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 06cdcba03a7dfe3e9b2ce1e145e9f28d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a199cbab4a37becd5a2b4041b95d131c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -108,7 +109,23 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &-5165712765887980131
+--- !u!114 &6246889470517588113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965398096993522727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fe2fb8e47e8b850aa774db64d73658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speechHand: {fileID: 0}
+  speechTabletop: {fileID: 0}
+  actionHand: {fileID: 0}
+  actionTabletop: {fileID: 0}
+--- !u!114 &-940603981736878513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
