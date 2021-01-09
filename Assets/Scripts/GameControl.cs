@@ -9,21 +9,21 @@ using UnityEngine.UI;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject goodbyeCard, readCard, stopCard, closeCard, byeCard, sueCard, mayCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
+    public static GameObject goodbyeCard, readCard, stopCard, byeCard, sueCard, mayCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     //public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
     public static GameObject upArrow, rightArrow, leftArrow, controlButton, actionHandPanel, canvasCode;
-    public static GameObject UICanvas, speechTabletop, actionTabletop;
+    public static GameObject UICanvas, speechTabletop, actionTabletop, cardTabletop;
     public static string playerName;
     public static int playerAge;
     public static bool arenaToggle;
-    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, speechHand, actionHand, actionTabletopPanel, speechTabletopPanel, characterHand;
+    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, speechHand, actionHand, actionTabletopPanel, speechTabletopPanel, characterHand, cardHandPanel, cardTabletopPanel;
     public static Text newCardText;
     public static Button runAwayButton;
     public static Image playerBGPanel, characterBGPanel;
-    public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard;
-    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite;
-
-    public static DropZone speechTabletopScript, actionTabletopScript;
+    public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard, newCard, haveCard, funCard, closeCard;
+    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite;
+    public static Sprite spanishHelloCardSprite, spanishAreYouCardSprite, spanishLostCardSprite, spanishQuestionMarkCardSprite, spanishTheCardSprite, spanishDoorCardSprite, spanishGoThroughCardSprite, closeCardSprite;
+    public static DropZone speechTabletopScript, actionTabletopScript, tabletopScript;
     void Awake()
     {
         if (control == null)
@@ -36,7 +36,6 @@ public class GameControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
     void Start()
     {
@@ -51,33 +50,26 @@ public class GameControl : MonoBehaviour
 
         characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
         characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
-        actionTabletopPanel = GameObject.Find("ActionTabletop").GetComponent<Image>();
-        speechTabletopPanel = GameObject.Find("SpeechTabletop").GetComponent<Image>();
-        actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
-        speechHand = GameObject.Find("SpeechHand").GetComponent<Image>();
+        //  actionTabletopPanel = GameObject.Find("ActionTabletop").GetComponent<Image>();
+        //   speechTabletopPanel = GameObject.Find("SpeechTabletop").GetComponent<Image>();
+        cardTabletopPanel = GameObject.Find("CardTabletop").GetComponent<Image>();
+        //   actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
+        //   speechHand = GameObject.Find("SpeechHand").GetComponent<Image>();
+        cardHandPanel = GameObject.Find("CardHand").GetComponent<Image>();
 
-        speechTabletop = GameObject.Find("SpeechTabletop");
-        actionTabletop = GameObject.Find("ActionTabletop");
+        //  speechTabletop = GameObject.Find("SpeechTabletop");
+        //  actionTabletop = GameObject.Find("ActionTabletop");
+        cardTabletop = GameObject.Find("CardTabletop");
 
-        speechTabletopScript = speechTabletop.GetComponent<DropZone>();
-        actionTabletopScript = actionTabletop.GetComponent<DropZone>();
+        //   speechTabletopScript = speechTabletop.GetComponent<DropZone>();
+        //   actionTabletopScript = actionTabletop.GetComponent<DropZone>();
+        tabletopScript = cardTabletop.GetComponent<DropZone>();
 
-        blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();
-
-
-        // doorCard = GameObject.Find("DoorCard");
-        // doorCard.SetActive(false);
-        // youCard = GameObject.Find("YouCard");
-        // youCard.SetActive(false);
-        // hiCard = GameObject.Find("HiCard");
-        // hiCard.SetActive(false);
-        // evaCard = GameObject.Find("EvaCard");
-        // evaCard.SetActive(false);
-        // noCard = GameObject.Find("NoCard");
+        //  blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();     
 
         // runAwayButton = GameObject.Find("RunAwayButton").GetComponent<Button>();
-        playerBGPanel = GameObject.Find("PlayerBGPanel").GetComponent<Image>();
-        characterBGPanel = GameObject.Find("CharacterBGPanel").GetComponent<Image>();
+        //  playerBGPanel = GameObject.Find("PlayerBGPanel").GetComponent<Image>();
+        // characterBGPanel = GameObject.Find("CharacterBGPanel").GetComponent<Image>();
 
         cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
         hiCardSprite = Resources.Load<Sprite>("Cards/HiCard");
@@ -105,6 +97,21 @@ public class GameControl : MonoBehaviour
         hereCardSprite = Resources.Load<Sprite>("Cards/HereCard");
         haveCardSprite = Resources.Load<Sprite>("Cards/HaveCard");
         funCardSprite = Resources.Load<Sprite>("Cards/FunCard");
+        niceCardSprite = Resources.Load<Sprite>("Cards/NiceCard");
+        toCardSprite = Resources.Load<Sprite>("Cards/ToCard");
+        meetCardSprite = Resources.Load<Sprite>("Cards/MeetCard");
+        askedCardSprite = Resources.Load<Sprite>("Cards/AskedCard");
+        notCardSprite = Resources.Load<Sprite>("Cards/NotCard");
+        fromCardSprite = Resources.Load<Sprite>("Cards/FromCard");
+        closeCardSprite = Resources.Load<Sprite>("Cards/CloseCard");
+
+        spanishHelloCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Hello");
+        spanishAreYouCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-AreYou");
+        spanishLostCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Lost");
+        spanishQuestionMarkCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-¿");
+        spanishTheCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-The");
+        spanishDoorCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Door");
+        spanishGoThroughCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-GoThrough");
     }
 
     public static void ArenaToggle()
@@ -156,10 +163,10 @@ public class GameControl : MonoBehaviour
 
     public static void RedBG()
     {
-        var tempColor = blackBGPanel.color;
-        tempColor = Color.red;
-        tempColor.a = 0.4f;
-        blackBGPanel.color = tempColor;
+        //  var tempColor = blackBGPanel.color;
+        // tempColor = Color.red;
+        // tempColor.a = 0.4f;
+        // blackBGPanel.color = tempColor;
     }
 
     public static void BlackBG()
@@ -321,9 +328,6 @@ public class GameControl : MonoBehaviour
             // print(sceneOne);
         }
     }
-
-
-
 }
 
 [Serializable]

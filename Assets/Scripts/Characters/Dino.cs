@@ -1,32 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class Dino : MonoBehaviour
 {
-    SpriteRenderer student03;
-    Sprite student03Front, student03Side;
-    int turn = 0;
+    public static List<Transform> cards = new List<Transform>();
+    public Sprite cardBackSprite;
+    Image cardImage;
     void Start()
     {
-        // student03 = GetComponent<SpriteRenderer>();
-        // student03Front = Resources.Load<Sprite>("Library/Student03Front");
-        // student03Side = Resources.Load<Sprite>("Library/Student03Side");
-        // student03.sprite = student03Front;
-    }
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
 
-    void Update()
-    {
-        // if (Academy.direction == "south" || Academy.direction == "north")
-        // {
-        //     student03.sprite = student03Front;
-        //     this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
 
-        // }
-        // else if (Academy.direction == "west" || Academy.direction == "east")
-        // {
-        //     student03.sprite = student03Side;
-        //     this.gameObject.transform.rotation = Quaternion.Euler(0, -90, 0);
-        // }
+        cards.Add(gameControlScript.hiCard);
+        cards.Add(gameControlScript.whatCard);
+        cards.Add(gameControlScript.isCard);
+        cards.Add(gameControlScript.yourCard);
+        cards.Add(gameControlScript.nameCard);
+        cards.Add(gameControlScript.questionMarkCard);
+        cards.Add(gameControlScript.iCard);
+        cards.Add(gameControlScript.askedCard);
+        cards.Add(gameControlScript.youCard);
+        cards.Add(gameControlScript.areCard);
+        cards.Add(gameControlScript.notCard);
+        cards.Add(gameControlScript.fromCard);
+        cards.Add(gameControlScript.hereCard);
+        cards.Add(gameControlScript.evaCard);
+        cards.Add(gameControlScript.niceCard);
+        cards.Add(gameControlScript.toCard);
+        cards.Add(gameControlScript.meetCard);
     }
 
     public void Move()

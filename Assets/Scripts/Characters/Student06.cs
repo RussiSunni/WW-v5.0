@@ -26,11 +26,13 @@ public class Student06 : MonoBehaviour
         cards.Add(gameControlScript.iCard);
         cards.Add(gameControlScript.amCard);
         cards.Add(gameControlScript.evaCard);
-        cards.Add(gameControlScript.whatCard);
-        cards.Add(gameControlScript.isCard);
-        cards.Add(gameControlScript.yourCard);
-        cards.Add(gameControlScript.nameCard);
+        cards.Add(gameControlScript.areCard);
+        cards.Add(gameControlScript.youCard);
+        cards.Add(gameControlScript.newCard);
+        cards.Add(gameControlScript.hereCard);
         cards.Add(gameControlScript.questionMarkCard);
+        cards.Add(gameControlScript.haveCard);
+        cards.Add(gameControlScript.funCard);
     }
 
     void Update()
