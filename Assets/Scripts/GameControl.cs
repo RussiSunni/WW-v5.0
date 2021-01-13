@@ -19,9 +19,9 @@ public class GameControl : MonoBehaviour
     public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, speechHand, actionHand, actionTabletopPanel, speechTabletopPanel, characterHand, cardHandPanel, cardTabletopPanel;
     public static Text newCardText;
     public static Button runAwayButton;
-    public static Image playerBGPanel, characterBGPanel;
-    public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard, newCard, haveCard, funCard, closeCard;
-    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite;
+    public static Image playerBGPanel, characterBGPanel, arenaPanel;
+    public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard, newCard, haveCard, funCard, closeCard, pleaseCard;
+    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite, pleaseCardSprite, openCardSprite;
     public static Sprite spanishHelloCardSprite, spanishAreYouCardSprite, spanishLostCardSprite, spanishQuestionMarkCardSprite, spanishTheCardSprite, spanishDoorCardSprite, spanishGoThroughCardSprite, closeCardSprite;
     public static DropZone speechTabletopScript, actionTabletopScript, tabletopScript;
     void Awake()
@@ -47,6 +47,7 @@ public class GameControl : MonoBehaviour
         rightArrow = GameObject.Find("Right Arrow");
         leftArrow = GameObject.Find("Left Arrow");
         controlButton = GameObject.Find("ControlButton");
+        arenaPanel = GameObject.Find("Arena").GetComponent<Image>();
 
         characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
         characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
@@ -104,6 +105,8 @@ public class GameControl : MonoBehaviour
         notCardSprite = Resources.Load<Sprite>("Cards/NotCard");
         fromCardSprite = Resources.Load<Sprite>("Cards/FromCard");
         closeCardSprite = Resources.Load<Sprite>("Cards/CloseCard");
+        pleaseCardSprite = Resources.Load<Sprite>("Cards/PleaseCard");
+        openCardSprite = Resources.Load<Sprite>("Cards/OpenCard");
 
         spanishHelloCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Hello");
         spanishAreYouCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-AreYou");

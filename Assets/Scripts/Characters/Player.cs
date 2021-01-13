@@ -31,10 +31,10 @@ public class Player : MonoBehaviour
         // }
 
         playerCards.Add(gameControlScript.helloCard);
-        playerCards.Add(gameControlScript.yesCard);
-        playerCards.Add(gameControlScript.noCard);
-        playerCards.Add(gameControlScript.thankyouCard);
-        playerCards.Add(gameControlScript.openCard);
+        // playerCards.Add(gameControlScript.yesCard);
+        //  playerCards.Add(gameControlScript.noCard);
+        //  playerCards.Add(gameControlScript.thankyouCard);
+        //  playerCards.Add(gameControlScript.openCard);
 
         for (int i = 0; i < playerCards.Count; ++i)
         {
@@ -52,15 +52,6 @@ public class Player : MonoBehaviour
         playerCards.Add(gameControlScript.doorCard);
     }
 
-    public static void AddEvaCard()
-    {
-        GameObject gameControl = GameObject.Find("GameControl");
-        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
-
-        //actionCards.Add(gameControlScript.evaCard);
-        playerCards.Add(gameControlScript.evaCard);
-    }
-
     public static void AddCloseCard()
     {
         GameObject gameControl = GameObject.Find("GameControl");
@@ -68,6 +59,15 @@ public class Player : MonoBehaviour
 
         //actionCards.Add(gameControlScript.evaCard);
         playerCards.Add(gameControlScript.closeCard);
+    }
+
+    public static void AddEvaCard()
+    {
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+
+        //actionCards.Add(gameControlScript.evaCard);
+        playerCards.Add(gameControlScript.evaCard);
     }
 
     public static void AddMeetCard()
@@ -78,6 +78,5 @@ public class Player : MonoBehaviour
         //actionCards.Add(gameControlScript.meetCard);
         playerCards.Add(gameControlScript.meetCard);
     }
-
 }
 

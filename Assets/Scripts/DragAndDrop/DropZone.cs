@@ -13,6 +13,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     bool haveEvaCard = false;
     bool haveMeetCard = false;
     bool haveCloseCard = false;
+    bool haveTheCard = false;
 
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -84,7 +85,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             //     //  print("test2");
             if (haveDoorCard == false)
             {
-                print("test2");
                 //d.transform.SetParent(GameControl.cardHandPanel.transform);
                 //d.parentToReturnTo = GameControl.cardHandPanel.transform;
 
@@ -105,7 +105,22 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             if (haveCloseCard == false)
             {
+                Player.AddCloseCard();
+
                 haveCloseCard = true;
+                GameObject canvasCode = GameObject.Find("CanvasCode");
+                Academy canvasCodeScript = canvasCode.GetComponent<Academy>();
+                canvasCodeScript.controlButton.interactable = true;
+            }
+        }
+
+        if (d.name == "TheCard(Clone)" && name == "CardHand")
+        {
+            if (haveTheCard == false)
+            {
+                Player.AddCloseCard();
+
+                haveTheCard = true;
                 GameObject canvasCode = GameObject.Find("CanvasCode");
                 Academy canvasCodeScript = canvasCode.GetComponent<Academy>();
                 canvasCodeScript.controlButton.interactable = true;

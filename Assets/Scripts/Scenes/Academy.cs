@@ -18,7 +18,7 @@ public class Academy : MonoBehaviour
     public static GameObject speechPages, actionPages, letterPages, numberPages, frontDoor, letterPage1, letterPage2, speechTabletop, actionTabletop, cardPages, cardTabletop;
     static SpriteRenderer secretary, secretaryCloseUp;
     static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite, wolfSprite, dinoSprite, doorCardSprite, youCardSprite, student06Sprite, student01Sprite, hiCardSprite, evaCardSprite;
-    public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, lookingCard, forCard, myCard, houndCard, closeCard;
+    public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, lookingCard, forCard, myCard, houndCard, closeCard, pleaseCard;
     static string timeOfDay, playerName;
     int controlNumber = 0;
     public GameObject student3, dino;
@@ -251,6 +251,21 @@ public class Academy : MonoBehaviour
                     }
                     roundNumber = 0;
                     DinoMethod();
+                }
+
+                // Secretary interaction ----------------
+                if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, -5.4f))
+                {
+                    print(Secretary.cards.Count);
+
+                    for (int i = 0; i < Secretary.cards.Count; ++i)
+                    {
+                        characterCards.Add(Instantiate(Secretary.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
+                        characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
+                        characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
+                    }
+
+                    roundNumber = 0;
                 }
             }
         }
@@ -810,6 +825,7 @@ public class Academy : MonoBehaviour
             {
                 roundNumber++;
                 NPCCardsAway();
+                StartCoroutine((FairyCoroutine02()));
             }
             else if (roundNumber == 2 && cardTabletopCount == 1 && cardTabletop.transform.GetChild(0).gameObject.name == "YesCard(Clone)")
             {
@@ -875,6 +891,7 @@ public class Academy : MonoBehaviour
         }
 
         //door  ----------------------------------
+
         // else if (cameraPos.z == 0f && cameraPos.x == 0f && direction == "north")
         // {
         //     if (actionTableTopCount == 2 && actionTabletop.transform.GetChild(0).gameObject.name == "OpenCard(Clone)" && actionTabletop.transform.GetChild(1).gameObject.name == "DoorCard(Clone)")
@@ -884,23 +901,23 @@ public class Academy : MonoBehaviour
         //     }
         // }
 
-        else if (cameraPos.z == 0f && cameraPos.x == 0f && direction == "north" && frontDoor.tag == "CantWalkThrough")
+
+        else if (cameraPos.z == 0f && cameraPos.x == 0f && direction == "north" || cameraPos.z == 5.4f && cameraPos.x == 0f && direction == "south")
         {
-            if (cardTabletopCount == 2 && cardTabletop.transform.GetChild(0).gameObject.name == "OpenCard(Clone)" && cardTabletop.transform.GetChild(1).gameObject.name == "DoorCard(Clone)")
+            if (cardTabletopCount == 2 && cardTabletop.transform.GetChild(0).gameObject.name == "OpenCard(Clone)" && cardTabletop.transform.GetChild(1).gameObject.name == "DoorCard(Clone)" && frontDoor.tag == "CantWalkThrough")
             {
-                //   Debug.Log("test");
                 OpenFrontDoor();
             }
-        }
 
-        else if (cameraPos.z == 0f && cameraPos.x == 0f && direction == "north" && frontDoor.tag == "Untagged")
-        {
-            if (cardTabletopCount == 2 && cardTabletop.transform.GetChild(0).gameObject.name == "CloseCard(Clone)" && cardTabletop.transform.GetChild(1).gameObject.name == "DoorCard(Clone)")
+            else if (cardTabletopCount == 2 && cardTabletop.transform.GetChild(0).gameObject.name == "CloseCard(Clone)" && cardTabletop.transform.GetChild(1).gameObject.name == "DoorCard(Clone)" && frontDoor.tag == "Untagged")
             {
                 CloseFrontDoor();
             }
         }
+
+
         //Secretary  -------------------------------------
+
         // else if (cameraPos.z == 5.4f && cameraPos.x == -5.4f && direction == "west")
         // {
         //     if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
@@ -915,17 +932,23 @@ public class Academy : MonoBehaviour
 
         else if (cameraPos.z == 5.4f && cameraPos.x == -5.4f && direction == "west")
         {
-            if (cardTabletopCount == 1 && cardTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
+            if (roundNumber == 0 & cardTabletopCount == 1 && cardTabletop.transform.GetChild(0).gameObject.name == "HelloCard(Clone)")
             {
-                GameControl.ArenaToggle();
                 roundNumber++;
-                GameControl.characterImage.sprite = secretarySprite01;
-                GameControl.characterImage.rectTransform.sizeDelta = new Vector2(300, 700);
-                SoundManager.playSecretaryTalk01ASound();
+                if (frontDoor.tag == "Untagged")
+                    StartCoroutine(SecretaryCoroutine01());
+                else
+                    StartCoroutine(SecretaryCoroutine02());
+            }
+            else if (roundNumber == 1)
+            {
+                roundNumber++;
+                NPCCardsAway();
             }
         }
 
         //Dino  .........................
+
         // else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -10.8f) && direction == "west")
         // {
         //     if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "EvaCard(Clone)")
@@ -980,7 +1003,9 @@ public class Academy : MonoBehaviour
             }
         }
 
+
         // Artemis ..............................
+
         // else if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -10.8f) && direction == "west")
         // {
         //     if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard(Clone)")
@@ -999,6 +1024,7 @@ public class Academy : MonoBehaviour
 
 
         //Student 1  .........................
+
         // else if (cameraPos.z == 16.2f && cameraPos.x == 5.4f && direction == "east")
         // {
         //     inInteraction = true;
@@ -1027,7 +1053,8 @@ public class Academy : MonoBehaviour
             }
         }
 
-        //Student 2 interaction .........................
+        //Student 2 .........................
+
         // else if (cameraPos.z == 21.6f && cameraPos.x == -5.4f && direction == "north")
         // {
         //     inInteraction = true;
@@ -1039,7 +1066,8 @@ public class Academy : MonoBehaviour
         //     }
         // }
 
-        //Student 6 interaction .........................
+        //Student 6 .........................
+
         // else if (cameraPos.z == 21.6f && cameraPos.x == 5.4f && direction == "north")
         // {
         //     if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard(Clone)" && roundNumber == 0 || speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HiCard(Clone)" && roundNumber == 0)
@@ -1143,26 +1171,40 @@ public class Academy : MonoBehaviour
     IEnumerator FairyCoroutine01()
     {
         yield return new WaitForSeconds(1.5f);
-        SoundManager.playFairyTalk06Sound();
+        SoundManager.playWordSound(SoundManager.fairyHello);
 
         characterCards[0].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         //characterCards[0].GetComponent<Image>().sprite = GameControl.helloCardSprite;
-        characterCards[0].GetComponent<Image>().sprite = GameControl.spanishHelloCardSprite;
+        // characterCards[0].GetComponent<Image>().sprite = GameControl.spanishHelloCardSprite;
+        characterCards[0].GetComponent<Image>().sprite = GameControl.helloCardSprite;
 
-        characterCards[1].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        //characterCards[1].GetComponent<Image>().sprite = GameControl.areCardSprite;
-        characterCards[1].GetComponent<Image>().sprite = GameControl.spanishQuestionMarkCardSprite;
 
-        characterCards[2].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        //characterCards[2].GetComponent<Image>().sprite = GameControl.youCardSprite;
-        characterCards[2].GetComponent<Image>().sprite = GameControl.spanishAreYouCardSprite;
 
-        characterCards[3].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        //characterCards[3].GetComponent<Image>().sprite = GameControl.lostCardSprite;
-        characterCards[3].GetComponent<Image>().sprite = GameControl.spanishLostCardSprite;
 
-        characterCards[4].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
-        characterCards[4].GetComponent<Image>().sprite = GameControl.questionMarkCardSprite;
+        // characterCards[1].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        // characterCards[1].GetComponent<Image>().sprite = GameControl.areCardSprite;
+        //characterCards[1].GetComponent<Image>().sprite = GameControl.spanishQuestionMarkCardSprite;
+        // characterCards[1].GetComponent<Image>().sprite = GameControl.openCardSprite;
+
+        //  characterCards[2].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        // characterCards[2].GetComponent<Image>().sprite = GameControl.youCardSprite;
+        // characterCards[2].GetComponent<Image>().sprite = GameControl.spanishAreYouCardSprite;
+        //  characterCards[2].GetComponent<Image>().sprite = GameControl.theCardSprite;
+
+        //  characterCards[3].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        // characterCards[3].GetComponent<Image>().sprite = GameControl.lostCardSprite;
+        //  characterCards[3].GetComponent<Image>().sprite = GameControl.spanishLostCardSprite;
+        //  characterCards[3].GetComponent<Image>().sprite = GameControl.doorCardSprite;
+
+        //  characterCards[4].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        // characterCards[4].GetComponent<Image>().sprite = GameControl.questionMarkCardSprite;
+        // characterCards[4].GetComponent<Image>().sprite = GameControl.openCardSprite;
+
+        //  characterCards[5].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        //  characterCards[5].GetComponent<Image>().sprite = GameControl.theCardSprite;
+
+        //   characterCards[6].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        //   characterCards[6].GetComponent<Image>().sprite = GameControl.doorCardSprite;
 
         // yield return new WaitForSeconds(3.5f);
         // for (int i = 0; i < characterCards.Count; ++i)
@@ -1175,23 +1217,36 @@ public class Academy : MonoBehaviour
     IEnumerator FairyCoroutine02()
     {
         yield return new WaitForSeconds(1.5f);
-        SoundManager.playFairyTalk07Sound();
+        // SoundManager.playFairyTalk07Sound();
+        SoundManager.playWordSound(SoundManager.fairyTalk09);
 
-        characterCards[0].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        var tempColor = GameControl.arenaPanel.color;
+        tempColor.a = 0.8f;
+        GameControl.arenaPanel.color = tempColor;
+
+        characterCards[1].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterCards[2].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterCards[3].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+
+        characterCards[1].GetComponent<Image>().sprite = GameControl.openCardSprite;
+        characterCards[2].GetComponent<Image>().sprite = GameControl.theCardSprite;
+        characterCards[3].GetComponent<Image>().sprite = GameControl.doorCardSprite;
+
+        // characterCards[0].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         // characterCards[0].GetComponent<Image>().sprite = GameControl.goCardSprite;
-        characterCards[0].GetComponent<Image>().sprite = GameControl.spanishGoThroughCardSprite;
+        // characterCards[0].GetComponent<Image>().sprite = GameControl.spanishGoThroughCardSprite;
 
         //  characterCards[1].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         //  characterCards[1].GetComponent<Image>().sprite = GameControl.throughCardSprite;
 
 
-        characterCards[1].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        //  characterCards[1].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         // characterCards[2].GetComponent<Image>().sprite = GameControl.theCardSprite;
-        characterCards[1].GetComponent<Image>().sprite = GameControl.spanishTheCardSprite;
+        // characterCards[1].GetComponent<Image>().sprite = GameControl.spanishTheCardSprite;
 
-        characterCards[2].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        //  characterCards[2].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
         //characterCards[3].GetComponent<Image>().sprite = GameControl.doorCardSprite;
-        characterCards[2].GetComponent<Image>().sprite = GameControl.spanishDoorCardSprite;
+        // characterCards[2].GetComponent<Image>().sprite = GameControl.spanishDoorCardSprite;
 
         // yield return new WaitForSeconds(2.5f);
         // for (int i = 0; i < characterCards.Count; ++i)
@@ -1225,10 +1280,9 @@ public class Academy : MonoBehaviour
         characterCards[8].transform.SetParent(GameControl.cardTabletopPanel.transform, false);
         characterCards[8].GetComponent<Image>().sprite = GameControl.doorCardSprite;
 
-
+        roundNumber = 0;
 
         //GameControl.speechTabletopScript.ReturnPlayerCardsToHand();
-
     }
     IEnumerator FairyCoroutine04()
     {
@@ -1252,6 +1306,8 @@ public class Academy : MonoBehaviour
             characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
         }
         GameControl.speechTabletopScript.ReturnPlayerCardsToHand();
+
+        roundNumber = 0;
     }
     IEnumerator WolfCoroutine01(Transform characterCard)
     {
@@ -1273,6 +1329,32 @@ public class Academy : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         GameControl.speechTabletopScript.ReturnPlayerCardsToHand();
     }
+
+    IEnumerator SecretaryCoroutine01()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playWordSound(SoundManager.SecretaryTalk01);
+
+        characterCards[0].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterCards[0].GetComponent<Image>().sprite = GameControl.helloCardSprite;
+        characterCards[1].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterCards[1].GetComponent<Image>().sprite = GameControl.pleaseCardSprite;
+        characterCards[2].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterCards[2].GetComponent<Image>().sprite = GameControl.closeCardSprite;
+        characterCards[3].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterCards[3].GetComponent<Image>().sprite = GameControl.theCardSprite;
+        characterCards[3].transform.SetParent(GameControl.characterTabletopPanel.transform, false);
+        characterCards[3].GetComponent<Image>().sprite = GameControl.doorCardSprite;
+    }
+
+    IEnumerator SecretaryCoroutine02()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.playWordSound(SoundManager.SecretaryTalk01);
+
+        // add exercise
+    }
+
     IEnumerator Student01Coroutine01()
     {
         yield return new WaitForSeconds(1.5f);
@@ -1559,18 +1641,24 @@ public class Academy : MonoBehaviour
         SoundManager.playDoorOpeningSound();
         GameControl.tabletopScript.ReturnPlayerCardsToHand();
 
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
 
-        var playerCloseCard = Instantiate(closeCard, new Vector3(0, 0, 0), Quaternion.identity);
-        playerCloseCard.transform.SetParent(GameControl.cardTabletop.transform, false);
+        if (Player.playerCards.Count == 6)
+        {
+            var playerCloseCard = Instantiate(closeCard, new Vector3(0, 0, 0), Quaternion.identity);
+            playerCloseCard.transform.SetParent(GameControl.cardTabletop.transform, false);
+
+            controlButton.interactable = false;
+        }
 
         // fairy.SetActive(true);
         // dialogue.text = "You learned a new word.";
-        controlButton.interactable = false;
+
     }
 
     public void CloseFrontDoor()
     {
-        print("test");
         frontDoor.transform.Rotate(0, -90f, 0, Space.World);
         frontDoor.transform.localPosition = new Vector3(-0.7482905f, 0.2079014f, 0.148201f);
         frontDoor.tag = "CantWalkThrough";
@@ -1578,10 +1666,13 @@ public class Academy : MonoBehaviour
         SoundManager.playDoorOpeningSound();
         GameControl.tabletopScript.ReturnPlayerCardsToHand();
 
-        //var playerCloseCard = Instantiate(closeCard, new Vector3(0, 0, 0), Quaternion.identity);
-        //playerCloseCard.transform.SetParent(GameControl.cardTabletop.transform, false);
+        if (Player.playerCards.Count == 7)
+        {
+            var playerTheCard = Instantiate(theCard, new Vector3(0, 0, 0), Quaternion.identity);
+            playerTheCard.transform.SetParent(GameControl.cardTabletop.transform, false);
 
-        //controlButton.interactable = false;
+            controlButton.interactable = false;
+        }
     }
 
     public void DinoMethod()
