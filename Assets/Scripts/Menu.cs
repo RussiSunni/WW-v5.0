@@ -10,7 +10,12 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Intro");
     }
 
-     public void LoadWilds()
+    public void LoadForest()
+    {
+        SceneManager.LoadScene("Forest");
+    }
+
+    public void LoadWilds()
     {
         SceneManager.LoadScene("The Wilds");
     }

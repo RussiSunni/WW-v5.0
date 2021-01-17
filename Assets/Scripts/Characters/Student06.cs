@@ -8,7 +8,6 @@ public class Student06 : MonoBehaviour
     SpriteRenderer student06;
     Sprite student06Front, student06Side;
     public static List<Transform> cards = new List<Transform>();
-    public Sprite cardBackSprite;
     Image cardImage;
     void Start()
     {
@@ -21,7 +20,6 @@ public class Student06 : MonoBehaviour
         // Their cards
         GameObject gameControl = GameObject.Find("GameControl");
         GameControl gameControlScript = gameControl.GetComponent<GameControl>();
-        cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
         cards.Add(gameControlScript.hiCard);
         cards.Add(gameControlScript.iCard);
         cards.Add(gameControlScript.amCard);

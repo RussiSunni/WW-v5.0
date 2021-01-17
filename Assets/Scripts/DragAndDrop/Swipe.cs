@@ -23,8 +23,8 @@ public class Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // re
         // actionTabletop = GameObject.Find("ActionTabletop").transform;
         // actionHand = GameObject.Find("ActionHand").transform;
 
-        tabletop = GameObject.Find("CardTabletop").transform;
-        hand = GameObject.Find("CardHand").transform;
+        tabletop = GameObject.Find("WordTabletop").transform;
+        hand = GameObject.Find("WordHand").transform;
     }
 
     // UI elements

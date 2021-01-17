@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < playerCards.Count; ++i)
         {
             var playerCard = Instantiate(playerCards[i], new Vector3(0, 0, 0), Quaternion.identity);
-            playerCard.transform.SetParent(GameControl.cardHandPanel.transform, false);
+            playerCard.transform.SetParent(GameControl.wordHandPanel.transform, false);
         }
     }
 

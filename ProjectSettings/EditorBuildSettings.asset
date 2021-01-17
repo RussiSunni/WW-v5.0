@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/The Wilds.unity
     guid: 896c237f35a231a9e8facecdba83f3e0
+  - enabled: 1
+    path: Assets/Scenes/Forest.unity
+    guid: ddcefc166af7e450e8f307a56a9eb0be
   m_configObjects: {}
