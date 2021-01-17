@@ -31,10 +31,10 @@ public class Player : MonoBehaviour
         // }
 
         playerCards.Add(gameControlScript.helloCard);
-        // playerCards.Add(gameControlScript.yesCard);
-        //  playerCards.Add(gameControlScript.noCard);
-        //  playerCards.Add(gameControlScript.thankyouCard);
-        //  playerCards.Add(gameControlScript.openCard);
+        playerCards.Add(gameControlScript.yesCard);
+        playerCards.Add(gameControlScript.noCard);
+        playerCards.Add(gameControlScript.thankyouCard);
+        playerCards.Add(gameControlScript.openCard);
 
         for (int i = 0; i < playerCards.Count; ++i)
         {
@@ -77,6 +77,42 @@ public class Player : MonoBehaviour
 
         //actionCards.Add(gameControlScript.meetCard);
         playerCards.Add(gameControlScript.meetCard);
+    }
+
+    public static void AddOpenCard()
+    {
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+
+        //actionCards.Add(gameControlScript.meetCard);
+        playerCards.Add(gameControlScript.openCard);
+    }
+
+    public static void AddTheCard()
+    {
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+
+        //actionCards.Add(gameControlScript.meetCard);
+        playerCards.Add(gameControlScript.theCard);
+    }
+
+    public static void AddPleaseCard()
+    {
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+
+        //actionCards.Add(gameControlScript.meetCard);
+        playerCards.Add(gameControlScript.pleaseCard);
+    }
+
+    public static void AddHiCard()
+    {
+        GameObject gameControl = GameObject.Find("GameControl");
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+
+        //actionCards.Add(gameControlScript.meetCard);
+        playerCards.Add(gameControlScript.hiCard);
     }
 }
 

@@ -14,7 +14,11 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     bool haveMeetCard = false;
     bool haveCloseCard = false;
     bool haveTheCard = false;
-
+    bool haveOpenCard = false;
+    bool havePleaseCard = false;
+    bool haveHiCard = false;
+    bool haveICard = false;
+    bool haveAmCard = false;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -40,6 +44,141 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (d != null)
         {
             d.parentToReturnTo = this.transform;
+        }
+
+
+        // if (d.name == "DoorCard(Clone)" && name == "CardHand")
+        // {
+        //     if (haveDoorCard == false)
+        //     {
+        //         haveDoorCard = true;
+        //         d.transform.SetParent(GameControl.cardHandPanel.transform);
+        //         d.parentToReturnTo = GameControl.cardHandPanel.transform;
+
+        //         Player.AddDoorCard();
+        //     }
+        //     else
+        //     {
+        //         Destroy(d.gameObject);
+        //     }
+        // }
+        if (d.name == "OpenCard(Clone)" && name == "CardHand")
+        {
+            if (haveOpenCard == false)
+            {
+                haveOpenCard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+                Player.AddOpenCard();
+            }
+        }
+        if (d.name == "TheCard(Clone)" && name == "CardHand")
+        {
+            if (haveTheCard == false)
+            {
+                haveTheCard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+
+                Player.AddTheCard();
+            }
+            else
+            {
+                Destroy(d.gameObject);
+            }
+        }
+
+        if (d.name == "TheCard(Clone)" || d.name == "OpenCard(Clone)" || d.name == "DoorCard(Clone)" && name == "CardHand")
+        {
+            if (haveOpenCard == true && haveDoorCard == true && haveTheCard == true)
+            {
+                GameControl.cont = true;
+            }
+        }
+
+        if (d.name == "PleaseCard(Clone)" && name == "CardHand")
+        {
+            if (havePleaseCard == false)
+            {
+                havePleaseCard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+
+                Player.AddPleaseCard();
+            }
+        }
+        if (d.name == "CloseCard(Clone)" && name == "CardHand")
+        {
+            if (haveCloseCard == false)
+            {
+                haveCloseCard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+                Player.AddCloseCard();
+            }
+        }
+
+        if (d.name == "PleaseCard(Clone)" || d.name == "CloseCard(Clone)" && name == "CardHand")
+        {
+            if (haveOpenCard == true && haveDoorCard == true && haveTheCard == true)
+            {
+                GameControl.cont = true;
+            }
+        }
+
+        if (d.name == "HiCard(Clone)" && name == "CardHand")
+        {
+            if (haveHiCard == false)
+            {
+                haveHiCard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+
+                Player.AddHiCard();
+            }
+            else
+            {
+                Destroy(d.gameObject);
+            }
+        }
+
+
+        if (d.name == "EvaCard(Clone)" && name == "CardHand")
+        {
+            if (havePleaseCard == false)
+            {
+                havePleaseCard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+
+                Player.AddPleaseCard();
+            }
+        }
+
+
+        if (d.name == "ICard(Clone)" && name == "CardHand")
+        {
+            if (haveICard == false)
+            {
+                haveICard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+
+                Player.AddPleaseCard();
+            }
+        }
+
+
+        if (d.name == "AmCard(Clone)" && name == "CardHand")
+        {
+            if (haveAmCard == false)
+            {
+                haveAmCard = true;
+                d.transform.SetParent(GameControl.cardHandPanel.transform);
+                d.parentToReturnTo = GameControl.cardHandPanel.transform;
+
+                Player.AddPleaseCard();
+            }
         }
 
         //  if (name == "SpeechTabletop")
@@ -68,6 +207,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         //     {
         //         d.transform.SetParent(GameControl.actionHand.transform);
         //         d.parentToReturnTo = GameControl.actionHand.transform;
+        // Player.AddDoorCard();
 
         //         Academy.characterCards.RemoveAt(8);
         //         Academy.CharacterCardsReturn();
@@ -82,7 +222,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
         if (d.name == "DoorCard(Clone)" && name == "CardHand")
         {
-            //     //  print("test2");
             if (haveDoorCard == false)
             {
                 //d.transform.SetParent(GameControl.cardHandPanel.transform);
@@ -95,9 +234,9 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 //Fairy.cards.RemoveAt(8);
 
                 haveDoorCard = true;
-                GameObject canvasCode = GameObject.Find("CanvasCode");
-                Academy canvasCodeScript = canvasCode.GetComponent<Academy>();
-                canvasCodeScript.controlButton.interactable = true;
+                GameObject academyCode = GameObject.Find("AcademyCode");
+                Academy academyCodeScript = academyCode.GetComponent<Academy>();
+                academyCodeScript.controlButton.interactable = true;
             }
         }
 
@@ -114,18 +253,18 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             }
         }
 
-        if (d.name == "TheCard(Clone)" && name == "CardHand")
-        {
-            if (haveTheCard == false)
-            {
-                Player.AddCloseCard();
+        // if (d.name == "TheCard(Clone)" && name == "CardHand")
+        // {
+        //     if (haveTheCard == false)
+        //     {
+        //         Player.AddCloseCard();
 
-                haveTheCard = true;
-                GameObject canvasCode = GameObject.Find("CanvasCode");
-                Academy canvasCodeScript = canvasCode.GetComponent<Academy>();
-                canvasCodeScript.controlButton.interactable = true;
-            }
-        }
+        //         haveTheCard = true;
+        //         GameObject canvasCode = GameObject.Find("CanvasCode");
+        //         Academy canvasCodeScript = canvasCode.GetComponent<Academy>();
+        //         canvasCodeScript.controlButton.interactable = true;
+        //     }
+        // }
 
 
         if (d.name == "EvaCard(Clone)" && name == "CardHand")

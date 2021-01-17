@@ -22,6 +22,7 @@ public class Fairy : MonoBehaviour
         cards.Add(gameControlScript.questionMarkCard);
         cards.Add(gameControlScript.goCard);
         cards.Add(gameControlScript.throughCard);
+        //  cards.Add(gameControlScript.openCard);
         cards.Add(gameControlScript.theCard);
         cards.Add(gameControlScript.doorCard);
         cards.Add(gameControlScript.okCard);

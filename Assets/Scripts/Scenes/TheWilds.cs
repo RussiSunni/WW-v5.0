@@ -272,7 +272,6 @@ public class TheWilds : MonoBehaviour
             if (speechTableTopCount == 1 && speechTabletop.transform.GetChild(0).gameObject.name == "HelloCard" && roundNumber == 0)
             {
                 print("test");
-                GameControl.ArenaToggle();
                 roundNumber++;
             }
         }

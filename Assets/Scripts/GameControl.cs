@@ -5,6 +5,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class GameControl : MonoBehaviour
     public static GameObject goodbyeCard, readCard, stopCard, byeCard, sueCard, mayCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
     //public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
     public static GameObject upArrow, rightArrow, leftArrow, controlButton, actionHandPanel, canvasCode;
-    public static GameObject UICanvas, speechTabletop, actionTabletop, cardTabletop;
+    public static GameObject UICanvas, speechTabletop, actionTabletop, cardTabletop, controls;
     public static string playerName;
     public static int playerAge;
     public static bool arenaToggle;
@@ -24,6 +25,15 @@ public class GameControl : MonoBehaviour
     public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite, pleaseCardSprite, openCardSprite;
     public static Sprite spanishHelloCardSprite, spanishAreYouCardSprite, spanishLostCardSprite, spanishQuestionMarkCardSprite, spanishTheCardSprite, spanishDoorCardSprite, spanishGoThroughCardSprite, closeCardSprite;
     public static DropZone speechTabletopScript, actionTabletopScript, tabletopScript;
+    public static bool cont = false;
+    int controlNumber = 0;
+    Sprite controlSprite01, controlSprite02;
+    GameObject wordUI, letterUI;
+    public static string direction;
+    Camera camera;
+    public static Vector3 cameraPos;
+    private Scene scene;
+
     void Awake()
     {
         if (control == null)
@@ -39,6 +49,11 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        cameraPos = camera.transform.position;
+        direction = "north";
+        scene = SceneManager.GetActiveScene();
+
         Load();
         canvasCode = GameObject.Find("CanvasCode");
 
@@ -48,6 +63,10 @@ public class GameControl : MonoBehaviour
         leftArrow = GameObject.Find("Left Arrow");
         controlButton = GameObject.Find("ControlButton");
         arenaPanel = GameObject.Find("Arena").GetComponent<Image>();
+        controls = GameObject.Find("Controls");
+
+        wordUI = GameObject.Find("WordUI");
+        letterUI = GameObject.Find("LetterUI");
 
         characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
         characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
@@ -71,6 +90,9 @@ public class GameControl : MonoBehaviour
         // runAwayButton = GameObject.Find("RunAwayButton").GetComponent<Button>();
         //  playerBGPanel = GameObject.Find("PlayerBGPanel").GetComponent<Image>();
         // characterBGPanel = GameObject.Find("CharacterBGPanel").GetComponent<Image>();
+
+        controlSprite01 = Resources.Load<Sprite>("UI/boots-icon");
+        controlSprite02 = Resources.Load<Sprite>("UI/speak-icon");
 
         cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
         hiCardSprite = Resources.Load<Sprite>("Cards/HiCard");
@@ -117,51 +139,179 @@ public class GameControl : MonoBehaviour
         spanishGoThroughCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-GoThrough");
     }
 
-    public static void ArenaToggle()
+    public void ControlButton()
     {
-
-        if (arenaToggle == false)
+        if (scene.name == "Academy")
         {
-            arenaToggle = true;
-            runAwayButton.interactable = true;
-        }
-        else
-        {
-            arenaToggle = false;
-            runAwayButton.interactable = false;
-        }
+            controlNumber++;
+            if (controlNumber > 1)
+                controlNumber = 0;
 
-        //  var tempColor1 = blackBGPanel.color;
-        //  var tempColor2 = characterImage.color;
-        //  var tempColor3 = characterTabletopPanel.color;
-
-        //   if (tempColor3.a == 0f)
-        //    {
-        //   tempColor1.a = 1f;
-        //   tempColor2.a = 1f;
-        //      tempColor3.a = 0.4f;
-        //   }
-        //   else
-        //   {
-        //  tempColor1.a = 0f;
-        //  tempColor2.a = 0f;
-        //   tempColor3.a = 0f;
-        //  }
-
-        //   blackBGPanel.color = tempColor1;
-        //  characterImage.color = tempColor2;
-        //   characterTabletopPanel.color = tempColor3;
-
-        int count = characterTabletopPanel.transform.childCount;
-        if (count > 0)
-        {
-            foreach (Transform child in characterTabletopPanel.transform)
+            switch (controlNumber)
             {
-                GameObject.Destroy(child.gameObject);
+                case 0:
+                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
+                    break;
+                case 1:
+                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                    break;
+            }
+
+            if (controlNumber == 1)
+            {
+                GameControl.HideArrows();
+                wordUI.transform.SetSiblingIndex(1);
+                wordUI.GetComponent<CanvasGroup>().interactable = true;
+                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
+            }
+            if (controlNumber == 0)
+            {
+                GameControl.ShowArrows();
+                wordUI.transform.SetSiblingIndex(0);
+                wordUI.GetComponent<CanvasGroup>().interactable = false;
+                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
             }
         }
 
-        Academy.roundNumber = 0;
+        if (scene.name == "Forest")
+        {
+            controlNumber++;
+            if (controlNumber > 2)
+                controlNumber = 0;
+
+            switch (controlNumber)
+            {
+                case 0:
+                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
+                    break;
+                case 1:
+                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                    break;
+                case 2:
+                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                    break;
+            }
+
+            if (controlNumber == 1)
+            {
+                GameControl.HideArrows();
+                letterUI.transform.SetSiblingIndex(2);
+                wordUI.transform.SetSiblingIndex(1);
+                letterUI.GetComponent<CanvasGroup>().interactable = true;
+                letterUI.GetComponent<CanvasGroup>().alpha = 1f;
+                wordUI.GetComponent<CanvasGroup>().interactable = false;
+                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+            }
+            if (controlNumber == 2)
+            {
+                GameControl.HideArrows();
+                wordUI.transform.SetSiblingIndex(2);
+                letterUI.transform.SetSiblingIndex(1);
+                wordUI.GetComponent<CanvasGroup>().interactable = true;
+                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
+                letterUI.GetComponent<CanvasGroup>().interactable = false;
+                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
+            }
+            if (controlNumber == 0)
+            {
+                GameControl.ShowArrows();
+                wordUI.transform.SetSiblingIndex(0);
+                wordUI.GetComponent<CanvasGroup>().interactable = false;
+                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+                letterUI.GetComponent<CanvasGroup>().interactable = false;
+                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
+            }
+        }
+    }
+
+    public void MoveForward()
+    {
+        //  if (canWalkThroughNextWall == true)
+        //  {   
+
+        SoundManager.playFootstepSound();
+
+        if (direction == "north")
+        {
+            cameraPos.z += 5.4f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            cameraPos = camera.transform.position;
+
+        }
+        else if (direction == "south")
+        {
+            cameraPos.z += -5.4f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            cameraPos = camera.transform.position;
+        }
+        else if (direction == "east")
+        {
+            cameraPos.x += 5.4f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            cameraPos = camera.transform.position;
+
+        }
+        else if (direction == "west")
+        {
+            cameraPos.x += -5.4f;
+            camera.transform.position = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
+            cameraPos = camera.transform.position;
+        }
+        // }    
+
+        // CheckWalls();
+
+    }
+    public void LeftButton()
+    {
+        if (controlNumber == 0)
+        {
+            if (direction == "north")
+            {
+                direction = "west";
+            }
+            else if (direction == "west")
+            {
+                direction = "south";
+            }
+            else if (direction == "south")
+            {
+                direction = "east";
+            }
+            else if (direction == "east")
+            {
+                direction = "north";
+            }
+
+            camera.transform.Rotate(0, -90, 0);
+
+            //  CheckWalls();
+        }
+    }
+    public void RightButton()
+    {
+        if (controlNumber == 0)
+        {
+            if (direction == "north")
+            {
+                direction = "east";
+            }
+            else if (direction == "east")
+            {
+                direction = "south";
+            }
+            else if (direction == "south")
+            {
+                direction = "west";
+            }
+            else if (direction == "west")
+            {
+                direction = "north";
+            }
+            camera.transform.Rotate(0, 90, 0);
+
+            // CheckWalls();
+        }
     }
 
     public static void RedBG()
@@ -235,6 +385,12 @@ public class GameControl : MonoBehaviour
         GameControl.upArrow.GetComponent<Button>().interactable = false;
         GameControl.rightArrow.GetComponent<Button>().interactable = false;
         GameControl.leftArrow.GetComponent<Button>().interactable = false;
+    }
+
+
+    public static void HideControls()
+    {
+        controls.SetActive(false);
     }
 
     public static void ShowArrows()
