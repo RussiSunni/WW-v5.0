@@ -26,6 +26,7 @@ public class Fairy : MonoBehaviour
         cards.Add(gameControlScript.theCard);
         cards.Add(gameControlScript.doorCard);
         cards.Add(gameControlScript.okCard);
+        cards.Add(gameControlScript.fairyCard);
 
 
         // cardImage = cards[0].GetComponent<Image>();

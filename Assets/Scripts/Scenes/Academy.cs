@@ -184,6 +184,17 @@ public class Academy : MonoBehaviour
                     characterCards.Clear();
                 }
 
+                //Door --------------------
+                if (Mathf.Approximately(cameraPos.z, 0f) && Mathf.Approximately(cameraPos.x, 0f))
+                {
+                    for (int i = 0; i < Door.cards.Count; ++i)
+                    {
+                        characterCards.Add(Instantiate(Door.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
+                        characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
+                        characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
+                    }
+                }
+
 
                 // Go inside
                 else if (Mathf.Approximately(cameraPos.z, 5.4f) && Mathf.Approximately(cameraPos.x, 0f))
@@ -770,7 +781,6 @@ public class Academy : MonoBehaviour
             else if (roundNumber == 1)
             {
                 roundNumber = 2;
-                print("TEST");
                 NPCCardsAway();
             }
             else if (roundNumber == 2 && cardTabletopCount == 1 && cardTabletop.transform.GetChild(0).gameObject.name == "YesCard(Clone)")
@@ -789,11 +799,11 @@ public class Academy : MonoBehaviour
                 roundNumber = 0;
                 StartCoroutine((FairyCoroutine05()));
             }
-            else if (roundNumber == 4 && cardTabletopCount == 1 && cardTabletop.transform.GetChild(0).gameObject.name == "ThankyouCard(Clone)")
-            {
-                roundNumber++;
-                StartCoroutine((FairyCoroutine03()));
-            }
+            // else if (roundNumber == 4 && cardTabletopCount == 1 && cardTabletop.transform.GetChild(0).gameObject.name == "ThankyouCard(Clone)")
+            // {
+            //     roundNumber++;
+            //     StartCoroutine((FairyCoroutine03()));
+            // }
             else
             {
                 StartCoroutine((FairyCoroutine04()));
@@ -1631,5 +1641,52 @@ public class Academy : MonoBehaviour
             characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
             characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
         }
+    }
+
+    public void Craft()
+    {
+        // Fairy ------------------------------
+        if (Mathf.Approximately(cameraPos.z, -5.4f) && Mathf.Approximately(cameraPos.x, 0f) && direction == "north")
+        {
+            int letterTabletopCount = GameControl.letterTabletop.transform.childCount;
+            print(letterTabletopCount);
+
+            if (letterTabletopCount == 5 && GameControl.letterTabletop.transform.GetChild(0).gameObject.name == "FCard" && GameControl.letterTabletop.transform.GetChild(1).gameObject.name == "ACard" && GameControl.letterTabletop.transform.GetChild(2).gameObject.name == "ICard" && GameControl.letterTabletop.transform.GetChild(3).gameObject.name == "RCard" && GameControl.letterTabletop.transform.GetChild(4).gameObject.name == "YCard")
+            {
+                GameObject gameControl = GameObject.Find("GameControl");
+                GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+
+                gameControlScript.ControlButton();
+                characterCards[10].transform.SetParent(GameControl.wordTabletopPanel.transform, false);
+                characterCards[10].GetComponent<Image>().sprite = GameControl.fairyCardSprite;
+
+                // var frontDoorPart = frontDoor.GetComponent<ParticleSystem>();
+                // frontDoorPart.Play();
+
+            }
+        }
+
+
+        // Door ------------------------------
+        if (Mathf.Approximately(cameraPos.z, 0f) && Mathf.Approximately(cameraPos.x, 0f) && direction == "north")
+        {
+            int letterTabletopCount = GameControl.letterTabletop.transform.childCount;
+            print(letterTabletopCount);
+
+            if (letterTabletopCount == 4 && GameControl.letterTabletop.transform.GetChild(0).gameObject.name == "DCard" && GameControl.letterTabletop.transform.GetChild(1).gameObject.name == "OCard" && GameControl.letterTabletop.transform.GetChild(2).gameObject.name == "ACard" && GameControl.letterTabletop.transform.GetChild(3).gameObject.name == "RCard")
+            {
+                GameObject gameControl = GameObject.Find("GameControl");
+                GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+                gameControlScript.ControlButton();
+                characterCards[0].transform.SetParent(GameControl.wordTabletopPanel.transform, false);
+                characterCards[0].GetComponent<Image>().sprite = GameControl.doorCardSprite;
+
+                var frontDoorPart = frontDoor.GetComponent<ParticleSystem>();
+                frontDoorPart.Play();
+            }
+        }
+
+        GameControl.tabletopScript.ReturnPlayerCardsToHand();
+
     }
 }

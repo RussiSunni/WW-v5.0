@@ -17,12 +17,12 @@ public class GameControl : MonoBehaviour
     public static string playerName;
     public static int playerAge;
     public static bool arenaToggle;
-    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, speechHand, actionHand, actionTabletopPanel, speechTabletopPanel, characterHand, wordHandPanel, wordTabletopPanel;
+    public static Image characterTabletopPanel, blackBGPanel, characterImage, newCardImage, speechHand, actionHand, actionTabletopPanel, speechTabletopPanel, characterHand, wordHandPanel, wordTabletopPanel, letterHandPanel;
     public static Text newCardText;
     public static Button runAwayButton;
     public static Image playerBGPanel, characterBGPanel, arenaPanel;
-    public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard, newCard, haveCard, funCard, closeCard, pleaseCard;
-    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite, pleaseCardSprite, openCardSprite;
+    public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard, newCard, haveCard, funCard, closeCard, pleaseCard, fairyCard;
+    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite, pleaseCardSprite, openCardSprite, fairyCardSprite;
     public static Sprite spanishHelloCardSprite, spanishAreYouCardSprite, spanishLostCardSprite, spanishQuestionMarkCardSprite, spanishTheCardSprite, spanishDoorCardSprite, spanishGoThroughCardSprite, closeCardSprite;
     public static DropZone tabletopScript;
     public static bool cont = false;
@@ -80,6 +80,7 @@ public class GameControl : MonoBehaviour
         //   actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
         //   speechHand = GameObject.Find("SpeechHand").GetComponent<Image>();
         wordHandPanel = GameObject.Find("WordHand").GetComponent<Image>();
+        letterHandPanel = GameObject.Find("LetterHand").GetComponent<Image>();
 
         //  speechTabletop = GameObject.Find("SpeechTabletop");
         //  actionTabletop = GameObject.Find("ActionTabletop");
@@ -133,6 +134,8 @@ public class GameControl : MonoBehaviour
         closeCardSprite = Resources.Load<Sprite>("Cards/CloseCard");
         pleaseCardSprite = Resources.Load<Sprite>("Cards/PleaseCard");
         openCardSprite = Resources.Load<Sprite>("Cards/OpenCard");
+        fairyCardSprite = Resources.Load<Sprite>("Cards/FairyCard");
+
 
         spanishHelloCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Hello");
         spanishAreYouCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-AreYou");
@@ -145,87 +148,87 @@ public class GameControl : MonoBehaviour
 
     public void ControlButton()
     {
-        if (scene.name == "Academy")
+        // if (scene.name == "Academy")
+        // {
+        //     controlNumber++;
+        //     if (controlNumber > 1)
+        //         controlNumber = 0;
+
+        //     switch (controlNumber)
+        //     {
+        //         case 0:
+        //             GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
+        //             break;
+        //         case 1:
+        //             GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+        //             break;
+        //     }
+
+        //     if (controlNumber == 1)
+        //     {
+        //         GameControl.HideArrows();
+        //         wordUI.transform.SetSiblingIndex(1);
+        //         wordUI.GetComponent<CanvasGroup>().interactable = true;
+        //         wordUI.GetComponent<CanvasGroup>().alpha = 1f;
+        //     }
+        //     if (controlNumber == 0)
+        //     {
+        //         GameControl.ShowArrows();
+        //         wordUI.transform.SetSiblingIndex(0);
+        //         wordUI.GetComponent<CanvasGroup>().interactable = false;
+        //         wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+        //     }
+        // }
+
+        //  if (scene.name == "Forest")
+        // {
+        controlNumber++;
+        if (controlNumber > 2)
+            controlNumber = 0;
+
+        switch (controlNumber)
         {
-            controlNumber++;
-            if (controlNumber > 1)
-                controlNumber = 0;
-
-            switch (controlNumber)
-            {
-                case 0:
-                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
-                    break;
-                case 1:
-                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
-                    break;
-            }
-
-            if (controlNumber == 1)
-            {
-                GameControl.HideArrows();
-                wordUI.transform.SetSiblingIndex(1);
-                wordUI.GetComponent<CanvasGroup>().interactable = true;
-                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
-            }
-            if (controlNumber == 0)
-            {
-                GameControl.ShowArrows();
-                wordUI.transform.SetSiblingIndex(0);
-                wordUI.GetComponent<CanvasGroup>().interactable = false;
-                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-            }
+            case 0:
+                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
+                break;
+            case 1:
+                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                break;
+            case 2:
+                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                break;
         }
 
-        if (scene.name == "Forest")
+        if (controlNumber == 1)
         {
-            controlNumber++;
-            if (controlNumber > 2)
-                controlNumber = 0;
-
-            switch (controlNumber)
-            {
-                case 0:
-                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
-                    break;
-                case 1:
-                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
-                    break;
-                case 2:
-                    GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
-                    break;
-            }
-
-            if (controlNumber == 1)
-            {
-                GameControl.HideArrows();
-                letterUI.transform.SetSiblingIndex(2);
-                wordUI.transform.SetSiblingIndex(1);
-                letterUI.GetComponent<CanvasGroup>().interactable = true;
-                letterUI.GetComponent<CanvasGroup>().alpha = 1f;
-                wordUI.GetComponent<CanvasGroup>().interactable = false;
-                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-            }
-            if (controlNumber == 2)
-            {
-                GameControl.HideArrows();
-                wordUI.transform.SetSiblingIndex(2);
-                letterUI.transform.SetSiblingIndex(1);
-                wordUI.GetComponent<CanvasGroup>().interactable = true;
-                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
-                letterUI.GetComponent<CanvasGroup>().interactable = false;
-                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
-            }
-            if (controlNumber == 0)
-            {
-                GameControl.ShowArrows();
-                wordUI.transform.SetSiblingIndex(0);
-                wordUI.GetComponent<CanvasGroup>().interactable = false;
-                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-                letterUI.GetComponent<CanvasGroup>().interactable = false;
-                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
-            }
+            GameControl.HideArrows();
+            letterUI.transform.SetSiblingIndex(2);
+            wordUI.transform.SetSiblingIndex(1);
+            letterUI.GetComponent<CanvasGroup>().interactable = true;
+            letterUI.GetComponent<CanvasGroup>().alpha = 1f;
+            wordUI.GetComponent<CanvasGroup>().interactable = false;
+            wordUI.GetComponent<CanvasGroup>().alpha = 0f;
         }
+        if (controlNumber == 2)
+        {
+            GameControl.HideArrows();
+            wordUI.transform.SetSiblingIndex(2);
+            letterUI.transform.SetSiblingIndex(1);
+            wordUI.GetComponent<CanvasGroup>().interactable = true;
+            wordUI.GetComponent<CanvasGroup>().alpha = 1f;
+            letterUI.GetComponent<CanvasGroup>().interactable = false;
+            letterUI.GetComponent<CanvasGroup>().alpha = 0f;
+        }
+        if (controlNumber == 0)
+        {
+            GameControl.ShowArrows();
+            wordUI.transform.SetSiblingIndex(0);
+            wordUI.GetComponent<CanvasGroup>().interactable = false;
+            wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+            letterUI.GetComponent<CanvasGroup>().interactable = false;
+            letterUI.GetComponent<CanvasGroup>().alpha = 0f;
+        }
+        // }
     }
 
     public void MoveForward()
