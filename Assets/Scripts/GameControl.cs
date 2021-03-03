@@ -27,12 +27,15 @@ public class GameControl : MonoBehaviour
     public static DropZone tabletopScript;
     public static bool cont = false;
     int controlNumber = 0;
-    Sprite controlSprite01, controlSprite02;
-    GameObject wordUI, letterUI;
+    public Sprite controlSprite00, controlSprite01, controlSprite02;
     public static string direction;
     Camera camera;
     public static Vector3 cameraPos;
     private Scene scene;
+    public Image controlButtonImage;
+
+
+    public GameObject panel1, panel2, wordUI, letterUI;
 
     void Awake()
     {
@@ -54,8 +57,6 @@ public class GameControl : MonoBehaviour
         direction = "north";
         scene = SceneManager.GetActiveScene();
 
-
-
         Load();
         canvasCode = GameObject.Find("AcademyCode");
 
@@ -64,31 +65,28 @@ public class GameControl : MonoBehaviour
         rightArrow = GameObject.Find("Right Arrow");
         leftArrow = GameObject.Find("Left Arrow");
         controlButton = GameObject.Find("ControlButton");
-        arenaPanel = GameObject.Find("Arena").GetComponent<Image>();
+        if (scene.name == "Academy")
+        {
+            arenaPanel = GameObject.Find("Arena").GetComponent<Image>();
+            characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
+            characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
+            wordTabletopPanel = GameObject.Find("WordTabletop").GetComponent<Image>();
+            //   actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
+            //   speechHand = GameObject.Find("SpeechHand").GetComponent<Image>();
+            wordHandPanel = GameObject.Find("WordHand").GetComponent<Image>();
+            letterHandPanel = GameObject.Find("LetterHand").GetComponent<Image>();
+            //  speechTabletop = GameObject.Find("SpeechTabletop");
+            //  actionTabletop = GameObject.Find("ActionTabletop");
+            cardTabletop = GameObject.Find("WordTabletop");
+            //  actionTabletopPanel = GameObject.Find("ActionTabletop").GetComponent<Image>();
+            //   speechTabletopPanel = GameObject.Find("SpeechTabletop").GetComponent<Image>();
+            //   speechTabletopScript = speechTabletop.GetComponent<DropZone>();
+            //   actionTabletopScript = actionTabletop.GetComponent<DropZone>();
+            tabletopScript = cardTabletop.GetComponent<DropZone>();
+        }
+
         controls = GameObject.Find("Controls");
-
-        wordUI = GameObject.Find("WordUI");
-        letterUI = GameObject.Find("LetterUI");
-
         letterTabletop = GameObject.Find("LetterTabletop");
-
-        characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
-        characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
-        //  actionTabletopPanel = GameObject.Find("ActionTabletop").GetComponent<Image>();
-        //   speechTabletopPanel = GameObject.Find("SpeechTabletop").GetComponent<Image>();
-        wordTabletopPanel = GameObject.Find("WordTabletop").GetComponent<Image>();
-        //   actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
-        //   speechHand = GameObject.Find("SpeechHand").GetComponent<Image>();
-        wordHandPanel = GameObject.Find("WordHand").GetComponent<Image>();
-        letterHandPanel = GameObject.Find("LetterHand").GetComponent<Image>();
-
-        //  speechTabletop = GameObject.Find("SpeechTabletop");
-        //  actionTabletop = GameObject.Find("ActionTabletop");
-        cardTabletop = GameObject.Find("WordTabletop");
-
-        //   speechTabletopScript = speechTabletop.GetComponent<DropZone>();
-        //   actionTabletopScript = actionTabletop.GetComponent<DropZone>();
-        tabletopScript = cardTabletop.GetComponent<DropZone>();
 
         //  blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();     
 
@@ -96,8 +94,6 @@ public class GameControl : MonoBehaviour
         //  playerBGPanel = GameObject.Find("PlayerBGPanel").GetComponent<Image>();
         // characterBGPanel = GameObject.Find("CharacterBGPanel").GetComponent<Image>();
 
-        controlSprite01 = Resources.Load<Sprite>("UI/boots-icon");
-        controlSprite02 = Resources.Load<Sprite>("UI/speak-icon");
 
         cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
         hiCardSprite = Resources.Load<Sprite>("Cards/HiCard");
@@ -144,44 +140,11 @@ public class GameControl : MonoBehaviour
         spanishTheCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-The");
         spanishDoorCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Door");
         spanishGoThroughCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-GoThrough");
+
     }
 
     public void ControlButton()
     {
-        // if (scene.name == "Academy")
-        // {
-        //     controlNumber++;
-        //     if (controlNumber > 1)
-        //         controlNumber = 0;
-
-        //     switch (controlNumber)
-        //     {
-        //         case 0:
-        //             GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
-        //             break;
-        //         case 1:
-        //             GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
-        //             break;
-        //     }
-
-        //     if (controlNumber == 1)
-        //     {
-        //         GameControl.HideArrows();
-        //         wordUI.transform.SetSiblingIndex(1);
-        //         wordUI.GetComponent<CanvasGroup>().interactable = true;
-        //         wordUI.GetComponent<CanvasGroup>().alpha = 1f;
-        //     }
-        //     if (controlNumber == 0)
-        //     {
-        //         GameControl.ShowArrows();
-        //         wordUI.transform.SetSiblingIndex(0);
-        //         wordUI.GetComponent<CanvasGroup>().interactable = false;
-        //         wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-        //     }
-        // }
-
-        //  if (scene.name == "Forest")
-        // {
         controlNumber++;
         if (controlNumber > 2)
             controlNumber = 0;
@@ -189,46 +152,41 @@ public class GameControl : MonoBehaviour
         switch (controlNumber)
         {
             case 0:
-                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite01;
+                controlButtonImage.sprite = controlSprite00;
+                ShowArrows();
+                wordUI.transform.SetSiblingIndex(0);
+                wordUI.GetComponent<CanvasGroup>().interactable = false;
+                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+                letterUI.GetComponent<CanvasGroup>().interactable = false;
+                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
+                print("case 0");
+
                 break;
             case 1:
-                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                controlButtonImage.sprite = controlSprite01;
+                HideArrows();
+                letterUI.transform.SetSiblingIndex(2);
+                wordUI.transform.SetSiblingIndex(1);
+                letterUI.GetComponent<CanvasGroup>().interactable = true;
+                letterUI.GetComponent<CanvasGroup>().alpha = 1f;
+                wordUI.GetComponent<CanvasGroup>().interactable = false;
+                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+
+                print("case 1");
                 break;
             case 2:
-                GameControl.controlButton.GetComponent<Image>().sprite = controlSprite02;
+                controlButtonImage.sprite = controlSprite02;
+                HideArrows();
+                wordUI.transform.SetSiblingIndex(2);
+                letterUI.transform.SetSiblingIndex(1);
+                wordUI.GetComponent<CanvasGroup>().interactable = true;
+                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
+                letterUI.GetComponent<CanvasGroup>().interactable = false;
+                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
+
+                print("case 2");
                 break;
         }
-
-        if (controlNumber == 1)
-        {
-            GameControl.HideArrows();
-            letterUI.transform.SetSiblingIndex(2);
-            wordUI.transform.SetSiblingIndex(1);
-            letterUI.GetComponent<CanvasGroup>().interactable = true;
-            letterUI.GetComponent<CanvasGroup>().alpha = 1f;
-            wordUI.GetComponent<CanvasGroup>().interactable = false;
-            wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-        }
-        if (controlNumber == 2)
-        {
-            GameControl.HideArrows();
-            wordUI.transform.SetSiblingIndex(2);
-            letterUI.transform.SetSiblingIndex(1);
-            wordUI.GetComponent<CanvasGroup>().interactable = true;
-            wordUI.GetComponent<CanvasGroup>().alpha = 1f;
-            letterUI.GetComponent<CanvasGroup>().interactable = false;
-            letterUI.GetComponent<CanvasGroup>().alpha = 0f;
-        }
-        if (controlNumber == 0)
-        {
-            GameControl.ShowArrows();
-            wordUI.transform.SetSiblingIndex(0);
-            wordUI.GetComponent<CanvasGroup>().interactable = false;
-            wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-            letterUI.GetComponent<CanvasGroup>().interactable = false;
-            letterUI.GetComponent<CanvasGroup>().alpha = 0f;
-        }
-        // }
     }
 
     public void MoveForward()
@@ -424,34 +382,31 @@ public class GameControl : MonoBehaviour
         GameControl.rightArrow.GetComponent<Button>().interactable = true;
         GameControl.leftArrow.GetComponent<Button>().interactable = true;
     }
-    // public static void HideCardToggles()
-    // {
-    //     cardMoveToggle.SetActive(false);
-    //     cardPhraseToggle.SetActive(false);
-    // }
-    // public static void ShowCardToggles()
-    // {
-    //     cardMoveToggle.SetActive(true);
-    //     cardPhraseToggle.SetActive(true);
-    // }
 
-    // public void Dictionary()
-    // {
-    //     if (dictionaryCanvas.activeSelf)
-    //     {
-    //         dictionaryCanvas.SetActive(false);
-    //         UICanvas.SetActive(true);
-    //     }
-    //     else if (UICanvas.activeSelf)
-    //     {
-    //         dictionaryCanvas.SetActive(true);
-    //         UICanvas.SetActive(false);
-    //     }
-    // }
-    // public static void CanMoveCards()
-    // {
-    //     canMoveCards = true;
-    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void Restart()
     {
         Destroy(control);
@@ -495,6 +450,8 @@ public class GameControl : MonoBehaviour
         }
     }
 }
+
+
 
 [Serializable]
 class PlayerData

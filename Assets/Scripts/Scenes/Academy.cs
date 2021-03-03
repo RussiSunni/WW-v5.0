@@ -1659,7 +1659,7 @@ public class Academy : MonoBehaviour
                 gameControlScript.ControlButton();
                 characterCards[10].transform.SetParent(GameControl.wordTabletopPanel.transform, false);
                 characterCards[10].GetComponent<Image>().sprite = GameControl.fairyCardSprite;
-
+                SoundManager.playWordSound(SoundManager.fairyCraftSound);
                 // var frontDoorPart = frontDoor.GetComponent<ParticleSystem>();
                 // frontDoorPart.Play();
 
@@ -1683,6 +1683,7 @@ public class Academy : MonoBehaviour
 
                 var frontDoorPart = frontDoor.GetComponent<ParticleSystem>();
                 frontDoorPart.Play();
+                SoundManager.playWordSound(SoundManager.doorCraftSound);
             }
         }
 
