@@ -35,7 +35,7 @@ public class GameControl : MonoBehaviour
     public Image controlButtonImage;
 
 
-    public GameObject panel1, panel2, wordUI, letterUI;
+    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground;
 
     void Awake()
     {
@@ -145,6 +145,9 @@ public class GameControl : MonoBehaviour
 
     public void ControlButton()
     {
+        RectTransform controlButtonBackgroundRT = controlButtonBackground.GetComponent<RectTransform>();
+        RectTransform controlButtonRT = controlButton.GetComponent<RectTransform>();
+
         controlNumber++;
         if (controlNumber > 2)
             controlNumber = 0;
@@ -154,6 +157,10 @@ public class GameControl : MonoBehaviour
             case 0:
                 controlButtonImage.sprite = controlSprite00;
                 ShowArrows();
+                controlButtonBackgroundRT.sizeDelta = new Vector2(135, 135);
+                controlButtonRT.sizeDelta = new Vector2(135, 135);
+                arrows.transform.SetSiblingIndex(1);
+                letterUI.transform.SetSiblingIndex(0);
                 // wordUI.transform.SetSiblingIndex(0);
                 // wordUI.GetComponent<CanvasGroup>().interactable = false;
                 //  wordUI.GetComponent<CanvasGroup>().alpha = 0f;
@@ -164,8 +171,10 @@ public class GameControl : MonoBehaviour
             case 1:
                 controlButtonImage.sprite = controlSprite01;
                 HideArrows();
-                letterUI.transform.SetSiblingIndex(0);
-                //   wordUI.transform.SetSiblingIndex(1);
+                controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
+                controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
+                letterUI.transform.SetSiblingIndex(1);
+                arrows.transform.SetSiblingIndex(0);
                 letterUI.GetComponent<CanvasGroup>().interactable = true;
                 letterUI.GetComponent<CanvasGroup>().alpha = 1f;
                 //    wordUI.GetComponent<CanvasGroup>().interactable = false;
@@ -175,8 +184,11 @@ public class GameControl : MonoBehaviour
             case 2:
                 controlButtonImage.sprite = controlSprite02;
                 HideArrows();
+                controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
+                controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
                 //  wordUI.transform.SetSiblingIndex(2);
                 letterUI.transform.SetSiblingIndex(1);
+
                 //  wordUI.GetComponent<CanvasGroup>().interactable = true;
                 //  wordUI.GetComponent<CanvasGroup>().alpha = 1f;
                 letterUI.GetComponent<CanvasGroup>().interactable = false;

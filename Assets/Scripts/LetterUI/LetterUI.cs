@@ -341,4 +341,22 @@ public class LetterUI : MonoBehaviour
             }
         }
     }
+
+    public void ClearBlocks()
+    {
+        for (int i = 0; i < Row1.Count; i++)
+        {
+            if (Row1[i].childCount > 0)
+            {
+                Destroy(Row1[i].transform.GetChild(0).gameObject);
+            }
+        }
+        for (int i = 0; i < Row2.Count; i++)
+        {
+            if (Row2[i].childCount > 0)
+            {
+                Destroy(Row2[i].transform.GetChild(0).gameObject);
+            }
+        }
+    }
 }

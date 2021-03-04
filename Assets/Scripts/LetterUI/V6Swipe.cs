@@ -33,8 +33,6 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
         else if (Academy.direction == "west" || Academy.direction == "east")
             firstTouchPosition = Camera.main.ScreenToWorldPoint(new Vector3(10.8f, Input.mousePosition.y, Input.mousePosition.x));
 
-        //  print(firstTouchPosition);
-
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -45,9 +43,6 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
         else if (Academy.direction == "west" || Academy.direction == "east")
             finalTouchPosition = Camera.main.ScreenToWorldPoint(new Vector3(10.8f, Input.mousePosition.y, Input.mousePosition.x));
 
-        //  print(finalTouchPosition);
-
-
         CalculateAngle();
     }
 
@@ -55,7 +50,6 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
     {
         swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180 / Mathf.PI;
 
-        // print(swipeAngle);
         MovePieces();
     }
 
@@ -63,7 +57,6 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
     void MovePieces()
     {
         // column and row
-        //  print(Academy.direction);
 
         var letterUI = GameObject.Find("LetterUI");
         LetterUI letterUIScript = letterUI.GetComponent<LetterUI>();
@@ -136,9 +129,6 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
                 this.transform.SetParent(letterUIScript.Cols[currentCol][newColIndex]);
             }
         }
-
-
-
         else if (Academy.direction == "east")
         {
             if (swipeAngle > 45 && swipeAngle <= 135) // 
@@ -187,8 +177,6 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
                 this.transform.SetParent(letterUIScript.Cols[currentCol][newColIndex]);
             }
         }
-
-
 
 
         //StartCoroutine((RegisterWord()));
