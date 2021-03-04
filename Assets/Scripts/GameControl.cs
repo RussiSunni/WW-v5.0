@@ -154,37 +154,34 @@ public class GameControl : MonoBehaviour
             case 0:
                 controlButtonImage.sprite = controlSprite00;
                 ShowArrows();
-                wordUI.transform.SetSiblingIndex(0);
-                wordUI.GetComponent<CanvasGroup>().interactable = false;
-                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+                // wordUI.transform.SetSiblingIndex(0);
+                // wordUI.GetComponent<CanvasGroup>().interactable = false;
+                //  wordUI.GetComponent<CanvasGroup>().alpha = 0f;
                 letterUI.GetComponent<CanvasGroup>().interactable = false;
-                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
-                print("case 0");
+
 
                 break;
             case 1:
                 controlButtonImage.sprite = controlSprite01;
                 HideArrows();
-                letterUI.transform.SetSiblingIndex(2);
-                wordUI.transform.SetSiblingIndex(1);
+                letterUI.transform.SetSiblingIndex(0);
+                //   wordUI.transform.SetSiblingIndex(1);
                 letterUI.GetComponent<CanvasGroup>().interactable = true;
                 letterUI.GetComponent<CanvasGroup>().alpha = 1f;
-                wordUI.GetComponent<CanvasGroup>().interactable = false;
-                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+                //    wordUI.GetComponent<CanvasGroup>().interactable = false;
+                //  wordUI.GetComponent<CanvasGroup>().alpha = 0f;
 
-                print("case 1");
                 break;
             case 2:
                 controlButtonImage.sprite = controlSprite02;
                 HideArrows();
-                wordUI.transform.SetSiblingIndex(2);
+                //  wordUI.transform.SetSiblingIndex(2);
                 letterUI.transform.SetSiblingIndex(1);
-                wordUI.GetComponent<CanvasGroup>().interactable = true;
-                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
+                //  wordUI.GetComponent<CanvasGroup>().interactable = true;
+                //  wordUI.GetComponent<CanvasGroup>().alpha = 1f;
                 letterUI.GetComponent<CanvasGroup>().interactable = false;
                 letterUI.GetComponent<CanvasGroup>().alpha = 0f;
 
-                print("case 2");
                 break;
         }
     }
@@ -229,54 +226,52 @@ public class GameControl : MonoBehaviour
     }
     public void LeftButton()
     {
-        if (controlNumber == 0)
+
+        if (direction == "north")
         {
-            if (direction == "north")
-            {
-                direction = "west";
-            }
-            else if (direction == "west")
-            {
-                direction = "south";
-            }
-            else if (direction == "south")
-            {
-                direction = "east";
-            }
-            else if (direction == "east")
-            {
-                direction = "north";
-            }
-
-            camera.transform.Rotate(0, -90, 0);
-
-            //  CheckWalls();
+            direction = "west";
         }
+        else if (direction == "west")
+        {
+            direction = "south";
+        }
+        else if (direction == "south")
+        {
+            direction = "east";
+        }
+        else if (direction == "east")
+        {
+            direction = "north";
+        }
+
+        camera.transform.Rotate(0, -90, 0);
+
+        //  CheckWalls();
+
     }
     public void RightButton()
     {
-        if (controlNumber == 0)
-        {
-            if (direction == "north")
-            {
-                direction = "east";
-            }
-            else if (direction == "east")
-            {
-                direction = "south";
-            }
-            else if (direction == "south")
-            {
-                direction = "west";
-            }
-            else if (direction == "west")
-            {
-                direction = "north";
-            }
-            camera.transform.Rotate(0, 90, 0);
 
-            // CheckWalls();
+        if (direction == "north")
+        {
+            direction = "east";
         }
+        else if (direction == "east")
+        {
+            direction = "south";
+        }
+        else if (direction == "south")
+        {
+            direction = "west";
+        }
+        else if (direction == "west")
+        {
+            direction = "north";
+        }
+        camera.transform.Rotate(0, 90, 0);
+
+        // CheckWalls();
+
     }
 
     public static void RedBG()
@@ -382,28 +377,6 @@ public class GameControl : MonoBehaviour
         GameControl.rightArrow.GetComponent<Button>().interactable = true;
         GameControl.leftArrow.GetComponent<Button>().interactable = true;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

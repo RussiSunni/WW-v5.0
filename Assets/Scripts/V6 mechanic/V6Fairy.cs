@@ -28,7 +28,7 @@ public class V6Fairy : MonoBehaviour
     public void Animation(string word)
     {
         animator.SetBool(word, true);
-        V6GameControl.currentWordFairyAnimations.Clear();
+        //  LetterUI.currentWordFairyAnimations.Clear();
     }
 
 }

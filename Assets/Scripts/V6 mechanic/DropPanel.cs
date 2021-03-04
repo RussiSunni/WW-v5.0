@@ -24,7 +24,7 @@ public class DropPanel : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
     void Start()
     {
         GameObject gameControl = GameObject.Find("GameControl");
-        V6GameControl gameControlScript = gameControl.GetComponent<V6GameControl>();
+        LetterUI gameControlScript = gameControl.GetComponent<LetterUI>();
 
         Col1.Add(gameControlScript.A4);
         Col1.Add(gameControlScript.A5);

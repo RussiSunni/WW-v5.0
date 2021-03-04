@@ -21,7 +21,7 @@ public class ExistingDBScript : MonoBehaviour
         {
             //  ToConsole(dictionaryLookup.ToString());
             //GameControl.dictionaryLookups.Add(dictionaryLookup.Name, dictionaryLookup.Sprite);
-            V6GameControl.dictionaryLookupsList.Add(dictionaryLookup);
+            //    LetterUI.dictionaryLookupsList.Add(dictionaryLookup);
 
             //ToConsole(dictionaryLookup.ToString());
 

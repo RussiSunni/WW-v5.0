@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressYButton
         m_Mode: 1
         m_Arguments:
@@ -2128,113 +2128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardBackSprite: {fileID: 0}
---- !u!1 &97317923
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 97317924}
-  - component: {fileID: 97317928}
-  - component: {fileID: 97317927}
-  - component: {fileID: 97317926}
-  - component: {fileID: 97317925}
-  m_Layer: 0
-  m_Name: Fairy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &97317924
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97317923}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 278018521}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &97317925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97317923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 088a2a53a2e5ff5f78eeee081c22d89c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 97317926}
---- !u!95 &97317926
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97317923}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ff42435994f9baaf2bfee8f9d3e5a32d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &97317927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97317923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4c34b1a315ca1463ea191fe3bdd32c4c, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &97317928
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97317923}
-  m_CullTransparentMesh: 0
 --- !u!1 &99043125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,7 +2611,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressKButton
         m_Mode: 1
         m_Arguments:
@@ -4970,7 +4863,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressOButton
         m_Mode: 1
         m_Arguments:
@@ -5465,80 +5358,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273125059}
   m_Mesh: {fileID: 3294201719984341883, guid: d1161901ab82a21e88840de93ac7f7b1, type: 3}
---- !u!1 &278018520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 278018521}
-  - component: {fileID: 278018523}
-  - component: {fileID: 278018522}
-  m_Layer: 0
-  m_Name: FairyPanel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &278018521
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278018520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 97317924}
-  m_Father: {fileID: 649073816}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
-  m_SizeDelta: {x: 128, y: 192}
-  m_Pivot: {x: 1, y: 1}
---- !u!114 &278018522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278018520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &278018523
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278018520}
-  m_CullTransparentMesh: 0
 --- !u!1 &282084457
 GameObject:
   m_ObjectHideFlags: 0
@@ -5829,7 +5648,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressGButton
         m_Mode: 1
         m_Arguments:
@@ -6642,6 +6461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 336728985}
   - component: {fileID: 336728986}
+  - component: {fileID: 336728987}
   m_Layer: 5
   m_Name: LetterUI
   m_TagString: Untagged
@@ -6682,6 +6502,79 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &336728987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336728984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f1753040689c94689478b0b5c713c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  A4: {fileID: 560657793}
+  A5: {fileID: 104793567}
+  A6: {fileID: 19268306}
+  B4: {fileID: 1409526873}
+  B5: {fileID: 307532301}
+  B6: {fileID: 1256553234}
+  C4: {fileID: 1787963783}
+  C5: {fileID: 848779994}
+  C6: {fileID: 60925117}
+  D4: {fileID: 1855610551}
+  D5: {fileID: 705047718}
+  D6: {fileID: 1401565644}
+  E4: {fileID: 1834334739}
+  E5: {fileID: 1937330660}
+  E6: {fileID: 1906160035}
+  F4: {fileID: 858147355}
+  F5: {fileID: 1131810584}
+  F6: {fileID: 915486517}
+  G4: {fileID: 1778921423}
+  G5: {fileID: 379387319}
+  G6: {fileID: 62054257}
+  H4: {fileID: 814274422}
+  H5: {fileID: 1557366931}
+  H6: {fileID: 1107825423}
+  A: {fileID: 840863916399782343, guid: 5830a88f34171b64788ac40c66b4fa2c, type: 3}
+  B: {fileID: 6748589916890908524, guid: b885e810fef9c2bc9b4cd5bdcedabeda, type: 3}
+  C: {fileID: 7901997279405664609, guid: 2040c0d5759e9795a9775502d4ad7a30, type: 3}
+  D: {fileID: 3890126369799166655, guid: 3b11a6fd06be847b9bfb323c1f83ec31, type: 3}
+  E: {fileID: 1807262951783942790, guid: 0d41e6858e9f2fe6da0dfaf92d9435de, type: 3}
+  F: {fileID: 6323903737733994247, guid: 4a389a48bea27e34999c21d680b43d0c, type: 3}
+  G: {fileID: 3191360526147260985, guid: abfba3e9c17893f0da638d043ddc5d22, type: 3}
+  H: {fileID: 6210731214677003973, guid: 9ff64540ff7e944e0adb2122a203ab96, type: 3}
+  I: {fileID: 5779021307175406154, guid: 55b7ceecde4384d7bbe49cd21709f4a8, type: 3}
+  J: {fileID: 4026123702457868670, guid: ffb4dd08a373b7fe694238a713331176, type: 3}
+  K: {fileID: 699739660201846293, guid: 7fef00d531e47707dac99a9fa94eccec, type: 3}
+  L: {fileID: 2607451005631848877, guid: dedc48e106bc3791b959f5810c32e3e3, type: 3}
+  M: {fileID: 708416689615148253, guid: 98451fa4f1567509fb2a8322207e48fe, type: 3}
+  N: {fileID: 2197829410104078509, guid: ea90272cd67cdc0bbb9d8817635a4170, type: 3}
+  O: {fileID: 1641403274814182058, guid: b265635c192a79bb48817fec9d3804ef, type: 3}
+  P: {fileID: 3498259690964608573, guid: 3fae089281aa7aac59904626fe7056e9, type: 3}
+  Q: {fileID: 713665626493912181, guid: 109b1b86cfe6cb6f1811dd85d7a46da7, type: 3}
+  R: {fileID: 6048703614903318403, guid: 8728e5c22af224387b2c5c0e3568cf4d, type: 3}
+  S: {fileID: 679117282475020938, guid: 01c5259072fedc24cb6933be47485a0a, type: 3}
+  T: {fileID: 4379910017493752812, guid: 14cbdb4eeed2528b0b00cdceb3ba3f8c, type: 3}
+  U: {fileID: 6829019262452282608, guid: 5c5580da3d72a267fb34b06357fa377e, type: 3}
+  V: {fileID: 73480814391786715, guid: 17dda702fe7e1049d9584b760f45ee8c, type: 3}
+  W: {fileID: 7447920315090006455, guid: e1455d94e42bc879fad437aa606d7e41, type: 3}
+  X: {fileID: 1311048937327067649, guid: 2d3e9b3cd8dd3cc539ca6d5c6a4eca29, type: 3}
+  Y: {fileID: 8150469933604103520, guid: 661276d7d0a6732508144bf0cef844fa, type: 3}
+  Z: {fileID: 1153321351919471689, guid: 6a3030cca9230654091a3ff684078a92, type: 3}
+  Col1: []
+  Col2: []
+  Col3: []
+  Col4: []
+  Col5: []
+  Col6: []
+  Col7: []
+  Col8: []
+  Row1: []
+  Row2: []
+  Row3: []
 --- !u!1 &351752721
 GameObject:
   m_ObjectHideFlags: 0
@@ -6763,7 +6656,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressJButton
         m_Mode: 1
         m_Arguments:
@@ -8910,7 +8803,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressSButton
         m_Mode: 1
         m_Arguments:
@@ -11601,7 +11494,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressPButton
         m_Mode: 1
         m_Arguments:
@@ -12705,7 +12598,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 278018521}
   - {fileID: 1323704172}
   m_Father: {fileID: 336728985}
   m_RootOrder: 1
@@ -14967,7 +14859,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressNButton
         m_Mode: 1
         m_Arguments:
@@ -16269,7 +16161,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressZButton
         m_Mode: 1
         m_Arguments:
@@ -20027,7 +19919,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressTButton
         m_Mode: 1
         m_Arguments:
@@ -21020,7 +20912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &985701530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21897,7 +21789,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressMButton
         m_Mode: 1
         m_Arguments:
@@ -22458,7 +22350,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressEButton
         m_Mode: 1
         m_Arguments:
@@ -22586,7 +22478,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressRButton
         m_Mode: 1
         m_Arguments:
@@ -25891,7 +25783,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressXButton
         m_Mode: 1
         m_Arguments:
@@ -27541,7 +27433,7 @@ RectTransform:
   - {fileID: 818388962}
   - {fileID: 424553350}
   m_Father: {fileID: 649073816}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -27720,7 +27612,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressCButton
         m_Mode: 1
         m_Arguments:
@@ -28304,7 +28196,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressAButton
         m_Mode: 1
         m_Arguments:
@@ -31314,7 +31206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressVButton
         m_Mode: 1
         m_Arguments:
@@ -32081,7 +31973,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressIButton
         m_Mode: 1
         m_Arguments:
@@ -33093,7 +32985,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressQButton
         m_Mode: 1
         m_Arguments:
@@ -35484,7 +35376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1696936215
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38259,7 +38151,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressUButton
         m_Mode: 1
         m_Arguments:
@@ -38742,7 +38634,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressHButton
         m_Mode: 1
         m_Arguments:
@@ -39316,7 +39208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressDButton
         m_Mode: 1
         m_Arguments:
@@ -40392,7 +40284,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressWButton
         m_Mode: 1
         m_Arguments:
@@ -41171,7 +41063,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressFButton
         m_Mode: 1
         m_Arguments:
@@ -42121,7 +42013,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressLButton
         m_Mode: 1
         m_Arguments:
@@ -42700,7 +42592,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 336728987}
         m_MethodName: pressBButton
         m_Mode: 1
         m_Arguments:

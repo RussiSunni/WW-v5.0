@@ -52,7 +52,7 @@ public class DraggableBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         yield return new WaitForSeconds(0.1f);
 
         GameObject gameControl = GameObject.Find("GameControl");
-        V6GameControl gameControlScript = gameControl.GetComponent<V6GameControl>();
+        LetterUI gameControlScript = gameControl.GetComponent<LetterUI>();
         gameControlScript.UpdateStage();
     }
 }
