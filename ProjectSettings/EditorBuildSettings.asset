@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartMenu.unity
     guid: 3388843f58b97e3898ba263d75237efe
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Intro.unity
     guid: b9491dc854407eadfafe7c61af5340e1
   - enabled: 1
@@ -35,13 +35,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: 3b90f424f23f98bd4ab7398a20ac64d1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/The Wilds.unity
     guid: 896c237f35a231a9e8facecdba83f3e0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Forest.unity
     guid: ddcefc166af7e450e8f307a56a9eb0be
   m_configObjects: {}

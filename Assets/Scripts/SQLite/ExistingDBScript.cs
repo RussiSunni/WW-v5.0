@@ -19,18 +19,17 @@ public class ExistingDBScript : MonoBehaviour
     {
         foreach (var dictionaryLookup in dictionaryLookups)
         {
-            //  ToConsole(dictionaryLookup.ToString());
+            ToConsole(dictionaryLookup.ToString());
             //GameControl.dictionaryLookups.Add(dictionaryLookup.Name, dictionaryLookup.Sprite);
-            //    LetterUI.dictionaryLookupsList.Add(dictionaryLookup);
+            LetterUI.dictionaryLookupsList.Add(dictionaryLookup);
 
-            //ToConsole(dictionaryLookup.ToString());
-
+            // DebugText.text = dictionaryLookup.Name;
         }
     }
 
     private void ToConsole(string msg)
     {
-        DebugText.text += System.Environment.NewLine + msg;
+        // DebugText.text += System.Environment.NewLine + msg;
         Debug.Log(msg);
     }
 }

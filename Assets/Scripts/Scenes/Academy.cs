@@ -737,6 +737,8 @@ public class Academy : MonoBehaviour
         numberPages.transform.localPosition = new Vector3(0f, -1500f, 0f);
     }
 
+
+
     public void Go()
     {
         int cardTabletopCount = cardTabletop.transform.childCount;
@@ -1690,4 +1692,20 @@ public class Academy : MonoBehaviour
         GameControl.tabletopScript.ReturnPlayerCardsToHand();
 
     }
+
+
+    public static void CheckTile(List<string> currentWords)
+    {
+        GameObject gameControl = GameObject.Find("GameControl");
+        NPCUI NPCUIScript = gameControl.GetComponent<NPCUI>();
+
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && direction == "north")
+        {
+            if (currentWords[0] == "HELLO")
+            {
+                NPCUIScript.UpdateNPCText("Why hello there!");
+            }
+        }
+    }
+
 }

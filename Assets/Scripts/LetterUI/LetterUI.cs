@@ -20,8 +20,9 @@ public class LetterUI : MonoBehaviour
     public List<Transform> Row2 = new List<Transform>();
     public List<Transform> Row3 = new List<Transform>();
     public List<List<Transform>> Rows = new List<List<Transform>>();
+    public static List<DictionaryLookup> dictionaryLookupsList = new List<DictionaryLookup>();
 
-    List<string> currentWords = new List<string>();
+    public static List<string> currentWords = new List<string>();
 
     string word;
     char[] board;
@@ -98,6 +99,7 @@ public class LetterUI : MonoBehaviour
 
     public void UpdateStage()
     {
+
         // load current board
 
         // Row 1
@@ -107,6 +109,8 @@ public class LetterUI : MonoBehaviour
             if (Row1[i].childCount > 0)
             {
                 board1[i] = Row1[i].GetChild(0).gameObject.name[0];
+
+                //  print(board1[i]);
             }
         }
 
@@ -117,6 +121,8 @@ public class LetterUI : MonoBehaviour
             if (Row2[i].childCount > 0)
             {
                 board2[i] = Row2[i].GetChild(0).gameObject.name[0];
+
+                // print(board2[i]);
             }
         }
 
@@ -127,14 +133,62 @@ public class LetterUI : MonoBehaviour
             if (Row3[i].childCount > 0)
             {
                 board3[i] = Row3[i].GetChild(0).gameObject.name[0];
+
+                // print(board3[i]);
             }
         }
 
+        Search(board1, dictionaryLookupsList);
+        Search(board2, dictionaryLookupsList);
+        Search(board3, dictionaryLookupsList);
 
         currentWords.Clear();
-
-
     }
+
+    private bool Search(char[] board, List<DictionaryLookup> dictionaryLookupsList)
+    {
+        for (int i = 0; i < board.Length; i++)
+        {
+            foreach (DictionaryLookup dictionaryLookup in dictionaryLookupsList)
+            {
+                if (board[i] == dictionaryLookup.Name[0] && dfs(board, i, 0, dictionaryLookup.Name))
+                {
+                    //print(words[h]);
+                }
+            }
+        }
+        return false;
+    }
+
+    public bool dfs(char[] board, int i, int count, string word)
+    {
+        // print(word);
+
+        if (count == word.Length)
+            return true;
+
+        if (i < 0 || i >= board.Length || board[i] != word[count])
+            return false;
+
+        char temp = board[i];
+        board[i] = ' ';
+
+        bool found = dfs(board, i + 1, count + 1, word);
+
+        board[i] = temp;
+
+        if (found && !currentWords.Contains(word))
+        {
+            currentWords.Add(word);
+
+            Academy.CheckTile(currentWords);
+        }
+        return found;
+    }
+
+
+    // letter buttons ----------------------------
+
     // optimise to a loop
     public void pressAButton()
     {
@@ -270,74 +324,40 @@ public class LetterUI : MonoBehaviour
 
 
     // for 3 rows
-    // private void setParent1(GameObject block)
-    // {
-    //     for (int i = 2; i < Rows.Count; i--)
-    //     {
-    //         for (int h = 0; h < Rows[i].Count; h++)
-    //         {
-    //             if (Rows[i][h].childCount == 0)
-    //             {
-    //                 block.transform.SetParent(Rows[i][h]);
-    //                 break;
-    //             }
-    //             else
-    //             {
-    //                 continue;
-    //             }
-    //         }
-    //     }
-    // }
-
-    // private void setParent2(GameObject block)
-    // {
-    //     for (int i = 2; i < Rows.Count; i--)
-    //     {
-    //         for (int h = 7; h < Rows[i].Count; h--)
-    //         {
-    //             if (Rows[i][h].childCount == 0)
-    //             {
-    //                 block.transform.SetParent(Rows[i][h]);
-    //                 break;
-    //             }
-    //             else
-    //             {
-    //                 continue;
-    //             }
-    //         }
-    //     }
-    // }
-
-    //1 ROW---------------------
-
-    void setParent1(GameObject block)
+    private void setParent1(GameObject block)
     {
-        for (int h = 0; h < Row1.Count; h++)
+        for (int i = 2; i < Rows.Count; i--)
         {
-            if (Row1[h].childCount == 0)
+            for (int h = 0; h < Rows[i].Count; h++)
             {
-                block.transform.SetParent(Row1[h], false);
-                break;
-            }
-            else
-            {
-                continue;
+                if (Rows[i][h].childCount == 0)
+                {
+                    block.transform.SetParent(Rows[i][h], false);
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
     }
 
-    void setParent2(GameObject block)
+    private void setParent2(GameObject block)
     {
-        for (int h = 7; h < Row1.Count; h--)
+        for (int i = 2; i < Rows.Count; i--)
         {
-            if (Row1[h].childCount == 0)
+            for (int h = 7; h < Rows[i].Count; h--)
             {
-                block.transform.SetParent(Row1[h], false);
-                break;
-            }
-            else
-            {
-                continue;
+                if (Rows[i][h].childCount == 0)
+                {
+                    block.transform.SetParent(Rows[i][h], false);
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
     }

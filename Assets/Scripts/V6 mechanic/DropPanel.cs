@@ -23,40 +23,40 @@ public class DropPanel : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
 
     void Start()
     {
-        GameObject gameControl = GameObject.Find("GameControl");
-        LetterUI gameControlScript = gameControl.GetComponent<LetterUI>();
+        GameObject letterUI = GameObject.Find("LetterUI");
+        LetterUI letterUIScript = letterUI.GetComponent<LetterUI>();
 
-        Col1.Add(gameControlScript.A4);
-        Col1.Add(gameControlScript.A5);
-        Col1.Add(gameControlScript.A6);
+        Col1.Add(letterUIScript.A4);
+        Col1.Add(letterUIScript.A5);
+        Col1.Add(letterUIScript.A6);
 
-        Col2.Add(gameControlScript.B4);
-        Col2.Add(gameControlScript.B5);
-        Col2.Add(gameControlScript.B6);
+        Col2.Add(letterUIScript.B4);
+        Col2.Add(letterUIScript.B5);
+        Col2.Add(letterUIScript.B6);
 
-        Col3.Add(gameControlScript.C4);
-        Col3.Add(gameControlScript.C5);
-        Col3.Add(gameControlScript.C6);
+        Col3.Add(letterUIScript.C4);
+        Col3.Add(letterUIScript.C5);
+        Col3.Add(letterUIScript.C6);
 
-        Col4.Add(gameControlScript.D4);
-        Col4.Add(gameControlScript.D5);
-        Col4.Add(gameControlScript.D6);
+        Col4.Add(letterUIScript.D4);
+        Col4.Add(letterUIScript.D5);
+        Col4.Add(letterUIScript.D6);
 
-        Col5.Add(gameControlScript.E4);
-        Col5.Add(gameControlScript.E5);
-        Col5.Add(gameControlScript.E6);
+        Col5.Add(letterUIScript.E4);
+        Col5.Add(letterUIScript.E5);
+        Col5.Add(letterUIScript.E6);
 
-        Col6.Add(gameControlScript.F4);
-        Col6.Add(gameControlScript.F5);
-        Col6.Add(gameControlScript.F6);
+        Col6.Add(letterUIScript.F4);
+        Col6.Add(letterUIScript.F5);
+        Col6.Add(letterUIScript.F6);
 
-        Col7.Add(gameControlScript.G4);
-        Col7.Add(gameControlScript.G5);
-        Col7.Add(gameControlScript.G6);
+        Col7.Add(letterUIScript.G4);
+        Col7.Add(letterUIScript.G5);
+        Col7.Add(letterUIScript.G6);
 
-        Col8.Add(gameControlScript.H4);
-        Col8.Add(gameControlScript.H5);
-        Col8.Add(gameControlScript.H6);
+        Col8.Add(letterUIScript.H4);
+        Col8.Add(letterUIScript.H5);
+        Col8.Add(letterUIScript.H6);
 
         columns.Add(Col1);
         columns.Add(Col2);

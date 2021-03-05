@@ -67,7 +67,7 @@ public class GameControl : MonoBehaviour
         controlButton = GameObject.Find("ControlButton");
         if (scene.name == "Academy")
         {
-            arenaPanel = GameObject.Find("Arena").GetComponent<Image>();
+            // arenaPanel = GameObject.Find("Arena").GetComponent<Image>();
             characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
             characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
             wordTabletopPanel = GameObject.Find("WordTabletop").GetComponent<Image>();

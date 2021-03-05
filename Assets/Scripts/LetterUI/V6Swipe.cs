@@ -32,7 +32,6 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
 
         else if (Academy.direction == "west" || Academy.direction == "east")
             firstTouchPosition = Camera.main.ScreenToWorldPoint(new Vector3(10.8f, Input.mousePosition.y, Input.mousePosition.x));
-
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -179,14 +178,14 @@ public class V6Swipe : MonoBehaviour, IPointerDownHandler, IPointerUpHandler // 
         }
 
 
-        //StartCoroutine((RegisterWord()));
+        //  StartCoroutine((RegisterWord()));
     }
     // IEnumerator RegisterWord()
     // {
     //     yield return new WaitForSeconds(0.1f);
 
-    //     GameObject gameControl = GameObject.Find("GameControl");
-    //     LetterUI gameControlScript = gameControl.GetComponent<LetterUI>();
-    //     gameControlScript.UpdateStage();
+    //     GameObject letterUI = GameObject.Find("LetterUI");
+    //     LetterUI letterUIScript = letterUI.GetComponent<LetterUI>();
+    //     letterUIScript.UpdateStage();
     // }
 }
