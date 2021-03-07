@@ -15,13 +15,13 @@ public class Academy : MonoBehaviour
     public static string direction;
     public static Text dialogue;
     public static int roundNumber;
-    public static GameObject speechPages, actionPages, letterPages, numberPages, frontDoor, letterPage1, letterPage2, speechTabletop, actionTabletop, cardTabletop;
+    public static GameObject speechPages, actionPages, letterPages, numberPages, letterPage1, letterPage2, speechTabletop, actionTabletop, cardTabletop;
     static SpriteRenderer secretary, secretaryCloseUp;
     static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite, wolfSprite, dinoSprite, doorCardSprite, youCardSprite, student06Sprite, student01Sprite, hiCardSprite, evaCardSprite;
     public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, lookingCard, forCard, myCard, houndCard, closeCard, pleaseCard;
     static string timeOfDay, playerName;
     int controlNumber = 0;
-    public GameObject student3, dino;
+    public GameObject student3, dino, frontDoor;
     public GameObject[] solidObjects;
 
     public bool canWalkThroughNextWall;
@@ -32,6 +32,8 @@ public class Academy : MonoBehaviour
     GameControl gameControl;
     public static List<Transform> characterCards = new List<Transform>();
     public Button controlButton;
+
+    public static int sceneNumber = 0;
 
     void Start()
     {
@@ -1579,7 +1581,7 @@ public class Academy : MonoBehaviour
         frontDoor.tag = "Untagged";
         CheckWalls();
         SoundManager.playDoorOpeningSound();
-        GameControl.tabletopScript.ReturnPlayerCardsToHand();
+        // GameControl.tabletopScript.ReturnPlayerCardsToHand();
 
         //  GameObject gameControl = GameObject.Find("GameControl");
         //  GameControl gameControlScript = gameControl.GetComponent<GameControl>();
@@ -1694,18 +1696,78 @@ public class Academy : MonoBehaviour
     }
 
 
-    public static void CheckTile(List<string> currentWords)
+    public void CheckTile(List<string> currentWords)
     {
         GameObject gameControl = GameObject.Find("GameControl");
         NPCUI NPCUIScript = gameControl.GetComponent<NPCUI>();
 
+        GameObject scorePanel = GameObject.Find("ScorePanel");
+        Score scoreScript = scorePanel.GetComponent<Score>();
+
+        //Tile Academy A2 "Fairy outside Academy, on tree"
         if (cameraPos.z == -5.4f && cameraPos.x == 0f && direction == "north")
         {
-            if (currentWords[0] == "HELLO")
+            if (sceneNumber == 0)
             {
-                NPCUIScript.UpdateNPCText("Why hello there!");
+                if (currentWords[0] == "HELLO")
+                {
+                    sceneNumber = 1;
+                    NPCUIScript.UpdateNPCText("Hello");
+                    if (PuzzleCompletionRecord.A2 == false)
+                    {
+                        PuzzleCompletionRecord.A2 = true;
+                        scoreScript.UpdateScorePanel(1);
+                    }
+                }
+            }
+        }
+        //Tile Academy A3 "Academy door"
+        if (cameraPos.z == 0f && cameraPos.x == 0f && direction == "north")
+        {
+
+            if (sceneNumber == 0)
+            {
+                if (currentWords[0] == "OPEN")
+                {
+                    OpenFrontDoor();
+
+                    sceneNumber = 1;
+                    if (PuzzleCompletionRecord.A3 == false)
+                    {
+                        PuzzleCompletionRecord.A3 = true;
+                        scoreScript.UpdateScorePanel(1);
+                    }
+                }
             }
         }
     }
 
+
+    public void NPCTextCont()
+    {
+        GameObject gameControl = GameObject.Find("GameControl");
+        NPCUI NPCUIScript = gameControl.GetComponent<NPCUI>();
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+
+        //Tile Academy A2 "Fairy outside Academy, on tree"
+        if (cameraPos.z == -5.4f && cameraPos.x == 0f && direction == "north")
+        {
+            if (sceneNumber == 1)
+            {
+                NPCUIScript.UpdateNPCText("Welcome to the Academy.");
+                sceneNumber = 2;
+            }
+            else if (sceneNumber == 2)
+            {
+                NPCUIScript.UpdateNPCText("");
+                sceneNumber = 3;
+                gameControlScript.ShowNewSpellNotification();
+                SoundManager.playSound(SoundManager.correctSound);
+            }
+            else if (sceneNumber == 3)
+            {
+                gameControlScript.ShowNewSpellNotification();
+            }
+        }
+    }
 }

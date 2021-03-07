@@ -99,7 +99,6 @@ public class LetterUI : MonoBehaviour
 
     public void UpdateStage()
     {
-
         // load current board
 
         // Row 1
@@ -162,7 +161,7 @@ public class LetterUI : MonoBehaviour
 
     public bool dfs(char[] board, int i, int count, string word)
     {
-        // print(word);
+
 
         if (count == word.Length)
             return true;
@@ -179,10 +178,16 @@ public class LetterUI : MonoBehaviour
 
         if (found && !currentWords.Contains(word))
         {
+
             currentWords.Add(word);
 
-            Academy.CheckTile(currentWords);
+            GameObject academy = GameObject.Find("AcademyCode");
+            Academy academyScript = academy.GetComponent<Academy>();
+            academyScript.CheckTile(currentWords);
+
+            ClearBlocks();
         }
+
         return found;
     }
 
@@ -259,67 +264,67 @@ public class LetterUI : MonoBehaviour
     public void pressNButton()
     {
         GameObject nBlock = Instantiate(Resources.Load("Prefabs/Letters/n")) as GameObject;
-        setParent2(nBlock);
+        setParent1(nBlock);
     }
     public void pressOButton()
     {
         GameObject oBlock = Instantiate(Resources.Load("Prefabs/Letters/o")) as GameObject;
-        setParent2(oBlock);
+        setParent1(oBlock);
     }
     public void pressPButton()
     {
         GameObject pBlock = Instantiate(Resources.Load("Prefabs/Letters/p")) as GameObject;
-        setParent2(pBlock);
+        setParent1(pBlock);
     }
     public void pressQButton()
     {
         GameObject qBlock = Instantiate(Resources.Load("Prefabs/Letters/q")) as GameObject;
-        setParent2(qBlock);
+        setParent1(qBlock);
     }
     public void pressRButton()
     {
         GameObject rBlock = Instantiate(Resources.Load("Prefabs/Letters/r")) as GameObject;
-        setParent2(rBlock);
+        setParent1(rBlock);
     }
     public void pressSButton()
     {
         GameObject sBlock = Instantiate(Resources.Load("Prefabs/Letters/s")) as GameObject;
-        setParent2(sBlock);
+        setParent1(sBlock);
     }
     public void pressTButton()
     {
         GameObject tBlock = Instantiate(Resources.Load("Prefabs/Letters/t")) as GameObject;
-        setParent2(tBlock);
+        setParent1(tBlock);
     }
     public void pressUButton()
     {
         GameObject uBlock = Instantiate(Resources.Load("Prefabs/Letters/u")) as GameObject;
-        setParent2(uBlock);
+        setParent1(uBlock);
     }
     public void pressVButton()
     {
         GameObject vBlock = Instantiate(Resources.Load("Prefabs/Letters/v")) as GameObject;
-        setParent2(vBlock);
+        setParent1(vBlock);
     }
     public void pressWButton()
     {
         GameObject wBlock = Instantiate(Resources.Load("Prefabs/Letters/w")) as GameObject;
-        setParent2(wBlock);
+        setParent1(wBlock);
     }
     public void pressXButton()
     {
         GameObject xBlock = Instantiate(Resources.Load("Prefabs/Letters/x")) as GameObject;
-        setParent2(xBlock);
+        setParent1(xBlock);
     }
     public void pressYButton()
     {
         GameObject yBlock = Instantiate(Resources.Load("Prefabs/Letters/y")) as GameObject;
-        setParent2(yBlock);
+        setParent1(yBlock);
     }
     public void pressZButton()
     {
         GameObject zBlock = Instantiate(Resources.Load("Prefabs/Letters/z")) as GameObject;
-        setParent2(zBlock);
+        setParent1(zBlock);
     }
 
 
@@ -343,24 +348,24 @@ public class LetterUI : MonoBehaviour
         }
     }
 
-    private void setParent2(GameObject block)
-    {
-        for (int i = 2; i < Rows.Count; i--)
-        {
-            for (int h = 7; h < Rows[i].Count; h--)
-            {
-                if (Rows[i][h].childCount == 0)
-                {
-                    block.transform.SetParent(Rows[i][h], false);
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
-            }
-        }
-    }
+    // private void setParent2(GameObject block)
+    // {
+    //     for (int i = 2; i < Rows.Count; i--)
+    //     {
+    //         for (int h = 7; h < Rows[i].Count; h--)
+    //         {
+    //             if (Rows[i][h].childCount == 0)
+    //             {
+    //                 block.transform.SetParent(Rows[i][h], false);
+    //                 break;
+    //             }
+    //             else
+    //             {
+    //                 continue;
+    //             }
+    //         }
+    //     }
+    // }
 
     public void ClearBlocks()
     {

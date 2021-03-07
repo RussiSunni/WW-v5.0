@@ -35,7 +35,7 @@ public class GameControl : MonoBehaviour
     public Image controlButtonImage;
 
 
-    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground;
+    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground, newSpellNotification, gameMenuPanel, spellCategory01Panel;
 
     void Awake()
     {
@@ -159,11 +159,12 @@ public class GameControl : MonoBehaviour
                 ShowArrows();
                 controlButtonBackgroundRT.sizeDelta = new Vector2(135, 135);
                 controlButtonRT.sizeDelta = new Vector2(135, 135);
-                arrows.transform.SetSiblingIndex(1);
-                letterUI.transform.SetSiblingIndex(0);
-                // wordUI.transform.SetSiblingIndex(0);
-                // wordUI.GetComponent<CanvasGroup>().interactable = false;
-                //  wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+                arrows.transform.SetSiblingIndex(3);
+                letterUI.transform.SetSiblingIndex(2);
+                wordUI.transform.SetSiblingIndex(1);
+                gameMenuPanel.transform.SetSiblingIndex(0);
+                wordUI.GetComponent<CanvasGroup>().interactable = false;
+                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
                 letterUI.GetComponent<CanvasGroup>().interactable = false;
 
 
@@ -173,12 +174,14 @@ public class GameControl : MonoBehaviour
                 HideArrows();
                 controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
                 controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
-                letterUI.transform.SetSiblingIndex(1);
-                arrows.transform.SetSiblingIndex(0);
+                letterUI.transform.SetSiblingIndex(3);
+                wordUI.transform.SetSiblingIndex(2);
+                arrows.transform.SetSiblingIndex(1);
+                gameMenuPanel.transform.SetSiblingIndex(0);
                 letterUI.GetComponent<CanvasGroup>().interactable = true;
                 letterUI.GetComponent<CanvasGroup>().alpha = 1f;
-                //    wordUI.GetComponent<CanvasGroup>().interactable = false;
-                //  wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+                wordUI.GetComponent<CanvasGroup>().interactable = false;
+                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
 
                 break;
             case 2:
@@ -186,11 +189,13 @@ public class GameControl : MonoBehaviour
                 HideArrows();
                 controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
                 controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
-                //  wordUI.transform.SetSiblingIndex(2);
-                letterUI.transform.SetSiblingIndex(1);
+                wordUI.transform.SetSiblingIndex(3);
+                letterUI.transform.SetSiblingIndex(2);
+                arrows.transform.SetSiblingIndex(1);
+                gameMenuPanel.transform.SetSiblingIndex(0);
 
-                //  wordUI.GetComponent<CanvasGroup>().interactable = true;
-                //  wordUI.GetComponent<CanvasGroup>().alpha = 1f;
+                wordUI.GetComponent<CanvasGroup>().interactable = true;
+                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
                 letterUI.GetComponent<CanvasGroup>().interactable = false;
                 letterUI.GetComponent<CanvasGroup>().alpha = 0f;
 
@@ -198,6 +203,38 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    public void GameMenuButton()
+    {
+        if (gameMenuPanel.GetComponent<CanvasGroup>().interactable == false)
+        {
+            gameMenuPanel.GetComponent<CanvasGroup>().interactable = true;
+            gameMenuPanel.GetComponent<CanvasGroup>().alpha = 1f;
+            gameMenuPanel.transform.SetSiblingIndex(6);
+        }
+        else
+        {
+            gameMenuPanel.GetComponent<CanvasGroup>().interactable = false;
+            gameMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
+            gameMenuPanel.transform.SetSiblingIndex(0);
+        }
+    }
+
+
+    public void SpellCategory01Button()
+    {
+        if (spellCategory01Panel.GetComponent<CanvasGroup>().interactable == false)
+        {
+            spellCategory01Panel.GetComponent<CanvasGroup>().interactable = true;
+            spellCategory01Panel.GetComponent<CanvasGroup>().alpha = 1f;
+            spellCategory01Panel.transform.SetSiblingIndex(6);
+        }
+        else
+        {
+            spellCategory01Panel.GetComponent<CanvasGroup>().interactable = false;
+            spellCategory01Panel.GetComponent<CanvasGroup>().alpha = 0f;
+            spellCategory01Panel.transform.SetSiblingIndex(0);
+        }
+    }
     public void MoveForward()
     {
         //  if (canWalkThroughNextWall == true)
@@ -389,6 +426,23 @@ public class GameControl : MonoBehaviour
         GameControl.rightArrow.GetComponent<Button>().interactable = true;
         GameControl.leftArrow.GetComponent<Button>().interactable = true;
     }
+
+
+    public void ShowNewSpellNotification()
+    {
+        if (newSpellNotification.GetComponent<CanvasGroup>().interactable == false)
+        {
+            newSpellNotification.GetComponent<CanvasGroup>().interactable = true;
+            newSpellNotification.GetComponent<CanvasGroup>().alpha = 1f;
+        }
+        else
+        {
+            newSpellNotification.GetComponent<CanvasGroup>().interactable = false;
+            newSpellNotification.GetComponent<CanvasGroup>().alpha = 0f;
+        }
+    }
+
+
 
 
 
