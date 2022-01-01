@@ -32,10 +32,10 @@ public class GameControl : MonoBehaviour
     Camera camera;
     public static Vector3 cameraPos;
     private Scene scene;
-    public Image controlButtonImage;
+    public Image controlButtonImage, helloSpellButton;
 
 
-    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground, newSpellNotification, gameMenuPanel, spellCategory01Panel;
+    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground, newSpellNotification, gameMenuPanel, wordPanels, adjectivesPanel, exclamationsPanel;
 
     void Awake()
     {
@@ -149,7 +149,7 @@ public class GameControl : MonoBehaviour
         RectTransform controlButtonRT = controlButton.GetComponent<RectTransform>();
 
         controlNumber++;
-        if (controlNumber > 2)
+        if (controlNumber > 1)
             controlNumber = 0;
 
         switch (controlNumber)
@@ -169,22 +169,22 @@ public class GameControl : MonoBehaviour
 
 
                 break;
-            case 1:
-                controlButtonImage.sprite = controlSprite01;
-                HideArrows();
-                controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
-                controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
-                letterUI.transform.SetSiblingIndex(3);
-                wordUI.transform.SetSiblingIndex(2);
-                arrows.transform.SetSiblingIndex(1);
-                gameMenuPanel.transform.SetSiblingIndex(0);
-                letterUI.GetComponent<CanvasGroup>().interactable = true;
-                letterUI.GetComponent<CanvasGroup>().alpha = 1f;
-                wordUI.GetComponent<CanvasGroup>().interactable = false;
-                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
+            // case 1:
+            //     controlButtonImage.sprite = controlSprite01;
+            //     HideArrows();
+            //     controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
+            //     controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
+            //     letterUI.transform.SetSiblingIndex(3);
+            //     wordUI.transform.SetSiblingIndex(2);
+            //     arrows.transform.SetSiblingIndex(1);
+            //     gameMenuPanel.transform.SetSiblingIndex(0);
+            //     letterUI.GetComponent<CanvasGroup>().interactable = true;
+            //     letterUI.GetComponent<CanvasGroup>().alpha = 1f;
+            //     wordUI.GetComponent<CanvasGroup>().interactable = false;
+            //     wordUI.GetComponent<CanvasGroup>().alpha = 0f;
 
-                break;
-            case 2:
+            //     break;
+            case 1:
                 controlButtonImage.sprite = controlSprite02;
                 HideArrows();
                 controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
@@ -218,23 +218,43 @@ public class GameControl : MonoBehaviour
             gameMenuPanel.transform.SetSiblingIndex(0);
         }
     }
-
-
-    public void SpellCategory01Button()
+    public void AdjectivesButton()
     {
-        if (spellCategory01Panel.GetComponent<CanvasGroup>().interactable == false)
+        if (adjectivesPanel.GetComponent<CanvasGroup>().interactable == false)
         {
-            spellCategory01Panel.GetComponent<CanvasGroup>().interactable = true;
-            spellCategory01Panel.GetComponent<CanvasGroup>().alpha = 1f;
-            spellCategory01Panel.transform.SetSiblingIndex(6);
-        }
-        else
-        {
-            spellCategory01Panel.GetComponent<CanvasGroup>().interactable = false;
-            spellCategory01Panel.GetComponent<CanvasGroup>().alpha = 0f;
-            spellCategory01Panel.transform.SetSiblingIndex(0);
+            adjectivesPanel.GetComponent<CanvasGroup>().interactable = true;
+            adjectivesPanel.GetComponent<CanvasGroup>().alpha = 1f;
+            adjectivesPanel.transform.SetSiblingIndex(6);
+            wordPanels.transform.SetSiblingIndex(6);
         }
     }
+    public void ExclamationsButton()
+    {
+        if (exclamationsPanel.GetComponent<CanvasGroup>().interactable == false)
+        {
+            exclamationsPanel.GetComponent<CanvasGroup>().interactable = true;
+            exclamationsPanel.GetComponent<CanvasGroup>().alpha = 1f;
+            exclamationsPanel.transform.SetSiblingIndex(6);
+            wordPanels.transform.SetSiblingIndex(6);
+        }
+    }
+
+    public void BackButton()
+    {
+        if (adjectivesPanel.GetComponent<CanvasGroup>().interactable)
+        {
+            adjectivesPanel.GetComponent<CanvasGroup>().interactable = false;
+            adjectivesPanel.GetComponent<CanvasGroup>().alpha = 0f;
+            wordPanels.transform.SetSiblingIndex(0);
+        }
+        else if (exclamationsPanel.GetComponent<CanvasGroup>().interactable)
+        {
+            exclamationsPanel.GetComponent<CanvasGroup>().interactable = false;
+            exclamationsPanel.GetComponent<CanvasGroup>().alpha = 0f;
+            wordPanels.transform.SetSiblingIndex(0);
+        }
+    }
+
     public void MoveForward()
     {
         //  if (canWalkThroughNextWall == true)

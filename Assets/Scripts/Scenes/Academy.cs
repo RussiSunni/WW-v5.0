@@ -35,6 +35,9 @@ public class Academy : MonoBehaviour
 
     public static int sceneNumber = 0;
 
+    public Rigidbody m_Rigidbody;
+    float speed;
+
     void Start()
     {
         roundNumber = 0;
@@ -122,8 +125,23 @@ public class Academy : MonoBehaviour
         //Debug.Log(canWalkThroughNextWall);
         // Debug.Log(canWalkThroughPreviousWall);
     }
+    IEnumerator Move()
+    {
+        yield return new WaitForSeconds(0.5f);
+        speed = 0f;
+        m_Rigidbody.velocity = transform.forward * speed;
+    }
+
+
     public void MoveForward()
     {
+        // speed = 10.53f;
+        // float previousPosition = m_Rigidbody.transform.position.z;
+
+        // m_Rigidbody.velocity = transform.forward * speed;
+        // StartCoroutine((Move()));
+
+
         if (canWalkThroughNextWall == true)
         {
             SoundManager.playFootstepSound();
@@ -1700,6 +1718,7 @@ public class Academy : MonoBehaviour
     {
         GameObject gameControl = GameObject.Find("GameControl");
         NPCUI NPCUIScript = gameControl.GetComponent<NPCUI>();
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
 
         GameObject scorePanel = GameObject.Find("ScorePanel");
         Score scoreScript = scorePanel.GetComponent<Score>();
@@ -1717,6 +1736,7 @@ public class Academy : MonoBehaviour
                     {
                         PuzzleCompletionRecord.A2 = true;
                         scoreScript.UpdateScorePanel(1);
+                        gameControlScript.helloSpellButton.sprite = Resources.Load<Sprite>("Cards/HelloCard");
                     }
                 }
             }
@@ -1736,6 +1756,7 @@ public class Academy : MonoBehaviour
                     {
                         PuzzleCompletionRecord.A3 = true;
                         scoreScript.UpdateScorePanel(1);
+                        gameControlScript.helloSpellButton.sprite = Resources.Load<Sprite>("Cards/OpenCard");
                     }
                 }
             }
