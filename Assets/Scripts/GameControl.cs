@@ -35,7 +35,7 @@ public class GameControl : MonoBehaviour
     public Image controlButtonImage, helloSpellButton;
 
 
-    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground, newSpellNotification, gameMenuPanel, wordPanels, adjectivesPanel, exclamationsPanel;
+    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground, gameMenuPanel, wordPanels, adjectivesPanel, exclamationsPanel;
 
     void Awake()
     {
@@ -446,26 +446,7 @@ public class GameControl : MonoBehaviour
         GameControl.rightArrow.GetComponent<Button>().interactable = true;
         GameControl.leftArrow.GetComponent<Button>().interactable = true;
     }
-
-
-    public void ShowNewSpellNotification()
-    {
-        if (newSpellNotification.GetComponent<CanvasGroup>().interactable == false)
-        {
-            newSpellNotification.GetComponent<CanvasGroup>().interactable = true;
-            newSpellNotification.GetComponent<CanvasGroup>().alpha = 1f;
-        }
-        else
-        {
-            newSpellNotification.GetComponent<CanvasGroup>().interactable = false;
-            newSpellNotification.GetComponent<CanvasGroup>().alpha = 0f;
-        }
-    }
-
-
-
-
-
+      
     public static void Restart()
     {
         Destroy(control);

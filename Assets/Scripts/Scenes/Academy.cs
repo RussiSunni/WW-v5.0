@@ -1718,10 +1718,7 @@ public class Academy : MonoBehaviour
     {
         GameObject gameControl = GameObject.Find("GameControl");
         NPCUI NPCUIScript = gameControl.GetComponent<NPCUI>();
-        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
-
-        GameObject scorePanel = GameObject.Find("ScorePanel");
-        Score scoreScript = scorePanel.GetComponent<Score>();
+        GameControl gameControlScript = gameControl.GetComponent<GameControl>();     
 
         //Tile Academy A2 "Fairy outside Academy, on tree"
         if (cameraPos.z == -5.4f && cameraPos.x == 0f && direction == "north")
@@ -1734,8 +1731,7 @@ public class Academy : MonoBehaviour
                     NPCUIScript.UpdateNPCText("Hello");
                     if (PuzzleCompletionRecord.A2 == false)
                     {
-                        PuzzleCompletionRecord.A2 = true;
-                        scoreScript.UpdateScorePanel(1);
+                        PuzzleCompletionRecord.A2 = true;                       
                         gameControlScript.helloSpellButton.sprite = Resources.Load<Sprite>("Cards/HelloCard");
                     }
                 }
@@ -1755,7 +1751,6 @@ public class Academy : MonoBehaviour
                     if (PuzzleCompletionRecord.A3 == false)
                     {
                         PuzzleCompletionRecord.A3 = true;
-                        scoreScript.UpdateScorePanel(1);
                         gameControlScript.helloSpellButton.sprite = Resources.Load<Sprite>("Cards/OpenCard");
                     }
                 }
@@ -1782,13 +1777,9 @@ public class Academy : MonoBehaviour
             {
                 NPCUIScript.UpdateNPCText("");
                 sceneNumber = 3;
-                gameControlScript.ShowNewSpellNotification();
+              
                 SoundManager.playSound(SoundManager.correctSound);
-            }
-            else if (sceneNumber == 3)
-            {
-                gameControlScript.ShowNewSpellNotification();
-            }
+            }         
         }
     }
 }
