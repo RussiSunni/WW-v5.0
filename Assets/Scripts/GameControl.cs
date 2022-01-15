@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public static GameObject goodbyeCard, readCard, stopCard, byeCard, sueCard, mayCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard, morningCard, afternoonCard, eveningCard;
+    public static GameObject goodbyeCard, readCard, stopCard, byeCard, sueCard, mayCard, sorryCard, goodCard, badCard, girlCard, boyCard, sitCard;
     //public static GameObject oneCard, twoCard, threeCard, fourCard, fiveCard, sixCard, sevenCard, eightCard, nineCard, tenCard, elevenCard, twelveCard, thirteenCard, fourteenCard, fifteenCard, sixteenCard, seventeenCard, eighteenCard, nineteenCard, twentyCard;
     public static GameObject upArrow, rightArrow, leftArrow, controlButton, actionHandPanel, canvasCode;
     public static GameObject UICanvas, speechTabletop, actionTabletop, cardTabletop, controls, letterTabletop;
@@ -22,8 +22,8 @@ public class GameControl : MonoBehaviour
     public static Button runAwayButton;
     public static Image playerBGPanel, characterBGPanel, arenaPanel;
     public Transform helloCard, okCard, noCard, yesCard, thankyouCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, openCard, newCard, haveCard, funCard, closeCard, pleaseCard, fairyCard;
-    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite, pleaseCardSprite, openCardSprite, fairyCardSprite;
-    public static Sprite spanishHelloCardSprite, spanishAreYouCardSprite, spanishLostCardSprite, spanishQuestionMarkCardSprite, spanishTheCardSprite, spanishDoorCardSprite, spanishGoThroughCardSprite, closeCardSprite;
+    public static Sprite questionMarkCardSprite, areCardSprite, youCardSprite, lostCardSprite, hiCardSprite, helloCardSprite, goCardSprite, throughCardSprite, theCardSprite, doorCardSprite, willCardSprite, needCardSprite, thisCardSprite, okCardSprite, iCardSprite, amCardSprite, evaCardSprite, whatCardSprite, isCardSprite, yourCardSprite, nameCardSprite, cardBackSprite, newCardSprite, hereCardSprite, haveCardSprite, funCardSprite, niceCardSprite, toCardSprite, meetCardSprite, askedCardSprite, notCardSprite, fromCardSprite, pleaseCardSprite, openCardSprite, fairyCardSprite, closeCardSprite;
+  //  public static Sprite spanishHelloCardSprite, spanishAreYouCardSprite, spanishLostCardSprite, spanishQuestionMarkCardSprite, spanishTheCardSprite, spanishDoorCardSprite, spanishGoThroughCardSprite, ;
     public static DropZone tabletopScript;
     public static bool cont = false;
     int controlNumber = 0;
@@ -35,7 +35,7 @@ public class GameControl : MonoBehaviour
     public Image controlButtonImage, helloSpellButton;
 
 
-    public GameObject panel1, panel2, wordUI, letterUI, arrows, controlButtonBackground, gameMenuPanel, wordPanels, adjectivesPanel, exclamationsPanel;
+    public GameObject wordUI, arrows, gameMenuPanel, wordPanel, movementPanel;
 
     void Awake()
     {
@@ -68,25 +68,25 @@ public class GameControl : MonoBehaviour
         if (scene.name == "Academy")
         {
             // arenaPanel = GameObject.Find("Arena").GetComponent<Image>();
-            characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
-            characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
-            wordTabletopPanel = GameObject.Find("WordTabletop").GetComponent<Image>();
+         //   characterTabletopPanel = GameObject.Find("CharacterTabletop").GetComponent<Image>();
+         //   characterHand = GameObject.Find("CharacterHand").GetComponent<Image>();
+         //   wordTabletopPanel = GameObject.Find("WordTabletop").GetComponent<Image>();
             //   actionHand = GameObject.Find("ActionHand").GetComponent<Image>();
             //   speechHand = GameObject.Find("SpeechHand").GetComponent<Image>();
-            wordHandPanel = GameObject.Find("WordHand").GetComponent<Image>();
-            letterHandPanel = GameObject.Find("LetterHand").GetComponent<Image>();
+        //    wordHandPanel = GameObject.Find("WordHand").GetComponent<Image>();
+         //   letterHandPanel = GameObject.Find("LetterHand").GetComponent<Image>();
             //  speechTabletop = GameObject.Find("SpeechTabletop");
             //  actionTabletop = GameObject.Find("ActionTabletop");
-            cardTabletop = GameObject.Find("WordTabletop");
+         //   cardTabletop = GameObject.Find("WordTabletop");
             //  actionTabletopPanel = GameObject.Find("ActionTabletop").GetComponent<Image>();
             //   speechTabletopPanel = GameObject.Find("SpeechTabletop").GetComponent<Image>();
             //   speechTabletopScript = speechTabletop.GetComponent<DropZone>();
             //   actionTabletopScript = actionTabletop.GetComponent<DropZone>();
-            tabletopScript = cardTabletop.GetComponent<DropZone>();
+         //   tabletopScript = cardTabletop.GetComponent<DropZone>();
         }
 
-        controls = GameObject.Find("Controls");
-        letterTabletop = GameObject.Find("LetterTabletop");
+    //    controls = GameObject.Find("Controls");
+     //   letterTabletop = GameObject.Find("LetterTabletop");
 
         //  blackBGPanel = GameObject.Find("BlackBGPanel").GetComponent<Image>();     
 
@@ -133,21 +133,18 @@ public class GameControl : MonoBehaviour
         fairyCardSprite = Resources.Load<Sprite>("Cards/FairyCard");
 
 
-        spanishHelloCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Hello");
-        spanishAreYouCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-AreYou");
-        spanishLostCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Lost");
-        spanishQuestionMarkCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-¿");
-        spanishTheCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-The");
-        spanishDoorCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Door");
-        spanishGoThroughCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-GoThrough");
+        //spanishHelloCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Hello");
+        //spanishAreYouCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-AreYou");
+        //spanishLostCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Lost");
+        //spanishQuestionMarkCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-¿");
+        //spanishTheCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-The");
+        //spanishDoorCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-Door");
+        //spanishGoThroughCardSprite = Resources.Load<Sprite>("Cards/Spanish Cards/Spanish-GoThrough");
 
     }
 
     public void ControlButton()
     {
-        RectTransform controlButtonBackgroundRT = controlButtonBackground.GetComponent<RectTransform>();
-        RectTransform controlButtonRT = controlButton.GetComponent<RectTransform>();
-
         controlNumber++;
         if (controlNumber > 1)
             controlNumber = 0;
@@ -155,50 +152,21 @@ public class GameControl : MonoBehaviour
         switch (controlNumber)
         {
             case 0:
-                controlButtonImage.sprite = controlSprite00;
-                ShowArrows();
-                controlButtonBackgroundRT.sizeDelta = new Vector2(135, 135);
-                controlButtonRT.sizeDelta = new Vector2(135, 135);
-                arrows.transform.SetSiblingIndex(3);
-                letterUI.transform.SetSiblingIndex(2);
-                wordUI.transform.SetSiblingIndex(1);
-                gameMenuPanel.transform.SetSiblingIndex(0);
-                wordUI.GetComponent<CanvasGroup>().interactable = false;
-                wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-                letterUI.GetComponent<CanvasGroup>().interactable = false;
+                movementPanel.GetComponent<CanvasGroup>().interactable = true;
+                movementPanel.GetComponent<CanvasGroup>().alpha = 1f;
+                movementPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+                wordPanel.GetComponent<CanvasGroup>().interactable = false;
+                wordPanel.GetComponent<CanvasGroup>().alpha = 0f;
+                wordPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                break;    
 
-
-                break;
-            // case 1:
-            //     controlButtonImage.sprite = controlSprite01;
-            //     HideArrows();
-            //     controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
-            //     controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
-            //     letterUI.transform.SetSiblingIndex(3);
-            //     wordUI.transform.SetSiblingIndex(2);
-            //     arrows.transform.SetSiblingIndex(1);
-            //     gameMenuPanel.transform.SetSiblingIndex(0);
-            //     letterUI.GetComponent<CanvasGroup>().interactable = true;
-            //     letterUI.GetComponent<CanvasGroup>().alpha = 1f;
-            //     wordUI.GetComponent<CanvasGroup>().interactable = false;
-            //     wordUI.GetComponent<CanvasGroup>().alpha = 0f;
-
-            //     break;
             case 1:
-                controlButtonImage.sprite = controlSprite02;
-                HideArrows();
-                controlButtonBackgroundRT.sizeDelta = new Vector2(135, 67.5f);
-                controlButtonRT.sizeDelta = new Vector2(135, 67.5f);
-                wordUI.transform.SetSiblingIndex(3);
-                letterUI.transform.SetSiblingIndex(2);
-                arrows.transform.SetSiblingIndex(1);
-                gameMenuPanel.transform.SetSiblingIndex(0);
-
-                wordUI.GetComponent<CanvasGroup>().interactable = true;
-                wordUI.GetComponent<CanvasGroup>().alpha = 1f;
-                letterUI.GetComponent<CanvasGroup>().interactable = false;
-                letterUI.GetComponent<CanvasGroup>().alpha = 0f;
-
+                movementPanel.GetComponent<CanvasGroup>().interactable = false;
+                movementPanel.GetComponent<CanvasGroup>().alpha = 0f;
+                movementPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                wordPanel.GetComponent<CanvasGroup>().interactable = true;
+                wordPanel.GetComponent<CanvasGroup>().alpha = 1f;
+                wordPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 break;
         }
     }
@@ -218,43 +186,8 @@ public class GameControl : MonoBehaviour
             gameMenuPanel.transform.SetSiblingIndex(0);
         }
     }
-    public void AdjectivesButton()
-    {
-        if (adjectivesPanel.GetComponent<CanvasGroup>().interactable == false)
-        {
-            adjectivesPanel.GetComponent<CanvasGroup>().interactable = true;
-            adjectivesPanel.GetComponent<CanvasGroup>().alpha = 1f;
-            adjectivesPanel.transform.SetSiblingIndex(6);
-            wordPanels.transform.SetSiblingIndex(6);
-        }
-    }
-    public void ExclamationsButton()
-    {
-        if (exclamationsPanel.GetComponent<CanvasGroup>().interactable == false)
-        {
-            exclamationsPanel.GetComponent<CanvasGroup>().interactable = true;
-            exclamationsPanel.GetComponent<CanvasGroup>().alpha = 1f;
-            exclamationsPanel.transform.SetSiblingIndex(6);
-            wordPanels.transform.SetSiblingIndex(6);
-        }
-    }
-
-    public void BackButton()
-    {
-        if (adjectivesPanel.GetComponent<CanvasGroup>().interactable)
-        {
-            adjectivesPanel.GetComponent<CanvasGroup>().interactable = false;
-            adjectivesPanel.GetComponent<CanvasGroup>().alpha = 0f;
-            wordPanels.transform.SetSiblingIndex(0);
-        }
-        else if (exclamationsPanel.GetComponent<CanvasGroup>().interactable)
-        {
-            exclamationsPanel.GetComponent<CanvasGroup>().interactable = false;
-            exclamationsPanel.GetComponent<CanvasGroup>().alpha = 0f;
-            wordPanels.transform.SetSiblingIndex(0);
-        }
-    }
-
+    
+   
     public void MoveForward()
     {
         //  if (canWalkThroughNextWall == true)
@@ -408,45 +341,6 @@ public class GameControl : MonoBehaviour
         Academy.roundNumber = 0;
     }
 
-
-    public static void HideArrows()
-    {
-        GameControl.upArrow.GetComponent<Button>().interactable = false;
-        GameControl.rightArrow.GetComponent<Button>().interactable = false;
-        GameControl.leftArrow.GetComponent<Button>().interactable = false;
-    }
-
-
-    public static void HideControls()
-    {
-        controls.SetActive(false);
-    }
-
-    public static void ShowArrows()
-    {
-        GameControl.upArrow.GetComponent<Button>().interactable = true;
-        GameControl.rightArrow.GetComponent<Button>().interactable = true;
-        GameControl.leftArrow.GetComponent<Button>().interactable = true;
-    }
-    public static void HideSideArrows()
-    {
-        GameControl.rightArrow.GetComponent<Button>().interactable = false;
-        GameControl.leftArrow.GetComponent<Button>().interactable = false;
-    }
-    public static void ShowUpArrow()
-    {
-        GameControl.upArrow.GetComponent<Button>().interactable = true;
-    }
-    public static void HideUpArrow()
-    {
-        GameControl.upArrow.GetComponent<Button>().interactable = false;
-    }
-    public static void ShowSideArrows()
-    {
-        GameControl.rightArrow.GetComponent<Button>().interactable = true;
-        GameControl.leftArrow.GetComponent<Button>().interactable = true;
-    }
-      
     public static void Restart()
     {
         Destroy(control);

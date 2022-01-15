@@ -212,19 +212,16 @@ public class TheWilds : MonoBehaviour
 
             if (controlNumber == 1)
             {
-                GameControl.HideArrows();
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -500f, 0f);
             }
             if (controlNumber == 2)
             {
-                GameControl.HideArrows();
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -550f, 0f);
             }
             if (controlNumber == 0)
             {
-                GameControl.ShowArrows();
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -550f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -1000f, 0f);
             }
@@ -247,13 +244,11 @@ public class TheWilds : MonoBehaviour
 
             if (controlNumber == 1)
             {
-                GameControl.HideArrows();
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, 0f, 0f);
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, -500f, 0f);
             }
             if (controlNumber == 2)
             {
-                GameControl.HideArrows();
 
                 actionPages.transform.localPosition = new Vector3(actionPages.transform.localPosition.x, 0f, 0f);
                 speechPages.transform.localPosition = new Vector3(speechPages.transform.localPosition.x, -550f, 0f);

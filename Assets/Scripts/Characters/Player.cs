@@ -30,17 +30,17 @@ public class Player : MonoBehaviour
         //     playerCard.transform.SetParent(GameControl.actionHand.transform, false);
         // }
 
-        playerCards.Add(gameControlScript.helloCard);
-        playerCards.Add(gameControlScript.yesCard);
-        playerCards.Add(gameControlScript.noCard);
-        playerCards.Add(gameControlScript.thankyouCard);
-        playerCards.Add(gameControlScript.openCard);
+        //playerCards.Add(gameControlScript.helloCard);
+        //playerCards.Add(gameControlScript.yesCard);
+        //playerCards.Add(gameControlScript.noCard);
+        //playerCards.Add(gameControlScript.thankyouCard);
+        //playerCards.Add(gameControlScript.openCard);
 
-        for (int i = 0; i < playerCards.Count; ++i)
-        {
-            var playerCard = Instantiate(playerCards[i], new Vector3(0, 0, 0), Quaternion.identity);
-            playerCard.transform.SetParent(GameControl.wordHandPanel.transform, false);
-        }
+        //for (int i = 0; i < playerCards.Count; ++i)
+        //{
+        //    var playerCard = Instantiate(playerCards[i], new Vector3(0, 0, 0), Quaternion.identity);
+        //    playerCard.transform.SetParent(GameControl.wordHandPanel.transform, false);
+        //}
     }
 
     public static void AddDoorCard()

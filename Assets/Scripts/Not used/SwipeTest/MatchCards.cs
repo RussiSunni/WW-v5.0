@@ -125,18 +125,18 @@ public class MatchCards : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 {
                     otherCard = potentialMatchParent.gameObject.transform.GetChild(0).gameObject;
 
-                    if (card == GameControl.goodCard && otherCard == GameControl.morningCard)
-                    {
-                        // Academy.MorningCard();
-                    }
-                    else if (card == GameControl.goodCard && otherCard == GameControl.afternoonCard)
-                    {
-                        //  Academy.AfternoonCard();
-                    }
-                    else if (card == GameControl.goodCard && otherCard == GameControl.eveningCard)
-                    {
-                        //   Academy.EveningCard();
-                    }
+                    //if (card == GameControl.goodCard && otherCard == GameControl.morningCard)
+                    //{
+                    //    // Academy.MorningCard();
+                    //}
+                    //else if (card == GameControl.goodCard && otherCard == GameControl.afternoonCard)
+                    //{
+                    //    //  Academy.AfternoonCard();
+                    //}
+                    //else if (card == GameControl.goodCard && otherCard == GameControl.eveningCard)
+                    //{
+                    //    //   Academy.EveningCard();
+                    //}
                 }
                 //  Debug.Log(card);
                 //  Debug.Log(otherCard);

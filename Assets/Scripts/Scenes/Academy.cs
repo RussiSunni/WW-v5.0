@@ -28,7 +28,7 @@ public class Academy : MonoBehaviour
     public static bool inInteraction;
 
     public static GameObject fairy, fairyInTree;
-    Animation fairyAnimation;
+   // Animation fairyAnimation;
     GameControl gameControl;
     public static List<Transform> characterCards = new List<Transform>();
     public Button controlButton;
@@ -57,8 +57,8 @@ public class Academy : MonoBehaviour
 
         direction = "north";
 
-        dialogue = GameObject.Find("Fairy Text").GetComponent<Text>();
-        dialogue.text = "";
+    //    dialogue = GameObject.Find("Fairy Text").GetComponent<Text>();
+    //    dialogue.text = "";
 
         // cardPages = GameObject.Find("CardPages");
         // blockUI = GameObject.Find("BlockUI");
@@ -81,10 +81,10 @@ public class Academy : MonoBehaviour
         secretarySprite03 = Resources.Load<Sprite>("Foyer/Secretary03");
 
 
-        controlSprite01 = Resources.Load<Sprite>("UI/boots-icon");
-        controlSprite02 = Resources.Load<Sprite>("UI/speak-icon");
-        controlSprite03 = Resources.Load<Sprite>("UI/action-icon");
-        controlSprite04 = Resources.Load<Sprite>("UI/map-icon");
+        //controlSprite01 = Resources.Load<Sprite>("UI/boots-icon");
+        //controlSprite02 = Resources.Load<Sprite>("UI/speak-icon");
+        //controlSprite03 = Resources.Load<Sprite>("UI/action-icon");
+        //controlSprite04 = Resources.Load<Sprite>("UI/map-icon");
 
         CheckWalk();
     }
@@ -102,7 +102,7 @@ public class Academy : MonoBehaviour
     }
     public void CheckWalls()
     {
-
+        Debug.Log(canWalkThroughNextWall);
         // 3D
         canWalkThroughNextWall = true;
 
@@ -110,7 +110,7 @@ public class Academy : MonoBehaviour
         {
             Vector3 viewPos = camera.WorldToViewportPoint(solidObjects[i].transform.position);
             // Vector3 rearViewPos = camera.WorldToViewportPoint(openings[i].transform.position) + new Vector3(0, 0, -5.4f);
-            //  Debug.Log(viewPos);
+            Debug.Log(viewPos);
 
             //3D
             if (viewPos.z > 5.3f && viewPos.z < 5.5f && viewPos.x > 0.4f && viewPos.x < 0.6f)
@@ -122,7 +122,7 @@ public class Academy : MonoBehaviour
                 canWalkThroughNextWall = false;
             }
         }
-        //Debug.Log(canWalkThroughNextWall);
+        Debug.Log(canWalkThroughNextWall);
         // Debug.Log(canWalkThroughPreviousWall);
     }
     IEnumerator Move()
@@ -135,13 +135,7 @@ public class Academy : MonoBehaviour
 
     public void MoveForward()
     {
-        // speed = 10.53f;
-        // float previousPosition = m_Rigidbody.transform.position.z;
-
-        // m_Rigidbody.velocity = transform.forward * speed;
-        // StartCoroutine((Move()));
-
-
+     
         if (canWalkThroughNextWall == true)
         {
             SoundManager.playFootstepSound();
@@ -158,12 +152,12 @@ public class Academy : MonoBehaviour
                 if (Mathf.Approximately(cameraPos.z, -5.4f) && Mathf.Approximately(cameraPos.x, 0f))
                 {
                     SoundManager.playHeySound();
-                    for (int i = 0; i < Fairy.cards.Count; ++i)
-                    {
-                        characterCards.Add(Instantiate(Fairy.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
-                        characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
-                        characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
-                    }
+                    //for (int i = 0; i < Fairy.cards.Count; ++i)
+                    //{
+                    //    characterCards.Add(Instantiate(Fairy.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
+                    //    characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
+                    //    characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
+                    //}
                 }
                 else if (Mathf.Approximately(cameraPos.z, 0f) && Mathf.Approximately(cameraPos.x, 0f))
                 {
@@ -207,12 +201,12 @@ public class Academy : MonoBehaviour
                 //Door --------------------
                 if (Mathf.Approximately(cameraPos.z, 0f) && Mathf.Approximately(cameraPos.x, 0f))
                 {
-                    for (int i = 0; i < Door.cards.Count; ++i)
-                    {
-                        characterCards.Add(Instantiate(Door.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
-                        characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
-                        characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
-                    }
+                    //for (int i = 0; i < Door.cards.Count; ++i)
+                    //{
+                    //    characterCards.Add(Instantiate(Door.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
+                    //    characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
+                    //    characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
+                    //}
                 }
 
 
@@ -238,12 +232,12 @@ public class Academy : MonoBehaviour
                 if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, 5.4f))
                 {
                     // SoundManager.playWordSound(SoundManager.interactionMusic);
-                    for (int i = 0; i < Wolf.cards.Count; ++i)
-                    {
-                        characterCards.Add(Instantiate(Wolf.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
-                        characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
-                        characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
-                    }
+                    //for (int i = 0; i < Wolf.cards.Count; ++i)
+                    //{
+                    //    characterCards.Add(Instantiate(Wolf.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
+                    //    characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
+                    //    characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
+                    //}
                 }
 
                 //Student 1 -----------------------
@@ -266,12 +260,12 @@ public class Academy : MonoBehaviour
                 // Dino interaction ----------------
                 if (Mathf.Approximately(cameraPos.z, -10.8f) && Mathf.Approximately(cameraPos.x, -10.8f))
                 {
-                    for (int i = 0; i < Dino.cards.Count; ++i)
-                    {
-                        characterCards.Add(Instantiate(Dino.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
-                        characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
-                        characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
-                    }
+                    //for (int i = 0; i < Dino.cards.Count; ++i)
+                    //{
+                    //    characterCards.Add(Instantiate(Dino.cards[i], new Vector3(0, 0, 0), Quaternion.identity));
+                    //    characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
+                    //    characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
+                    //}
                     roundNumber = 0;
                     DinoMethod();
                 }
