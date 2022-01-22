@@ -267,7 +267,7 @@ public class Academy : MonoBehaviour
                     //    characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
                     //}
                     roundNumber = 0;
-                    DinoMethod();
+                  //  DinoMethod();
                 }
 
                 // Secretary interaction ----------------
