@@ -35,9 +35,6 @@ public class Academy : MonoBehaviour
 
     public static int sceneNumber = 0;
 
-    public Rigidbody m_Rigidbody;
-    float speed;
-
     void Start()
     {
         roundNumber = 0;
@@ -125,17 +122,10 @@ public class Academy : MonoBehaviour
         Debug.Log(canWalkThroughNextWall);
         // Debug.Log(canWalkThroughPreviousWall);
     }
-    IEnumerator Move()
-    {
-        yield return new WaitForSeconds(0.5f);
-        speed = 0f;
-        m_Rigidbody.velocity = transform.forward * speed;
-    }
 
 
     public void MoveForward()
     {
-     
         if (canWalkThroughNextWall == true)
         {
             SoundManager.playFootstepSound();
@@ -267,7 +257,7 @@ public class Academy : MonoBehaviour
                     //    characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
                     //}
                     roundNumber = 0;
-                  //  DinoMethod();
+                    //  DinoMethod();
                 }
 
                 // Secretary interaction ----------------
