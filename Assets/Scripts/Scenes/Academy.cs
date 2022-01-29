@@ -19,7 +19,7 @@ public class Academy : MonoBehaviour
     static SpriteRenderer secretary, secretaryCloseUp;
     static Sprite frontDoorOpen, roomsDoorOpen, roomsDoorClosed, secretarySprite, secretarySprite01, secretarySprite02, secretarySprite03, fairyInTreeNoFairy, controlSprite01, controlSprite02, controlSprite03, controlSprite04, fairyNeutralSprite, wolfSprite, dinoSprite, doorCardSprite, youCardSprite, student06Sprite, student01Sprite, hiCardSprite, evaCardSprite;
     public Transform helloCard, howCard, areCard, youCard, questionMarkCard, canCard, notCard, passCard, lostCard, goCard, throughCard, theCard, doorCard, hiCard, whatCard, isCard, yourCard, nameCard, iCard, askedCard, fromCard, hereCard, amCard, evaCard, niceCard, toCard, meetCard, willCard, needCard, thisCard, lookingCard, forCard, myCard, houndCard, closeCard, pleaseCard;
-    static string timeOfDay, playerName;
+    static string timeOfDay;
     int controlNumber = 0;
     public GameObject student3, dino, frontDoor;
     public GameObject[] solidObjects;
