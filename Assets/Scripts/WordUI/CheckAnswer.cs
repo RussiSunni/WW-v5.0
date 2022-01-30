@@ -33,6 +33,9 @@ public class CheckAnswer : MonoBehaviour
 
             var wordUIScript = GameObject.Find("WordPanel").GetComponent<WordUI>();
             wordUIScript.ClearBlocks();
+
+            var fairyScript = GameObject.Find("Fairy").GetComponent<Fairy>();
+            fairyScript.SayOpenTheDoor();
         }
 
 

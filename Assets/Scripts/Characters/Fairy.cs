@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Fairy : MonoBehaviour
 {
-    public Transform A;
+    public Transform A, B, C;
     List<Transform> GridRow = new List<Transform>();
-    GameObject helloCard;
+    GameObject helloCard, openCard, theCard, doorCard;
     private SpriteRenderer spriteRenderer;
 
     // Delete later
@@ -16,6 +16,8 @@ public class Fairy : MonoBehaviour
     void Start()
     {
         GridRow.Add(A);
+        GridRow.Add(B);
+        GridRow.Add(C);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
        // SayHello();
     }
@@ -29,15 +31,36 @@ public class Fairy : MonoBehaviour
     public void SayHello() 
     {
         helloCard = Instantiate(Resources.Load("Prefabs/Cards/HelloCard")) as GameObject;
-        SetGridParent(helloCard);
+        SetGridAParent(helloCard);
         //SoundManager.playSound(SoundManager.elfHello);
     }
 
-    private void SetGridParent(GameObject block)
+    public void SayOpenTheDoor()
+    {
+        openCard = Instantiate(Resources.Load("Prefabs/Cards/OpenCard")) as GameObject;
+        theCard = Instantiate(Resources.Load("Prefabs/Cards/TheCard")) as GameObject;
+        doorCard = Instantiate(Resources.Load("Prefabs/Cards/DoorCard")) as GameObject;
+        SetGridAParent(openCard);
+        SetGridBParent(theCard);
+        SetGridCParent(doorCard);
+        //SoundManager.playSound(SoundManager.elfHello);
+    }
+
+    private void SetGridAParent(GameObject block)
     {
         block.transform.SetParent(GridRow[0], false);
     }
-        
+
+    private void SetGridBParent(GameObject block)
+    {
+        block.transform.SetParent(GridRow[1], false);
+    }
+
+    private void SetGridCParent(GameObject block)
+    {
+        block.transform.SetParent(GridRow[2], false);
+    }
+
 
     void OnMouseDown()
     {
