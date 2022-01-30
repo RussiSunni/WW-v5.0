@@ -17,7 +17,7 @@ public class Fairy : MonoBehaviour
     {
         GridRow.Add(A);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        SayHello();
+       // SayHello();
     }
 
     // Update is called once per frame

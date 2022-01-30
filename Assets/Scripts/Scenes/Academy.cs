@@ -148,6 +148,9 @@ public class Academy : MonoBehaviour
                     //    characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
                     //    characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
                     //}
+                    
+                    var fairyScript = GameObject.Find("Fairy").GetComponent<Fairy>();
+                    fairyScript.SayHello();
                 }
                 else if (Mathf.Approximately(cameraPos.z, 0f) && Mathf.Approximately(cameraPos.x, 0f))
                 {

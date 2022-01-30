@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound, correctSound, hiSound, evaSound, doorCraftSound, fairyCraftSound;
+    public static AudioClip helloSound, doorClosedSound, doorLockedSound, cardAppearSound, doorOpeningSound, goodbyeSound, doorSound, heySound, wolfGrowlSound, bumpSound, pageTurnSound, footstepSound, correctSound, hiSound, evaSound, doorCraftSound, fairyCraftSound, effectPop;
     public static AudioClip fairyTalk01, fairyTalk02, fairyTalk03, fairyTalk04, fairyTalk05, fairyTalk06, fairyTalk07, fairyTalk08, fairyTalk09, fairyHuh, fairyOK, fairyHello, connectSound, SecretaryTalk01, SecretaryHuh, SecretaryTalk01A, SecretaryTalk01B, SecretaryTalk01C, SecretaryTalk02, SecretaryTalk03, SecretaryTalk04, SecretaryTalk05, WolfTalk01, wolfHi, ArenaMusic01, WolfHello, Student01Hi, Student01Huh, dinoTalk01, dinoTalk02, dinoTalk03, dinoTalk04, dinoTalk05, student06Talk01, student06Talk02, student06Talk03, student06Huh, student02Hi, interactionMusic;
     static AudioSource audioSrc;
 
@@ -79,6 +79,8 @@ public class SoundManager : MonoBehaviour
 
         fairyCraftSound = Resources.Load<AudioClip>("Sound/Crafted/Fairy");
         doorCraftSound = Resources.Load<AudioClip>("Sound/Crafted/Door");
+
+        effectPop = Resources.Load<AudioClip>("Sound/EffectPop");
     }
 
     public static void playHelloSound()

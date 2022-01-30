@@ -7,6 +7,9 @@ public class WordUI : MonoBehaviour
 {
     public Transform A, B, C, D, E;
     List<Transform> GridRow = new List<Transform>();
+    public Button helloCardBtn;
+    public Sprite helloCardSprite;
+
 
     void Start()
     {
@@ -15,6 +18,12 @@ public class WordUI : MonoBehaviour
         GridRow.Add(C);
         GridRow.Add(D);
         GridRow.Add(E);
+    }
+
+    public void TurnOnHelloButton()
+    {
+        helloCardBtn.interactable = true;
+        helloCardBtn.image.sprite = helloCardSprite;
     }
 
     public void HelloButton()
