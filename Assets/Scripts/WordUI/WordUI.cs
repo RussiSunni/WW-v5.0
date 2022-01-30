@@ -8,7 +8,7 @@ public class WordUI : MonoBehaviour
     public Transform A, B, C, D, E;
     List<Transform> GridRow = new List<Transform>();
     public Button helloCardBtn;
-    public Sprite helloCardSprite;
+    public Sprite emptyCardSprite, helloCardSprite;
 
 
     void Start()
@@ -26,10 +26,26 @@ public class WordUI : MonoBehaviour
         helloCardBtn.image.sprite = helloCardSprite;
     }
 
+    public void TurnOffHelloButton()
+    {
+        helloCardBtn.interactable = false;
+        helloCardBtn.image.sprite = emptyCardSprite;
+    }
+
     public void HelloButton()
     {
         GameObject helloCard = Instantiate(Resources.Load("Prefabs/Cards/HelloCard")) as GameObject;
         SetGridParent(helloCard);
+        SoundManager.playSound(SoundManager.effectPop);
+
+        TurnOffHelloButton();
+    }
+
+    public void ReturnHelloButton()
+    {
+        SoundManager.playSound(SoundManager.effectPop);
+        ClearBlocks();
+        TurnOnHelloButton();
     }
 
 

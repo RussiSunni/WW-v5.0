@@ -26,7 +26,7 @@ public class Fairy : MonoBehaviour
         
     }
 
-    public void SayHello()
+    public void SayHello() 
     {
         helloCard = Instantiate(Resources.Load("Prefabs/Cards/HelloCard")) as GameObject;
         SetGridParent(helloCard);

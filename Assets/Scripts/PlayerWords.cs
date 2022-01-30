@@ -26,6 +26,13 @@ public class PlayerWords : MonoBehaviour
                     hasHelloCard = true;
                     var wordUIScript = GameObject.Find("WordPanel").GetComponent<WordUI>();
                     wordUIScript.TurnOnHelloButton();
+
+                    var gameControlScript = GameObject.Find("GameControl").GetComponent<GameControl>();
+
+                    if (gameControlScript.wordPanel.GetComponent<CanvasGroup>().interactable == false)
+                    {
+                        gameControlScript.ControlButton();
+                    }
                 }
             }           
         }

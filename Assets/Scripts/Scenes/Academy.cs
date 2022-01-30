@@ -35,6 +35,9 @@ public class Academy : MonoBehaviour
 
     public static int sceneNumber = 0;
 
+    List<Transform> GridRow = new List<Transform>();
+    public Transform A;
+
     void Start()
     {
         roundNumber = 0;
@@ -84,6 +87,8 @@ public class Academy : MonoBehaviour
         //controlSprite04 = Resources.Load<Sprite>("UI/map-icon");
 
         CheckWalk();
+
+        GridRow.Add(A);   
     }
 
     void CheckWalk()
@@ -126,6 +131,12 @@ public class Academy : MonoBehaviour
 
     public void MoveForward()
     {
+       
+        if (GridRow[0].childCount > 0)
+        {
+            Destroy(GridRow[0].transform.GetChild(0).gameObject);
+        }
+
         if (canWalkThroughNextWall == true)
         {
             SoundManager.playFootstepSound();
@@ -303,6 +314,11 @@ public class Academy : MonoBehaviour
 
     public void LeftButton()
     {
+        if (GridRow[0].childCount > 0)
+        {
+            Destroy(GridRow[0].transform.GetChild(0).gameObject);
+        }
+
         if (controlNumber == 1 || controlNumber == 2)
         {
             SpellbookButtonLeft();
@@ -377,6 +393,9 @@ public class Academy : MonoBehaviour
                         characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
                         characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
                     }
+
+                    var fairyScript = GameObject.Find("Fairy").GetComponent<Fairy>();
+                    fairyScript.SayHello();
                 }
             }
 
@@ -504,6 +523,11 @@ public class Academy : MonoBehaviour
     }
     public void RightButton()
     {
+        if (GridRow[0].childCount > 0)
+        {
+            Destroy(GridRow[0].transform.GetChild(0).gameObject);
+        }
+
         if (controlNumber == 1 || controlNumber == 2)
         {
             SpellbookButtonRight();
@@ -576,6 +600,9 @@ public class Academy : MonoBehaviour
                         characterCards[i].transform.SetParent(GameControl.characterHand.transform, false);
                         characterCards[i].GetComponent<Image>().sprite = GameControl.cardBackSprite;
                     }
+
+                    var fairyScript = GameObject.Find("Fairy").GetComponent<Fairy>();
+                    fairyScript.SayHello();
                 }
             }
 
