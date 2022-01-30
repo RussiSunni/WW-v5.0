@@ -2180,10 +2180,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 95365113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6eb91d23bdc4eb13b58f46d0f972254, type: 3}
+  m_Script: {fileID: 11500000, guid: 5debaa85fbc8765409a25ebaa3f8cda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardBackSprite: {fileID: 0}
+  A: {fileID: 710987263}
 --- !u!1 &99043125
 GameObject:
   m_ObjectHideFlags: 0

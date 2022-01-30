@@ -1,36 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Fairy : MonoBehaviour
 {
+    public Transform A;
+    List<Transform> GridRow = new List<Transform>();
+    GameObject helloCard;
+    private SpriteRenderer spriteRenderer;
+
+    // Delete later
     public static List<Transform> cards = new List<Transform>();
-    public Sprite cardBackSprite;
-    Image cardImage;
+
+
     void Start()
     {
-        GameObject gameControl = GameObject.Find("GameControl");
-        GameControl gameControlScript = gameControl.GetComponent<GameControl>();
+        GridRow.Add(A);
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        SayHello();
+    }
 
-        cardBackSprite = Resources.Load<Sprite>("Cards/CardBack");
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
-        cards.Add(gameControlScript.helloCard);
-        cards.Add(gameControlScript.areCard);
-        cards.Add(gameControlScript.youCard);
-        cards.Add(gameControlScript.lostCard);
-        cards.Add(gameControlScript.questionMarkCard);
-        cards.Add(gameControlScript.goCard);
-        cards.Add(gameControlScript.throughCard);
-        //  cards.Add(gameControlScript.openCard);
-        cards.Add(gameControlScript.theCard);
-        cards.Add(gameControlScript.doorCard);
-        cards.Add(gameControlScript.okCard);
-        cards.Add(gameControlScript.fairyCard);
+    public void SayHello()
+    {
+        helloCard = Instantiate(Resources.Load("Prefabs/Cards/HelloCard")) as GameObject;
+        SetGridParent(helloCard);
+        //SoundManager.playSound(SoundManager.elfHello);
+    }
 
+    private void SetGridParent(GameObject block)
+    {
+        block.transform.SetParent(GridRow[0], false);
+    }
+        
 
-        // cardImage = cards[0].GetComponent<Image>();
-        // cardImage.sprite = cardBackSprite;
+    void OnMouseDown()
+    {
+      //  SoundManager.playSound(SoundManager.elfHey);
     }
 }
-
